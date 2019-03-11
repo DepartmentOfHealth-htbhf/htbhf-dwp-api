@@ -1,2 +1,3 @@
-# htbhf-dwp-api
-An internal API for checking eligibility against DWP data (whether this is from a DWP API or data feed)
+# htbfh-dwp-api
+A Rest service that takes requests for eligibility checks against DWP data and checks against an internal database
+before making a call to the real DWP API.
