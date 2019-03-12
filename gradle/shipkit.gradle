@@ -7,9 +7,9 @@
 shipkit {
    gitHub.repository = "DepartmentOfHealth-htbhf/htbhf-dwp-api"
 
-    gitHub.readOnlyAuthToken = "765881d6a8c080bc220404116459dcfd4a0d4dfd"
+   gitHub.readOnlyAuthToken = "765881d6a8c080bc220404116459dcfd4a0d4dfd"
 
-    gitHub.writeAuthToken = System.getenv("GH_WRITE_TOKEN")
+   gitHub.writeAuthToken = System.getenv("GH_WRITE_TOKEN")
 }
 
 allprojects {
