@@ -1,6 +1,6 @@
-pluginManagement {
-	repositories {
-		gradlePluginPortal()
-	}
-}
 rootProject.name = 'htbhf-dwp-api-parent'
+include "htbhf-dwp-api", "htbhf-dwp-api-db", "htbhf-dwp-api-manifest"
+
+project(":htbhf-dwp-api").projectDir = file("api")
+project(":htbhf-dwp-api-db").projectDir = file("db")
+project(":htbhf-dwp-api-manifest").projectDir = file("manifest")
