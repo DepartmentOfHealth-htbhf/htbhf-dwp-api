@@ -1,1 +1,35 @@
 
+# see http://engineering.pivotal.io/post/spring-boot-injecting-credentials/
+# to understand how spring parses cloud foundry vcap servcies environment variables
+spring:
+  datasource:
+    url: ${vcap.services.htbhf-eligibility-api-postgres.credentials.jdbcuri:jdbc:postgresql://localhost/eligibility_api}
+    username: ${vcap.services.htbhf-eligibility-api-postgres.credentials.username:eligibility_admin}
+    password: ${vcap.services.htbhf-eligibility-api-postgres.credentials.password:eligibility_admin}
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connectionTimeout: 5000
+  jpa:
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL9Dialect
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    properties.hibernate.connection.CharSet: utf8
+    properties.hibernate.connection.characterEncoding: utf8
+    properties.hibernate.connection.useUnicode: true
+    properties.hibernate.connection.releaseMode: after_transaction
+  application:
+    name: dwp/api
+  boot:
+    admin:
+      url: http://localhost:8080
+  jackson:
+    default-property-inclusion: NON_NULL
+  flyway:
+    baseline-on-migrate: true
+    table: dwp_flyway_schema_history
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] [%X{session.id}][%X{request.id}] %-5level %logger{36} - %msg%n"
+  level:
+    ROOT: ${vcap.services.variable-service.credentials.dwp-api-app-root-loglevel:info}
+    uk.gov.dhsc: ${vcap.services.variable-service.credentials.dwp-api-app-loglevel:debug}
