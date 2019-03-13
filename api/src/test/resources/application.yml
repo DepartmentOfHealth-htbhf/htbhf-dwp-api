@@ -1,3 +1,8 @@
 spring:
   datasource:
     url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+
+dwp:
+  eligibility-check-in-weeks: 4
+  monthly-income-threshold: 408.00
+  uri: http://localhost:8080
