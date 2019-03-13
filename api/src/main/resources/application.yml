@@ -33,3 +33,8 @@ logging:
   level:
     ROOT: ${vcap.services.variable-service.credentials.dwp-api-app-root-loglevel:info}
     uk.gov.dhsc: ${vcap.services.variable-service.credentials.dwp-api-app-loglevel:debug}
+
+dwp:
+  eligibility-check-in-weeks: 4
+  monthly-income-threshold: 410.00
+  uri: ${vcap.services.htbhf-dwp-api.credentials.uri:http://localhost:8080}
