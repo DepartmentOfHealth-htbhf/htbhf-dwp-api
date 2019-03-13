@@ -8,8 +8,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
-import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import uk.gov.dhsc.htbhf.dwp.service.EligibilityService;
 
 import java.net.URI;
@@ -19,8 +19,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.OK;
+import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.anEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPerson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -36,14 +36,14 @@ class DWPEligibilityControllerIntegrationTest {
 
     @Test
     void shouldReturnEligibilityResponse() {
-        PersonDTO person = aPerson();
+        EligibilityRequest eligibilityRequest = anEligibilityRequest();
         given(eligibilityService.checkEligibility(any())).willReturn(anEligibilityResponse());
 
-        ResponseEntity<EligibilityResponse> response = restTemplate.postForEntity(ENDPOINT, person, EligibilityResponse.class);
+        ResponseEntity<EligibilityResponse> response = restTemplate.postForEntity(ENDPOINT, eligibilityRequest, EligibilityResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody()).isEqualTo(anEligibilityResponse());
-        verify(eligibilityService).checkEligibility(person);
+        verify(eligibilityService).checkEligibility(eligibilityRequest);
     }
 
 }
