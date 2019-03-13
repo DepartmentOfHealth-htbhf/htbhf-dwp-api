@@ -2,46 +2,24 @@
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
-import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Service
 public class EligibilityService {
 
-    private final DWPClient dwpClient;
-    private final Integer eligibilityCheckInWeeks;
-    private final BigDecimal ucMonthlyIncomeThreshold;
+    private final String uri;
+    private final RestTemplate restTemplate;
 
-    public EligibilityService(@Value(&quot;${dwp.monthly-income-threshold}&quot;) BigDecimal ucMonthlyIncomeThreshold,
-                              @Value(&quot;${dwp.eligibility-check-in-weeks}&quot;) Integer eligibilityCheckInWeeks,
-<span class="fc" id="L21">                              DWPClient dwpClient) {</span>
-<span class="fc" id="L22">        this.dwpClient = dwpClient;</span>
-<span class="fc" id="L23">        this.eligibilityCheckInWeeks = eligibilityCheckInWeeks;</span>
-<span class="fc" id="L24">        this.ucMonthlyIncomeThreshold = ucMonthlyIncomeThreshold;</span>
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L15">    public EligibilityService(@Value(&quot;${dwp.uri}&quot;) String uri, RestTemplate restTemplate) {</span>
+<span class="fc" id="L16">        this.uri = uri;</span>
+<span class="fc" id="L17">        this.restTemplate = restTemplate;</span>
+<span class="fc" id="L18">    }</span>
 
-    public EligibilityResponse checkEligibility(PersonDTO person) {
-<span class="fc" id="L28">        EligibilityRequest request = EligibilityRequest.builder()</span>
-<span class="fc" id="L29">                .person(person)</span>
-<span class="fc" id="L30">                .eligibleEndDate(getEligibleEndDate())</span>
-<span class="fc" id="L31">                .eligibleStartDate(getEligibleStartDate())</span>
-<span class="fc" id="L32">                .ucMonthlyIncomeThreshold(ucMonthlyIncomeThreshold)</span>
-<span class="fc" id="L33">                .build();</span>
-
-<span class="fc" id="L35">        return dwpClient.checkEligibility(request);</span>
-    }
-
-    private LocalDate getEligibleStartDate() {
-<span class="fc" id="L39">        LocalDate endDate = getEligibleEndDate();</span>
-<span class="fc" id="L40">        return endDate.minusWeeks(eligibilityCheckInWeeks);</span>
-    }
-
-    private LocalDate getEligibleEndDate() {
-<span class="fc" id="L44">        return LocalDate.now();</span>
+    public EligibilityResponse checkEligibility(EligibilityRequest eligibilityRequest) {
+<span class="fc" id="L21">        var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);</span>
+<span class="fc" id="L22">        return response.getBody();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

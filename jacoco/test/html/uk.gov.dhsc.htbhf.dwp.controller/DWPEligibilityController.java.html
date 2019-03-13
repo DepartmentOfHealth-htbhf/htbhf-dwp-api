@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
-import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import uk.gov.dhsc.htbhf.dwp.service.EligibilityService;
 
 import javax.validation.Valid;
@@ -19,8 +19,8 @@ public class DWPEligibilityController {
     private final EligibilityService eligibilityService;
 
     @PostMapping
-    public EligibilityResponse getBenefits(@RequestBody @Valid PersonDTO person) {
-<span class="fc" id="L23">        return eligibilityService.checkEligibility(person);</span>
+    public EligibilityResponse getBenefits(@RequestBody @Valid EligibilityRequest eligibilityRequest) {
+<span class="fc" id="L23">        return eligibilityService.checkEligibility(eligibilityRequest);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
