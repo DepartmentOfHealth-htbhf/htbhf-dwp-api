@@ -9,6 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
+import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +36,7 @@ class DWPClientTest {
 
     @Test
     void shouldCallEndpoint() {
-        var eligibilityRequest = anEligibilityRequest();
+        EligibilityRequest eligibilityRequest = anEligibilityRequest();
         given(restTemplate.postForEntity(anyString(), any(), any()))
                 .willReturn(new ResponseEntity<>(anEligibilityResponse(), OK));
 

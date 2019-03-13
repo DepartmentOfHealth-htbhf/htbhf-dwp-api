@@ -5,9 +5,6 @@ import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 
 import java.time.LocalDate;
 
-/**
- * Test data factory for {@link PersonDTO} objects.
- */
 public class PersonTestFactory {
 
     private static final LocalDate DOB = LocalDate.parse("1985-12-31");
@@ -19,9 +16,6 @@ public class PersonTestFactory {
     private static final String FORENAME = "Lisa";
     private static final String SURNAME = "Simpson";
 
-    /**
-     * Creates a {@link PersonDTO} request object with a nino that encodes to a person who is ineligible.
-     */
     public static PersonDTO aPerson() {
         String nino = "IA000000C";
         return buildDefaultPerson().nino(nino).build();

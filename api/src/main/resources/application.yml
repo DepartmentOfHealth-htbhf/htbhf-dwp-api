@@ -36,5 +36,5 @@ logging:
 
 dwp:
   eligibility-check-in-weeks: 4
-  monthly-income-threshold: 410.00
+  monthly-income-threshold: 408.00
   uri: ${vcap.services.htbhf-dwp-api.credentials.uri:http://localhost:8080}

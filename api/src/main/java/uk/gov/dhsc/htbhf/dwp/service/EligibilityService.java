@@ -25,7 +25,7 @@ public class EligibilityService {
     }
 
     public EligibilityResponse checkEligibility(PersonDTO person) {
-        var request = EligibilityRequest.builder()
+        EligibilityRequest request = EligibilityRequest.builder()
                 .person(person)
                 .eligibleEndDate(getEligibleEndDate())
                 .eligibleStartDate(getEligibleStartDate())

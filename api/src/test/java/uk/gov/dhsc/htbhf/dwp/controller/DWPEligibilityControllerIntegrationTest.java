@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
+import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import uk.gov.dhsc.htbhf.dwp.service.EligibilityService;
 
 import java.net.URI;
@@ -34,10 +36,10 @@ class DWPEligibilityControllerIntegrationTest {
 
     @Test
     void shouldReturnEligibilityResponse() {
-        var person = aPerson();
+        PersonDTO person = aPerson();
         given(eligibilityService.checkEligibility(any())).willReturn(anEligibilityResponse());
 
-        var response = restTemplate.postForEntity(ENDPOINT, person, EligibilityResponse.class);
+        ResponseEntity<EligibilityResponse> response = restTemplate.postForEntity(ENDPOINT, person, EligibilityResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody()).isEqualTo(anEligibilityResponse());
