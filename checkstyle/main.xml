@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.15">
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/DWPApplication.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/controller/DWPEligibilityController.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/AddressDTO.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/PersonDTO.java">
+</file>
+</checkstyle>
