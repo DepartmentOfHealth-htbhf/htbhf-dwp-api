@@ -23,7 +23,7 @@ public class EligibilityResponse {
     private final Integer numberOfChildrenUnderOne;
 
     @JsonProperty("numberOfChildrenUnderFour")
-    @ApiModelProperty(notes = "The number of children under 4 that the person has", example = "1")
+    @ApiModelProperty(notes = "The number of children under 4 that the person has (which will include the number of children under 1)", example = "1")
     private final Integer numberOfChildrenUnderFour;
 
     @JsonProperty("householdIdentifier")

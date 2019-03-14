@@ -22,7 +22,7 @@ public class EligibilityRequest {
     @NotNull
     @Valid
     @JsonProperty("person")
-    @ApiModelProperty(notes = "Details of the person", example = "Jo")
+    @ApiModelProperty(notes = "Details of the person")
     private PersonDTO person;
 
     @NotNull
