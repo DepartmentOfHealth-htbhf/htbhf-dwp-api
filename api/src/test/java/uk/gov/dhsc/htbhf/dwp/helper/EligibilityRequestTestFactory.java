@@ -1,7 +1,6 @@
 package uk.gov.dhsc.htbhf.dwp.helper;
 
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
-import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

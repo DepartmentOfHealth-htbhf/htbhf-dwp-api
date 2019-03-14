@@ -21,9 +21,13 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.*;
+import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.anEligibilityRequest;
+import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.buildDefaultRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.*;
+import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithAnInvalidNino;
+import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithNoAddress;
+import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithNoDateOfBirth;
+import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithNoNino;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
