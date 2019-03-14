@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -35,6 +36,7 @@ public class PersonDTO {
     private final LocalDate dateOfBirth;
 
     @NotNull
+    @Valid
     @JsonProperty("address")
     private final AddressDTO address;
 }
