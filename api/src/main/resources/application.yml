@@ -35,4 +35,4 @@ logging:
     uk.gov.dhsc: ${vcap.services.variable-service.credentials.dwp-api-app-loglevel:debug}
 
 dwp:
-  uri: ${vcap.services.htbhf-dwp-api.credentials.uri:http://localhost:8080}
+  uri: ${vcap.services.htbhf-dwp-api.credentials.uri:http://localhost:8091/v1/dwp/benefits}
