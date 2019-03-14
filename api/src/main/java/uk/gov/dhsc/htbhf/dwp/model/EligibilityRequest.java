@@ -8,6 +8,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 public class EligibilityRequest {
 
     @NotNull
+    @Valid
     @JsonProperty("person")
     private PersonDTO person;
 
