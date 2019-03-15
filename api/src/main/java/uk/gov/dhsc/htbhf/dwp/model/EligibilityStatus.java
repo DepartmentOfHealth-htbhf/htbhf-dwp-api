@@ -1,6 +1,7 @@
 package uk.gov.dhsc.htbhf.dwp.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 
 /**
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 @JsonFormat(shape = JsonFormat.Shape.STRING)
+@ApiModel(description = "The eligibility status")
 public enum EligibilityStatus {
 
     ELIGIBLE,
