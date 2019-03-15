@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.886s</div>
+<div class="counter">1.062s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,47 +79,47 @@
 </thead>
 <tr>
 <td class="success">shouldReturnBadRequestForInvalidNino()</td>
-<td class="success">0.062s</td>
+<td class="success">0.051s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnBadRequestForMissingAddress()</td>
-<td class="success">0.030s</td>
+<td class="success">0.035s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnBadRequestForMissingDateOfBirth()</td>
-<td class="success">0.025s</td>
+<td class="success">0.030s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnBadRequestForMissingEndDate()</td>
-<td class="success">0.023s</td>
+<td class="success">0.038s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnBadRequestForMissingIncomeThreshold()</td>
-<td class="success">0.579s</td>
+<td class="success">0.737s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnBadRequestForMissingNino()</td>
-<td class="success">0.041s</td>
+<td class="success">0.039s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnBadRequestForMissingPerson()</td>
-<td class="success">0.021s</td>
+<td class="success">0.035s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnBadRequestForMissingStartDate()</td>
-<td class="success">0.048s</td>
+<td class="success">0.055s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnEligibilityResponse()</td>
-<td class="success">0.057s</td>
+<td class="success">0.042s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -127,12 +127,12 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2019-03-15 12:05:47.822  INFO 4934 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest], using SpringBootContextLoader
-2019-03-15 12:05:47.824  INFO 4934 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2019-03-15 12:05:47.824  INFO 4934 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest]: DWPEligibilityControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2019-03-15 12:05:47.834  INFO 4934 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.gov.dhsc.htbhf.dwp.DWPApplication for test class uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest
-2019-03-15 12:05:47.837  INFO 4934 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2019-03-15 12:05:47.838  INFO 4934 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6b0aa3a0, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@108f9d2, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@23a28f10, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6117f573, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5f3e4d52, org.springframework.test.context.transaction.TransactionalTestExecutionListener@19bee90e, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2ed33f26, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@70b1fbe2, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5d487c7b, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@33500845, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@44d2b06, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@7bdcae86]
+<pre>2019-03-15 15:14:22.452  INFO 5010 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest], using SpringBootContextLoader
+2019-03-15 15:14:22.454  INFO 5010 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2019-03-15 15:14:22.457  INFO 5010 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest]: DWPEligibilityControllerIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2019-03-15 15:14:22.474  INFO 5010 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.gov.dhsc.htbhf.dwp.DWPApplication for test class uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityControllerIntegrationTest
+2019-03-15 15:14:22.477  INFO 5010 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2019-03-15 15:14:22.477  INFO 5010 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@eb4581a, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@707e8765, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@6f7423f2, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@5fe9d105, org.springframework.test.context.support.DirtiesContextTestExecutionListener@73b1266a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@7770c2d6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@39d50479, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@28a59bbf, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@52dd6ab7, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@23ca6448, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@32ad4a84, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@36d1570d]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -142,47 +142,47 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.3.RELEASE)
 
-2019-03-15 12:05:47.883  INFO 4934 --- [    Test worker] .DWPEligibilityControllerIntegrationTest : Starting DWPEligibilityControllerIntegrationTest on travis-job-4a8aae38-77e5-4716-9554-f048ddcddfac with PID 4934 (started by travis in /home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api)
-2019-03-15 12:05:47.886  INFO 4934 --- [    Test worker] .DWPEligibilityControllerIntegrationTest : No active profile set, falling back to default profiles: default
-2019-03-15 12:05:48.499  INFO 4934 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-03-15 12:05:48.506  INFO 4934 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6ms. Found 0 repository interfaces.
-2019-03-15 12:05:48.670  INFO 4934 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5c8e4898] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-03-15 12:05:48.882  INFO 4934 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
-2019-03-15 12:05:48.886  INFO 4934 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-03-15 12:05:48.888  INFO 4934 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
-2019-03-15 12:05:48.959  INFO 4934 --- [    Test worker] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
-2019-03-15 12:05:48.961  INFO 4934 --- [    Test worker] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1072 ms
-2019-03-15 12:05:49.623  INFO 4934 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
-2019-03-15 12:05:49.628  INFO 4934 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
-2019-03-15 12:05:49.629  INFO 4934 --- [    Test worker] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:h2:mem:test (H2 1.4)
-2019-03-15 12:05:49.671  INFO 4934 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.015s)
-2019-03-15 12:05:49.711  INFO 4934 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;PUBLIC&quot;: 1.001
-2019-03-15 12:05:49.712  INFO 4934 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema &quot;PUBLIC&quot; is up to date. No migration necessary.
-2019-03-15 12:05:49.785  INFO 4934 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+2019-03-15 15:14:22.543  INFO 5010 --- [    Test worker] .DWPEligibilityControllerIntegrationTest : Starting DWPEligibilityControllerIntegrationTest on travis-job-aa7cac6b-416f-4eb8-a586-ef9e68185f36 with PID 5010 (started by travis in /home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api)
+2019-03-15 15:14:22.546  INFO 5010 --- [    Test worker] .DWPEligibilityControllerIntegrationTest : No active profile set, falling back to default profiles: default
+2019-03-15 15:14:23.216  INFO 5010 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-15 15:14:23.222  INFO 5010 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4ms. Found 0 repository interfaces.
+2019-03-15 15:14:23.446  INFO 5010 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2738497f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-15 15:14:23.661  INFO 5010 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2019-03-15 15:14:23.665  INFO 5010 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-03-15 15:14:23.667  INFO 5010 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-15 15:14:23.710  INFO 5010 --- [    Test worker] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2019-03-15 15:14:23.711  INFO 5010 --- [    Test worker] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1162 ms
+2019-03-15 15:14:24.532  INFO 5010 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2019-03-15 15:14:24.540  INFO 5010 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2019-03-15 15:14:24.540  INFO 5010 --- [    Test worker] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:h2:mem:test (H2 1.4)
+2019-03-15 15:14:24.581  INFO 5010 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 1 migration (execution time 00:00.013s)
+2019-03-15 15:14:24.619  INFO 5010 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;PUBLIC&quot;: 1.001
+2019-03-15 15:14:24.624  INFO 5010 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema &quot;PUBLIC&quot; is up to date. No migration necessary.
+2019-03-15 15:14:24.706  INFO 5010 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2019-03-15 12:05:49.802  INFO 4934 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2019-03-15 12:05:49.831  INFO 4934 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-03-15 12:05:50.102  WARN 4934 --- [    Test worker] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-03-15 12:05:50.236  INFO 4934 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2019-03-15 12:05:50.442  INFO 4934 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity&lt;springfox.documentation.spring.web.json.Json&gt; springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2019-03-15 12:05:50.637  INFO 4934 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-03-15 12:05:50.987  INFO 4934 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2019-03-15 12:05:50.989  INFO 4934 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2019-03-15 12:05:51.003  INFO 4934 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2019-03-15 12:05:51.057  INFO 4934 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 44603 (http) with context path ''
-2019-03-15 12:05:51.059  INFO 4934 --- [    Test worker] .DWPEligibilityControllerIntegrationTest : Started DWPEligibilityControllerIntegrationTest in 3.217 seconds (JVM running for 30.435)
-2019-03-15 12:05:51.147  INFO 4934 --- [o-auto-2-exec-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-03-15 12:05:51.148  INFO 4934 --- [o-auto-2-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-03-15 12:05:51.163  INFO 4934 --- [o-auto-2-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
-2019-03-15 12:05:51.571  WARN 4934 --- [o-auto-2-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'ucMonthlyIncomeThreshold': rejected value [null]; codes [NotNull.eligibilityRequest.ucMonthlyIncomeThreshold,NotNull.ucMonthlyIncomeThreshold,NotNull.java.math.BigDecimal,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.ucMonthlyIncomeThreshold,ucMonthlyIncomeThreshold]; arguments []; default message [ucMonthlyIncomeThreshold]]; default message [must not be null]] ]
-2019-03-15 12:05:51.679  WARN 4934 --- [o-auto-2-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'eligibleStartDate': rejected value [null]; codes [NotNull.eligibilityRequest.eligibleStartDate,NotNull.eligibleStartDate,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.eligibleStartDate,eligibleStartDate]; arguments []; default message [eligibleStartDate]]; default message [must not be null]] ]
-2019-03-15 12:05:51.787  WARN 4934 --- [o-auto-2-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.nino': rejected value [null]; codes [NotNull.eligibilityRequest.person.nino,NotNull.person.nino,NotNull.nino,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.nino,person.nino]; arguments []; default message [person.nino]]; default message [must not be null]] ]
-2019-03-15 12:05:51.823  WARN 4934 --- [o-auto-2-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.dateOfBirth': rejected value [null]; codes [NotNull.eligibilityRequest.person.dateOfBirth,NotNull.person.dateOfBirth,NotNull.dateOfBirth,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.dateOfBirth,person.dateOfBirth]; arguments []; default message [person.dateOfBirth]]; default message [must not be null]] ]
-2019-03-15 12:05:51.850  WARN 4934 --- [o-auto-2-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'eligibleEndDate': rejected value [null]; codes [NotNull.eligibilityRequest.eligibleEndDate,NotNull.eligibleEndDate,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.eligibleEndDate,eligibleEndDate]; arguments []; default message [eligibleEndDate]]; default message [must not be null]] ]
-2019-03-15 12:05:51.875  WARN 4934 --- [o-auto-2-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person': rejected value [null]; codes [NotNull.eligibilityRequest.person,NotNull.person,NotNull.uk.gov.dhsc.htbhf.dwp.model.PersonDTO,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person,person]; arguments []; default message [person]]; default message [must not be null]] ]
-2019-03-15 12:05:51.901  WARN 4934 --- [o-auto-2-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.address': rejected value [null]; codes [NotNull.eligibilityRequest.person.address,NotNull.person.address,NotNull.address,NotNull.uk.gov.dhsc.htbhf.dwp.model.AddressDTO,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.address,person.address]; arguments []; default message [person.address]]; default message [must not be null]] ]
-2019-03-15 12:05:51.961  WARN 4934 --- [o-auto-2-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.nino': rejected value [ab123]; codes [Pattern.eligibilityRequest.person.nino,Pattern.person.nino,Pattern.nino,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.nino,person.nino]; arguments []; default message [person.nino],[Ljavax.validation.constraints.Pattern$Flag;@28031129,org.springframework.validation.beanvalidation.SpringValidatorAdapter$ResolvableAttribute@1376ac3b]; default message [must match &quot;[a-zA-Z]{2}\d{6}[a-dA-D]&quot;]] ]
+2019-03-15 15:14:24.717  INFO 5010 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-03-15 15:14:24.744  INFO 5010 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-03-15 15:14:25.047  WARN 5010 --- [    Test worker] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-03-15 15:14:25.180  INFO 5010 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-15 15:14:25.437  INFO 5010 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity&lt;springfox.documentation.spring.web.json.Json&gt; springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-03-15 15:14:25.721  INFO 5010 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-15 15:14:26.151  INFO 5010 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-03-15 15:14:26.154  INFO 5010 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-03-15 15:14:26.172  INFO 5010 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-03-15 15:14:26.271  INFO 5010 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 36332 (http) with context path ''
+2019-03-15 15:14:26.274  INFO 5010 --- [    Test worker] .DWPEligibilityControllerIntegrationTest : Started DWPEligibilityControllerIntegrationTest in 3.792 seconds (JVM running for 33.486)
+2019-03-15 15:14:26.395  INFO 5010 --- [o-auto-2-exec-2] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-03-15 15:14:26.396  INFO 5010 --- [o-auto-2-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-03-15 15:14:26.413  INFO 5010 --- [o-auto-2-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2019-03-15 15:14:26.906  WARN 5010 --- [o-auto-2-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'ucMonthlyIncomeThreshold': rejected value [null]; codes [NotNull.eligibilityRequest.ucMonthlyIncomeThreshold,NotNull.ucMonthlyIncomeThreshold,NotNull.java.math.BigDecimal,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.ucMonthlyIncomeThreshold,ucMonthlyIncomeThreshold]; arguments []; default message [ucMonthlyIncomeThreshold]]; default message [must not be null]] ]
+2019-03-15 15:14:27.063  WARN 5010 --- [o-auto-2-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'eligibleStartDate': rejected value [null]; codes [NotNull.eligibilityRequest.eligibleStartDate,NotNull.eligibleStartDate,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.eligibleStartDate,eligibleStartDate]; arguments []; default message [eligibleStartDate]]; default message [must not be null]] ]
+2019-03-15 15:14:27.153  WARN 5010 --- [o-auto-2-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.nino': rejected value [null]; codes [NotNull.eligibilityRequest.person.nino,NotNull.person.nino,NotNull.nino,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.nino,person.nino]; arguments []; default message [person.nino]]; default message [must not be null]] ]
+2019-03-15 15:14:27.197  WARN 5010 --- [o-auto-2-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.dateOfBirth': rejected value [null]; codes [NotNull.eligibilityRequest.person.dateOfBirth,NotNull.person.dateOfBirth,NotNull.dateOfBirth,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.dateOfBirth,person.dateOfBirth]; arguments []; default message [person.dateOfBirth]]; default message [must not be null]] ]
+2019-03-15 15:14:27.233  WARN 5010 --- [o-auto-2-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'eligibleEndDate': rejected value [null]; codes [NotNull.eligibilityRequest.eligibleEndDate,NotNull.eligibleEndDate,NotNull.java.time.LocalDate,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.eligibleEndDate,eligibleEndDate]; arguments []; default message [eligibleEndDate]]; default message [must not be null]] ]
+2019-03-15 15:14:27.267  WARN 5010 --- [o-auto-2-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person': rejected value [null]; codes [NotNull.eligibilityRequest.person,NotNull.person,NotNull.uk.gov.dhsc.htbhf.dwp.model.PersonDTO,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person,person]; arguments []; default message [person]]; default message [must not be null]] ]
+2019-03-15 15:14:27.312  WARN 5010 --- [o-auto-2-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.address': rejected value [null]; codes [NotNull.eligibilityRequest.person.address,NotNull.person.address,NotNull.address,NotNull.uk.gov.dhsc.htbhf.dwp.model.AddressDTO,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.address,person.address]; arguments []; default message [person.address]]; default message [must not be null]] ]
+2019-03-15 15:14:27.359  WARN 5010 --- [-auto-2-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse uk.gov.dhsc.htbhf.dwp.controller.DWPEligibilityController.getBenefits(uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest): [Field error in object 'eligibilityRequest' on field 'person.nino': rejected value [ab123]; codes [Pattern.eligibilityRequest.person.nino,Pattern.person.nino,Pattern.nino,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [eligibilityRequest.person.nino,person.nino]; arguments []; default message [person.nino],[Ljavax.validation.constraints.Pattern$Flag;@783c7f81,org.springframework.validation.beanvalidation.SpringValidatorAdapter$ResolvableAttribute@335ec004]; default message [must match &quot;[a-zA-Z]{2}\d{6}[a-dA-D]&quot;]] ]
 </pre>
 </span>
 </div>
@@ -194,7 +194,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 5.2.1</a> at Mar 15, 2019, 12:05:52 PM</p>
+<a href="http://www.gradle.org">Gradle 5.2.1</a> at Mar 15, 2019, 3:14:27 PM</p>
 </div>
 </div>
 </body>
