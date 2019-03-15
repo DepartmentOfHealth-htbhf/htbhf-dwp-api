@@ -21,6 +21,34 @@ public class PersonTestFactory {
         return buildDefaultPerson().nino(nino).build();
     }
 
+    /**
+     * Creates a {@link PersonDTO} request object with no nino.
+     */
+    public static PersonDTO aPersonWithNoNino() {
+        return buildDefaultPerson().nino(null).build();
+    }
+
+    /**
+     * Creates a {@link PersonDTO} request object with an invalid nino.
+     */
+    public static PersonDTO aPersonWithAnInvalidNino() {
+        return buildDefaultPerson().nino("ab123").build();
+    }
+
+    /**
+     * Creates a {@link PersonDTO} request object with no date of birth.
+     */
+    public static PersonDTO aPersonWithNoDateOfBirth() {
+        return buildDefaultPerson().dateOfBirth(null).build();
+    }
+
+    /**
+     * Creates a {@link PersonDTO} request object with no address.
+     */
+    public static PersonDTO aPersonWithNoAddress() {
+        return buildDefaultPerson().address(null).build();
+    }
+
     private static PersonDTO.PersonDTOBuilder buildDefaultPerson() {
         return PersonDTO.builder()
                 .dateOfBirth(DOB)
