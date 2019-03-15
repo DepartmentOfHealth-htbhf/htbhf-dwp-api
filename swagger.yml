@@ -1,0 +1,149 @@
+swagger: "2.0"
+info:
+  description: "Responsible for taking Universal Credit eligibility requests and checking\
+    \ them against DWP data in an internal database before making a call to the real\
+    \ DWP API."
+  title: "DWP API Service"
+  contact:
+    name: "Department Of Health"
+    url: "https://github.com/DepartmentOfHealth-htbhf"
+    email: "dh-htbhf-team@equalexperts.com"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "localhost:49283"
+basePath: "/"
+tags:
+- name: "dwp-eligibility-controller"
+  description: "Endpoints for dealing with DWP Eligibility requests."
+paths:
+  /v1/dwp/eligibility:
+    post:
+      tags:
+      - "dwp-eligibility-controller"
+      summary: "Retrieve the eligibility of a person for Universal Credit"
+      operationId: "getBenefitsUsingPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "*/*"
+      parameters:
+      - in: "body"
+        name: "eligibilityRequest"
+        description: "The eligibility request for Universal Credit"
+        required: false
+        schema:
+          $ref: "#/definitions/EligibilityRequest"
+      responses:
+        200:
+          description: "The person's eligibility for Universal Credit"
+          schema:
+            $ref: "#/definitions/EligibilityResponse"
+        201:
+          description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+definitions:
+  AddressDTO:
+    type: "object"
+    properties:
+      addressLine1:
+        type: "string"
+        example: "Flat B"
+        description: "First line of the address"
+      addressLine2:
+        type: "string"
+        example: "221 Baker Street"
+        description: "Second line of the address"
+      postcode:
+        type: "string"
+        example: "AA1 1AA"
+        description: "The postcode of the address."
+      townOrCity:
+        type: "string"
+        example: "London"
+        description: "Town or city of the address"
+    title: "AddressDTO"
+    description: "The address object"
+  EligibilityRequest:
+    type: "object"
+    properties:
+      eligibleEndDate:
+        type: "string"
+        format: "date"
+        example: "2019-02-01"
+        description: "The end date for eligibility"
+      eligibleStartDate:
+        type: "string"
+        format: "date"
+        example: "2019-01-01"
+        description: "The start date for eligibility"
+      person:
+        description: "Details of the person"
+        $ref: "#/definitions/PersonDTO"
+      ucMonthlyIncomeThreshold:
+        type: "number"
+        example: 408.0
+        description: "The monthly income threshold for Universal Credit"
+    title: "EligibilityRequest"
+    description: "The eligibility request for Universal Credit"
+  EligibilityResponse:
+    type: "object"
+    properties:
+      eligibilityStatus:
+        type: "string"
+        example: "ELIGIBLE"
+        description: "The eligibility status"
+        enum:
+        - "ELIGIBLE"
+        - "INELIGIBLE"
+        - "PENDING"
+        - "NOMATCH"
+      householdIdentifier:
+        type: "string"
+        example: "9d6049ee-d6e6-4d9b-ae3d-3b1bdf98682f"
+        description: "The identifier for their household"
+      numberOfChildrenUnderFour:
+        type: "integer"
+        format: "int32"
+        example: 1
+        description: "The number of children under 4 that the person has (which will\
+          \ include the number of children under 1)"
+      numberOfChildrenUnderOne:
+        type: "integer"
+        format: "int32"
+        example: 1
+        description: "The number of children under 1 that the person has"
+    title: "EligibilityResponse"
+    description: "The eligibility response from DWP"
+  PersonDTO:
+    type: "object"
+    properties:
+      address:
+        description: "The person's address"
+        $ref: "#/definitions/AddressDTO"
+      dateOfBirth:
+        type: "string"
+        format: "date"
+        example: "1985-12-30"
+        description: "The date of birth, in the format YYYY-MM-DD"
+      forename:
+        type: "string"
+        example: "Lisa"
+        description: "The person's forename"
+      nino:
+        type: "string"
+        example: "QQ123456C"
+        description: "National Insurance number"
+        pattern: "[a-zA-Z]{2}\\d{6}[a-dA-D]"
+      surname:
+        type: "string"
+        example: "Simpson"
+        description: "The person's surname"
+    title: "PersonDTO"
+    description: "The person who we are checking eligibility for"

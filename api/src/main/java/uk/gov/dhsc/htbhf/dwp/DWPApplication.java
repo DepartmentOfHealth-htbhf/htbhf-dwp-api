@@ -8,11 +8,18 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uk.gov.dhsc.htbhf.dwp.requestcontext.HeaderInterceptor;
 import uk.gov.dhsc.htbhf.dwp.requestcontext.RequestContext;
 
+/**
+ * The starting point for spring boot, this class enables SpringFox for documenting the api using swagger
+ * and defines a number of beans.
+ * See also: {@link ApiDocumentation}.
+ */
 @AllArgsConstructor
 @SpringBootApplication
+@EnableSwagger2
 public class DWPApplication {
 
     private HeaderInterceptor headerInterceptor;
