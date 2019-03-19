@@ -38,11 +38,11 @@ public class UCChild {
     @JoinColumn(name = "dwp_uc_household_id", nullable = false)
     private UCHousehold household;
 
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "forename")
     private String forename;
 
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "surname")
     private String surname;
 

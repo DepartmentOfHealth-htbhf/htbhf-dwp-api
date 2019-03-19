@@ -41,27 +41,27 @@ public class UCAdult {
     @Column(name = "nino")
     private String nino;
 
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "forename")
     private String forename;
 
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "surname")
     private String surname;
 
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "address_line_1")
     private String addressLine1;
 
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "address_line_2")
     private String addressLine2;
 
-    @Size(min = 1, max = 500)
+    @Size(max = 500)
     @Column(name = "address_town_or_city")
     private String townOrCity;
 
-    @Size(min = 1, max = 10)
+    @Size(max = 10)
     @Column(name = "address_postcode")
     private String postcode;
 

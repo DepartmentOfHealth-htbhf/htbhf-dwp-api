@@ -23,8 +23,7 @@ public class UCHouseholdFactory {
                 .addAdult(anAdult("Marge", "Simpson", "QQ123456B"))
                 .addChild(aChild("Bart", "Simpson", 48))
                 .addChild(aChild("Lisa", "Simpson", 24))
-                .addChild(aChild("Maggie", "Simpson", 6))
-                ;
+                .addChild(aChild("Maggie", "Simpson", 6));
     }
 
     public static UCChild aChild(String forename, String surname, int ageInMonths) {
