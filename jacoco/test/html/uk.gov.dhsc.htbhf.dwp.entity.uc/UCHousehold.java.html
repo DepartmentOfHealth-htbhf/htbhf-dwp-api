@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UCHousehold.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">htbhf-dwp-api</a> &gt; <a href="index.source.html" class="el_package">uk.gov.dhsc.htbhf.dwp.entity.uc</a> &gt; <span class="el_source">UCHousehold.java</span></div><h1>UCHousehold.java</h1><pre class="source lang-java linenums">package uk.gov.dhsc.htbhf.dwp.entity.uc;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import static java.util.Collections.unmodifiableSet;
+
+@Entity
+@Data
+@Builder
+@Table(name = &quot;dwp_uc_household&quot;)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuppressWarnings(&quot;PMD.DataClass&quot;)
+public class UCHousehold {
+
+    @Id
+    @Access(AccessType.PROPERTY)
+    @EqualsAndHashCode.Include
+    private UUID id;
+
+    @Size(min = 1, max = 50)
+    @Column(name = &quot;household_identifier&quot;)
+    private String householdIdentifier;
+
+    @Column(name = &quot;file_import_number&quot;)
+    private Integer fileImportNumber;
+
+    @Column(name = &quot;award_date&quot;)
+    private LocalDate awardDate;
+
+    @Column(name = &quot;last_assessment_period_start&quot;)
+    private LocalDate lastAssessmentPeriodStart;
+
+    @Column(name = &quot;last_assessment_period_end&quot;)
+    private LocalDate lastAssessmentPeriodEnd;
+
+    @Column(name = &quot;household_member_pregnant&quot;)
+    private Boolean householdMemberPregnant;
+
+    @Column(name = &quot;earnings_threshold_exceeded&quot;)
+    private Boolean earningsThresholdExceeded;
+
+    @Column(name = &quot;no_of_children_under_four&quot;)
+    private Integer childrenUnderFour;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;household&quot;, orphanRemoval = true)
+    @ToString.Exclude
+    private final Set&lt;UCAdult&gt; adults = new HashSet&lt;&gt;();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;household&quot;, orphanRemoval = true)
+    @ToString.Exclude
+    private final Set&lt;UCChild&gt; children = new HashSet&lt;&gt;();
+
+
+    /**
+     * Adding a custom getter for the id so that we can compare an entity before and after its initial
+     * persistence and they will be the same.
+     *
+     * @return The id for the entity.
+     */
+    public UUID getId() {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (id == null) {</span>
+<span class="fc" id="L84">            this.id = UUID.randomUUID();</span>
+        }
+<span class="fc" id="L86">        return this.id;</span>
+    }
+
+    public UCHousehold addAdult(UCAdult adult) {
+<span class="fc" id="L90">        adult.setHousehold(this);</span>
+<span class="fc" id="L91">        this.adults.add(adult);</span>
+<span class="fc" id="L92">        return this;</span>
+    }
+
+    public Set&lt;UCAdult&gt; getAdults() {
+<span class="fc" id="L96">        return unmodifiableSet(adults);</span>
+    }
+
+    public void setAdults(Set&lt;UCAdult&gt; adults) {
+<span class="nc" id="L100">        this.adults.clear();</span>
+<span class="nc" id="L101">        adults.forEach(adult -&gt; this.addAdult(adult));</span>
+<span class="nc" id="L102">    }</span>
+
+    public UCHousehold addChild(UCChild child) {
+<span class="fc" id="L105">        child.setHousehold(this);</span>
+<span class="fc" id="L106">        this.children.add(child);</span>
+<span class="fc" id="L107">        return this;</span>
+    }
+
+    public Set&lt;UCChild&gt; getChildren() {
+<span class="fc" id="L111">        return unmodifiableSet(children);</span>
+    }
+
+    public void setChildren(Set&lt;UCChild&gt; children) {
+<span class="nc" id="L115">        this.children.clear();</span>
+<span class="nc" id="L116">        children.forEach(child -&gt; this.addChild(child));</span>
+<span class="nc" id="L117">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

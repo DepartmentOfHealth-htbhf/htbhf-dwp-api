@@ -6,6 +6,12 @@
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/controller/DWPEligibilityController.java">
 </file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCAdult.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCChild.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCHousehold.java">
+</file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/AddressDTO.java">
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/EligibilityRequest.java">
@@ -15,6 +21,8 @@
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/EligibilityStatus.java">
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/PersonDTO.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/repository/UCHouseholdRepository.java">
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/EligibilityService.java">
 </file>
