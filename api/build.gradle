@@ -37,12 +37,12 @@ repositories {
 
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'com.zaxxer:HikariCP'
-    implementation 'org.postgresql:postgresql'
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "com.zaxxer:HikariCP"
+    implementation "org.postgresql:postgresql"
     implementation "org.flywaydb:flyway-core:${flywayVersion}"
     implementation "commons-io:commons-io:2.5"
     implementation "io.springfox:springfox-swagger2:${springFoxVersion}"
@@ -51,10 +51,10 @@ dependencies {
     // https://app.snyk.io/vuln/SNYK-JAVA-COMGOOGLEGUAVA-32236
     implementation "com.google.guava:guava:27.0.1-jre"
     implementation "com.google.code.findbugs:annotations:3.0.1"
-    implementation 'uk.gov.dhsc.htbhf:htbhf-common-rest:0.0.4'
-    implementation project(':htbhf-dwp-api-db')
+    implementation "uk.gov.dhsc.htbhf:htbhf-common-rest:latest.release"
+    implementation project(":htbhf-dwp-api-db")
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.mockito:mockito-junit-jupiter:2.23.4"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
     testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
