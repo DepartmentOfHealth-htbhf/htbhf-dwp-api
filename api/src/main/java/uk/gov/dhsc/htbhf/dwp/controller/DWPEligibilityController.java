@@ -29,11 +29,10 @@ public class DWPEligibilityController {
     @PostMapping
     @ApiOperation("Retrieve the eligibility of a person for Universal Credit")
     @ApiResponses({@ApiResponse(code = 200, message = "The person's eligibility for Universal Credit", response = EligibilityResponse.class)})
-    public EligibilityResponse getBenefits(
-            @RequestBody
-            @Valid
-            @ApiParam("The eligibility request for Universal Credit")
-            EligibilityRequest eligibilityRequest) {
+    public EligibilityResponse getBenefits(@RequestBody
+                                           @Valid
+                                           @ApiParam("The eligibility request for Universal Credit")
+                                           EligibilityRequest eligibilityRequest) {
         log.debug("Received eligibility request");
         return eligibilityService.checkEligibility(eligibilityRequest);
     }
