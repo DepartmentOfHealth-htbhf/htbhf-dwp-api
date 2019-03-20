@@ -4,8 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory;
-import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory;
+import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,10 +13,10 @@ import javax.persistence.PersistenceContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class UCHouseholdRepositoryTest {
+class LegacyHouseholdRepositoryTest {
 
     @Autowired
-    UCHouseholdRepository repository;
+    LegacyHouseholdRepository repository;
 
     @PersistenceContext
     EntityManager em;
@@ -29,10 +29,10 @@ class UCHouseholdRepositoryTest {
     @Test
     void saveAndRetrieveHousehold() {
         //Given
-        UCHousehold household = UCHouseholdFactory.aHousehold();
+        LegacyHousehold household = LegacyHouseholdFactory.aHousehold();
 
         //When
-        UCHousehold savedHousehold = repository.save(household);
+        LegacyHousehold savedHousehold = repository.save(household);
 
         //Then
         assertThat(savedHousehold.getId()).isEqualTo(household.getId());
