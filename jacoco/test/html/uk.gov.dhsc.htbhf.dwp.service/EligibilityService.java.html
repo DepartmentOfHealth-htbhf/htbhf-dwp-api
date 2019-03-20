@@ -9,17 +9,18 @@ import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 @Service
 public class EligibilityService {
 
+    private static final String ENDPOINT = &quot;/v1/dwp/benefits&quot;;
     private final String uri;
     private final RestTemplate restTemplate;
 
-<span class="fc" id="L15">    public EligibilityService(@Value(&quot;${dwp.uri}&quot;) String uri, RestTemplate restTemplate) {</span>
-<span class="fc" id="L16">        this.uri = uri;</span>
-<span class="fc" id="L17">        this.restTemplate = restTemplate;</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L16">    public EligibilityService(@Value(&quot;${dwp.base-uri}&quot;) String baseUri, RestTemplate restTemplate) {</span>
+<span class="fc" id="L17">        this.uri = baseUri + ENDPOINT;</span>
+<span class="fc" id="L18">        this.restTemplate = restTemplate;</span>
+<span class="fc" id="L19">    }</span>
 
     public EligibilityResponse checkEligibility(EligibilityRequest eligibilityRequest) {
-<span class="fc" id="L21">        var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);</span>
-<span class="fc" id="L22">        return response.getBody();</span>
+<span class="fc" id="L22">        var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);</span>
+<span class="fc" id="L23">        return response.getBody();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
