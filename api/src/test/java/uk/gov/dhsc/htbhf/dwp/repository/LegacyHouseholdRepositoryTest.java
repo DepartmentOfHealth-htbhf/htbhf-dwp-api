@@ -7,6 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -14,6 +17,9 @@ class LegacyHouseholdRepositoryTest {
 
     @Autowired
     LegacyHouseholdRepository repository;
+
+    @PersistenceContext
+    EntityManager em;
 
     @AfterEach
     void afterEach() {
@@ -29,9 +35,9 @@ class LegacyHouseholdRepositoryTest {
         LegacyHousehold savedHousehold = repository.save(household);
 
         //Then
-        assertThat(savedHousehold.getId()).isNotNull();
-        savedHousehold.getChildren().forEach(child -> assertThat(child.getId()).isNotNull());
-        savedHousehold.getAdults().forEach(adult -> assertThat(adult.getId()).isNotNull());
+        assertThat(savedHousehold.getId()).isEqualTo(household.getId());
+        household.getChildren().forEach(child -> assertThat(em.contains(child)));
+        household.getAdults().forEach(adult -> assertThat(em.contains(adult)));
         assertThat(savedHousehold).isEqualTo(household);
         assertThat(savedHousehold).isEqualToComparingFieldByFieldRecursively(household);
     }

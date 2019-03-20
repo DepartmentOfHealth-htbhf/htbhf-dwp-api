@@ -10,6 +10,6 @@
     </Match>
 
     <Match>
-        <Bug code="NP" />
+        <Bug code="NP,RV" />
     </Match>
 </FindBugsFilter>
