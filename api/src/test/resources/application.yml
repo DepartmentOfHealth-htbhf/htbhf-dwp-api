@@ -16,4 +16,4 @@ spring:
 ###
 
 dwp:
-  uri: http://localhost:8080
+  base-uri: http://localhost:8080
