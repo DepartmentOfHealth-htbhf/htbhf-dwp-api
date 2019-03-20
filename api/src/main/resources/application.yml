@@ -38,4 +38,4 @@ server:
   port: 8110
 
 dwp:
-  uri: ${vcap.services.variable-service.credentials.dwp-api-uri:http://localhost:8120/v1/dwp/benefits}
+  base-uri: ${vcap.services.variable-service.credentials.dwp-api-uri:http://localhost:8120}

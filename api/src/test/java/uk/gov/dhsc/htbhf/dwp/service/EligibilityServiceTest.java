@@ -25,7 +25,9 @@ import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anElig
 @SpringBootTest
 class EligibilityServiceTest {
 
-    @Value("${dwp.uri}")
+    private static final String ENDPOINT = "/v1/dwp/benefits";
+
+    @Value("${dwp.base-uri}")
     private String dwpUri;
 
     @MockBean
@@ -43,6 +45,6 @@ class EligibilityServiceTest {
         var response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(anEligibilityResponse());
-        verify(restTemplate).postForEntity(dwpUri, eligibilityRequest, EligibilityResponse.class);
+        verify(restTemplate).postForEntity(dwpUri + ENDPOINT, eligibilityRequest, EligibilityResponse.class);
     }
 }

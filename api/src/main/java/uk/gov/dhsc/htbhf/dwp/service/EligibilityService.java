@@ -9,11 +9,12 @@ import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 @Service
 public class EligibilityService {
 
+    private static final String ENDPOINT = "/v1/dwp/benefits";
     private final String uri;
     private final RestTemplate restTemplate;
 
-    public EligibilityService(@Value("${dwp.uri}") String uri, RestTemplate restTemplate) {
-        this.uri = uri;
+    public EligibilityService(@Value("${dwp.base-uri}") String baseUri, RestTemplate restTemplate) {
+        this.uri = baseUri + ENDPOINT;
         this.restTemplate = restTemplate;
     }
 
