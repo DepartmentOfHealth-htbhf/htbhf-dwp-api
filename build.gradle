@@ -60,7 +60,7 @@ subprojects {
     }
     
     task updateConfig() {
-        'git submodule update --remote'.execute()
+        'git submodule update --init --recursive --remote'.execute()
     }
 
     tasks.check.dependsOn updateConfig
