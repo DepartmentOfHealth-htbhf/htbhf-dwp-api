@@ -29,13 +29,12 @@ public class DWPEligibilityController {
     @PostMapping
     @ApiOperation(&quot;Retrieve the eligibility of a person for Universal Credit&quot;)
     @ApiResponses({@ApiResponse(code = 200, message = &quot;The person's eligibility for Universal Credit&quot;, response = EligibilityResponse.class)})
-    public EligibilityResponse getBenefits(
-            @RequestBody
-            @Valid
-            @ApiParam(&quot;The eligibility request for Universal Credit&quot;)
-            EligibilityRequest eligibilityRequest) {
-<span class="fc" id="L37">        log.debug(&quot;Received eligibility request&quot;);</span>
-<span class="fc" id="L38">        return eligibilityService.checkEligibility(eligibilityRequest);</span>
+    public EligibilityResponse getBenefits(@RequestBody
+                                           @Valid
+                                           @ApiParam(&quot;The eligibility request for Universal Credit&quot;)
+                                           EligibilityRequest eligibilityRequest) {
+<span class="fc" id="L36">        log.debug(&quot;Received eligibility request&quot;);</span>
+<span class="fc" id="L37">        return eligibilityService.checkEligibility(eligibilityRequest);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
