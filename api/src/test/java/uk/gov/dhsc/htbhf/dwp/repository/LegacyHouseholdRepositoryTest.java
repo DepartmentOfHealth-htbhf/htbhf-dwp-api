@@ -56,7 +56,10 @@ class LegacyHouseholdRepositoryTest {
 
     @Test
     void shouldFailToFindLegacyHouseholdByNino() {
-        Optional<LegacyHousehold> result = repository.findHouseholdByAdultWithNino("QQ123456C");
+        LegacyHousehold household = aHousehold();
+        repository.save(household);
+
+        Optional<LegacyHousehold> result = repository.findHouseholdByAdultWithNino("AB999999C");
 
         assertThat(result.isEmpty()).isTrue();
     }

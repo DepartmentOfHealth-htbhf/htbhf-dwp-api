@@ -56,7 +56,10 @@ class UCHouseholdRepositoryTest {
 
     @Test
     void shouldFailToFindUCHouseholdByNino() {
-        Optional<UCHousehold> result = repository.findHouseholdByAdultWithNino("QQ123456C");
+        UCHousehold household = aHousehold();
+        repository.save(household);
+
+        Optional<UCHousehold> result = repository.findHouseholdByAdultWithNino("AB999999C");
 
         assertThat(result.isEmpty()).isTrue();
     }
