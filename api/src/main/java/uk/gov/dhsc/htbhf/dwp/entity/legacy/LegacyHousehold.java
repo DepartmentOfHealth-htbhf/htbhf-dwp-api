@@ -26,7 +26,7 @@ import static java.util.Collections.unmodifiableSet;
 
 @Entity
 @Data
-@Builder
+@Builder(toBuilder = true)
 @Table(name = "dwp_legacy_household")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor

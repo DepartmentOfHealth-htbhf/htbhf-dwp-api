@@ -9,6 +9,13 @@ import java.time.LocalDate;
 public class LegacyHouseholdFactory {
 
     public static LegacyHousehold aHousehold() {
+        return aHouseholdWithNoAdults()
+                .build()
+                .addAdult(anAdult("Homer", "Simpson", "QQ123456A"))
+                .addAdult(anAdult("Marge", "Simpson", "QQ123456B"));
+    }
+
+    public static LegacyHousehold.LegacyHouseholdBuilder aHouseholdWithNoAdults() {
         return LegacyHousehold.builder()
                 .fileImportNumber(1)
                 .householdIdentifier("aHouseholdIdentifier")
@@ -16,11 +23,10 @@ public class LegacyHouseholdFactory {
                 .townOrCity("Springfield")
                 .postcode("AA11AA")
                 .build()
-                .addAdult(anAdult("Homer", "Simpson", "QQ123456A"))
-                .addAdult(anAdult("Marge", "Simpson", "QQ123456B"))
                 .addChild(aChild("Bart", "Simpson", 48))
                 .addChild(aChild("Lisa", "Simpson", 24))
-                .addChild(aChild("Maggie", "Simpson", 6));
+                .addChild(aChild("Maggie", "Simpson", 6))
+                .toBuilder();
     }
 
     public static LegacyChild aChild(String forename, String surname, int ageInMonths) {
@@ -38,5 +44,14 @@ public class LegacyHouseholdFactory {
                 .nino(nino)
                 .build();
     }
+
+    public static LegacyAdult anAdultWithNino(String nino) {
+        return LegacyAdult.builder()
+                .forename("Bart")
+                .surname("Simpson")
+                .nino(nino)
+                .build();
+    }
+
 
 }

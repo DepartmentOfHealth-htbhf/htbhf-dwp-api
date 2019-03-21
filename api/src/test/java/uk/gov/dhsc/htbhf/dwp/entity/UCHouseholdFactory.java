@@ -9,6 +9,13 @@ import java.time.LocalDate;
 public class UCHouseholdFactory {
 
     public static UCHousehold aHousehold() {
+        return aHouseholdWithNoAdults()
+                .build()
+                .addAdult(anAdult("Homer", "Simpson", "QQ123456C"))
+                .addAdult(anAdult("Marge", "Simpson", "QQ123456D"));
+    }
+
+    public static UCHousehold.UCHouseholdBuilder aHouseholdWithNoAdults() {
         return UCHousehold.builder()
                 .awardDate(LocalDate.now())
                 .fileImportNumber(1)
@@ -19,11 +26,10 @@ public class UCHouseholdFactory {
                 .householdMemberPregnant(true)
                 .childrenUnderFour(2)
                 .build()
-                .addAdult(anAdult("Homer", "Simpson", "QQ123456A"))
-                .addAdult(anAdult("Marge", "Simpson", "QQ123456B"))
                 .addChild(aChild("Bart", "Simpson", 48))
                 .addChild(aChild("Lisa", "Simpson", 24))
-                .addChild(aChild("Maggie", "Simpson", 6));
+                .addChild(aChild("Maggie", "Simpson", 6))
+                .toBuilder();
     }
 
     public static UCChild aChild(String forename, String surname, int ageInMonths) {
@@ -38,6 +44,17 @@ public class UCHouseholdFactory {
         return UCAdult.builder()
                 .forename(forename)
                 .surname(surname)
+                .nino(nino)
+                .addressLine1("742 Evergreen Terrace")
+                .townOrCity("Springfield")
+                .postcode("AA11AA")
+                .build();
+    }
+
+    public static UCAdult anAdultWithNino(String nino) {
+        return UCAdult.builder()
+                .forename("Homer")
+                .surname("Simpson")
                 .nino(nino)
                 .addressLine1("742 Evergreen Terrace")
                 .townOrCity("Springfield")

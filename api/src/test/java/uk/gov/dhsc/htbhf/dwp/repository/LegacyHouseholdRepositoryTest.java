@@ -12,6 +12,8 @@ import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aHousehold;
+import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aHouseholdWithNoAdults;
+import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.anAdultWithNino;
 
 @SpringBootTest
 class LegacyHouseholdRepositoryTest {
@@ -45,13 +47,19 @@ class LegacyHouseholdRepositoryTest {
 
     @Test
     void shouldFindLegacyHouseholdByNino() {
-        String nino = "QQ123456A";
-        LegacyHousehold household = aHousehold();
-        repository.save(household);
+        String nino = "QQ111111A";
+        LegacyHousehold household1Version1 = aHouseholdWithNoAdults().fileImportNumber(1).build().addAdult(anAdultWithNino(nino));
+        LegacyHousehold household1Version2 = aHouseholdWithNoAdults().fileImportNumber(2).build().addAdult(anAdultWithNino(nino));
+        LegacyHousehold household2Version1 = aHouseholdWithNoAdults().fileImportNumber(1).build().addAdult(anAdultWithNino("QQ222222C"));
+        LegacyHousehold household2Version2 = aHouseholdWithNoAdults().fileImportNumber(2).build().addAdult(anAdultWithNino("QQ222222C"));
+        repository.save(household1Version1);
+        repository.save(household1Version2);
+        repository.save(household2Version1);
+        repository.save(household2Version2);
 
         Optional<LegacyHousehold> result = repository.findHouseholdByAdultWithNino(nino);
 
-        assertThat(result.get()).isEqualTo(household);
+        assertThat(result.get()).isEqualTo(household1Version2);
     }
 
     @Test
