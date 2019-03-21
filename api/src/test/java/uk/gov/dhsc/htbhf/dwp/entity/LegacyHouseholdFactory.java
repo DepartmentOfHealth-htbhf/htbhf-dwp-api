@@ -9,13 +9,16 @@ import java.time.LocalDate;
 public class LegacyHouseholdFactory {
 
     public static LegacyHousehold aHousehold() {
-        return aHouseholdWithNoAdults()
+        return aHouseholdWithNoAdultsOrChildren()
                 .build()
                 .addAdult(anAdult("Homer", "Simpson", "QQ123456A"))
-                .addAdult(anAdult("Marge", "Simpson", "QQ123456B"));
+                .addAdult(anAdult("Marge", "Simpson", "QQ123456B"))
+                .addChild(aChild("Bart", "Simpson", 48))
+                .addChild(aChild("Lisa", "Simpson", 24))
+                .addChild(aChild("Maggie", "Simpson", 6));
     }
 
-    public static LegacyHousehold.LegacyHouseholdBuilder aHouseholdWithNoAdults() {
+    public static LegacyHousehold.LegacyHouseholdBuilder aHouseholdWithNoAdultsOrChildren() {
         return LegacyHousehold.builder()
                 .fileImportNumber(1)
                 .householdIdentifier("aHouseholdIdentifier")
@@ -23,9 +26,6 @@ public class LegacyHouseholdFactory {
                 .townOrCity("Springfield")
                 .postcode("AA11AA")
                 .build()
-                .addChild(aChild("Bart", "Simpson", 48))
-                .addChild(aChild("Lisa", "Simpson", 24))
-                .addChild(aChild("Maggie", "Simpson", 6))
                 .toBuilder();
     }
 

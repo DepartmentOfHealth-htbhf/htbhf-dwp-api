@@ -9,13 +9,16 @@ import java.time.LocalDate;
 public class UCHouseholdFactory {
 
     public static UCHousehold aHousehold() {
-        return aHouseholdWithNoAdults()
+        return aHouseholdWithNoAdultsOrChildren()
                 .build()
                 .addAdult(anAdult("Homer", "Simpson", "QQ123456C"))
-                .addAdult(anAdult("Marge", "Simpson", "QQ123456D"));
+                .addAdult(anAdult("Marge", "Simpson", "QQ123456D"))
+                .addChild(aChild("Bart", "Simpson", 48))
+                .addChild(aChild("Lisa", "Simpson", 24))
+                .addChild(aChild("Maggie", "Simpson", 6));
     }
 
-    public static UCHousehold.UCHouseholdBuilder aHouseholdWithNoAdults() {
+    public static UCHousehold.UCHouseholdBuilder aHouseholdWithNoAdultsOrChildren() {
         return UCHousehold.builder()
                 .awardDate(LocalDate.now())
                 .fileImportNumber(1)
@@ -26,9 +29,6 @@ public class UCHouseholdFactory {
                 .householdMemberPregnant(true)
                 .childrenUnderFour(2)
                 .build()
-                .addChild(aChild("Bart", "Simpson", 48))
-                .addChild(aChild("Lisa", "Simpson", 24))
-                .addChild(aChild("Maggie", "Simpson", 6))
                 .toBuilder();
     }
 

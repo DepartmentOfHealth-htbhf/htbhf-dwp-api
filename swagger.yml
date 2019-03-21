@@ -11,7 +11,7 @@ info:
   license:
     name: "MIT"
     url: "https://opensource.org/licenses/MIT"
-host: "localhost:41009"
+host: "localhost:42417"
 basePath: "/"
 tags:
 - name: "dwp-eligibility-controller"
@@ -95,6 +95,11 @@ definitions:
   EligibilityResponse:
     type: "object"
     properties:
+      earningsThresholdExceeded:
+        type: "boolean"
+        example: true
+        description: "Whether or not the household has exceeded the earnings threshold\
+          \ for help to buy healthy foods."
       eligibilityStatus:
         type: "string"
         example: "ELIGIBLE"
