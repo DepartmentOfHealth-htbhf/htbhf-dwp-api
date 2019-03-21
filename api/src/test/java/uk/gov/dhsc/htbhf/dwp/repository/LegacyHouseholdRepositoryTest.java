@@ -59,7 +59,7 @@ class LegacyHouseholdRepositoryTest {
 
         Optional<LegacyHousehold> result = repository.findHouseholdByAdultWithNino(nino);
 
-        assertThat(result.get()).isEqualTo(household1Version2);
+        assertThat(result).contains(household1Version2);
     }
 
     @Test
@@ -69,7 +69,7 @@ class LegacyHouseholdRepositoryTest {
 
         Optional<LegacyHousehold> result = repository.findHouseholdByAdultWithNino("AB999999C");
 
-        assertThat(result.isEmpty()).isTrue();
+        assertThat(result).isEmpty();
     }
 
 }

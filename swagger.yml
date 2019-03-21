@@ -11,7 +11,7 @@ info:
   license:
     name: "MIT"
     url: "https://opensource.org/licenses/MIT"
-host: "localhost:45641"
+host: "localhost:41009"
 basePath: "/"
 tags:
 - name: "dwp-eligibility-controller"

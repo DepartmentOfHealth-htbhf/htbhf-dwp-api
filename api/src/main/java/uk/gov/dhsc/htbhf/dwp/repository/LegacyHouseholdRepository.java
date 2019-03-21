@@ -15,10 +15,17 @@ import java.util.stream.Stream;
  */
 public interface LegacyHouseholdRepository extends CrudRepository<LegacyHousehold, UUID> {
 
+    /**
+     * Return all households containing an adult with the given nino. These are ordered by fileImportNumber in descending order.
+     */
     @Query("SELECT household FROM LegacyHousehold household INNER JOIN household.adults adult "
             + "WHERE adult.nino = :nino ORDER BY household.fileImportNumber DESC")
     Stream<LegacyHousehold> findAllHouseholdsByAdultWithNino(@Param("nino") String nino);
 
+    /**
+     * Finds a household containing an adult with a matching nino. The household with the highest fileImportNumber
+     * (most recent version) is the one returned.
+     */
     @Transactional(readOnly = true)
     default Optional<LegacyHousehold> findHouseholdByAdultWithNino(String nino) {
         Stream<LegacyHousehold> households = findAllHouseholdsByAdultWithNino(nino);
