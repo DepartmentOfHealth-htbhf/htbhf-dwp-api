@@ -8,7 +8,12 @@ import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 @Service
 public class HouseholdVerifier {
     public Boolean detailsMatch(UCHousehold household, PersonDTO person) {
-        return true;
+        return household.getAdults().stream()
+                .anyMatch(adult ->
+                        adult.getForename().equals(person.getForename())
+                        && adult.getSurname().equals(person.getSurname())
+                        && adult.getAddressLine1().equals(person.getAddress().getAddressLine1())
+                        && adult.getPostcode().equals(person.getAddress().getPostcode()));
     }
 
     public Boolean detailsMatch(LegacyHousehold household, PersonDTO person) {
