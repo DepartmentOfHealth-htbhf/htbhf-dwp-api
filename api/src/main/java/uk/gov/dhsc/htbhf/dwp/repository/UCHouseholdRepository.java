@@ -17,6 +17,8 @@ public interface UCHouseholdRepository extends CrudRepository<UCHousehold, UUID>
 
     /**
      * Return all households containing an adult with the given nino. These are ordered by fileImportNumber in descending order.
+     * @param nino The nino to check against
+     * @return A stream containing all households found
      */
     @Query("SELECT household FROM UCHousehold household INNER JOIN household.adults adult WHERE adult.nino = :nino ORDER BY household.fileImportNumber DESC")
     Stream<UCHousehold> findAllHouseholdsByAdultWithNino(@Param("nino") String nino);
@@ -24,6 +26,8 @@ public interface UCHouseholdRepository extends CrudRepository<UCHousehold, UUID>
     /**
      * Finds a household containing an adult with a matching nino. The household with the highest fileImportNumber
      * (most recent version) is the one returned.
+     * @param nino The nino to check against
+     * @return An Optional containing a household if found
      */
     @Transactional(readOnly = true)
     default Optional<UCHousehold> findHouseholdByAdultWithNino(String nino) {

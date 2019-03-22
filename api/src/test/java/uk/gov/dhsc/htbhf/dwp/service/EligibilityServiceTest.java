@@ -57,7 +57,7 @@ class EligibilityServiceTest {
         UCHousehold household = aHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
 
-        var response = eligibilityService.checkEligibility(eligibilityRequest);
+        EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response.getNumberOfChildrenUnderFour()).isEqualTo(2);
         assertThat(response.getNumberOfChildrenUnderOne()).isEqualTo(1);
@@ -75,7 +75,7 @@ class EligibilityServiceTest {
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
         given(legacyHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
 
-        var response = eligibilityService.checkEligibility(eligibilityRequest);
+        EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response.getNumberOfChildrenUnderFour()).isEqualTo(2);
         assertThat(response.getNumberOfChildrenUnderOne()).isEqualTo(1);
@@ -94,7 +94,7 @@ class EligibilityServiceTest {
         given(restTemplate.postForEntity(anyString(), any(), any()))
                 .willReturn(new ResponseEntity<>(anEligibilityResponse(), OK));
 
-        var response = eligibilityService.checkEligibility(eligibilityRequest);
+        EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(anEligibilityResponse());
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());

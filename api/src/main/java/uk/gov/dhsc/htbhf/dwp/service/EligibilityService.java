@@ -34,6 +34,11 @@ public class EligibilityService {
         this.legacyHouseholdRepository = legacyHouseholdRepository;
     }
 
+    /**
+     * Checks if a given request is eligible. First check the Universal credit database,
+     * then the legacy database, then call the dwp api.
+     * Checking UC database first as most data is held there.
+     */
     public EligibilityResponse checkEligibility(EligibilityRequest eligibilityRequest) {
         String nino = eligibilityRequest.getPerson().getNino();
         Optional<UCHousehold> ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);
