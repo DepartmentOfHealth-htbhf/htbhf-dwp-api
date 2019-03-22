@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EligibilityResponseFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">htbhf-dwp-api</a> &gt; <a href="index.source.html" class="el_package">uk.gov.dhsc.htbhf.dwp.factory</a> &gt; <span class="el_source">EligibilityResponseFactory.java</span></div><h1>EligibilityResponseFactory.java</h1><pre class="source lang-java linenums">package uk.gov.dhsc.htbhf.dwp.factory;
+
+import uk.gov.dhsc.htbhf.dwp.entity.Child;
+import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
+
+import java.time.LocalDate;
+import java.util.Set;
+
+<span class="nc" id="L11">public class EligibilityResponseFactory {</span>
+
+    public static EligibilityResponse createEligibilityResponse(LegacyHousehold household) {
+<span class="fc" id="L14">        return EligibilityResponse.builder()</span>
+<span class="fc" id="L15">                .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))</span>
+<span class="fc" id="L16">                .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))</span>
+<span class="fc" id="L17">                .householdIdentifier(household.getHouseholdIdentifier())</span>
+<span class="fc" id="L18">                .build();</span>
+    }
+
+    public static EligibilityResponse createEligibilityResponse(UCHousehold household) {
+<span class="fc" id="L22">        return EligibilityResponse.builder()</span>
+<span class="fc" id="L23">                .earningsThresholdExceeded(household.getEarningsThresholdExceeded())</span>
+<span class="fc" id="L24">                .householdIdentifier(household.getHouseholdIdentifier())</span>
+<span class="fc" id="L25">                .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))</span>
+<span class="fc" id="L26">                .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))</span>
+<span class="fc" id="L27">                .build();</span>
+    }
+
+    private static Integer getNumberOfChildrenUnderOne(Set&lt;? extends Child&gt; children) {
+<span class="fc" id="L31">        return getNumberOfChildrenUnderAgeInYears(children, 1);</span>
+    }
+
+    private static Integer getNumberOfChildrenUnderFour(Set&lt;? extends Child&gt; children) {
+<span class="fc" id="L35">        return getNumberOfChildrenUnderAgeInYears(children, 4);</span>
+    }
+
+    private static Integer getNumberOfChildrenUnderAgeInYears(Set&lt;? extends Child&gt; children, Integer ageInYears) {
+<span class="fc" id="L39">        LocalDate pastDate = LocalDate.now().minusYears(ageInYears);</span>
+<span class="fc" id="L40">        return Math.toIntExact(children.stream()</span>
+<span class="fc" id="L41">                .filter(child -&gt; child.getDateOfBirth().isAfter(pastDate))</span>
+<span class="fc" id="L42">                .count());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

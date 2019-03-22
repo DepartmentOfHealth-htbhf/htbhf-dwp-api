@@ -17,6 +17,8 @@ public interface LegacyHouseholdRepository extends CrudRepository&lt;LegacyHouse
 
     /**
      * Return all households containing an adult with the given nino. These are ordered by fileImportNumber in descending order.
+     * @param nino The nino to check against
+     * @return A stream containing all households found
      */
     @Query(&quot;SELECT household FROM LegacyHousehold household INNER JOIN household.adults adult &quot;
             + &quot;WHERE adult.nino = :nino ORDER BY household.fileImportNumber DESC&quot;)
@@ -25,11 +27,13 @@ public interface LegacyHouseholdRepository extends CrudRepository&lt;LegacyHouse
     /**
      * Finds a household containing an adult with a matching nino. The household with the highest fileImportNumber
      * (most recent version) is the one returned.
+     * @param nino The nino to check against
+     * @return An Optional containing a household if found
      */
     @Transactional(readOnly = true)
     default Optional&lt;LegacyHousehold&gt; findHouseholdByAdultWithNino(String nino) {
-<span class="fc" id="L31">        Stream&lt;LegacyHousehold&gt; households = findAllHouseholdsByAdultWithNino(nino);</span>
-<span class="fc" id="L32">        return households.findFirst();</span>
+<span class="fc" id="L35">        Stream&lt;LegacyHousehold&gt; households = findAllHouseholdsByAdultWithNino(nino);</span>
+<span class="fc" id="L36">        return households.findFirst();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
