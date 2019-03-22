@@ -23,8 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHousehold;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.anEligibilityRequest;
@@ -65,8 +65,7 @@ class EligibilityServiceTest {
         assertThat(response.getEarningsThresholdExceeded()).isEqualTo(household.getEarningsThresholdExceeded());
 
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
-        verify(legacyHouseholdRepository, never()).findHouseholdByAdultWithNino(anyString());
-        verify(restTemplate, never()).postForEntity(anyString(), any(), any());
+        verifyZeroInteractions(legacyHouseholdRepository, restTemplate);
     }
 
     @Test
@@ -84,7 +83,7 @@ class EligibilityServiceTest {
 
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(anyString());
         verify(legacyHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
-        verify(restTemplate, never()).postForEntity(anyString(), any(), any());
+        verifyZeroInteractions(restTemplate);
     }
 
     @Test

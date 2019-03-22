@@ -3,7 +3,6 @@ package uk.gov.dhsc.htbhf.dwp.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import uk.gov.dhsc.htbhf.dwp.entity.Child;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
@@ -11,9 +10,10 @@ import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
 import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 
-import java.time.LocalDate;
 import java.util.Optional;
-import java.util.Set;
+
+import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
+
 
 @Service
 public class EligibilityService {
@@ -48,37 +48,5 @@ public class EligibilityService {
 
         var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);
         return response.getBody();
-    }
-
-    private EligibilityResponse createEligibilityResponse(LegacyHousehold household) {
-        return EligibilityResponse.builder()
-                .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))
-                .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))
-                .householdIdentifier(household.getHouseholdIdentifier())
-                .build();
-    }
-
-    private EligibilityResponse createEligibilityResponse(UCHousehold household) {
-        return EligibilityResponse.builder()
-                .earningsThresholdExceeded(household.getEarningsThresholdExceeded())
-                .householdIdentifier(household.getHouseholdIdentifier())
-                .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))
-                .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))
-                .build();
-    }
-
-    private Integer getNumberOfChildrenUnderOne(Set<? extends Child> children) {
-        return getNumberOfChildrenUnderAgeInYears(children, 1);
-    }
-
-    private Integer getNumberOfChildrenUnderFour(Set<? extends Child> children) {
-        return getNumberOfChildrenUnderAgeInYears(children, 4);
-    }
-
-    private Integer getNumberOfChildrenUnderAgeInYears(Set<? extends Child> children, Integer ageInYears) {
-        LocalDate pastDate = LocalDate.now().minusYears(ageInYears);
-        return Math.toIntExact(children.stream()
-                .filter(child -> child.getDateOfBirth().isAfter(pastDate))
-                .count());
     }
 }
