@@ -18,6 +18,10 @@ public class EligibilityResponse {
     @ApiModelProperty(notes = "The eligibility status", example = "ELIGIBLE")
     private EligibilityStatus eligibilityStatus;
 
+    @JsonProperty("earningsThresholdExceeded")
+    @ApiModelProperty(notes = "Whether or not the household has exceeded the earnings threshold for help to buy healthy foods.", example = "true")
+    private Boolean earningsThresholdExceeded;
+
     @JsonProperty("numberOfChildrenUnderOne")
     @ApiModelProperty(notes = "The number of children under 1 that the person has", example = "1")
     private final Integer numberOfChildrenUnderOne;

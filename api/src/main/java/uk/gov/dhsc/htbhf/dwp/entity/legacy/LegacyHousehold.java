@@ -1,25 +1,11 @@
 package uk.gov.dhsc.htbhf.dwp.entity.legacy;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import uk.gov.dhsc.htbhf.dwp.entity.BaseEntity;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import static java.util.Collections.unmodifiableSet;
@@ -30,15 +16,9 @@ import static java.util.Collections.unmodifiableSet;
 @Table(name = "dwp_legacy_household")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @SuppressWarnings("PMD.DataClass")
-public class LegacyHousehold {
-
-    @Id
-    @Getter(AccessLevel.NONE)
-    @Access(AccessType.PROPERTY)
-    @EqualsAndHashCode.Include
-    private UUID id;
+public class LegacyHousehold extends BaseEntity {
 
     @Size(min = 1, max = 50)
     @Column(name = "household_identifier")
@@ -74,20 +54,6 @@ public class LegacyHousehold {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "household", orphanRemoval = true)
     @ToString.Exclude
     private final Set<LegacyChild> children = new HashSet<>();
-
-
-    /**
-     * Adding a custom getter for the id so that we can compare an entity before and after its initial
-     * persistence and they will be the same.
-     *
-     * @return The id for the entity.
-     */
-    public UUID getId() {
-        if (id == null) {
-            this.id = UUID.randomUUID();
-        }
-        return this.id;
-    }
 
     public LegacyHousehold addAdult(LegacyAdult adult) {
         adult.setHousehold(this);

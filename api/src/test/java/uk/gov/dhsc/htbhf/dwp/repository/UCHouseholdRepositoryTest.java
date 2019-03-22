@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHousehold;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHouseholdWithNoAdults;
+import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHouseholdWithNoAdultsOrChildren;
 import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.anAdultWithNino;
 
 @SpringBootTest
@@ -48,10 +48,10 @@ class UCHouseholdRepositoryTest {
     @Test
     void shouldFindMostRecentVersionOfUCHouseholdByNino() {
         String nino = "QQ111111A";
-        UCHousehold household1Version1 = aHouseholdWithNoAdults().fileImportNumber(1).build().addAdult(anAdultWithNino(nino));
-        UCHousehold household1Version2 = aHouseholdWithNoAdults().fileImportNumber(2).build().addAdult(anAdultWithNino(nino));
-        UCHousehold household2Version1 = aHouseholdWithNoAdults().fileImportNumber(1).build().addAdult(anAdultWithNino("QQ222222C"));
-        UCHousehold household2Version2 = aHouseholdWithNoAdults().fileImportNumber(2).build().addAdult(anAdultWithNino("QQ222222C"));
+        UCHousehold household1Version1 = aHouseholdWithNoAdultsOrChildren().fileImportNumber(1).build().addAdult(anAdultWithNino(nino));
+        UCHousehold household1Version2 = aHouseholdWithNoAdultsOrChildren().fileImportNumber(2).build().addAdult(anAdultWithNino(nino));
+        UCHousehold household2Version1 = aHouseholdWithNoAdultsOrChildren().fileImportNumber(1).build().addAdult(anAdultWithNino("QQ222222C"));
+        UCHousehold household2Version2 = aHouseholdWithNoAdultsOrChildren().fileImportNumber(2).build().addAdult(anAdultWithNino("QQ222222C"));
         repository.save(household1Version1);
         repository.save(household1Version2);
         repository.save(household2Version1);
