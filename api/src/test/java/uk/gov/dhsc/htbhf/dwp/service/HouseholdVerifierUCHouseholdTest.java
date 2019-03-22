@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHouseholdWithNoAdultsOrChildren;
 
-public class HouseholdVerifierTest {
+public class HouseholdVerifierUCHouseholdTest {
 
     private final HouseholdVerifier householdVerifier = new HouseholdVerifier();
     private final AddressDTO address = AddressDTO.builder()

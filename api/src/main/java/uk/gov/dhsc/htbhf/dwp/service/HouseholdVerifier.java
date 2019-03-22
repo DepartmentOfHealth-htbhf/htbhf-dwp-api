@@ -27,7 +27,14 @@ public class HouseholdVerifier {
     }
 
     public Boolean detailsMatch(LegacyHousehold household, PersonDTO person) {
-        return true;
+        boolean nameMatches = household.getAdults().stream()
+                .anyMatch(adult ->
+                        areEqual(adult.getForename(), person.getForename())
+                        && areEqual(adult.getSurname(), person.getSurname()));
+
+        return nameMatches
+                && firstSixCharacterMatch(household.getAddressLine1(), person.getAddress().getAddressLine1())
+                && areEqual(household.getPostcode(), person.getAddress().getPostcode());
     }
 
     private boolean firstSixCharacterMatch(String s1, String s2) {
