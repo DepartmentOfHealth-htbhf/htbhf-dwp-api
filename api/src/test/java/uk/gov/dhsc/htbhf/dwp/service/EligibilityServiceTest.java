@@ -29,6 +29,7 @@ import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHousehold;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.anEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -48,6 +49,9 @@ class EligibilityServiceTest {
     @MockBean
     private LegacyHouseholdRepository legacyHouseholdRepository;
 
+    @MockBean
+    private HouseholdVerifier householdVerifier;
+
     @Autowired
     private EligibilityService eligibilityService;
 
@@ -56,6 +60,7 @@ class EligibilityServiceTest {
         EligibilityRequest eligibilityRequest = anEligibilityRequest();
         UCHousehold household = aHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
+        given(householdVerifier.detailsMatch(any(UCHousehold.class), any())).willReturn(true);
 
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
@@ -64,6 +69,23 @@ class EligibilityServiceTest {
         assertThat(response.getHouseholdIdentifier()).isEqualTo(household.getHouseholdIdentifier());
 
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
+        verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
+        verifyZeroInteractions(legacyHouseholdRepository, restTemplate);
+    }
+
+    @Test
+    void shouldReturnNoMatchWhenFoundInUCDatabaseAndDetailsDontMatch() {
+        EligibilityRequest eligibilityRequest = anEligibilityRequest();
+        UCHousehold household = aHousehold();
+        given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
+        given(householdVerifier.detailsMatch(any(UCHousehold.class), any())).willReturn(false);
+
+        EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
+
+        assertThat(response.getEligibilityStatus()).isEqualTo(NOMATCH);
+
+        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
+        verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
         verifyZeroInteractions(legacyHouseholdRepository, restTemplate);
     }
 
@@ -73,6 +95,7 @@ class EligibilityServiceTest {
         LegacyHousehold household = LegacyHouseholdFactory.aHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
         given(legacyHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
+        given(householdVerifier.detailsMatch(any(LegacyHousehold.class), any())).willReturn(true);
 
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
@@ -82,6 +105,25 @@ class EligibilityServiceTest {
 
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(anyString());
         verify(legacyHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
+        verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
+        verifyZeroInteractions(restTemplate);
+    }
+
+    @Test
+    void shouldReturnNoMatchWhenFoundInLegacyDatabaseAndDetailsDontMatch() {
+        EligibilityRequest eligibilityRequest = anEligibilityRequest();
+        LegacyHousehold household = LegacyHouseholdFactory.aHousehold();
+        given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
+        given(legacyHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
+        given(householdVerifier.detailsMatch(any(LegacyHousehold.class), any())).willReturn(false);
+
+        EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
+
+        assertThat(response.getEligibilityStatus()).isEqualTo(NOMATCH);
+
+        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(anyString());
+        verify(legacyHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
+        verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
         verifyZeroInteractions(restTemplate);
     }
 

@@ -13,6 +13,7 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import java.util.Optional;
 
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 
 
 @Service
@@ -23,15 +24,18 @@ public class EligibilityService {
     private final RestTemplate restTemplate;
     private final UCHouseholdRepository ucHouseholdRepository;
     private final LegacyHouseholdRepository legacyHouseholdRepository;
+    private final HouseholdVerifier householdVerifier;
 
     public EligibilityService(@Value("${dwp.base-uri}") String baseUri,
                               RestTemplate restTemplate,
                               UCHouseholdRepository ucHouseholdRepository,
-                              LegacyHouseholdRepository legacyHouseholdRepository) {
+                              LegacyHouseholdRepository legacyHouseholdRepository,
+                              HouseholdVerifier householdVerifier) {
         this.uri = baseUri + ENDPOINT;
         this.restTemplate = restTemplate;
         this.ucHouseholdRepository = ucHouseholdRepository;
         this.legacyHouseholdRepository = legacyHouseholdRepository;
+        this.householdVerifier = householdVerifier;
     }
 
     /**
@@ -43,12 +47,16 @@ public class EligibilityService {
         String nino = eligibilityRequest.getPerson().getNino();
         Optional<UCHousehold> ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);
         if (ucHousehold.isPresent()) {
-            return createEligibilityResponse(ucHousehold.get());
+            return householdVerifier.detailsMatch(ucHousehold.get(), eligibilityRequest.getPerson())
+                    ? createEligibilityResponse(ucHousehold.get())
+                    : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
         }
 
         Optional<LegacyHousehold> legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);
         if (legacyHousehold.isPresent()) {
-            return createEligibilityResponse(legacyHousehold.get());
+            return householdVerifier.detailsMatch(legacyHousehold.get(), eligibilityRequest.getPerson())
+                    ? createEligibilityResponse(legacyHousehold.get())
+                    : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
         }
 
         var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);
