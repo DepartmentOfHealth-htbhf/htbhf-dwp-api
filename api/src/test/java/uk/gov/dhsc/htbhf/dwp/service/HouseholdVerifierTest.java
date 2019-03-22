@@ -69,7 +69,7 @@ public class HouseholdVerifierTest {
     }
 
     @Test
-    void shouldReturnFalseWhenAddressLine1FirstSixCharactersDoesNotMatchUCHousehold() {
+    void shouldReturnFalseWhenAddressLine1DoesNotMatchUCHousehold() {
         UCAdult adult = UCAdult.builder()
                 .forename("Lisa")
                 .surname("Simpson")
@@ -97,4 +97,51 @@ public class HouseholdVerifierTest {
 
         assertFalse(response);
     }
+
+    @Test
+    void shouldReturnTrueWhenAddressLine1FirstSixCharactersMatchesUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .forename("Lisa")
+                .surname("Simpson")
+                .addressLine1("742 Ev_DIFFERENT")
+                .postcode("BS1 5AA")
+                .build();
+        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, person);
+
+        assertTrue(response);
+    }
+
+    @Test
+    void shouldReturnTrueWhenAddressLine1FirstSixCharactersDifferentCaseMatchesUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .forename("Lisa")
+                .surname("Simpson")
+                .addressLine1("742 ev_DIFFERENT")
+                .postcode("BS1 5AA")
+                .build();
+        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, person);
+
+        assertTrue(response);
+    }
+
+    @Test
+    void shouldReturnFalseWhenAddressLine1UnderSixCharacterDoesNotMatchUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .forename("Lisa")
+                .surname("Simpson")
+                .addressLine1("742")
+                .postcode("BS1 5AA")
+                .build();
+        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, person);
+
+        assertFalse(response);
+    }
+
+
 }
