@@ -28,21 +28,6 @@ public class HouseholdVerifierUCHouseholdTest {
     }
 
     @Test
-    void shouldReturnFalseWhenForenameDoesNotMatchUCHousehold() {
-        UCAdult adult = UCAdult.builder()
-                .forename("Bart")
-                .surname("Simpson")
-                .addressLine1("742 Evergreen Terrace")
-                .postcode("AA11AA")
-                .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
-
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
-
-        assertThat(response).isFalse();
-    }
-
-    @Test
     void shouldReturnFalseWhenSurnameDoesNotMatchUCHousehold() {
         UCAdult adult = UCAdult.builder()
                 .forename("Lisa")

@@ -26,19 +26,6 @@ public class HouseholdVerifierLegacyHouseholdTest {
     }
 
     @Test
-    void shouldReturnFalseWhenForenameDoesNotMatchLegacyHousehold() {
-        LegacyAdult adult = LegacyAdult.builder()
-                .forename("Bart")
-                .surname("Simpson")
-                .build();
-        LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
-
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
-
-        assertThat(response).isFalse();
-    }
-
-    @Test
     void shouldReturnFalseWhenSurnameDoesNotMatchLegacyHousehold() {
         LegacyAdult adult = LegacyAdult.builder()
                 .forename("Lisa")

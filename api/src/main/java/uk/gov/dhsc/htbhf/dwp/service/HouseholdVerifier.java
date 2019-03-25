@@ -2,7 +2,6 @@ package uk.gov.dhsc.htbhf.dwp.service;
 
 import org.flywaydb.core.internal.util.StringUtils;
 import org.springframework.stereotype.Service;
-import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
@@ -13,33 +12,27 @@ public class HouseholdVerifier {
 
     /**
      * Determines if a given household contains an adult matching a given person.
-     * DWP rules specify to match on the forename, surname, postcode and first six characters of address line 1.
+     * DWP rules specify to match on the surname, postcode and first six characters of address line 1.
      * @param household household to check
      * @param person person to check
      * @return true the details of the household and the person match.
      */
     public Boolean detailsMatch(UCHousehold household, PersonDTO person) {
         return household.getAdults().stream()
-                .anyMatch(adult -> nameMatches(adult, person));
+                .anyMatch(adult -> adultMatchesPerson(adult, person));
     }
 
     public Boolean detailsMatch(LegacyHousehold household, PersonDTO person) {
         boolean nameMatches = household.getAdults().stream()
-                .anyMatch(adult -> nameMatches(adult, person));
+                .anyMatch(adult -> areEqual(adult.getSurname(), person.getSurname()));
 
         return nameMatches && addressMatches(household, person);
     }
 
-    private boolean nameMatches(UCAdult adult, PersonDTO person) {
-        return areEqual(adult.getForename(), person.getForename())
-                && areEqual(adult.getSurname(), person.getSurname())
+    private boolean adultMatchesPerson(UCAdult adult, PersonDTO person) {
+        return areEqual(adult.getSurname(), person.getSurname())
                 && firstSixCharacterMatch(person.getAddress().getAddressLine1(), adult.getAddressLine1())
                 && areEqualIgnoringWhitespace(adult.getPostcode(), person.getAddress().getPostcode());
-    }
-
-    private boolean nameMatches(LegacyAdult adult, PersonDTO person) {
-        return areEqual(adult.getForename(), person.getForename())
-                && areEqual(adult.getSurname(), person.getSurname());
     }
 
     private boolean addressMatches(LegacyHousehold household, PersonDTO person) {
