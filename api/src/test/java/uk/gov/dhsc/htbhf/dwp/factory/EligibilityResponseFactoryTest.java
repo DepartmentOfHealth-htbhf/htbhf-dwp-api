@@ -32,6 +32,5 @@ public class EligibilityResponseFactoryTest {
         assertThat(response.getHouseholdIdentifier()).isEqualTo(household.getHouseholdIdentifier());
         assertThat(response.getNumberOfChildrenUnderFour()).isEqualTo(2);
         assertThat(response.getNumberOfChildrenUnderOne()).isEqualTo(1);
-        assertThat(response.getEarningsThresholdExceeded()).isEqualTo(household.getEarningsThresholdExceeded());
     }
 }

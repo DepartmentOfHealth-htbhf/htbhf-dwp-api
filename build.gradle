@@ -1,7 +1,5 @@
 buildscript {
 
-    apply from: "default-properties.gradle"
-
     ext {
         HikariCPVersion = '2.7.8'
         postgresVersion = '10.5'
@@ -58,7 +56,7 @@ subprojects {
             csv.enabled = false
         }
     }
-    
+
     task updateConfig() {
         'git submodule update --init --recursive --remote'.execute()
     }

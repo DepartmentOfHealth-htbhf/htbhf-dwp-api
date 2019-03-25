@@ -20,7 +20,6 @@ public class EligibilityResponseFactory {
 
     public static EligibilityResponse createEligibilityResponse(UCHousehold household) {
         return EligibilityResponse.builder()
-                .earningsThresholdExceeded(household.getEarningsThresholdExceeded())
                 .householdIdentifier(household.getHouseholdIdentifier())
                 .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))
                 .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))
