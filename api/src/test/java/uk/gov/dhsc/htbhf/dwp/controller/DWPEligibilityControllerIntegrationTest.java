@@ -12,6 +12,7 @@ import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import uk.gov.dhsc.htbhf.dwp.service.EligibilityService;
+import uk.gov.dhsc.htbhf.errorhandler.ErrorResponse;
 
 import java.net.URI;
 
@@ -46,10 +47,10 @@ class DWPEligibilityControllerIntegrationTest {
         EligibilityRequest eligibilityRequest = anEligibilityRequest();
         given(eligibilityService.checkEligibility(any())).willReturn(anEligibilityResponse());
 
-        ResponseEntity<EligibilityResponse> response = restTemplate.postForEntity(ENDPOINT, eligibilityRequest, EligibilityResponse.class);
+        ResponseEntity<EligibilityResponse> benefit = restTemplate.postForEntity(ENDPOINT, eligibilityRequest, EligibilityResponse.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(OK);
-        assertThat(response.getBody()).isEqualTo(anEligibilityResponse());
+        assertThat(benefit.getStatusCode()).isEqualTo(OK);
+        assertThat(benefit.getBody()).isEqualTo(anEligibilityResponse());
         verify(eligibilityService).checkEligibility(eligibilityRequest);
     }
 
@@ -58,9 +59,10 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithNoNino();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "person.nino", "must not be null");
     }
 
     @Test
@@ -68,9 +70,10 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithAnInvalidNino();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "person.nino", "must match \"[a-zA-Z]{2}\\d{6}[a-dA-D]\"");
     }
 
     @Test
@@ -78,9 +81,10 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithNoDateOfBirth();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "person.dateOfBirth", "must not be null");
     }
 
     @Test
@@ -88,45 +92,60 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithNoAddress();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "person.address", "must not be null");
     }
 
     @Test
     void shouldReturnBadRequestForMissingPerson() {
         EligibilityRequest request = buildDefaultRequest().person(null).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "person", "must not be null");
     }
 
     @Test
     void shouldReturnBadRequestForMissingIncomeThreshold() {
         EligibilityRequest request = buildDefaultRequest().ucMonthlyIncomeThreshold(null).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "ucMonthlyIncomeThreshold", "must not be null");
     }
 
     @Test
     void shouldReturnBadRequestForMissingStartDate() {
         EligibilityRequest request = buildDefaultRequest().eligibleStartDate(null).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "eligibleStartDate", "must not be null");
     }
 
     @Test
     void shouldReturnBadRequestForMissingEndDate() {
         EligibilityRequest request = buildDefaultRequest().eligibleEndDate(null).build();
 
-        var benefit = restTemplate.postForEntity(ENDPOINT, request, EligibilityResponse.class);
+        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+        assertValidationError(response, "eligibleEndDate", "must not be null");
+    }
+
+    private void assertValidationError(ResponseEntity<ErrorResponse> response, String field, String errorMessage) {
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().getFieldErrors()).hasSize(1);
+        assertThat(response.getBody().getFieldErrors().get(0).getField()).isEqualTo(field);
+        assertThat(response.getBody().getFieldErrors().get(0).getMessage()).isEqualTo(errorMessage);
+        assertThat(response.getBody().getRequestId()).isNotNull();
+        assertThat(response.getBody().getTimestamp()).isNotNull();
+        assertThat(response.getBody().getMessage()).isEqualTo("There were validation issues with the request.");
     }
 
 }
