@@ -59,7 +59,7 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithNoNino();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "person.nino", "must not be null");
@@ -70,7 +70,7 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithAnInvalidNino();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "person.nino", "must match \"[a-zA-Z]{2}\\d{6}[a-dA-D]\"");
@@ -81,7 +81,7 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithNoDateOfBirth();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "person.dateOfBirth", "must not be null");
@@ -92,7 +92,7 @@ class DWPEligibilityControllerIntegrationTest {
         PersonDTO person = aPersonWithNoAddress();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "person.address", "must not be null");
@@ -102,7 +102,7 @@ class DWPEligibilityControllerIntegrationTest {
     void shouldReturnBadRequestForMissingPerson() {
         EligibilityRequest request = buildDefaultRequest().person(null).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "person", "must not be null");
@@ -112,7 +112,7 @@ class DWPEligibilityControllerIntegrationTest {
     void shouldReturnBadRequestForMissingIncomeThreshold() {
         EligibilityRequest request = buildDefaultRequest().ucMonthlyIncomeThreshold(null).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "ucMonthlyIncomeThreshold", "must not be null");
@@ -122,7 +122,7 @@ class DWPEligibilityControllerIntegrationTest {
     void shouldReturnBadRequestForMissingStartDate() {
         EligibilityRequest request = buildDefaultRequest().eligibleStartDate(null).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "eligibleStartDate", "must not be null");
@@ -132,7 +132,7 @@ class DWPEligibilityControllerIntegrationTest {
     void shouldReturnBadRequestForMissingEndDate() {
         EligibilityRequest request = buildDefaultRequest().eligibleEndDate(null).build();
 
-        var response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
         assertValidationError(response, "eligibleEndDate", "must not be null");
