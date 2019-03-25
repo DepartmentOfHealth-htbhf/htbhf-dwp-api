@@ -3,25 +3,14 @@ package uk.gov.dhsc.htbhf.dwp.service;
 import org.junit.jupiter.api.Test;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
-import uk.gov.dhsc.htbhf.dwp.model.AddressDTO;
-import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHouseholdWithNoAdultsOrChildren;
+import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPerson;
 
 public class HouseholdVerifierUCHouseholdTest {
 
     private final HouseholdVerifier householdVerifier = new HouseholdVerifier();
-    private final AddressDTO address = AddressDTO.builder()
-            .addressLine1("742 Evergreen Terrace")
-            .postcode("BS1 5AA")
-            .build();
-    private final PersonDTO person = PersonDTO.builder()
-            .forename("Lisa")
-            .surname("Simpson")
-            .address(address)
-            .build();
 
     @Test
     void shouldReturnTrueWhenPersonMatchesUCHousehold() {
@@ -29,13 +18,13 @@ public class HouseholdVerifierUCHouseholdTest {
                 .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 Evergreen Terrace")
-                .postcode("BS1 5AA")
+                .postcode("AA11AA")
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertTrue(response);
+        assertThat(response).isTrue();
     }
 
     @Test
@@ -44,13 +33,13 @@ public class HouseholdVerifierUCHouseholdTest {
                 .forename("Bart")
                 .surname("Simpson")
                 .addressLine1("742 Evergreen Terrace")
-                .postcode("BS1 5AA")
+                .postcode("AA11AA")
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -59,13 +48,13 @@ public class HouseholdVerifierUCHouseholdTest {
                 .forename("Lisa")
                 .surname("Smith")
                 .addressLine1("742 Evergreen Terrace")
-                .postcode("BS1 5AA")
+                .postcode("AA11AA")
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -74,13 +63,13 @@ public class HouseholdVerifierUCHouseholdTest {
                 .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("745 Deciduous Road")
-                .postcode("BS1 5AA")
+                .postcode("AA11AA")
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -93,9 +82,9 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -104,13 +93,13 @@ public class HouseholdVerifierUCHouseholdTest {
                 .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 Ev_DIFFERENT")
-                .postcode("BS1 5AA")
+                .postcode("AA11AA")
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertTrue(response);
+        assertThat(response).isTrue();
     }
 
     @Test
@@ -119,13 +108,13 @@ public class HouseholdVerifierUCHouseholdTest {
                 .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 ev_DIFFERENT")
-                .postcode("BS1 5AA")
+                .postcode("AA11AA")
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertTrue(response);
+        assertThat(response).isTrue();
     }
 
     @Test
@@ -134,14 +123,28 @@ public class HouseholdVerifierUCHouseholdTest {
                 .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742")
-                .postcode("BS1 5AA")
+                .postcode("AA11AA")
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
+    @Test
+    void shouldReturnTrueWhenPostcodeMatchesWithSpacesLegacyHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .forename("Lisa")
+                .surname("Simpson")
+                .addressLine1("742 Evergreen Terrace")
+                .postcode("AA1 1AA")
+                .build();
+        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+
+        assertThat(response).isTrue();
+    }
 
 }

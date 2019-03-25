@@ -3,25 +3,14 @@ package uk.gov.dhsc.htbhf.dwp.service;
 import org.junit.jupiter.api.Test;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
-import uk.gov.dhsc.htbhf.dwp.model.AddressDTO;
-import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aHouseholdWithNoAdultsOrChildren;
+import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPerson;
 
 public class HouseholdVerifierLegacyHouseholdTest {
 
     private final HouseholdVerifier householdVerifier = new HouseholdVerifier();
-    private final AddressDTO address = AddressDTO.builder()
-            .addressLine1("742 Evergreen Terrace")
-            .postcode("AA11AA")
-            .build();
-    private final PersonDTO person = PersonDTO.builder()
-            .forename("Lisa")
-            .surname("Simpson")
-            .address(address)
-            .build();
 
     @Test
     void shouldReturnTrueWhenPersonMatchesLegacyHousehold() {
@@ -31,9 +20,9 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertTrue(response);
+        assertThat(response).isTrue();
     }
 
     @Test
@@ -44,9 +33,9 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -57,9 +46,9 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -70,9 +59,9 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().addressLine1("Fake Street").build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -83,9 +72,9 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().postcode("W1 1NA").build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
     @Test
@@ -96,9 +85,9 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().addressLine1("742 Ev_DIFFERENT").build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertTrue(response);
+        assertThat(response).isTrue();
     }
 
     @Test
@@ -109,9 +98,9 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().addressLine1("742 ev_DIFFERENT").build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertTrue(response);
+        assertThat(response).isTrue();
     }
 
     @Test
@@ -122,10 +111,22 @@ public class HouseholdVerifierLegacyHouseholdTest {
                 .build();
         LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().addressLine1("742").build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, person);
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
 
-        assertFalse(response);
+        assertThat(response).isFalse();
     }
 
+    @Test
+    void shouldReturnTrueWhenPostcodeMatchesWithSpacesLegacyHousehold() {
+        LegacyAdult adult = LegacyAdult.builder()
+                .forename("Lisa")
+                .surname("Simpson")
+                .build();
+        LegacyHousehold household = aHouseholdWithNoAdultsOrChildren().postcode("AA1 1AA").build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+
+        assertThat(response).isTrue();
+    }
 
 }

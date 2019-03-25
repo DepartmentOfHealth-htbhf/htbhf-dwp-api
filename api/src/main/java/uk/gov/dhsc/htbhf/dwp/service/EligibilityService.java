@@ -47,19 +47,27 @@ public class EligibilityService {
         String nino = eligibilityRequest.getPerson().getNino();
         Optional<UCHousehold> ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);
         if (ucHousehold.isPresent()) {
-            return householdVerifier.detailsMatch(ucHousehold.get(), eligibilityRequest.getPerson())
-                    ? createEligibilityResponse(ucHousehold.get())
-                    : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
+            return getEligibilityResponse(eligibilityRequest, ucHousehold.get());
         }
 
         Optional<LegacyHousehold> legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);
         if (legacyHousehold.isPresent()) {
-            return householdVerifier.detailsMatch(legacyHousehold.get(), eligibilityRequest.getPerson())
-                    ? createEligibilityResponse(legacyHousehold.get())
-                    : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
+            return getEligibilityResponse(eligibilityRequest, legacyHousehold.get());
         }
 
         var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);
         return response.getBody();
+    }
+
+    private EligibilityResponse getEligibilityResponse(EligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
+        return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())
+                ? createEligibilityResponse(ucHousehold)
+                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
+    }
+
+    private EligibilityResponse getEligibilityResponse(EligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
+        return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())
+                ? createEligibilityResponse(legacyHousehold)
+                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
     }
 }

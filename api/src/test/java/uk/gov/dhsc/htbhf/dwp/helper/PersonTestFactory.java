@@ -8,10 +8,10 @@ import java.time.LocalDate;
 public class PersonTestFactory {
 
     private static final LocalDate DOB = LocalDate.parse("1985-12-31");
-    private static final String ADDRESS_LINE_1 = "Flat b";
+    private static final String ADDRESS_LINE_1 = "742 Evergreen Terrace";
     private static final String ADDRESS_LINE_2 = "123 Fake street";
     private static final String TOWN_OR_CITY = "Springfield";
-    private static final String POSTCODE = "AA1 1AA";
+    private static final String POSTCODE = "AA11AA";
     private static final String NINO = "EB123456C";
     private static final String FORENAME = "Lisa";
     private static final String SURNAME = "Simpson";
