@@ -40,4 +40,6 @@
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/EligibilityService.java">
 </file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifier.java">
+</file>
 </checkstyle>

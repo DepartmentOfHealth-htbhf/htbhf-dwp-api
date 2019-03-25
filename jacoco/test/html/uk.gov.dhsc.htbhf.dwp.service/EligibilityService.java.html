@@ -13,6 +13,7 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import java.util.Optional;
 
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 
 
 @Service
@@ -23,16 +24,19 @@ public class EligibilityService {
     private final RestTemplate restTemplate;
     private final UCHouseholdRepository ucHouseholdRepository;
     private final LegacyHouseholdRepository legacyHouseholdRepository;
+    private final HouseholdVerifier householdVerifier;
 
     public EligibilityService(@Value(&quot;${dwp.base-uri}&quot;) String baseUri,
                               RestTemplate restTemplate,
                               UCHouseholdRepository ucHouseholdRepository,
-<span class="fc" id="L30">                              LegacyHouseholdRepository legacyHouseholdRepository) {</span>
-<span class="fc" id="L31">        this.uri = baseUri + ENDPOINT;</span>
-<span class="fc" id="L32">        this.restTemplate = restTemplate;</span>
-<span class="fc" id="L33">        this.ucHouseholdRepository = ucHouseholdRepository;</span>
-<span class="fc" id="L34">        this.legacyHouseholdRepository = legacyHouseholdRepository;</span>
-<span class="fc" id="L35">    }</span>
+                              LegacyHouseholdRepository legacyHouseholdRepository,
+<span class="fc" id="L33">                              HouseholdVerifier householdVerifier) {</span>
+<span class="fc" id="L34">        this.uri = baseUri + ENDPOINT;</span>
+<span class="fc" id="L35">        this.restTemplate = restTemplate;</span>
+<span class="fc" id="L36">        this.ucHouseholdRepository = ucHouseholdRepository;</span>
+<span class="fc" id="L37">        this.legacyHouseholdRepository = legacyHouseholdRepository;</span>
+<span class="fc" id="L38">        this.householdVerifier = householdVerifier;</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      * Checks if a given request is eligible. First check the Universal credit database,
@@ -40,19 +44,31 @@ public class EligibilityService {
      * Checking UC database first as most data is held there.
      */
     public EligibilityResponse checkEligibility(EligibilityRequest eligibilityRequest) {
-<span class="fc" id="L43">        String nino = eligibilityRequest.getPerson().getNino();</span>
-<span class="fc" id="L44">        Optional&lt;UCHousehold&gt; ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
-<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (ucHousehold.isPresent()) {</span>
-<span class="fc" id="L46">            return createEligibilityResponse(ucHousehold.get());</span>
+<span class="fc" id="L47">        String nino = eligibilityRequest.getPerson().getNino();</span>
+<span class="fc" id="L48">        Optional&lt;UCHousehold&gt; ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (ucHousehold.isPresent()) {</span>
+<span class="fc" id="L50">            return getEligibilityResponse(eligibilityRequest, ucHousehold.get());</span>
         }
 
-<span class="fc" id="L49">        Optional&lt;LegacyHousehold&gt; legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
-<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (legacyHousehold.isPresent()) {</span>
-<span class="fc" id="L51">            return createEligibilityResponse(legacyHousehold.get());</span>
+<span class="fc" id="L53">        Optional&lt;LegacyHousehold&gt; legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (legacyHousehold.isPresent()) {</span>
+<span class="fc" id="L55">            return getEligibilityResponse(eligibilityRequest, legacyHousehold.get());</span>
         }
 
-<span class="fc" id="L54">        var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);</span>
-<span class="fc" id="L55">        return response.getBody();</span>
+<span class="fc" id="L58">        var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);</span>
+<span class="fc" id="L59">        return response.getBody();</span>
+    }
+
+    private EligibilityResponse getEligibilityResponse(EligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())</span>
+<span class="fc" id="L64">                ? createEligibilityResponse(ucHousehold)</span>
+<span class="fc" id="L65">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
+    }
+
+    private EligibilityResponse getEligibilityResponse(EligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())</span>
+<span class="fc" id="L70">                ? createEligibilityResponse(legacyHousehold)</span>
+<span class="fc" id="L71">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -20,7 +20,8 @@ public interface UCHouseholdRepository extends CrudRepository&lt;UCHousehold, UU
      * @param nino The nino to check against
      * @return A stream containing all households found
      */
-    @Query(&quot;SELECT household FROM UCHousehold household INNER JOIN household.adults adult WHERE adult.nino = :nino ORDER BY household.fileImportNumber DESC&quot;)
+    @Query(&quot;SELECT household FROM UCHousehold household INNER JOIN FETCH household.adults adult &quot;
+            + &quot;WHERE adult.nino = :nino ORDER BY household.fileImportNumber DESC&quot;)
     Stream&lt;UCHousehold&gt; findAllHouseholdsByAdultWithNino(@Param(&quot;nino&quot;) String nino);
 
     /**
@@ -31,8 +32,8 @@ public interface UCHouseholdRepository extends CrudRepository&lt;UCHousehold, UU
      */
     @Transactional(readOnly = true)
     default Optional&lt;UCHousehold&gt; findHouseholdByAdultWithNino(String nino) {
-<span class="fc" id="L34">        Stream&lt;UCHousehold&gt; households = findAllHouseholdsByAdultWithNino(nino);</span>
-<span class="fc" id="L35">        return households.findFirst();</span>
+<span class="fc" id="L35">        Stream&lt;UCHousehold&gt; households = findAllHouseholdsByAdultWithNino(nino);</span>
+<span class="fc" id="L36">        return households.findFirst();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -20,7 +20,7 @@ public interface LegacyHouseholdRepository extends CrudRepository&lt;LegacyHouse
      * @param nino The nino to check against
      * @return A stream containing all households found
      */
-    @Query(&quot;SELECT household FROM LegacyHousehold household INNER JOIN household.adults adult &quot;
+    @Query(&quot;SELECT household FROM LegacyHousehold household INNER JOIN FETCH household.adults adult &quot;
             + &quot;WHERE adult.nino = :nino ORDER BY household.fileImportNumber DESC&quot;)
     Stream&lt;LegacyHousehold&gt; findAllHouseholdsByAdultWithNino(@Param(&quot;nino&quot;) String nino);
 
