@@ -20,15 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.anEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.buildDefaultRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithAnInvalidNino;
-import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithNoAddress;
-import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithNoDateOfBirth;
 import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithNoNino;
 
 @ExtendWith(SpringExtension.class)
@@ -56,86 +52,13 @@ class DWPEligibilityControllerIntegrationTest {
     }
 
     @Test
-    void shouldReturnBadRequestForMissingNino() {
+    void shouldReturnBadRequestForInvalidRequest() {
         PersonDTO person = aPersonWithNoNino();
         EligibilityRequest request = buildDefaultRequest().person(person).build();
 
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertValidationErrorInResponse(response, "person.nino", "must not be null");
-    }
-
-    @Test
-    void shouldReturnBadRequestForInvalidNino() {
-        PersonDTO person = aPersonWithAnInvalidNino();
-        EligibilityRequest request = buildDefaultRequest().person(person).build();
-
-        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationErrorInResponse(response, "person.nino", "must match \"[a-zA-Z]{2}\\d{6}[a-dA-D]\"");
-    }
-
-    @Test
-    void shouldReturnBadRequestForMissingDateOfBirth() {
-        PersonDTO person = aPersonWithNoDateOfBirth();
-        EligibilityRequest request = buildDefaultRequest().person(person).build();
-
-        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationErrorInResponse(response, "person.dateOfBirth", "must not be null");
-    }
-
-    @Test
-    void shouldReturnBadRequestForMissingAddress() {
-        PersonDTO person = aPersonWithNoAddress();
-        EligibilityRequest request = buildDefaultRequest().person(person).build();
-
-        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationErrorInResponse(response, "person.address", "must not be null");
-    }
-
-    @Test
-    void shouldReturnBadRequestForMissingPerson() {
-        EligibilityRequest request = buildDefaultRequest().person(null).build();
-
-        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationErrorInResponse(response, "person", "must not be null");
-    }
-
-    @Test
-    void shouldReturnBadRequestForMissingIncomeThreshold() {
-        EligibilityRequest request = buildDefaultRequest().ucMonthlyIncomeThreshold(null).build();
-
-        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationErrorInResponse(response, "ucMonthlyIncomeThreshold", "must not be null");
-    }
-
-    @Test
-    void shouldReturnBadRequestForMissingStartDate() {
-        EligibilityRequest request = buildDefaultRequest().eligibleStartDate(null).build();
-
-        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationErrorInResponse(response, "eligibleStartDate", "must not be null");
-    }
-
-    @Test
-    void shouldReturnBadRequestForMissingEndDate() {
-        EligibilityRequest request = buildDefaultRequest().eligibleEndDate(null).build();
-
-        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationErrorInResponse(response, "eligibleEndDate", "must not be null");
     }
 
 }
