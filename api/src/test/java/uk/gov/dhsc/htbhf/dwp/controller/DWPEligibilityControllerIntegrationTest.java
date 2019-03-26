@@ -22,6 +22,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.OK;
+import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.anEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.buildDefaultRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
@@ -61,8 +62,7 @@ class DWPEligibilityControllerIntegrationTest {
 
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "person.nino", "must not be null");
+        assertValidationErrorInResponse(response, "person.nino", "must not be null");
     }
 
     @Test
@@ -73,7 +73,7 @@ class DWPEligibilityControllerIntegrationTest {
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "person.nino", "must match \"[a-zA-Z]{2}\\d{6}[a-dA-D]\"");
+        assertValidationErrorInResponse(response, "person.nino", "must match \"[a-zA-Z]{2}\\d{6}[a-dA-D]\"");
     }
 
     @Test
@@ -84,7 +84,7 @@ class DWPEligibilityControllerIntegrationTest {
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "person.dateOfBirth", "must not be null");
+        assertValidationErrorInResponse(response, "person.dateOfBirth", "must not be null");
     }
 
     @Test
@@ -95,7 +95,7 @@ class DWPEligibilityControllerIntegrationTest {
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "person.address", "must not be null");
+        assertValidationErrorInResponse(response, "person.address", "must not be null");
     }
 
     @Test
@@ -105,7 +105,7 @@ class DWPEligibilityControllerIntegrationTest {
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "person", "must not be null");
+        assertValidationErrorInResponse(response, "person", "must not be null");
     }
 
     @Test
@@ -115,7 +115,7 @@ class DWPEligibilityControllerIntegrationTest {
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "ucMonthlyIncomeThreshold", "must not be null");
+        assertValidationErrorInResponse(response, "ucMonthlyIncomeThreshold", "must not be null");
     }
 
     @Test
@@ -125,7 +125,7 @@ class DWPEligibilityControllerIntegrationTest {
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "eligibleStartDate", "must not be null");
+        assertValidationErrorInResponse(response, "eligibleStartDate", "must not be null");
     }
 
     @Test
@@ -135,17 +135,7 @@ class DWPEligibilityControllerIntegrationTest {
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
-        assertValidationError(response, "eligibleEndDate", "must not be null");
-    }
-
-    private void assertValidationError(ResponseEntity<ErrorResponse> response, String field, String errorMessage) {
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getFieldErrors()).hasSize(1);
-        assertThat(response.getBody().getFieldErrors().get(0).getField()).isEqualTo(field);
-        assertThat(response.getBody().getFieldErrors().get(0).getMessage()).isEqualTo(errorMessage);
-        assertThat(response.getBody().getRequestId()).isNotNull();
-        assertThat(response.getBody().getTimestamp()).isNotNull();
-        assertThat(response.getBody().getMessage()).isEqualTo("There were validation issues with the request.");
+        assertValidationErrorInResponse(response, "eligibleEndDate", "must not be null");
     }
 
 }
