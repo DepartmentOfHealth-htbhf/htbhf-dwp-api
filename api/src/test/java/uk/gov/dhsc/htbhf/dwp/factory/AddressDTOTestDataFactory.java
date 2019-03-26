@@ -29,7 +29,7 @@ public class AddressDTOTestDataFactory {
         return aValidAddressBuilder().townOrCity(townOrCity).build();
     }
 
-    private static AddressDTO.AddressDTOBuilder aValidAddressBuilder() {
+    public static AddressDTO.AddressDTOBuilder aValidAddressBuilder() {
         return AddressDTO.builder()
                 .addressLine1(ADDRESS_LINE_1)
                 .addressLine2(ADDRESS_LINE_2)

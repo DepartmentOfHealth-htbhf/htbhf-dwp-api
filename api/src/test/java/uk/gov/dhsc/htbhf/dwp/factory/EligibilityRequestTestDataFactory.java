@@ -6,7 +6,7 @@ import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static uk.gov.dhsc.htbhf.dwp.factory.AddressDTOTestDataFactory.aValidAddress;
+import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aValidPersonBuilder;
 
 public class EligibilityRequestTestDataFactory {
 
@@ -20,10 +20,6 @@ public class EligibilityRequestTestDataFactory {
 
     public static EligibilityRequest anEligibilityRequestWithPerson(PersonDTO person) {
         return aValidEligibilityRequestBuilder().person(person).build();
-    }
-
-    public static EligibilityRequest anEligibilityRequestWithInvalidPerson() {
-        return anEligibilityRequestWithPerson(anInvalidPerson());
     }
 
     public static EligibilityRequest anEligibilityRequestWithUcMonthlyIncomeThreshold(BigDecimal ucMonthlyIncomeThreshold) {
@@ -40,26 +36,9 @@ public class EligibilityRequestTestDataFactory {
 
     private static EligibilityRequest.EligibilityRequestBuilder aValidEligibilityRequestBuilder() {
         return EligibilityRequest.builder()
-                .person(aValidPerson())
+                .person(aValidPersonBuilder().build())
                 .ucMonthlyIncomeThreshold(UC_MONTHLY_INCOME_THRESHOLD)
                 .eligibleStartDate(ELIGIBLE_START_DATE)
                 .eligibleEndDate(ELIGIBLE_END_DATE);
-    }
-
-    private static PersonDTO aValidPerson() {
-        return aValidPersonBuilder().build();
-    }
-
-    private static PersonDTO anInvalidPerson() {
-        return aValidPersonBuilder().nino(null).build();
-    }
-
-    private static PersonDTO.PersonDTOBuilder aValidPersonBuilder() {
-        return PersonDTO.builder()
-                .forename("Lisa")
-                .surname("Simpson")
-                .nino("QQ123456C")
-                .dateOfBirth(LocalDate.parse("1985-12-30"))
-                .address(aValidAddress());
     }
 }

@@ -8,6 +8,7 @@ import javax.validation.ConstraintViolation;
 
 import static uk.gov.dhsc.htbhf.assertions.ConstraintViolationAssert.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityRequestTestDataFactory.*;
+import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aValidPersonBuilder;
 
 class EligibilityRequestTest extends AbstractValidationTest {
 
@@ -22,7 +23,8 @@ class EligibilityRequestTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateEligibilityRequestWithInvalidPerson() {
-        var request = anEligibilityRequestWithInvalidPerson();
+        var person = aValidPersonBuilder().nino(null).build();
+        var request = anEligibilityRequestWithPerson(person);
 
         Set<ConstraintViolation<EligibilityRequest>> violations = validator.validate(request);
 
