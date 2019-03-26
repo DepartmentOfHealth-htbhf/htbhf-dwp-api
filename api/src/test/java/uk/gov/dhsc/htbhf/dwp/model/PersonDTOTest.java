@@ -8,14 +8,14 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import static uk.gov.dhsc.htbhf.assertions.ConstraintViolationAssert.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.factory.AddressDTOTestDataFactory.aValidAddressBuilder;
+import static uk.gov.dhsc.htbhf.dwp.factory.AddressDTOTestDataFactory.anAddressWithAddressLine1;
 import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.*;
 
 class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldValidatePersonSuccessfully() {
-        var person = aValidPerson();
+        PersonDTO person = aValidPerson();
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
@@ -24,7 +24,7 @@ class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateWithNoForename() {
-        var person = aPersonWithForename(null);
+        PersonDTO person = aPersonWithForename(null);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
@@ -33,7 +33,7 @@ class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateWithNoSurname() {
-        var person = aPersonWithSurname(null);
+        PersonDTO person = aPersonWithSurname(null);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
@@ -42,7 +42,7 @@ class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateWithNoNino() {
-        var person = aPersonWithNino(null);
+        PersonDTO person = aPersonWithNino(null);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
@@ -51,7 +51,7 @@ class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateWithNoDateOfBirth() {
-        var person = aPersonWithDateOfBirth(null);
+        PersonDTO person = aPersonWithDateOfBirth(null);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
@@ -60,7 +60,7 @@ class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateWithDateOfBirthInFuture() {
-        var person = aPersonWithDateOfBirth(LocalDate.now().plusDays(1));
+        PersonDTO person = aPersonWithDateOfBirth(LocalDate.now().plusDays(1));
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
@@ -69,7 +69,7 @@ class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateWithNoAddress() {
-        var person = aPersonWithAddress(null);
+        PersonDTO person = aPersonWithAddress(null);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
@@ -78,8 +78,8 @@ class PersonDTOTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateWithInvalidAddress() {
-        var address = aValidAddressBuilder().addressLine1(null).build();
-        var person = aPersonWithAddress(address);
+        AddressDTO address = anAddressWithAddressLine1(null);
+        PersonDTO person = aPersonWithAddress(address);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 

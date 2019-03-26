@@ -38,7 +38,7 @@ public class PersonDTOTestDataFactory {
         return aValidPersonBuilder().address(address).build();
     }
 
-    public static PersonDTO.PersonDTOBuilder aValidPersonBuilder() {
+    private static PersonDTO.PersonDTOBuilder aValidPersonBuilder() {
         return PersonDTO.builder()
                 .forename(FORENAME)
                 .surname(SURNAME)

@@ -44,10 +44,10 @@ class DWPEligibilityControllerIntegrationTest {
         EligibilityRequest eligibilityRequest = anEligibilityRequest();
         given(eligibilityService.checkEligibility(any())).willReturn(anEligibilityResponse());
 
-        ResponseEntity<EligibilityResponse> benefit = restTemplate.postForEntity(ENDPOINT, eligibilityRequest, EligibilityResponse.class);
+        ResponseEntity<EligibilityResponse> response = restTemplate.postForEntity(ENDPOINT, eligibilityRequest, EligibilityResponse.class);
 
-        assertThat(benefit.getStatusCode()).isEqualTo(OK);
-        assertThat(benefit.getBody()).isEqualTo(anEligibilityResponse());
+        assertThat(response.getStatusCode()).isEqualTo(OK);
+        assertThat(response.getBody()).isEqualTo(anEligibilityResponse());
         verify(eligibilityService).checkEligibility(eligibilityRequest);
     }
 

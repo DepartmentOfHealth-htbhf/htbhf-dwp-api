@@ -6,7 +6,7 @@ import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aValidPersonBuilder;
+import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aValidPerson;
 
 public class EligibilityRequestTestDataFactory {
 
@@ -36,7 +36,7 @@ public class EligibilityRequestTestDataFactory {
 
     private static EligibilityRequest.EligibilityRequestBuilder aValidEligibilityRequestBuilder() {
         return EligibilityRequest.builder()
-                .person(aValidPersonBuilder().build())
+                .person(aValidPerson())
                 .ucMonthlyIncomeThreshold(UC_MONTHLY_INCOME_THRESHOLD)
                 .eligibleStartDate(ELIGIBLE_START_DATE)
                 .eligibleEndDate(ELIGIBLE_END_DATE);

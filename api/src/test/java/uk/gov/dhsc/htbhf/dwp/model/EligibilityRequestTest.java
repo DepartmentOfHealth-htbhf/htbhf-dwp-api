@@ -8,13 +8,13 @@ import javax.validation.ConstraintViolation;
 
 import static uk.gov.dhsc.htbhf.assertions.ConstraintViolationAssert.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityRequestTestDataFactory.*;
-import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aValidPersonBuilder;
+import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aPersonWithNino;
 
 class EligibilityRequestTest extends AbstractValidationTest {
 
     @Test
     public void shouldValidateEligibilityRequestSuccessfully() {
-        var request = aValidEligibilityRequest();
+        EligibilityRequest request = aValidEligibilityRequest();
 
         Set<ConstraintViolation<EligibilityRequest>> violations = validator.validate(request);
 
@@ -23,8 +23,8 @@ class EligibilityRequestTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateEligibilityRequestWithInvalidPerson() {
-        var person = aValidPersonBuilder().nino(null).build();
-        var request = anEligibilityRequestWithPerson(person);
+        PersonDTO person = aPersonWithNino(null);
+        EligibilityRequest request = anEligibilityRequestWithPerson(person);
 
         Set<ConstraintViolation<EligibilityRequest>> violations = validator.validate(request);
 
@@ -33,7 +33,7 @@ class EligibilityRequestTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateEligibilityRequestWithNoPerson() {
-        var request = anEligibilityRequestWithPerson(null);
+        EligibilityRequest request = anEligibilityRequestWithPerson(null);
 
         Set<ConstraintViolation<EligibilityRequest>> violations = validator.validate(request);
 
@@ -42,7 +42,7 @@ class EligibilityRequestTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateEligibilityRequestWithNoUcMonthlyIncomeThreshold() {
-        var request = anEligibilityRequestWithUcMonthlyIncomeThreshold(null);
+        EligibilityRequest request = anEligibilityRequestWithUcMonthlyIncomeThreshold(null);
 
         Set<ConstraintViolation<EligibilityRequest>> violations = validator.validate(request);
 
@@ -51,7 +51,7 @@ class EligibilityRequestTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateEligibilityRequestWithNoEligibleStartDate() {
-        var request = anEligibilityRequestWithEligibleStartDate(null);
+        EligibilityRequest request = anEligibilityRequestWithEligibleStartDate(null);
 
         Set<ConstraintViolation<EligibilityRequest>> violations = validator.validate(request);
 
@@ -60,7 +60,7 @@ class EligibilityRequestTest extends AbstractValidationTest {
 
     @Test
     public void shouldFailToValidateEligibilityRequestWithNoEligibleEndDate() {
-        var request = anEligibilityRequestWithEligibleEndDate(null);
+        EligibilityRequest request = anEligibilityRequestWithEligibleEndDate(null);
 
         Set<ConstraintViolation<EligibilityRequest>> violations = validator.validate(request);
 
