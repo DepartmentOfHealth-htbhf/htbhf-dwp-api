@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.659s</div>
+<div class="counter">0.453s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,17 +79,17 @@
 </thead>
 <tr>
 <td class="success">saveAndRetrieveHousehold()</td>
-<td class="success">0.104s</td>
+<td class="success">0.057s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldFailToFindUCHouseholdByNino()</td>
-<td class="success">0.440s</td>
+<td class="success">0.340s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldFindMostRecentVersionOfUCHouseholdByNino()</td>
-<td class="success">0.115s</td>
+<td class="success">0.056s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -97,12 +97,12 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2019-03-25 12:00:19.535  INFO 5360 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest], using SpringBootContextLoader
-2019-03-25 12:00:19.536  INFO 5360 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2019-03-25 12:00:19.536  INFO 5360 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest]: UCHouseholdRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2019-03-25 12:00:19.554  INFO 5360 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.gov.dhsc.htbhf.dwp.DWPApplication for test class uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest
-2019-03-25 12:00:19.558  INFO 5360 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-2019-03-25 12:00:19.558  INFO 5360 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@53fb2e7b, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@794afa4, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@a243b2a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@4228067, org.springframework.test.context.support.DirtiesContextTestExecutionListener@ea0ee6e, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2c6b9991, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7bd1a5d, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@170c9375, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@1e56dc64, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@6e01792e, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@101e941, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@72e5452f]
+<pre>2019-03-26 15:37:07.660  INFO 5328 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest], using SpringBootContextLoader
+2019-03-26 15:37:07.665  INFO 5328 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2019-03-26 15:37:07.666  INFO 5328 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest]: UCHouseholdRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2019-03-26 15:37:07.676  INFO 5328 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.gov.dhsc.htbhf.dwp.DWPApplication for test class uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepositoryTest
+2019-03-26 15:37:07.678  INFO 5328 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2019-03-26 15:37:07.679  INFO 5328 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@42370b8d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5cac8ecb, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@82770e, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@46d31310, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3c421324, org.springframework.test.context.transaction.TransactionalTestExecutionListener@42008b1, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1709353c, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@499cef5e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@65eb1e7a, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@618af7f6, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@3f748e2e, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@11bc7081]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -112,31 +112,31 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.3.RELEASE)
 
-2019-03-25 12:00:19.610  INFO 5360 --- [    Test worker] u.g.d.h.d.r.UCHouseholdRepositoryTest    : Starting UCHouseholdRepositoryTest on travis-job-2f748ca0-b273-462c-9590-72a7ec60dc61 with PID 5360 (started by travis in /home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api)
-2019-03-25 12:00:19.611  INFO 5360 --- [    Test worker] u.g.d.h.d.r.UCHouseholdRepositoryTest    : No active profile set, falling back to default profiles: default
-2019-03-25 12:00:20.389  INFO 5360 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-03-25 12:00:20.441  INFO 5360 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43ms. Found 2 repository interfaces.
-2019-03-25 12:00:20.600  INFO 5360 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c00ef4e3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-03-25 12:00:20.828  INFO 5360 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
-2019-03-25 12:00:20.831  INFO 5360 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
-2019-03-25 12:00:20.831  INFO 5360 --- [    Test worker] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:h2:mem:test (H2 1.4)
-2019-03-25 12:00:20.879  INFO 5360 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 5 migrations (execution time 00:00.023s)
-2019-03-25 12:00:20.910  INFO 5360 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;PUBLIC&quot;: 1.005
-2019-03-25 12:00:20.911  INFO 5360 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema &quot;PUBLIC&quot; is up to date. No migration necessary.
-2019-03-25 12:00:21.040  INFO 5360 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+2019-03-26 15:37:07.724  INFO 5328 --- [    Test worker] u.g.d.h.d.r.UCHouseholdRepositoryTest    : Starting UCHouseholdRepositoryTest on travis-job-90d85be1-ed88-41b4-8223-2b12b77fbe6b with PID 5328 (started by travis in /home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api)
+2019-03-26 15:37:07.724  INFO 5328 --- [    Test worker] u.g.d.h.d.r.UCHouseholdRepositoryTest    : No active profile set, falling back to default profiles: default
+2019-03-26 15:37:08.274  INFO 5328 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-03-26 15:37:08.293  INFO 5328 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19ms. Found 2 repository interfaces.
+2019-03-26 15:37:08.423  INFO 5328 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$64b8277d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-03-26 15:37:08.546  INFO 5328 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2019-03-26 15:37:08.548  INFO 5328 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2019-03-26 15:37:08.548  INFO 5328 --- [    Test worker] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:h2:mem:test (H2 1.4)
+2019-03-26 15:37:08.569  INFO 5328 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 5 migrations (execution time 00:00.010s)
+2019-03-26 15:37:08.587  INFO 5328 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;PUBLIC&quot;: 1.005
+2019-03-26 15:37:08.587  INFO 5328 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema &quot;PUBLIC&quot; is up to date. No migration necessary.
+2019-03-26 15:37:08.696  INFO 5328 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
 	name: default
 	...]
-2019-03-25 12:00:21.051  INFO 5360 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2019-03-25 12:00:21.157  INFO 5360 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-03-25 12:00:21.276  INFO 5360 --- [    Test worker] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
-2019-03-25 12:00:21.789  WARN 5360 --- [    Test worker] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-03-25 12:00:22.229  INFO 5360 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2019-03-25 12:00:22.462  INFO 5360 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity&lt;springfox.documentation.spring.web.json.Json&gt; springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2019-03-25 12:00:22.799  INFO 5360 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-03-25 12:00:23.244  INFO 5360 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2019-03-25 12:00:23.249  INFO 5360 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2019-03-25 12:00:23.262  INFO 5360 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2019-03-25 12:00:23.357  INFO 5360 --- [    Test worker] u.g.d.h.d.r.UCHouseholdRepositoryTest    : Started UCHouseholdRepositoryTest in 3.795 seconds (JVM running for 40.91)
+2019-03-26 15:37:08.712  INFO 5328 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2019-03-26 15:37:08.888  INFO 5328 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-03-26 15:37:09.026  INFO 5328 --- [    Test worker] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2019-03-26 15:37:09.407  WARN 5328 --- [    Test worker] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-03-26 15:37:09.782  INFO 5328 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-03-26 15:37:09.991  INFO 5328 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity&lt;springfox.documentation.spring.web.json.Json&gt; springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-03-26 15:37:10.264  INFO 5328 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-26 15:37:10.700  INFO 5328 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-03-26 15:37:10.703  INFO 5328 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-03-26 15:37:10.716  INFO 5328 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-03-26 15:37:10.788  INFO 5328 --- [    Test worker] u.g.d.h.d.r.UCHouseholdRepositoryTest    : Started UCHouseholdRepositoryTest in 3.107 seconds (JVM running for 38.575)
 </pre>
 </span>
 </div>
@@ -148,7 +148,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 5.2.1</a> at Mar 25, 2019, 12:06:29 PM</p>
+<a href="http://www.gradle.org">Gradle 5.2.1</a> at Mar 26, 2019, 3:41:04 PM</p>
 </div>
 </div>
 </body>
