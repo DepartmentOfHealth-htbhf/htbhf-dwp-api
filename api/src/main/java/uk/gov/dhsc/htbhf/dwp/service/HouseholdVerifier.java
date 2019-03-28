@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
-import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
+import uk.gov.dhsc.htbhf.dwp.model.DWPPersonDTO;
 
 @Service
 public class HouseholdVerifier {
@@ -17,25 +17,25 @@ public class HouseholdVerifier {
      * @param person person to check
      * @return true the details of the household and the person match.
      */
-    public Boolean detailsMatch(UCHousehold household, PersonDTO person) {
+    public Boolean detailsMatch(UCHousehold household, DWPPersonDTO person) {
         return household.getAdults().stream()
                 .anyMatch(adult -> adultMatchesPerson(adult, person));
     }
 
-    public Boolean detailsMatch(LegacyHousehold household, PersonDTO person) {
+    public Boolean detailsMatch(LegacyHousehold household, DWPPersonDTO person) {
         boolean nameMatches = household.getAdults().stream()
-                .anyMatch(adult -> areEqual(adult.getSurname(), person.getLastName()));
+                .anyMatch(adult -> areEqual(adult.getSurname(), person.getSurname()));
 
         return nameMatches && addressMatches(household, person);
     }
 
-    private boolean adultMatchesPerson(UCAdult adult, PersonDTO person) {
-        return areEqual(adult.getSurname(), person.getLastName())
+    private boolean adultMatchesPerson(UCAdult adult, DWPPersonDTO person) {
+        return areEqual(adult.getSurname(), person.getSurname())
                 && firstSixCharacterMatch(person.getAddress().getAddressLine1(), adult.getAddressLine1())
                 && areEqualIgnoringWhitespace(adult.getPostcode(), person.getAddress().getPostcode());
     }
 
-    private boolean addressMatches(LegacyHousehold household, PersonDTO person) {
+    private boolean addressMatches(LegacyHousehold household, DWPPersonDTO person) {
         return firstSixCharacterMatch(household.getAddressLine1(), person.getAddress().getAddressLine1())
                 && areEqualIgnoringWhitespace(household.getPostcode(), person.getAddress().getPostcode());
     }

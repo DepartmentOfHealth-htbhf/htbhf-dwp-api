@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
@@ -43,7 +44,7 @@ public class EligibilityService {
      * then the legacy database, then call the dwp api.
      * Checking UC database first as most data is held there.
      */
-    public EligibilityResponse checkEligibility(EligibilityRequest eligibilityRequest) {
+    public EligibilityResponse checkEligibility(DWPEligibilityRequest eligibilityRequest) {
         String nino = eligibilityRequest.getPerson().getNino();
         Optional<UCHousehold> ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);
         if (ucHousehold.isPresent()) {
@@ -59,13 +60,13 @@ public class EligibilityService {
         return response.getBody();
     }
 
-    private EligibilityResponse getEligibilityResponse(EligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
+    private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
         return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())
                 ? createEligibilityResponse(ucHousehold)
                 : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
     }
 
-    private EligibilityResponse getEligibilityResponse(EligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
+    private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
         return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())
                 ? createEligibilityResponse(legacyHousehold)
                 : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
