@@ -4,7 +4,7 @@ import uk.gov.dhsc.htbhf.dwp.model.AddressDTO;
 
 public class AddressDTOTestDataFactory {
 
-    private static final String ADDRESS_LINE_1 = "Flat b";
+    private static final String ADDRESS_LINE_1 = "742 Evergreen Terrace";
     private static final String ADDRESS_LINE_2 = "123 Fake street";
     private static final String TOWN_OR_CITY = "Springfield";
     private static final String POSTCODE = "AA1 1AA";

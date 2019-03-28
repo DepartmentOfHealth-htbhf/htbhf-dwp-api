@@ -6,7 +6,6 @@ import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
-import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
 import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
@@ -15,7 +14,6 @@ import java.util.Optional;
 
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
-
 
 @Service
 public class EligibilityService {
