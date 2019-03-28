@@ -24,13 +24,13 @@ public class HouseholdVerifier {
 
     public Boolean detailsMatch(LegacyHousehold household, PersonDTO person) {
         boolean nameMatches = household.getAdults().stream()
-                .anyMatch(adult -> areEqual(adult.getSurname(), person.getSurname()));
+                .anyMatch(adult -> areEqual(adult.getSurname(), person.getLastName()));
 
         return nameMatches && addressMatches(household, person);
     }
 
     private boolean adultMatchesPerson(UCAdult adult, PersonDTO person) {
-        return areEqual(adult.getSurname(), person.getSurname())
+        return areEqual(adult.getSurname(), person.getLastName())
                 && firstSixCharacterMatch(person.getAddress().getAddressLine1(), adult.getAddressLine1())
                 && areEqualIgnoringWhitespace(adult.getPostcode(), person.getAddress().getPostcode());
     }

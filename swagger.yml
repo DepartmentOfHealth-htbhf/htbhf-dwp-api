@@ -11,7 +11,7 @@ info:
   license:
     name: "MIT"
     url: "https://opensource.org/licenses/MIT"
-host: "localhost:49450"
+host: "localhost:56849"
 basePath: "/"
 tags:
 - name: "dwp-eligibility-controller"
@@ -132,18 +132,18 @@ definitions:
         format: "date"
         example: "1985-12-30"
         description: "The date of birth, in the format YYYY-MM-DD"
-      forename:
+      firstName:
         type: "string"
         example: "Lisa"
-        description: "The person's forename"
+        description: "The person's first name"
+      lastName:
+        type: "string"
+        example: "Simpson"
+        description: "The person's last name"
       nino:
         type: "string"
         example: "QQ123456C"
         description: "National Insurance number"
         pattern: "[a-zA-Z]{2}\\d{6}[a-dA-D]"
-      surname:
-        type: "string"
-        example: "Simpson"
-        description: "The person's surname"
     title: "PersonDTO"
     description: "The person who we are checking eligibility for"
