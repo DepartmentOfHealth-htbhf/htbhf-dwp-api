@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 @AllArgsConstructor(onConstructor_ = {@JsonCreator})
-@ApiModel(description = "The eligibility request for Universal Credit")
+@ApiModel(description = "The eligibility request for DWP benefits")
 public class DWPEligibilityRequest {
 
     @NotNull

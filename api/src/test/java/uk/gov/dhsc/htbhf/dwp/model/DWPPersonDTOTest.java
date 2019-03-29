@@ -23,7 +23,7 @@ class DWPPersonDTOTest extends AbstractValidationTest {
     }
 
     @Test
-    public void shouldFailToValidateWithNoFirstName() {
+    public void shouldFailToValidateWithNoForename() {
         DWPPersonDTO person = aDWPPersonWithForename(null);
 
         Set<ConstraintViolation<DWPPersonDTO>> violations = validator.validate(person);
@@ -32,7 +32,7 @@ class DWPPersonDTOTest extends AbstractValidationTest {
     }
 
     @Test
-    public void shouldFailToValidateWithNoSurName() {
+    public void shouldFailToValidateWithNoSurname() {
         DWPPersonDTO person = aDWPPersonWithSurname(null);
 
         Set<ConstraintViolation<DWPPersonDTO>> violations = validator.validate(person);
