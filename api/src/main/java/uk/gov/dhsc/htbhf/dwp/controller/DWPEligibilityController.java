@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.dhsc.htbhf.dwp.converter.EligibilityRequestToDWPEligibilityRequest;
+import uk.gov.dhsc.htbhf.dwp.converter.EligibilityRequestToDWPEligibilityRequestConverter;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
@@ -23,7 +23,7 @@ import javax.validation.Valid;
 public class DWPEligibilityController {
 
     private final EligibilityService eligibilityService;
-    private final EligibilityRequestToDWPEligibilityRequest converter;
+    private final EligibilityRequestToDWPEligibilityRequestConverter converter;
 
     @PostMapping
     @ApiOperation("Retrieve the eligibility of a person for Universal Credit")

@@ -8,7 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import uk.gov.dhsc.htbhf.dwp.converter.EligibilityRequestToDWPEligibilityRequest;
+import uk.gov.dhsc.htbhf.dwp.converter.EligibilityRequestToDWPEligibilityRequestConverter;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
@@ -43,7 +43,7 @@ class DWPEligibilityControllerIntegrationTest {
     private EligibilityService eligibilityService;
 
     @MockBean
-    private EligibilityRequestToDWPEligibilityRequest converter;
+    private EligibilityRequestToDWPEligibilityRequestConverter converter;
 
     @Test
     void shouldReturnEligibilityResponse() {

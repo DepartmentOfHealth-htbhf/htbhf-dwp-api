@@ -8,7 +8,7 @@ import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 
 @Component
 @AllArgsConstructor
-public class EligibilityRequestToDWPEligibilityRequest {
+public class EligibilityRequestToDWPEligibilityRequestConverter {
 
     private final PersonDTOToDWPPersonConverter converter;
 
