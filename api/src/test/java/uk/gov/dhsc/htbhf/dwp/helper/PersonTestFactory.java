@@ -13,8 +13,8 @@ public class PersonTestFactory {
     private static final String TOWN_OR_CITY = "Springfield";
     private static final String POSTCODE = "AA11AA";
     private static final String NINO = "EB123456C";
-    private static final String FORENAME = "Lisa";
-    private static final String SURNAME = "Simpson";
+    private static final String FIRST_NAME = "Lisa";
+    private static final String LAST_NAME = "Simpson";
 
     public static PersonDTO aPerson() {
         String nino = "IA000000C";
@@ -54,8 +54,8 @@ public class PersonTestFactory {
                 .dateOfBirth(DOB)
                 .nino(NINO)
                 .address(aValidAddress())
-                .forename(FORENAME)
-                .surname(SURNAME);
+                .firstName(FIRST_NAME)
+                .lastName(LAST_NAME);
     }
 
     private static AddressDTO aValidAddress() {

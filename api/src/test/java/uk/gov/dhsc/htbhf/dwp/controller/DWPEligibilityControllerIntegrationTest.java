@@ -8,6 +8,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uk.gov.dhsc.htbhf.dwp.converter.EligibilityRequestToDWPEligibilityRequestConverter;
+import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
@@ -22,10 +24,11 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
+import static uk.gov.dhsc.htbhf.dwp.factory.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
+import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
+import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aPersonWithNino;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.anEligibilityRequest;
-import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityRequestTestFactory.buildDefaultRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPersonWithNoNino;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -39,22 +42,28 @@ class DWPEligibilityControllerIntegrationTest {
     @MockBean
     private EligibilityService eligibilityService;
 
+    @MockBean
+    private EligibilityRequestToDWPEligibilityRequestConverter converter;
+
     @Test
     void shouldReturnEligibilityResponse() {
         EligibilityRequest eligibilityRequest = anEligibilityRequest();
+        DWPEligibilityRequest dwpEligibilityRequest = aValidDWPEligibilityRequest();
+        given(converter.convert(any())).willReturn(dwpEligibilityRequest);
         given(eligibilityService.checkEligibility(any())).willReturn(anEligibilityResponse());
 
         ResponseEntity<EligibilityResponse> response = restTemplate.postForEntity(ENDPOINT, eligibilityRequest, EligibilityResponse.class);
 
         assertThat(response.getStatusCode()).isEqualTo(OK);
         assertThat(response.getBody()).isEqualTo(anEligibilityResponse());
-        verify(eligibilityService).checkEligibility(eligibilityRequest);
+        verify(converter).convert(eligibilityRequest);
+        verify(eligibilityService).checkEligibility(dwpEligibilityRequest);
     }
 
     @Test
     void shouldReturnBadRequestForInvalidRequest() {
-        PersonDTO person = aPersonWithNoNino();
-        EligibilityRequest request = buildDefaultRequest().person(person).build();
+        PersonDTO person = aPersonWithNino(null);
+        EligibilityRequest request = anEligibilityRequestWithPerson(person);
 
         ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
 

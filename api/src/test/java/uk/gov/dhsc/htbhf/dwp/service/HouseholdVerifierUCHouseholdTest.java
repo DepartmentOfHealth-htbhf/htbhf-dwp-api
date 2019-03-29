@@ -6,7 +6,7 @@ import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHouseholdWithNoAdultsOrChildren;
-import static uk.gov.dhsc.htbhf.dwp.helper.PersonTestFactory.aPerson;
+import static uk.gov.dhsc.htbhf.dwp.factory.DWPPersonDTOTestDataFactory.aValidDWPPerson;
 
 public class HouseholdVerifierUCHouseholdTest {
 
@@ -22,7 +22,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isTrue();
     }
@@ -37,7 +37,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isFalse();
     }
@@ -52,7 +52,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isFalse();
     }
@@ -67,7 +67,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isFalse();
     }
@@ -82,7 +82,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isTrue();
     }
@@ -97,7 +97,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isTrue();
     }
@@ -112,7 +112,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isFalse();
     }
@@ -127,7 +127,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .build();
         UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
-        Boolean response = householdVerifier.detailsMatch(household, aPerson());
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
         assertThat(response).isTrue();
     }

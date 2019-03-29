@@ -23,21 +23,21 @@ class PersonDTOTest extends AbstractValidationTest {
     }
 
     @Test
-    public void shouldFailToValidateWithNoForename() {
-        PersonDTO person = aPersonWithForename(null);
+    public void shouldFailToValidateWithNoFirstName() {
+        PersonDTO person = aPersonWithFirstName(null);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
-        assertThat(violations).hasSingleConstraintViolation("must not be null", "forename");
+        assertThat(violations).hasSingleConstraintViolation("must not be null", "firstName");
     }
 
     @Test
-    public void shouldFailToValidateWithNoSurname() {
-        PersonDTO person = aPersonWithSurname(null);
+    public void shouldFailToValidateWithNoLastName() {
+        PersonDTO person = aPersonWithLastName(null);
 
         Set<ConstraintViolation<PersonDTO>> violations = validator.validate(person);
 
-        assertThat(violations).hasSingleConstraintViolation("must not be null", "surname");
+        assertThat(violations).hasSingleConstraintViolation("must not be null", "lastName");
     }
 
     @Test

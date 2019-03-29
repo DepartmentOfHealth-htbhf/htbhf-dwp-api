@@ -21,14 +21,14 @@ import javax.validation.constraints.Pattern;
 public class PersonDTO {
 
     @NotNull
-    @JsonProperty("forename")
-    @ApiModelProperty(notes = "The person's forename", example = "Lisa")
-    private final String forename;
+    @JsonProperty("firstName")
+    @ApiModelProperty(notes = "The person's first name", example = "Lisa")
+    private final String firstName;
 
     @NotNull
-    @JsonProperty("surname")
-    @ApiModelProperty(notes = "The person's surname", example = "Simpson")
-    private final String surname;
+    @JsonProperty("lastName")
+    @ApiModelProperty(notes = "The person's last name", example = "Simpson")
+    private final String lastName;
 
     @NotNull
     @Pattern(regexp = "[a-zA-Z]{2}\\d{6}[a-dA-D]")

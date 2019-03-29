@@ -9,8 +9,8 @@ import static uk.gov.dhsc.htbhf.dwp.factory.AddressDTOTestDataFactory.aValidAddr
 
 public class PersonDTOTestDataFactory {
 
-    private static final String FORENAME = "Lisa";
-    private static final String SURNAME = "Simpson";
+    private static final String FIRST_NAME = "Lisa";
+    private static final String LAST_NAME = "Simpson";
     private static final String NINO = "QQ123456C";
     private static final String DATE_OF_BIRTH = "1985-12-30";
 
@@ -18,12 +18,12 @@ public class PersonDTOTestDataFactory {
         return aValidPersonBuilder().build();
     }
 
-    public static PersonDTO aPersonWithForename(String forename) {
-        return aValidPersonBuilder().forename(forename).build();
+    public static PersonDTO aPersonWithFirstName(String firstName) {
+        return aValidPersonBuilder().firstName(firstName).build();
     }
 
-    public static PersonDTO aPersonWithSurname(String surname) {
-        return aValidPersonBuilder().surname(surname).build();
+    public static PersonDTO aPersonWithLastName(String lastName) {
+        return aValidPersonBuilder().lastName(lastName).build();
     }
 
     public static PersonDTO aPersonWithNino(String nino) {
@@ -40,8 +40,8 @@ public class PersonDTOTestDataFactory {
 
     private static PersonDTO.PersonDTOBuilder aValidPersonBuilder() {
         return PersonDTO.builder()
-                .forename(FORENAME)
-                .surname(SURNAME)
+                .firstName(FIRST_NAME)
+                .lastName(LAST_NAME)
                 .nino(NINO)
                 .dateOfBirth(LocalDate.parse(DATE_OF_BIRTH))
                 .address(aValidAddress());
