@@ -29,7 +29,7 @@ spring:
     table: dwp_flyway_schema_history
 logging:
   pattern:
-    console: "%d{HH:mm:ss.SSS} [%thread] [%X{session.id}][%X{request.id}] %-5level %logger{36} - %msg%n"
+    console: "%d{HH:mm:ss.SSS} [%thread] [%X{session.id}][%X{request.id}] %-5level %logger{36} - %msg%n%rEx{full, org.springframework.web, org.springframework.boot, org.apache.catalina, org.apache.coyote, org.apache.tomcat, java.base}"
   level:
     ROOT: ${vcap.services.variable-service.credentials.dwp-api-app-root-loglevel:info}
     uk.gov.dhsc: ${vcap.services.variable-service.credentials.dwp-api-app-loglevel:debug}
