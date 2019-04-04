@@ -32,11 +32,13 @@ public class DWPEligibilityController {
                                            @Valid
                                            @ApiParam(&quot;The eligibility request for Universal Credit&quot;)
                                            EligibilityRequest eligibilityRequest) {
-<span class="fc" id="L35">        log.debug(&quot;Received eligibility request&quot;);</span>
 
-<span class="fc" id="L37">        DWPEligibilityRequest request = converter.convert(eligibilityRequest);</span>
+<span class="fc" id="L36">        DWPEligibilityRequest request = converter.convert(eligibilityRequest);</span>
 
-<span class="fc" id="L39">        return eligibilityService.checkEligibility(request);</span>
+<span class="fc" id="L38">        EligibilityResponse eligibilityResponse = eligibilityService.checkEligibility(request);</span>
+
+<span class="fc" id="L40">        log.debug(&quot;DWP eligibility status: {}&quot;, eligibilityResponse.getEligibilityStatus());</span>
+<span class="fc" id="L41">        return eligibilityResponse;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
