@@ -8,8 +8,8 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import static uk.gov.dhsc.htbhf.assertions.ConstraintViolationAssert.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.factory.AddressDTOTestDataFactory.anAddressWithAddressLine1;
-import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.*;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.AddressDTOTestDataFactory.anAddressWithAddressLine1;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.*;
 
 class PersonDTOTest extends AbstractValidationTest {
 

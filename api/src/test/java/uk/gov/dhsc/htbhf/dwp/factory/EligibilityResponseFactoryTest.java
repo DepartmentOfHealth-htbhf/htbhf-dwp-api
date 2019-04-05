@@ -1,14 +1,14 @@
 package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.junit.jupiter.api.Test;
-import uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
+import uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aLegacyHousehold;
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
 
 public class EligibilityResponseFactoryTest {
 
@@ -25,7 +25,7 @@ public class EligibilityResponseFactoryTest {
 
     @Test
     void shouldCreateResponseFromUCHousehold() {
-        UCHousehold household = UCHouseholdFactory.aUCHousehold();
+        UCHousehold household = UCHouseholdTestDataFactory.aUCHousehold();
 
         EligibilityResponse response = createEligibilityResponse(household);
 

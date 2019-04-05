@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import static uk.gov.dhsc.htbhf.assertions.ConstraintViolationAssert.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.factory.AddressDTOTestDataFactory.*;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.AddressDTOTestDataFactory.*;
 
 class AddressDTOTest extends AbstractValidationTest {
 

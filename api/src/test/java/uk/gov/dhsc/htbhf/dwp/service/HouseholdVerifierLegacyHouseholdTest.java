@@ -5,8 +5,8 @@ import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aLegacyHouseholdWithNoAdultsOrChildren;
-import static uk.gov.dhsc.htbhf.dwp.factory.DWPPersonDTOTestDataFactory.aValidDWPPerson;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPPersonDTOTestDataFactory.aValidDWPPerson;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHouseholdWithNoAdultsOrChildren;
 
 public class HouseholdVerifierLegacyHouseholdTest {
 

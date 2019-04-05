@@ -1,13 +1,13 @@
-package uk.gov.dhsc.htbhf.dwp.factory;
+package uk.gov.dhsc.htbhf.dwp.testhelper;
 
 import uk.gov.dhsc.htbhf.dwp.model.AddressDTO;
 
-public class AddressDTOTestDataFactory {
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSONS_ADDRESS_LINE_1;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSONS_ADDRESS_LINE_2;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSONS_POSTCODE;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSONS_TOWN;
 
-    private static final String ADDRESS_LINE_1 = "742 Evergreen Terrace";
-    private static final String ADDRESS_LINE_2 = "123 Fake street";
-    private static final String TOWN_OR_CITY = "Springfield";
-    private static final String POSTCODE = "AA1 1AA";
+public class AddressDTOTestDataFactory {
 
     public static AddressDTO aValidAddress() {
         return aValidAddressBuilder().build();
@@ -31,9 +31,9 @@ public class AddressDTOTestDataFactory {
 
     private static AddressDTO.AddressDTOBuilder aValidAddressBuilder() {
         return AddressDTO.builder()
-                .addressLine1(ADDRESS_LINE_1)
-                .addressLine2(ADDRESS_LINE_2)
-                .townOrCity(TOWN_OR_CITY)
-                .postcode(POSTCODE);
+                .addressLine1(SIMPSONS_ADDRESS_LINE_1)
+                .addressLine2(SIMPSONS_ADDRESS_LINE_2)
+                .townOrCity(SIMPSONS_TOWN)
+                .postcode(SIMPSONS_POSTCODE);
     }
 }
