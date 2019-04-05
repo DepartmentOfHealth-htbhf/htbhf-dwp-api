@@ -8,20 +8,23 @@ import java.time.LocalDate;
 
 public class LegacyHouseholdFactory {
 
-    public static LegacyHousehold aHousehold() {
-        return aHouseholdWithNoAdultsOrChildren()
+    public static final String HOMER_NINO = "QQ123456A";
+    public static final String SIMPSON_HOUSEHOLD_IDENTIFIER = "legacyHouseholdIdentifier";
+
+    public static LegacyHousehold aLegacyHousehold() {
+        return aLegacyHouseholdWithNoAdultsOrChildren()
                 .build()
-                .addAdult(anAdult("Homer", "Simpson", "QQ123456A"))
-                .addAdult(anAdult("Marge", "Simpson", "QQ123456B"))
-                .addChild(aChild("Bart", "Simpson", 48))
-                .addChild(aChild("Lisa", "Simpson", 24))
-                .addChild(aChild("Maggie", "Simpson", 6));
+                .addAdult(aLegacyAdult("Homer", "Simpson", HOMER_NINO))
+                .addAdult(aLegacyAdult("Marge", "Simpson", "QQ123456B"))
+                .addChild(aLegacyChild("Bart", "Simpson", 48))
+                .addChild(aLegacyChild("Lisa", "Simpson", 24))
+                .addChild(aLegacyChild("Maggie", "Simpson", 6));
     }
 
-    public static LegacyHousehold.LegacyHouseholdBuilder aHouseholdWithNoAdultsOrChildren() {
+    public static LegacyHousehold.LegacyHouseholdBuilder aLegacyHouseholdWithNoAdultsOrChildren() {
         return LegacyHousehold.builder()
                 .fileImportNumber(1)
-                .householdIdentifier("aHouseholdIdentifier")
+                .householdIdentifier(SIMPSON_HOUSEHOLD_IDENTIFIER)
                 .addressLine1("742 Evergreen Terrace")
                 .townOrCity("Springfield")
                 .postcode("AA11AA")
@@ -29,7 +32,7 @@ public class LegacyHouseholdFactory {
                 .toBuilder();
     }
 
-    public static LegacyChild aChild(String forename, String surname, int ageInMonths) {
+    public static LegacyChild aLegacyChild(String forename, String surname, int ageInMonths) {
         return LegacyChild.builder()
                 .forename(forename)
                 .surname(surname)
@@ -37,7 +40,7 @@ public class LegacyHouseholdFactory {
                 .build();
     }
 
-    public static LegacyAdult anAdult(String forename, String surname, String nino) {
+    public static LegacyAdult aLegacyAdult(String forename, String surname, String nino) {
         return LegacyAdult.builder()
                 .forename(forename)
                 .surname(surname)
@@ -45,13 +48,12 @@ public class LegacyHouseholdFactory {
                 .build();
     }
 
-    public static LegacyAdult anAdultWithNino(String nino) {
+    public static LegacyAdult aLegacyAdultWithNino(String nino) {
         return LegacyAdult.builder()
                 .forename("Bart")
                 .surname("Simpson")
                 .nino(nino)
                 .build();
     }
-
 
 }

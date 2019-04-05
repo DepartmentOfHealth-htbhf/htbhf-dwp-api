@@ -8,21 +8,24 @@ import java.time.LocalDate;
 
 public class UCHouseholdFactory {
 
-    public static UCHousehold aHousehold() {
-        return aHouseholdWithNoAdultsOrChildren()
+    public static final String HOMER_NINO = "QQ123456C";
+    public static final String SIMPSON_HOUSEHOLD_IDENTIFIER = "ucHouseholdIdentifier";
+
+    public static UCHousehold aUCHousehold() {
+        return aUCHouseholdWithNoAdultsOrChildren()
                 .build()
-                .addAdult(anAdult("Homer", "Simpson", "QQ123456C"))
-                .addAdult(anAdult("Marge", "Simpson", "QQ123456D"))
-                .addChild(aChild("Bart", "Simpson", 48))
-                .addChild(aChild("Lisa", "Simpson", 24))
-                .addChild(aChild("Maggie", "Simpson", 6));
+                .addAdult(aUCAdult("Homer", "Simpson", HOMER_NINO))
+                .addAdult(aUCAdult("Marge", "Simpson", "QQ123456D"))
+                .addChild(aUCChild("Bart", "Simpson", 48))
+                .addChild(aUCChild("Lisa", "Simpson", 24))
+                .addChild(aUCChild("Maggie", "Simpson", 6));
     }
 
-    public static UCHousehold.UCHouseholdBuilder aHouseholdWithNoAdultsOrChildren() {
+    public static UCHousehold.UCHouseholdBuilder aUCHouseholdWithNoAdultsOrChildren() {
         return UCHousehold.builder()
                 .awardDate(LocalDate.now())
                 .fileImportNumber(1)
-                .householdIdentifier("aHouseholdIdentifier")
+                .householdIdentifier(SIMPSON_HOUSEHOLD_IDENTIFIER)
                 .lastAssessmentPeriodStart(LocalDate.now().minusMonths(1))
                 .lastAssessmentPeriodEnd(LocalDate.now())
                 .earningsThresholdExceeded(false)
@@ -32,7 +35,7 @@ public class UCHouseholdFactory {
                 .toBuilder();
     }
 
-    public static UCChild aChild(String forename, String surname, int ageInMonths) {
+    public static UCChild aUCChild(String forename, String surname, int ageInMonths) {
         return UCChild.builder()
                 .forename(forename)
                 .surname(surname)
@@ -40,7 +43,7 @@ public class UCHouseholdFactory {
                 .build();
     }
 
-    public static UCAdult anAdult(String forename, String surname, String nino) {
+    public static UCAdult aUCAdult(String forename, String surname, String nino) {
         return UCAdult.builder()
                 .forename(forename)
                 .surname(surname)
@@ -51,7 +54,7 @@ public class UCHouseholdFactory {
                 .build();
     }
 
-    public static UCAdult anAdultWithNino(String nino) {
+    public static UCAdult aUCAdultWithNino(String nino) {
         return UCAdult.builder()
                 .forename("Homer")
                 .surname("Simpson")

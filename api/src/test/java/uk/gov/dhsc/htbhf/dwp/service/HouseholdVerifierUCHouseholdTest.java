@@ -5,7 +5,7 @@ import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHouseholdWithNoAdultsOrChildren;
+import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aUCHouseholdWithNoAdultsOrChildren;
 import static uk.gov.dhsc.htbhf.dwp.factory.DWPPersonDTOTestDataFactory.aValidDWPPerson;
 
 public class HouseholdVerifierUCHouseholdTest {
@@ -20,7 +20,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("AA11AA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
@@ -35,7 +35,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("AA11AA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
@@ -50,7 +50,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("745 Deciduous Road")
                 .postcode("AA11AA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
@@ -65,7 +65,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("W1 1NA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
@@ -80,7 +80,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("742 Ev_DIFFERENT")
                 .postcode("AA11AA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
@@ -95,7 +95,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("742 ev_DIFFERENT")
                 .postcode("AA11AA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
@@ -110,7 +110,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("742")
                 .postcode("AA11AA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 
@@ -125,7 +125,7 @@ public class HouseholdVerifierUCHouseholdTest {
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("AA1 1AA")
                 .build();
-        UCHousehold household = aHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
 
         Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
 

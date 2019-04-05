@@ -11,8 +11,8 @@ public class PersonDTOTestDataFactory {
 
     private static final String FIRST_NAME = "Lisa";
     private static final String LAST_NAME = "Simpson";
-    private static final String NINO = "QQ123456C";
-    private static final String DATE_OF_BIRTH = "1985-12-30";
+    private static final String NINO = "EB123456C";
+    private static final String DATE_OF_BIRTH = "1985-12-31";
 
     public static PersonDTO aValidPerson() {
         return aValidPersonBuilder().build();
@@ -38,7 +38,7 @@ public class PersonDTOTestDataFactory {
         return aValidPersonBuilder().address(address).build();
     }
 
-    private static PersonDTO.PersonDTOBuilder aValidPersonBuilder() {
+    public static PersonDTO.PersonDTOBuilder aValidPersonBuilder() {
         return PersonDTO.builder()
                 .firstName(FIRST_NAME)
                 .lastName(LAST_NAME)

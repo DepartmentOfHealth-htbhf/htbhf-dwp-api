@@ -26,7 +26,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aHousehold;
+import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aUCHousehold;
 import static uk.gov.dhsc.htbhf.dwp.factory.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
@@ -58,7 +58,7 @@ class EligibilityServiceTest {
     @Test
     void shouldReturnResponseFromUCDatabaseIfFound() {
         DWPEligibilityRequest eligibilityRequest = aValidDWPEligibilityRequest();
-        UCHousehold household = aHousehold();
+        UCHousehold household = aUCHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
         given(householdVerifier.detailsMatch(any(UCHousehold.class), any())).willReturn(true);
 
@@ -76,7 +76,7 @@ class EligibilityServiceTest {
     @Test
     void shouldReturnNoMatchWhenFoundInUCDatabaseAndDetailsDontMatch() {
         DWPEligibilityRequest eligibilityRequest = aValidDWPEligibilityRequest();
-        UCHousehold household = aHousehold();
+        UCHousehold household = aUCHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
         given(householdVerifier.detailsMatch(any(UCHousehold.class), any())).willReturn(false);
 
@@ -92,7 +92,7 @@ class EligibilityServiceTest {
     @Test
     void shouldReturnResponseFromLegacyDatabaseIfFound() {
         DWPEligibilityRequest eligibilityRequest = aValidDWPEligibilityRequest();
-        LegacyHousehold household = LegacyHouseholdFactory.aHousehold();
+        LegacyHousehold household = LegacyHouseholdFactory.aLegacyHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
         given(legacyHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
         given(householdVerifier.detailsMatch(any(LegacyHousehold.class), any())).willReturn(true);
@@ -112,7 +112,7 @@ class EligibilityServiceTest {
     @Test
     void shouldReturnNoMatchWhenFoundInLegacyDatabaseAndDetailsDontMatch() {
         DWPEligibilityRequest eligibilityRequest = aValidDWPEligibilityRequest();
-        LegacyHousehold household = LegacyHouseholdFactory.aHousehold();
+        LegacyHousehold household = LegacyHouseholdFactory.aLegacyHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
         given(legacyHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
         given(householdVerifier.detailsMatch(any(LegacyHousehold.class), any())).willReturn(false);
