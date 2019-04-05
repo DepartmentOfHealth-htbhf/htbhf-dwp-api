@@ -8,27 +8,7 @@
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/EligibilityRequestToDWPEligibilityRequestTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/entity/LegacyHouseholdFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/entity/UCHouseholdFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/AddressDTOTestDataFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/DWPEligibilityRequestTestDataFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/DWPPersonDTOTestDataFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/EligibilityRequestTestDataFactory.java">
-</file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/EligibilityResponseFactoryTest.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/PersonDTOTestDataFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/helper/EligibilityRequestTestFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/helper/EligibilityResponseTestFactory.java">
-</file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/helper/PersonTestFactory.java">
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/AddressDTOTest.java">
 </file>
@@ -45,5 +25,23 @@
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierLegacyHouseholdTest.java">
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierUCHouseholdTest.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/AddressDTOTestDataFactory.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPEligibilityRequestTestDataFactory.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPPersonDTOTestDataFactory.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityRequestTestDataFactory.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityResponseTestDataFactory.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/LegacyHouseholdTestDataFactory.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/PersonDTOTestDataFactory.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/TestConstants.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/UCHouseholdTestDataFactory.java">
 </file>
 </checkstyle>
