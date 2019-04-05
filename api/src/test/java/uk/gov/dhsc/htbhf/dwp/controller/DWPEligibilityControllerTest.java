@@ -32,7 +32,7 @@ import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anElig
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class DWPEligibilityControllerIntegrationTest {
+class DWPEligibilityControllerTest {
 
     private static final URI ENDPOINT = URI.create("/v1/dwp/eligibility");
 
