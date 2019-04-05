@@ -43,6 +43,8 @@ public class EligibilityService {
      * Checks if a given request is eligible. First check the Universal credit database,
      * then the legacy database, then call the dwp api.
      * Checking UC database first as most data is held there.
+     * @param eligibilityRequest The eligibility request
+     * @return The eligibility response
      */
     public EligibilityResponse checkEligibility(DWPEligibilityRequest eligibilityRequest) {
         String nino = eligibilityRequest.getPerson().getNino();

@@ -7,14 +7,14 @@ import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aHousehold;
+import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aLegacyHousehold;
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
 
 public class EligibilityResponseFactoryTest {
 
     @Test
     void shouldCreateResponseFromLegacyHousehold() {
-        LegacyHousehold household = aHousehold();
+        LegacyHousehold household = aLegacyHousehold();
 
         EligibilityResponse response = createEligibilityResponse(household);
 
@@ -25,7 +25,7 @@ public class EligibilityResponseFactoryTest {
 
     @Test
     void shouldCreateResponseFromUCHousehold() {
-        UCHousehold household = UCHouseholdFactory.aHousehold();
+        UCHousehold household = UCHouseholdFactory.aUCHousehold();
 
         EligibilityResponse response = createEligibilityResponse(household);
 
