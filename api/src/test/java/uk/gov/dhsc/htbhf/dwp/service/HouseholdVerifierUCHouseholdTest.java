@@ -5,8 +5,8 @@ import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aUCHouseholdWithNoAdultsOrChildren;
-import static uk.gov.dhsc.htbhf.dwp.factory.DWPPersonDTOTestDataFactory.aValidDWPPerson;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPPersonDTOTestDataFactory.aValidDWPPerson;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHouseholdWithNoAdultsOrChildren;
 
 public class HouseholdVerifierUCHouseholdTest {
 

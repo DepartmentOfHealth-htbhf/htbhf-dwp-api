@@ -11,9 +11,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aUCAdultWithNino;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aUCHousehold;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aUCHouseholdWithNoAdultsOrChildren;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCAdultWithNino;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHouseholdWithNoAdultsOrChildren;
 
 @SpringBootTest
 class UCHouseholdRepositoryTest {

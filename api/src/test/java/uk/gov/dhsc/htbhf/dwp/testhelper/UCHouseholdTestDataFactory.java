@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.entity;
+package uk.gov.dhsc.htbhf.dwp.testhelper;
 
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCChild;
@@ -6,16 +6,15 @@ import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import java.time.LocalDate;
 
-public class UCHouseholdFactory {
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.*;
 
-    public static final String HOMER_NINO = "QQ123456C";
-    public static final String SIMPSON_HOUSEHOLD_IDENTIFIER = "ucHouseholdIdentifier";
+public class UCHouseholdTestDataFactory {
 
     public static UCHousehold aUCHousehold() {
         return aUCHouseholdWithNoAdultsOrChildren()
                 .build()
                 .addAdult(aUCAdult("Homer", "Simpson", HOMER_NINO))
-                .addAdult(aUCAdult("Marge", "Simpson", "QQ123456D"))
+                .addAdult(aUCAdult("Marge", "Simpson", MARGE_NINO))
                 .addChild(aUCChild("Bart", "Simpson", 48))
                 .addChild(aUCChild("Lisa", "Simpson", 24))
                 .addChild(aUCChild("Maggie", "Simpson", 6));
@@ -25,7 +24,7 @@ public class UCHouseholdFactory {
         return UCHousehold.builder()
                 .awardDate(LocalDate.now())
                 .fileImportNumber(1)
-                .householdIdentifier(SIMPSON_HOUSEHOLD_IDENTIFIER)
+                .householdIdentifier(SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER)
                 .lastAssessmentPeriodStart(LocalDate.now().minusMonths(1))
                 .lastAssessmentPeriodEnd(LocalDate.now())
                 .earningsThresholdExceeded(false)
@@ -48,21 +47,14 @@ public class UCHouseholdFactory {
                 .forename(forename)
                 .surname(surname)
                 .nino(nino)
-                .addressLine1("742 Evergreen Terrace")
-                .townOrCity("Springfield")
-                .postcode("AA11AA")
+                .addressLine1(SIMPSONS_ADDRESS_LINE_1)
+                .townOrCity(SIMPSONS_TOWN)
+                .postcode(SIMPSONS_POSTCODE)
                 .build();
     }
 
     public static UCAdult aUCAdultWithNino(String nino) {
-        return UCAdult.builder()
-                .forename("Homer")
-                .surname("Simpson")
-                .nino(nino)
-                .addressLine1("742 Evergreen Terrace")
-                .townOrCity("Springfield")
-                .postcode("AA11AA")
-                .build();
+        return aUCAdult(HOMER_FORENAME, SIMPSON_SURNAME, nino);
     }
 
 }

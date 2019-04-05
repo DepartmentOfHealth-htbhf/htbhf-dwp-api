@@ -12,8 +12,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
-import uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory;
-import uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus;
@@ -31,16 +29,19 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.entity.LegacyHouseholdFactory.aLegacyHousehold;
-import static uk.gov.dhsc.htbhf.dwp.entity.UCHouseholdFactory.aUCHousehold;
-import static uk.gov.dhsc.htbhf.dwp.factory.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
-import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityRequestTestDataFactory.aValidEligibilityRequest;
-import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
-import static uk.gov.dhsc.htbhf.dwp.factory.PersonDTOTestDataFactory.aValidPersonBuilder;
-import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.aValidEligibilityResponseBuilder;
-import static uk.gov.dhsc.htbhf.dwp.helper.EligibilityResponseTestFactory.anEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
 import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.aValidEligibilityRequest;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidEligibilityResponseBuilder;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.anEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.buildDefaultPerson;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -72,7 +73,7 @@ public class DWPIntegrationTests {
         ResponseEntity<EligibilityResponse> response = callService(aValidEligibilityRequest());
 
         //Then
-        assertResponseCorrectWithHouseholdDetails(response, "dwpHousehold1", ELIGIBLE);
+        assertResponseCorrectWithHouseholdDetails(response, SIMPSON_UC_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
         verify(restTemplateWithIdHeaders).postForEntity(DWP_URL, aValidDWPEligibilityRequest(), EligibilityResponse.class);
     }
 
@@ -83,14 +84,14 @@ public class DWPIntegrationTests {
     void shouldReturnEligibleWhenMatchesUCHouseholdInDatabase(String parentName, String nino) {
         //Given
         ucHouseholdRepository.save(aUCHousehold());
-        PersonDTO person = aValidPersonBuilder().firstName(parentName).nino(nino).build();
+        PersonDTO person = buildDefaultPerson().firstName(parentName).nino(nino).build();
         EligibilityRequest eligibilityRequest = anEligibilityRequestWithPerson(person);
 
         //When
         ResponseEntity<EligibilityResponse> response = callService(eligibilityRequest);
 
         //Then
-        assertResponseCorrectWithHouseholdDetails(response, UCHouseholdFactory.SIMPSON_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
+        assertResponseCorrectWithHouseholdDetails(response, SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
         verifyZeroInteractions(restTemplateWithIdHeaders);
         ucHouseholdRepository.deleteAll();
     }
@@ -99,7 +100,7 @@ public class DWPIntegrationTests {
     void shouldReturnNoMatchWhenMatchesNinoButNotNameInUCDatabase() {
         //Given
         ucHouseholdRepository.save(aUCHousehold());
-        PersonDTO person = aValidPersonBuilder().lastName("noMatch").nino(UCHouseholdFactory.HOMER_NINO).build();
+        PersonDTO person = buildDefaultPerson().lastName("noMatch").nino(HOMER_NINO).build();
         EligibilityRequest eligibilityRequest = anEligibilityRequestWithPerson(person);
 
         //When
@@ -118,14 +119,14 @@ public class DWPIntegrationTests {
     void shouldReturnEligibleWhenMatchesLegacyHouseholdInDatabase(String parentName, String nino) {
         //Given
         legacyHouseholdRepository.save(aLegacyHousehold());
-        PersonDTO homer = aValidPersonBuilder().firstName(parentName).nino(nino).build();
+        PersonDTO homer = buildDefaultPerson().firstName(parentName).nino(nino).build();
         EligibilityRequest eligibilityRequest = anEligibilityRequestWithPerson(homer);
 
         //When
         ResponseEntity<EligibilityResponse> response = callService(eligibilityRequest);
 
         //Then
-        assertResponseCorrectWithHouseholdDetails(response, LegacyHouseholdFactory.SIMPSON_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
+        assertResponseCorrectWithHouseholdDetails(response, SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
         verifyZeroInteractions(restTemplateWithIdHeaders);
         legacyHouseholdRepository.deleteAll();
     }
@@ -134,7 +135,7 @@ public class DWPIntegrationTests {
     void shouldReturnNoMatchWhenMatchesNinoButNotNameInLegacyDatabase() {
         //Given
         legacyHouseholdRepository.save(aLegacyHousehold());
-        PersonDTO homer = aValidPersonBuilder().lastName("noMatch").nino(LegacyHouseholdFactory.HOMER_NINO).build();
+        PersonDTO homer = buildDefaultPerson().lastName("noMatch").nino(HOMER_NINO).build();
         EligibilityRequest eligibilityRequest = anEligibilityRequestWithPerson(homer);
 
         //When

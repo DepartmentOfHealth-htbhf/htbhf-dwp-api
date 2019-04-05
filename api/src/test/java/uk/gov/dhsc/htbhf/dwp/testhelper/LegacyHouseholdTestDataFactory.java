@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.entity;
+package uk.gov.dhsc.htbhf.dwp.testhelper;
 
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyChild;
@@ -6,28 +6,27 @@ import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 
 import java.time.LocalDate;
 
-public class LegacyHouseholdFactory {
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.*;
 
-    public static final String HOMER_NINO = "QQ123456A";
-    public static final String SIMPSON_HOUSEHOLD_IDENTIFIER = "legacyHouseholdIdentifier";
+public class LegacyHouseholdTestDataFactory {
 
     public static LegacyHousehold aLegacyHousehold() {
         return aLegacyHouseholdWithNoAdultsOrChildren()
                 .build()
-                .addAdult(aLegacyAdult("Homer", "Simpson", HOMER_NINO))
-                .addAdult(aLegacyAdult("Marge", "Simpson", "QQ123456B"))
-                .addChild(aLegacyChild("Bart", "Simpson", 48))
-                .addChild(aLegacyChild("Lisa", "Simpson", 24))
-                .addChild(aLegacyChild("Maggie", "Simpson", 6));
+                .addAdult(aLegacyAdult(HOMER_FORENAME, SIMPSON_SURNAME, HOMER_NINO))
+                .addAdult(aLegacyAdult(MARGE_FORENAME, SIMPSON_SURNAME, MARGE_NINO))
+                .addChild(aLegacyChild(BART_FORENAME, SIMPSON_SURNAME, 48))
+                .addChild(aLegacyChild(LISA_FORENAME, SIMPSON_SURNAME, 24))
+                .addChild(aLegacyChild(MAGGIE_FORENAME, SIMPSON_SURNAME, 6));
     }
 
     public static LegacyHousehold.LegacyHouseholdBuilder aLegacyHouseholdWithNoAdultsOrChildren() {
         return LegacyHousehold.builder()
                 .fileImportNumber(1)
-                .householdIdentifier(SIMPSON_HOUSEHOLD_IDENTIFIER)
-                .addressLine1("742 Evergreen Terrace")
-                .townOrCity("Springfield")
-                .postcode("AA11AA")
+                .householdIdentifier(SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER)
+                .addressLine1(SIMPSONS_ADDRESS_LINE_1)
+                .townOrCity(SIMPSONS_TOWN)
+                .postcode(SIMPSONS_POSTCODE)
                 .build()
                 .toBuilder();
     }
@@ -50,8 +49,8 @@ public class LegacyHouseholdFactory {
 
     public static LegacyAdult aLegacyAdultWithNino(String nino) {
         return LegacyAdult.builder()
-                .forename("Bart")
-                .surname("Simpson")
+                .forename(HOMER_FORENAME)
+                .surname(SIMPSON_SURNAME)
                 .nino(nino)
                 .build();
     }
