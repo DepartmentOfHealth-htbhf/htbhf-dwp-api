@@ -16,7 +16,7 @@ public final class TestConstants {
     public static final LocalDate HOMER_DOB = LocalDate.parse("1985-12-31");
 
     public static final String SIMPSONS_ADDRESS_LINE_1 = "742 Evergreen Terrace";
-    public static final String SIMPSONS_ADDRESS_LINE_2 = "Suburb";
+    public static final String SIMPSONS_ADDRESS_LINE_2 = "Mystery Spot";
     public static final String SIMPSONS_TOWN = "Springfield";
     public static final String SIMPSONS_POSTCODE = "AA1 1AA";
 

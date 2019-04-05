@@ -7,12 +7,12 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOL
 
 public class EligibilityResponseTestDataFactory {
 
-    public static EligibilityResponse anEligibilityResponse() {
-        return aValidEligibilityResponseBuilder()
+    public static EligibilityResponse aValidUCEligibilityResponse() {
+        return aValidUCEligibilityResponseBuilder()
                 .build();
     }
 
-    public static EligibilityResponse.EligibilityResponseBuilder aValidEligibilityResponseBuilder() {
+    public static EligibilityResponse.EligibilityResponseBuilder aValidUCEligibilityResponseBuilder() {
         return EligibilityResponse.builder()
                 .eligibilityStatus(ELIGIBLE)
                 .numberOfChildrenUnderOne(1)

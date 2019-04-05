@@ -34,8 +34,8 @@ import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.aValidEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidEligibilityResponseBuilder;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.anEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidUCEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidUCEligibilityResponseBuilder;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.buildDefaultPerson;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
@@ -66,7 +66,7 @@ public class DWPIntegrationTests {
     @Test
     void shouldReturnEligibilityResponseWhenNotInDatabase() {
         //Given
-        ResponseEntity<EligibilityResponse> dwpEligibilityResponse = new ResponseEntity<>(anEligibilityResponse(), OK);
+        ResponseEntity<EligibilityResponse> dwpEligibilityResponse = new ResponseEntity<>(aValidUCEligibilityResponse(), OK);
         given(restTemplateWithIdHeaders.postForEntity(anyString(), any(), eq(EligibilityResponse.class))).willReturn(dwpEligibilityResponse);
 
         //When
@@ -152,7 +152,7 @@ public class DWPIntegrationTests {
     }
 
     private void assertResponseCorrectWithHouseholdDetails(ResponseEntity<EligibilityResponse> response, String householdIdentifier, EligibilityStatus status) {
-        EligibilityResponse expectedResponse = aValidEligibilityResponseBuilder()
+        EligibilityResponse expectedResponse = aValidUCEligibilityResponseBuilder()
                 .householdIdentifier(householdIdentifier)
                 .eligibilityStatus(status)
                 .build();

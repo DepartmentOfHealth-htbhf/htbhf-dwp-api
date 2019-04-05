@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.anEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidUCEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
 
 @ExtendWith(SpringExtension.class)
@@ -133,11 +133,11 @@ class EligibilityServiceTest {
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
         given(legacyHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
         given(restTemplate.postForEntity(anyString(), any(), any()))
-                .willReturn(new ResponseEntity<>(anEligibilityResponse(), OK));
+                .willReturn(new ResponseEntity<>(aValidUCEligibilityResponse(), OK));
 
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
-        assertThat(response).isEqualTo(anEligibilityResponse());
+        assertThat(response).isEqualTo(aValidUCEligibilityResponse());
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
         verify(legacyHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
         verify(restTemplate).postForEntity(dwpUri + ENDPOINT, eligibilityRequest, EligibilityResponse.class);

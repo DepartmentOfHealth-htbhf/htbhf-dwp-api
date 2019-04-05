@@ -13,11 +13,11 @@ public class UCHouseholdTestDataFactory {
     public static UCHousehold aUCHousehold() {
         return aUCHouseholdWithNoAdultsOrChildren()
                 .build()
-                .addAdult(aUCAdult("Homer", "Simpson", HOMER_NINO))
-                .addAdult(aUCAdult("Marge", "Simpson", MARGE_NINO))
-                .addChild(aUCChild("Bart", "Simpson", 48))
-                .addChild(aUCChild("Lisa", "Simpson", 24))
-                .addChild(aUCChild("Maggie", "Simpson", 6));
+                .addAdult(aUCAdult(HOMER_FORENAME, SIMPSON_SURNAME, HOMER_NINO))
+                .addAdult(aUCAdult(MARGE_FORENAME, SIMPSON_SURNAME, MARGE_NINO))
+                .addChild(aUCChild(BART_FORENAME, SIMPSON_SURNAME, 48))
+                .addChild(aUCChild(LISA_FORENAME, SIMPSON_SURNAME, 24))
+                .addChild(aUCChild(MAGGIE_FORENAME, SIMPSON_SURNAME, 6));
     }
 
     public static UCHousehold.UCHouseholdBuilder aUCHouseholdWithNoAdultsOrChildren() {
