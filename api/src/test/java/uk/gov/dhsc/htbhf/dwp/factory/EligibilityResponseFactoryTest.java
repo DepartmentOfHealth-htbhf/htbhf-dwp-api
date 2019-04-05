@@ -8,6 +8,7 @@ import uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
 
 public class EligibilityResponseFactoryTest {
@@ -16,21 +17,23 @@ public class EligibilityResponseFactoryTest {
     void shouldCreateResponseFromLegacyHousehold() {
         LegacyHousehold household = aLegacyHousehold();
 
-        EligibilityResponse response = createEligibilityResponse(household);
+        EligibilityResponse response = createEligibilityResponse(household, ELIGIBLE);
 
         assertThat(response.getHouseholdIdentifier()).isEqualTo(household.getHouseholdIdentifier());
         assertThat(response.getNumberOfChildrenUnderFour()).isEqualTo(2);
         assertThat(response.getNumberOfChildrenUnderOne()).isEqualTo(1);
+        assertThat(response.getEligibilityStatus()).isEqualTo(ELIGIBLE);
     }
 
     @Test
     void shouldCreateResponseFromUCHousehold() {
         UCHousehold household = UCHouseholdTestDataFactory.aUCHousehold();
 
-        EligibilityResponse response = createEligibilityResponse(household);
+        EligibilityResponse response = createEligibilityResponse(household, ELIGIBLE);
 
         assertThat(response.getHouseholdIdentifier()).isEqualTo(household.getHouseholdIdentifier());
         assertThat(response.getNumberOfChildrenUnderFour()).isEqualTo(2);
         assertThat(response.getNumberOfChildrenUnderOne()).isEqualTo(1);
+        assertThat(response.getEligibilityStatus()).isEqualTo(ELIGIBLE);
     }
 }

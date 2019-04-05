@@ -1,6 +1,7 @@
 package uk.gov.dhsc.htbhf.dwp;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -63,6 +64,13 @@ public class DWPIntegrationTests {
     @MockBean
     private RestTemplate restTemplateWithIdHeaders;
 
+    @BeforeEach
+    @AfterEach
+    void clearDatabase() {
+        ucHouseholdRepository.deleteAll();
+        legacyHouseholdRepository.deleteAll();
+    }
+
     @Test
     void shouldReturnEligibilityResponseWhenNotInDatabase() {
         //Given
@@ -77,10 +85,9 @@ public class DWPIntegrationTests {
         verify(restTemplateWithIdHeaders).postForEntity(DWP_URL, aValidDWPEligibilityRequest(), EligibilityResponse.class);
     }
 
-    @Disabled("To be enabled when the code is fixed in the next PR")
     @ParameterizedTest(name = "Should return eligible response for claimant [{0}] Simpson stored in UC household table")
-    @CsvSource({"Homer, QQ123456C",
-            "Marge, QQ123456D"})
+    @CsvSource({"Homer, EB123456C",
+            "Marge, EB123456D"})
     void shouldReturnEligibleWhenMatchesUCHouseholdInDatabase(String parentName, String nino) {
         //Given
         ucHouseholdRepository.save(aUCHousehold());
@@ -91,9 +98,8 @@ public class DWPIntegrationTests {
         ResponseEntity<EligibilityResponse> response = callService(eligibilityRequest);
 
         //Then
-        assertResponseCorrectWithHouseholdDetails(response, SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
+        assertResponseCorrectWithHouseholdDetails(response, SIMPSON_UC_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
         verifyZeroInteractions(restTemplateWithIdHeaders);
-        ucHouseholdRepository.deleteAll();
     }
 
     @Test
@@ -109,13 +115,11 @@ public class DWPIntegrationTests {
         //Then
         assertResponseCorrectWithStatusOnly(response, NOMATCH);
         verifyZeroInteractions(restTemplateWithIdHeaders);
-        ucHouseholdRepository.deleteAll();
     }
 
-    @Disabled("To be enabled when the code is fixed in the next PR")
     @ParameterizedTest(name = "Should return eligible response for claimant [{0}] Simpson stored in Legacy household table")
-    @CsvSource({"Homer, QQ123456A",
-            "Marge, QQ123456B"})
+    @CsvSource({"Homer, EB123456C",
+            "Marge, EB123456D"})
     void shouldReturnEligibleWhenMatchesLegacyHouseholdInDatabase(String parentName, String nino) {
         //Given
         legacyHouseholdRepository.save(aLegacyHousehold());
@@ -128,7 +132,6 @@ public class DWPIntegrationTests {
         //Then
         assertResponseCorrectWithHouseholdDetails(response, SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
         verifyZeroInteractions(restTemplateWithIdHeaders);
-        legacyHouseholdRepository.deleteAll();
     }
 
     @Test
