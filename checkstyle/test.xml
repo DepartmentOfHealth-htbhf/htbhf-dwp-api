@@ -2,7 +2,9 @@
 <checkstyle version="8.15">
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/DWPApplicationTests.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/controller/DWPEligibilityControllerIntegrationTest.java">
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/DWPIntegrationTests.java">
+</file>
+<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/controller/DWPEligibilityControllerTest.java">
 </file>
 <file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/EligibilityRequestToDWPEligibilityRequestTest.java">
 </file>
