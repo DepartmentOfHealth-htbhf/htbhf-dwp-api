@@ -24,7 +24,7 @@ public class UCHouseholdTestDataFactory {
         return UCHousehold.builder()
                 .awardDate(LocalDate.now())
                 .fileImportNumber(1)
-                .householdIdentifier(SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER)
+                .householdIdentifier(SIMPSON_UC_HOUSEHOLD_IDENTIFIER)
                 .lastAssessmentPeriodStart(LocalDate.now().minusMonths(1))
                 .lastAssessmentPeriodEnd(LocalDate.now())
                 .earningsThresholdExceeded(false)

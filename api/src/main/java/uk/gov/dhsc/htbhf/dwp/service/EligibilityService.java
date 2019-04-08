@@ -14,6 +14,7 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import java.util.Optional;
 
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
 import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 
 @Service
@@ -43,6 +44,7 @@ public class EligibilityService {
      * Checks if a given request is eligible. First check the Universal credit database,
      * then the legacy database, then call the dwp api.
      * Checking UC database first as most data is held there.
+     *
      * @param eligibilityRequest The eligibility request
      * @return The eligibility response
      */
@@ -67,13 +69,13 @@ public class EligibilityService {
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
         return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())
-                ? createEligibilityResponse(ucHousehold)
+                ? createEligibilityResponse(ucHousehold, ELIGIBLE)
                 : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
     }
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
         return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())
-                ? createEligibilityResponse(legacyHousehold)
+                ? createEligibilityResponse(legacyHousehold, ELIGIBLE)
                 : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
     }
 }
