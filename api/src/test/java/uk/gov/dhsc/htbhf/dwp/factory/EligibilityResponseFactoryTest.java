@@ -8,8 +8,8 @@ import uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 
 public class EligibilityResponseFactoryTest {
 

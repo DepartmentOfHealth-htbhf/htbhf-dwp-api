@@ -2,10 +2,10 @@ package uk.gov.dhsc.htbhf.dwp.testhelper;
 
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.NO_MATCH;
 
 public class EligibilityResponseTestDataFactory {
 
@@ -22,7 +22,7 @@ public class EligibilityResponseTestDataFactory {
 
     public static EligibilityResponse aNoMatchEligibilityResponse() {
         return EligibilityResponse.builder()
-                .eligibilityStatus(NOMATCH)
+                .eligibilityStatus(NO_MATCH)
                 .build();
     }
 
