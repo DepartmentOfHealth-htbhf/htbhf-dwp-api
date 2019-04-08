@@ -14,10 +14,11 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import java.util.Optional;
 
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
+import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
 import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 
 @Service
-<span class="fc" id="L20">@Slf4j</span>
+<span class="fc" id="L21">@Slf4j</span>
 public class EligibilityService {
 
     private static final String ENDPOINT = &quot;/v1/dwp/benefits&quot;;
@@ -31,50 +32,51 @@ public class EligibilityService {
                               RestTemplate restTemplate,
                               UCHouseholdRepository ucHouseholdRepository,
                               LegacyHouseholdRepository legacyHouseholdRepository,
-<span class="fc" id="L34">                              HouseholdVerifier householdVerifier) {</span>
-<span class="fc" id="L35">        this.uri = baseUri + ENDPOINT;</span>
-<span class="fc" id="L36">        this.restTemplate = restTemplate;</span>
-<span class="fc" id="L37">        this.ucHouseholdRepository = ucHouseholdRepository;</span>
-<span class="fc" id="L38">        this.legacyHouseholdRepository = legacyHouseholdRepository;</span>
-<span class="fc" id="L39">        this.householdVerifier = householdVerifier;</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L35">                              HouseholdVerifier householdVerifier) {</span>
+<span class="fc" id="L36">        this.uri = baseUri + ENDPOINT;</span>
+<span class="fc" id="L37">        this.restTemplate = restTemplate;</span>
+<span class="fc" id="L38">        this.ucHouseholdRepository = ucHouseholdRepository;</span>
+<span class="fc" id="L39">        this.legacyHouseholdRepository = legacyHouseholdRepository;</span>
+<span class="fc" id="L40">        this.householdVerifier = householdVerifier;</span>
+<span class="fc" id="L41">    }</span>
 
     /**
      * Checks if a given request is eligible. First check the Universal credit database,
      * then the legacy database, then call the dwp api.
      * Checking UC database first as most data is held there.
+     *
      * @param eligibilityRequest The eligibility request
      * @return The eligibility response
      */
     public EligibilityResponse checkEligibility(DWPEligibilityRequest eligibilityRequest) {
-<span class="fc" id="L50">        String nino = eligibilityRequest.getPerson().getNino();</span>
-<span class="fc" id="L51">        Optional&lt;UCHousehold&gt; ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
-<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (ucHousehold.isPresent()) {</span>
-<span class="fc" id="L53">            log.debug(&quot;Matched UC household: {}&quot;, ucHousehold.get().getHouseholdIdentifier());</span>
-<span class="fc" id="L54">            return getEligibilityResponse(eligibilityRequest, ucHousehold.get());</span>
+<span class="fc" id="L52">        String nino = eligibilityRequest.getPerson().getNino();</span>
+<span class="fc" id="L53">        Optional&lt;UCHousehold&gt; ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (ucHousehold.isPresent()) {</span>
+<span class="fc" id="L55">            log.debug(&quot;Matched UC household: {}&quot;, ucHousehold.get().getHouseholdIdentifier());</span>
+<span class="fc" id="L56">            return getEligibilityResponse(eligibilityRequest, ucHousehold.get());</span>
         }
 
-<span class="fc" id="L57">        Optional&lt;LegacyHousehold&gt; legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
-<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (legacyHousehold.isPresent()) {</span>
-<span class="fc" id="L59">            log.debug(&quot;Matched legacy household: {}&quot;, legacyHousehold.get().getHouseholdIdentifier());</span>
-<span class="fc" id="L60">            return getEligibilityResponse(eligibilityRequest, legacyHousehold.get());</span>
+<span class="fc" id="L59">        Optional&lt;LegacyHousehold&gt; legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (legacyHousehold.isPresent()) {</span>
+<span class="fc" id="L61">            log.debug(&quot;Matched legacy household: {}&quot;, legacyHousehold.get().getHouseholdIdentifier());</span>
+<span class="fc" id="L62">            return getEligibilityResponse(eligibilityRequest, legacyHousehold.get());</span>
         }
 
-<span class="fc" id="L63">        log.debug(&quot;No match found in db - calling DWP to check eligibility&quot;);</span>
-<span class="fc" id="L64">        var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);</span>
-<span class="fc" id="L65">        return response.getBody();</span>
+<span class="fc" id="L65">        log.debug(&quot;No match found in db - calling DWP to check eligibility&quot;);</span>
+<span class="fc" id="L66">        var response = restTemplate.postForEntity(uri, eligibilityRequest, EligibilityResponse.class);</span>
+<span class="fc" id="L67">        return response.getBody();</span>
     }
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
-<span class="fc bfc" id="L69" title="All 2 branches covered.">        return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())</span>
-<span class="fc" id="L70">                ? createEligibilityResponse(ucHousehold)</span>
-<span class="fc" id="L71">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())</span>
+<span class="fc" id="L72">                ? createEligibilityResponse(ucHousehold, ELIGIBLE)</span>
+<span class="fc" id="L73">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
     }
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())</span>
-<span class="fc" id="L76">                ? createEligibilityResponse(legacyHousehold)</span>
-<span class="fc" id="L77">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())</span>
+<span class="fc" id="L78">                ? createEligibilityResponse(legacyHousehold, ELIGIBLE)</span>
+<span class="fc" id="L79">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
