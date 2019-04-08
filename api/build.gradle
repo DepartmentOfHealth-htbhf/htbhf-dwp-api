@@ -16,8 +16,13 @@ plugins {
 }
 
 apply plugin: 'java'
-apply plugin: 'groovy'
 apply plugin: 'io.spring.dependency-management'
+
+configurations.all {
+    resolutionStrategy {
+        cacheDynamicVersionsFor 0, 'seconds'
+    }
+}
 
 lombok {
     version = '1.18.4'

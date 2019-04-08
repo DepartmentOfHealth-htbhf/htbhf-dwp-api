@@ -103,7 +103,9 @@ definitions:
         - "ELIGIBLE"
         - "INELIGIBLE"
         - "PENDING"
-        - "NOMATCH"
+        - "NO_MATCH"
+        - "ERROR"
+        - "DUPLICATE"
       householdIdentifier:
         type: "string"
         example: "9d6049ee-d6e6-4d9b-ae3d-3b1bdf98682f"

@@ -14,8 +14,8 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import java.util.Optional;
 
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.NO_MATCH;
 
 @Service
 @Slf4j
@@ -70,12 +70,12 @@ public class EligibilityService {
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
         return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())
                 ? createEligibilityResponse(ucHousehold, ELIGIBLE)
-                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
+                : EligibilityResponse.builder().eligibilityStatus(NO_MATCH).build();
     }
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
         return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())
                 ? createEligibilityResponse(legacyHousehold, ELIGIBLE)
-                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();
+                : EligibilityResponse.builder().eligibilityStatus(NO_MATCH).build();
     }
 }

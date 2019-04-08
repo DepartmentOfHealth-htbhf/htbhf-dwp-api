@@ -15,10 +15,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
-import uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus;
 import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
 import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
+import uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus;
 
 import java.net.URI;
 
@@ -30,8 +30,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.aValidEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
@@ -43,6 +41,8 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.NO_MATCH;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -113,7 +113,7 @@ public class DWPIntegrationTests {
         ResponseEntity<EligibilityResponse> response = callService(eligibilityRequest);
 
         //Then
-        assertResponseCorrectWithStatusOnly(response, NOMATCH);
+        assertResponseCorrectWithStatusOnly(response, NO_MATCH);
         verifyZeroInteractions(restTemplateWithIdHeaders);
     }
 
@@ -145,7 +145,7 @@ public class DWPIntegrationTests {
         ResponseEntity<EligibilityResponse> response = callService(eligibilityRequest);
 
         //Then
-        assertResponseCorrectWithStatusOnly(response, NOMATCH);
+        assertResponseCorrectWithStatusOnly(response, NO_MATCH);
         verifyZeroInteractions(restTemplateWithIdHeaders);
         legacyHouseholdRepository.deleteAll();
     }
