@@ -4,7 +4,7 @@ import uk.gov.dhsc.htbhf.dwp.entity.Child;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
-import uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus;
+import uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus;
 
 import java.time.LocalDate;
 import java.util.Set;

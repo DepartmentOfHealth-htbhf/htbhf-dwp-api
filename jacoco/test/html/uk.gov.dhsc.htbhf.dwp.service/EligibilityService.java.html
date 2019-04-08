@@ -14,8 +14,8 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import java.util.Optional;
 
 import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.ELIGIBLE;
-import static uk.gov.dhsc.htbhf.dwp.model.EligibilityStatus.NOMATCH;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.NO_MATCH;
 
 @Service
 <span class="fc" id="L21">@Slf4j</span>
@@ -70,13 +70,13 @@ public class EligibilityService {
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
 <span class="fc bfc" id="L71" title="All 2 branches covered.">        return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())</span>
 <span class="fc" id="L72">                ? createEligibilityResponse(ucHousehold, ELIGIBLE)</span>
-<span class="fc" id="L73">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
+<span class="fc" id="L73">                : EligibilityResponse.builder().eligibilityStatus(NO_MATCH).build();</span>
     }
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
 <span class="fc bfc" id="L77" title="All 2 branches covered.">        return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())</span>
 <span class="fc" id="L78">                ? createEligibilityResponse(legacyHousehold, ELIGIBLE)</span>
-<span class="fc" id="L79">                : EligibilityResponse.builder().eligibilityStatus(NOMATCH).build();</span>
+<span class="fc" id="L79">                : EligibilityResponse.builder().eligibilityStatus(NO_MATCH).build();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
