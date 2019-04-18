@@ -70,6 +70,15 @@ definitions:
         description: "Town or city of the address"
     title: "AddressDTO"
     description: "The address object"
+  ChildDTO:
+    type: "object"
+    properties:
+      dateOfBirth:
+        type: "string"
+        format: "date"
+        description: "The date of birth of the child"
+    title: "ChildDTO"
+    description: "A child in a household."
   EligibilityRequest:
     type: "object"
     properties:
@@ -95,6 +104,11 @@ definitions:
   EligibilityResponse:
     type: "object"
     properties:
+      children:
+        type: "array"
+        description: "A list of the children (under four years old) in the household"
+        items:
+          $ref: "#/definitions/ChildDTO"
       eligibilityStatus:
         type: "string"
         example: "ELIGIBLE"

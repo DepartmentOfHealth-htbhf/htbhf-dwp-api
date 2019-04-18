@@ -15,9 +15,9 @@ public class UCHouseholdTestDataFactory {
                 .build()
                 .addAdult(aUCAdult(HOMER_FORENAME, SIMPSON_SURNAME, HOMER_NINO))
                 .addAdult(aUCAdult(MARGE_FORENAME, SIMPSON_SURNAME, MARGE_NINO))
-                .addChild(aUCChild(BART_FORENAME, SIMPSON_SURNAME, 48))
-                .addChild(aUCChild(LISA_FORENAME, SIMPSON_SURNAME, 24))
-                .addChild(aUCChild(MAGGIE_FORENAME, SIMPSON_SURNAME, 6));
+                .addChild(aUCChild(BART_FORENAME, SIMPSON_SURNAME, BART_DOB))
+                .addChild(aUCChild(LISA_FORENAME, SIMPSON_SURNAME, LISA_DOB))
+                .addChild(aUCChild(MAGGIE_FORENAME, SIMPSON_SURNAME, MAGGIE_DOB));
     }
 
     public static UCHousehold.UCHouseholdBuilder aUCHouseholdWithNoAdultsOrChildren() {
@@ -34,11 +34,11 @@ public class UCHouseholdTestDataFactory {
                 .toBuilder();
     }
 
-    public static UCChild aUCChild(String forename, String surname, int ageInMonths) {
+    public static UCChild aUCChild(String forename, String surname, LocalDate dateOfBirth) {
         return UCChild.builder()
                 .forename(forename)
                 .surname(surname)
-                .dateOfBirth(LocalDate.now().minusMonths(ageInMonths))
+                .dateOfBirth(dateOfBirth)
                 .build();
     }
 

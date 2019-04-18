@@ -1,7 +1,13 @@
 package uk.gov.dhsc.htbhf.dwp.testhelper;
 
+import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DOB;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
@@ -31,6 +37,13 @@ public class EligibilityResponseTestDataFactory {
                 .eligibilityStatus(ELIGIBLE)
                 .numberOfChildrenUnderOne(1)
                 .numberOfChildrenUnderFour(2)
-                .householdIdentifier(SIMPSON_UC_HOUSEHOLD_IDENTIFIER);
+                .householdIdentifier(SIMPSON_UC_HOUSEHOLD_IDENTIFIER)
+                .children(createChildren());
+    }
+
+    private static List<ChildDTO> createChildren() {
+        ChildDTO childUnderOne = ChildDTO.builder().dateOfBirth(MAGGIE_DOB).build();
+        ChildDTO childUnderFour = ChildDTO.builder().dateOfBirth(LISA_DOB).build();
+        return asList(childUnderOne, childUnderFour);
     }
 }

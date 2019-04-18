@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus;
 
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor(onConstructor_ = {@JsonCreator})
@@ -30,4 +32,8 @@ public class EligibilityResponse {
     @JsonProperty("householdIdentifier")
     @ApiModelProperty(notes = "The identifier for their household", example = "9d6049ee-d6e6-4d9b-ae3d-3b1bdf98682f")
     private final String householdIdentifier;
+
+    @JsonProperty("children")
+    @ApiModelProperty(notes = "A list of the children (under four years old) in the household")
+    private final List<ChildDTO> children;
 }

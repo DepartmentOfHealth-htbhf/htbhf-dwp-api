@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
@@ -13,7 +14,6 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 
 import java.util.Optional;
 
-import static uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory.createEligibilityResponse;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.NO_MATCH;
 
@@ -27,17 +27,20 @@ public class EligibilityService {
     private final UCHouseholdRepository ucHouseholdRepository;
     private final LegacyHouseholdRepository legacyHouseholdRepository;
     private final HouseholdVerifier householdVerifier;
+    private final EligibilityResponseFactory eligibilityResponseFactory;
 
     public EligibilityService(@Value("${dwp.base-uri}") String baseUri,
                               RestTemplate restTemplate,
                               UCHouseholdRepository ucHouseholdRepository,
                               LegacyHouseholdRepository legacyHouseholdRepository,
-                              HouseholdVerifier householdVerifier) {
+                              HouseholdVerifier householdVerifier,
+                              EligibilityResponseFactory eligibilityResponseFactory) {
         this.uri = baseUri + ENDPOINT;
         this.restTemplate = restTemplate;
         this.ucHouseholdRepository = ucHouseholdRepository;
         this.legacyHouseholdRepository = legacyHouseholdRepository;
         this.householdVerifier = householdVerifier;
+        this.eligibilityResponseFactory = eligibilityResponseFactory;
     }
 
     /**
@@ -69,13 +72,13 @@ public class EligibilityService {
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, UCHousehold ucHousehold) {
         return householdVerifier.detailsMatch(ucHousehold, eligibilityRequest.getPerson())
-                ? createEligibilityResponse(ucHousehold, ELIGIBLE)
+                ? eligibilityResponseFactory.createEligibilityResponse(ucHousehold, ELIGIBLE)
                 : EligibilityResponse.builder().eligibilityStatus(NO_MATCH).build();
     }
 
     private EligibilityResponse getEligibilityResponse(DWPEligibilityRequest eligibilityRequest, LegacyHousehold legacyHousehold) {
         return householdVerifier.detailsMatch(legacyHousehold, eligibilityRequest.getPerson())
-                ? createEligibilityResponse(legacyHousehold, ELIGIBLE)
+                ? eligibilityResponseFactory.createEligibilityResponse(legacyHousehold, ELIGIBLE)
                 : EligibilityResponse.builder().eligibilityStatus(NO_MATCH).build();
     }
 }
