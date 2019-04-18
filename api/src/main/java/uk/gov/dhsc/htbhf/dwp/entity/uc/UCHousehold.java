@@ -2,6 +2,7 @@ package uk.gov.dhsc.htbhf.dwp.entity.uc;
 
 import lombok.*;
 import uk.gov.dhsc.htbhf.dwp.entity.BaseEntity;
+import uk.gov.dhsc.htbhf.dwp.entity.Household;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ import static java.util.Collections.unmodifiableSet;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @SuppressWarnings("PMD.DataClass")
-public class UCHousehold extends BaseEntity {
+public class UCHousehold extends BaseEntity implements Household {
 
     @Size(min = 1, max = 50)
     @Column(name = "household_identifier")
@@ -66,7 +67,7 @@ public class UCHousehold extends BaseEntity {
 
     public void setAdults(Set<UCAdult> adults) {
         this.adults.clear();
-        adults.forEach(adult -> this.addAdult(adult));
+        adults.forEach(this::addAdult);
     }
 
     public UCHousehold addChild(UCChild child) {
@@ -75,12 +76,13 @@ public class UCHousehold extends BaseEntity {
         return this;
     }
 
+    @Override
     public Set<UCChild> getChildren() {
         return unmodifiableSet(children);
     }
 
     public void setChildren(Set<UCChild> children) {
         this.children.clear();
-        children.forEach(child -> this.addChild(child));
+        children.forEach(this::addChild);
     }
 }

@@ -2,6 +2,7 @@ package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.springframework.stereotype.Component;
 import uk.gov.dhsc.htbhf.dwp.entity.Child;
+import uk.gov.dhsc.htbhf.dwp.entity.Household;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class EligibilityResponseFactory {
 
-    public EligibilityResponse createEligibilityResponse(LegacyHousehold household, EligibilityStatus eligibilityStatus) {
+    public EligibilityResponse createEligibilityResponse(Household household, EligibilityStatus eligibilityStatus) {
         return EligibilityResponse.builder()
                 .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))
                 .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))
@@ -29,24 +30,7 @@ public class EligibilityResponseFactory {
                 .build();
     }
 
-    public EligibilityResponse createEligibilityResponse(UCHousehold household, EligibilityStatus eligibilityStatus) {
-        return EligibilityResponse.builder()
-                .householdIdentifier(household.getHouseholdIdentifier())
-                .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))
-                .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))
-                .children(getChildrenUnderFour(household))
-                .eligibilityStatus(eligibilityStatus)
-                .build();
-    }
-
-    private List<ChildDTO> getChildrenUnderFour(UCHousehold household) {
-        return household.getChildren().stream()
-                .filter(child -> isUnderFour(child.getDateOfBirth()))
-                .map(child -> ChildDTO.builder().dateOfBirth(child.getDateOfBirth()).build())
-                .collect(Collectors.toList());
-    }
-
-    private List<ChildDTO> getChildrenUnderFour(LegacyHousehold household) {
+    private List<ChildDTO> getChildrenUnderFour(Household household) {
         return household.getChildren().stream()
                 .filter(child -> isUnderFour(child.getDateOfBirth()))
                 .map(child -> ChildDTO.builder().dateOfBirth(child.getDateOfBirth()).build())

@@ -185,15 +185,14 @@ public class DWPIntegrationTests {
     // checks that two eligibility responses are equal whilst ignoring the order of the children
     private void assertEligibilityResponse(EligibilityResponse expectedResponse, EligibilityResponse eligibilityResponse) {
         assertThat(eligibilityResponse).isEqualToIgnoringGivenFields(expectedResponse, "children");
-        assertChildren(expectedResponse.getChildren(), eligibilityResponse.getChildren());
+        assertChildren(eligibilityResponse.getChildren(), expectedResponse.getChildren());
     }
 
     private void assertChildren(List<ChildDTO> expected, List<ChildDTO> actual) {
         if (expected == null) {
             assertThat(actual).isNull();
         } else {
-            // containsExactlyInAnyOrder requires an array
-            assertThat(expected).containsExactlyInAnyOrder(actual.toArray(new ChildDTO[0]));
+            assertThat(expected).containsOnlyElementsOf(actual);
         }
     }
 
