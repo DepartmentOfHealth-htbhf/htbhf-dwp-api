@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Generates an {@link EligibilityResponse} for a given household and {@link EligibilityStatus}.
+ * Generates an {@link EligibilityResponse} for a given household ({@link LegacyHousehold} or {@link UCHousehold}) and {@link EligibilityStatus}.
  */
 @Component
 public class EligibilityResponseFactory {
