@@ -14,6 +14,9 @@ public final class TestConstants {
     public static final String BART_FORENAME = "BART";
     public static final String SIMPSON_SURNAME = "Simpson";
     public static final LocalDate HOMER_DOB = LocalDate.parse("1985-12-31");
+    public static final LocalDate MAGGIE_DOB = LocalDate.now().minusMonths(6);
+    public static final LocalDate LISA_DOB = LocalDate.now().minusMonths(24);
+    public static final LocalDate BART_DOB = LocalDate.now().minusMonths(48);
 
     public static final String SIMPSONS_ADDRESS_LINE_1 = "742 Evergreen Terrace";
     public static final String SIMPSONS_ADDRESS_LINE_2 = "Mystery Spot";

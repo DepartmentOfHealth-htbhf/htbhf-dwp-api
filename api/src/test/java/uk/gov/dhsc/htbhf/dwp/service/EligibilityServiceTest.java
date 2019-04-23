@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.factory.EligibilityResponseFactory;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
@@ -32,6 +33,7 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactor
 import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
+import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -54,6 +56,9 @@ class EligibilityServiceTest {
     @MockBean
     private HouseholdVerifier householdVerifier;
 
+    @MockBean
+    private EligibilityResponseFactory eligibilityResponseFactory;
+
     @Autowired
     private EligibilityService eligibilityService;
 
@@ -63,13 +68,15 @@ class EligibilityServiceTest {
         UCHousehold household = aUCHousehold();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
         given(householdVerifier.detailsMatch(any(UCHousehold.class), any())).willReturn(true);
+        given(eligibilityResponseFactory.createEligibilityResponse(any(UCHousehold.class), any()))
+                .willReturn(aValidUCEligibilityResponse());
 
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(aValidUCEligibilityResponse());
-
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
+        verify(eligibilityResponseFactory).createEligibilityResponse(household, ELIGIBLE);
         verifyZeroInteractions(legacyHouseholdRepository, restTemplate);
     }
 
@@ -83,7 +90,6 @@ class EligibilityServiceTest {
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(aNoMatchEligibilityResponse());
-
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
         verifyZeroInteractions(legacyHouseholdRepository, restTemplate);
@@ -96,14 +102,16 @@ class EligibilityServiceTest {
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.empty());
         given(legacyHouseholdRepository.findHouseholdByAdultWithNino(anyString())).willReturn(Optional.of(household));
         given(householdVerifier.detailsMatch(any(LegacyHousehold.class), any())).willReturn(true);
+        given(eligibilityResponseFactory.createEligibilityResponse(any(LegacyHousehold.class), any()))
+                .willReturn(aValidLegacyEligibilityResponse());
 
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(aValidLegacyEligibilityResponse());
-
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
         verify(legacyHouseholdRepository).findHouseholdByAdultWithNino(eligibilityRequest.getPerson().getNino());
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
+        verify(eligibilityResponseFactory).createEligibilityResponse(household, ELIGIBLE);
         verifyZeroInteractions(restTemplate);
     }
 
@@ -118,7 +126,6 @@ class EligibilityServiceTest {
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(aNoMatchEligibilityResponse());
-
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
         verify(legacyHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());

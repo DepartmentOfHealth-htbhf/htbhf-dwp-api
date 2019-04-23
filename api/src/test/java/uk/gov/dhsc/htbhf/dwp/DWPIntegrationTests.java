@@ -10,9 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
+import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
@@ -21,6 +26,7 @@ import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus;
 
 import java.net.URI;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -173,7 +179,21 @@ public class DWPIntegrationTests {
         assertThat(response.getStatusCode()).isEqualTo(OK);
         EligibilityResponse eligibilityResponse = response.getBody();
         assertThat(eligibilityResponse).isNotNull();
-        assertThat(eligibilityResponse).isEqualTo(expectedResponse);
+        assertEligibilityResponse(expectedResponse, eligibilityResponse);
+    }
+
+    // checks that two eligibility responses are equal whilst ignoring the order of the children
+    private void assertEligibilityResponse(EligibilityResponse expectedResponse, EligibilityResponse eligibilityResponse) {
+        assertThat(eligibilityResponse).isEqualToIgnoringGivenFields(expectedResponse, "children");
+        assertChildren(eligibilityResponse.getChildren(), expectedResponse.getChildren());
+    }
+
+    private void assertChildren(List<ChildDTO> expected, List<ChildDTO> actual) {
+        if (expected == null) {
+            assertThat(actual).isNull();
+        } else {
+            assertThat(expected).containsOnlyElementsOf(actual);
+        }
     }
 
     private RequestEntity buildRequestEntity(Object requestObject) {

@@ -2,6 +2,7 @@ package uk.gov.dhsc.htbhf.dwp.entity.legacy;
 
 import lombok.*;
 import uk.gov.dhsc.htbhf.dwp.entity.BaseEntity;
+import uk.gov.dhsc.htbhf.dwp.entity.Household;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,7 @@ import static java.util.Collections.unmodifiableSet;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @SuppressWarnings("PMD.DataClass")
-public class LegacyHousehold extends BaseEntity {
+public class LegacyHousehold extends BaseEntity implements Household {
 
     @Size(min = 1, max = 50)
     @Column(name = "household_identifier")
@@ -67,7 +68,7 @@ public class LegacyHousehold extends BaseEntity {
 
     public void setAdults(Set<LegacyAdult> adults) {
         this.adults.clear();
-        adults.forEach(adult -> this.addAdult(adult));
+        adults.forEach(this::addAdult);
     }
 
     public LegacyHousehold addChild(LegacyChild child) {
@@ -76,13 +77,14 @@ public class LegacyHousehold extends BaseEntity {
         return this;
     }
 
+    @Override
     public Set<LegacyChild> getChildren() {
         return unmodifiableSet(children);
     }
 
     public void setChildren(Set<LegacyChild> children) {
         this.children.clear();
-        children.forEach(child -> this.addChild(child));
+        children.forEach(this::addChild);
     }
 
 }
