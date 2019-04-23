@@ -2,6 +2,7 @@
 
 import lombok.*;
 import uk.gov.dhsc.htbhf.dwp.entity.BaseEntity;
+import uk.gov.dhsc.htbhf.dwp.entity.Household;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ import static java.util.Collections.unmodifiableSet;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @SuppressWarnings(&quot;PMD.DataClass&quot;)
-public class UCHousehold extends BaseEntity {
+public class UCHousehold extends BaseEntity implements Household {
 
     @Size(min = 1, max = 50)
     @Column(name = &quot;household_identifier&quot;)
@@ -55,33 +56,34 @@ public class UCHousehold extends BaseEntity {
     private final Set&lt;UCChild&gt; children = new HashSet&lt;&gt;();
 
     public UCHousehold addAdult(UCAdult adult) {
-<span class="fc" id="L58">        adult.setHousehold(this);</span>
-<span class="fc" id="L59">        this.adults.add(adult);</span>
-<span class="fc" id="L60">        return this;</span>
+<span class="fc" id="L59">        adult.setHousehold(this);</span>
+<span class="fc" id="L60">        this.adults.add(adult);</span>
+<span class="fc" id="L61">        return this;</span>
     }
 
     public Set&lt;UCAdult&gt; getAdults() {
-<span class="fc" id="L64">        return unmodifiableSet(adults);</span>
+<span class="fc" id="L65">        return unmodifiableSet(adults);</span>
     }
 
     public void setAdults(Set&lt;UCAdult&gt; adults) {
-<span class="nc" id="L68">        this.adults.clear();</span>
-<span class="nc" id="L69">        adults.forEach(adult -&gt; this.addAdult(adult));</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L69">        this.adults.clear();</span>
+<span class="nc" id="L70">        adults.forEach(this::addAdult);</span>
+<span class="nc" id="L71">    }</span>
 
     public UCHousehold addChild(UCChild child) {
-<span class="fc" id="L73">        child.setHousehold(this);</span>
-<span class="fc" id="L74">        this.children.add(child);</span>
-<span class="fc" id="L75">        return this;</span>
+<span class="fc" id="L74">        child.setHousehold(this);</span>
+<span class="fc" id="L75">        this.children.add(child);</span>
+<span class="fc" id="L76">        return this;</span>
     }
 
+    @Override
     public Set&lt;UCChild&gt; getChildren() {
-<span class="fc" id="L79">        return unmodifiableSet(children);</span>
+<span class="fc" id="L81">        return unmodifiableSet(children);</span>
     }
 
     public void setChildren(Set&lt;UCChild&gt; children) {
-<span class="nc" id="L83">        this.children.clear();</span>
-<span class="nc" id="L84">        children.forEach(child -&gt; this.addChild(child));</span>
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L85">        this.children.clear();</span>
+<span class="nc" id="L86">        children.forEach(this::addChild);</span>
+<span class="nc" id="L87">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
