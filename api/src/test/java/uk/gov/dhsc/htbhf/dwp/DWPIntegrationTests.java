@@ -1,22 +1,23 @@
 package uk.gov.dhsc.htbhf.dwp;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
@@ -24,24 +25,21 @@ import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
 import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus;
+import uk.gov.dhsc.htbhf.errorhandler.ErrorResponse;
 
 import java.net.URI;
 import java.util.List;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
+import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.aValidEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidUCEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidUCEligibilityResponseBuilder;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.aPersonWithNino;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.buildDefaultPerson;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
@@ -52,11 +50,12 @@ import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.NO_MATCH;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureWireMock(port = 8120)
 public class DWPIntegrationTests {
 
     private static final URI ENDPOINT = URI.create("/v1/dwp/eligibility");
 
-    private static final String DWP_URL = "http://localhost:8120/v1/dwp/benefits";
+    private static final String DWP_URL = "/v1/dwp/benefits";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -67,28 +66,29 @@ public class DWPIntegrationTests {
     @Autowired
     private UCHouseholdRepository ucHouseholdRepository;
 
-    @MockBean
-    private RestTemplate restTemplateWithIdHeaders;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    @BeforeEach
     @AfterEach
+    @SuppressWarnings("PMD.UnnecessaryFullyQualifiedName")
     void clearDatabase() {
         ucHouseholdRepository.deleteAll();
         legacyHouseholdRepository.deleteAll();
+        WireMock.reset();
     }
 
     @Test
-    void shouldReturnEligibilityResponseWhenNotInDatabase() {
+    void shouldReturnEligibilityResponseWhenNotInDatabase() throws JsonProcessingException {
         //Given
-        ResponseEntity<EligibilityResponse> dwpEligibilityResponse = new ResponseEntity<>(aValidUCEligibilityResponse(), OK);
-        given(restTemplateWithIdHeaders.postForEntity(anyString(), any(), eq(EligibilityResponse.class))).willReturn(dwpEligibilityResponse);
+        EligibilityResponse dwpEligibilityResponse = aValidUCEligibilityResponse();
+        stubDWPEndpointWithSuccessfulResponse(dwpEligibilityResponse);
 
         //When
         ResponseEntity<EligibilityResponse> response = callService(aValidEligibilityRequest());
 
         //Then
         assertResponseCorrectWithHouseholdDetails(response, SIMPSON_UC_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
-        verify(restTemplateWithIdHeaders).postForEntity(DWP_URL, aValidDWPEligibilityRequest(), EligibilityResponse.class);
+        verify(exactly(1), postRequestedFor(urlEqualTo(DWP_URL)));
     }
 
     @ParameterizedTest(name = "Should return eligible response for claimant [{0}] Simpson stored in UC household table")
@@ -105,7 +105,7 @@ public class DWPIntegrationTests {
 
         //Then
         assertResponseCorrectWithHouseholdDetails(response, SIMPSON_UC_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
-        verifyZeroInteractions(restTemplateWithIdHeaders);
+        verifyNoCallToDWP();
     }
 
     @Test
@@ -120,7 +120,7 @@ public class DWPIntegrationTests {
 
         //Then
         assertResponseCorrectWithStatusOnly(response, NO_MATCH);
-        verifyZeroInteractions(restTemplateWithIdHeaders);
+        verifyNoCallToDWP();
     }
 
     @ParameterizedTest(name = "Should return eligible response for claimant [{0}] Simpson stored in Legacy household table")
@@ -137,7 +137,7 @@ public class DWPIntegrationTests {
 
         //Then
         assertResponseCorrectWithHouseholdDetails(response, SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
-        verifyZeroInteractions(restTemplateWithIdHeaders);
+        verifyNoCallToDWP();
     }
 
     @Test
@@ -152,8 +152,23 @@ public class DWPIntegrationTests {
 
         //Then
         assertResponseCorrectWithStatusOnly(response, NO_MATCH);
-        verifyZeroInteractions(restTemplateWithIdHeaders);
+        verifyNoCallToDWP();
         legacyHouseholdRepository.deleteAll();
+    }
+
+    @Test
+    void shouldReturnBadRequestForInvalidRequest() {
+        PersonDTO person = aPersonWithNino(null);
+        EligibilityRequest request = anEligibilityRequestWithPerson(person);
+
+        ResponseEntity<ErrorResponse> response = restTemplate.postForEntity(ENDPOINT, request, ErrorResponse.class);
+
+        assertValidationErrorInResponse(response, "person.nino", "must not be null");
+    }
+
+    private void stubDWPEndpointWithSuccessfulResponse(EligibilityResponse eligibilityResponse) throws JsonProcessingException {
+        String json = objectMapper.writeValueAsString(eligibilityResponse);
+        stubFor(post(urlEqualTo(DWP_URL)).willReturn(okJson(json)));
     }
 
     private ResponseEntity<EligibilityResponse> callService(EligibilityRequest eligibilityRequest) {
@@ -200,6 +215,10 @@ public class DWPIntegrationTests {
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new RequestEntity<>(requestObject, headers, HttpMethod.POST, ENDPOINT);
+    }
+
+    private void verifyNoCallToDWP() {
+        verify(exactly(0), postRequestedFor(urlEqualTo(DWP_URL)));
     }
 
 }

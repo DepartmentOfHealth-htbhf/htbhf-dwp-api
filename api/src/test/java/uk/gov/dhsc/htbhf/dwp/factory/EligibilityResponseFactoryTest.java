@@ -1,8 +1,6 @@
 package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
@@ -15,11 +13,9 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DOB;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 
-@SpringBootTest
 public class EligibilityResponseFactoryTest {
 
-    @Autowired
-    private EligibilityResponseFactory factory;
+    private EligibilityResponseFactory factory = new EligibilityResponseFactory();
 
     @Test
     void shouldCreateResponseFromLegacyHousehold() {
