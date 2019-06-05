@@ -10,6 +10,9 @@ applications:
   env:
     JBP_CONFIG_OPEN_JDK_JRE: '{jre: { version: 11.+ }}'
     APP_VERSION: ((app-version))
+    # disable auto reconfiguration which causes our datasource properties to be ignored.
+    # see https://stackoverflow.com/questions/39436194/how-to-disable-the-download-of-the-auto-reconfiguration-1-10-0-release-jar-when
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
   services:
     - htbhf-eligibility-api-postgres
     - logit-ssl-drain
