@@ -69,6 +69,7 @@ dependencies {
     testImplementation "org.assertj:assertj-core:3.11.1"
     testImplementation "com.h2database:h2:1.4.197"
     testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
+    testImplementation "org.springframework.cloud:spring-cloud-starter-contract-stub-runner:2.1.1.RELEASE"
     testImplementation "uk.gov.dhsc.htbhf:htbhf-common-test:latest.release"
 
 

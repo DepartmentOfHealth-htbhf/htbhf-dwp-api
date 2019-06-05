@@ -2,12 +2,11 @@ package uk.gov.dhsc.htbhf.dwp.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
@@ -35,8 +34,7 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class EligibilityServiceTest {
 
     private static final String ENDPOINT = "/v1/dwp/benefits";
@@ -44,22 +42,22 @@ class EligibilityServiceTest {
     @Value("${dwp.base-uri}")
     private String dwpUri;
 
-    @MockBean
+    @Mock
     private RestTemplate restTemplate;
 
-    @MockBean
+    @Mock
     private UCHouseholdRepository ucHouseholdRepository;
 
-    @MockBean
+    @Mock
     private LegacyHouseholdRepository legacyHouseholdRepository;
 
-    @MockBean
+    @Mock
     private HouseholdVerifier householdVerifier;
 
-    @MockBean
+    @Mock
     private EligibilityResponseFactory eligibilityResponseFactory;
 
-    @Autowired
+    @InjectMocks
     private EligibilityService eligibilityService;
 
     @Test
