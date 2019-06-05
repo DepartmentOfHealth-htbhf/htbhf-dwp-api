@@ -70,7 +70,6 @@ public class DWPIntegrationTests {
     private ObjectMapper objectMapper;
 
     @AfterEach
-    @SuppressWarnings("PMD.UnnecessaryFullyQualifiedName")
     void clearDatabase() {
         ucHouseholdRepository.deleteAll();
         legacyHouseholdRepository.deleteAll();
