@@ -58,6 +58,7 @@ dependencies {
     implementation "com.google.code.findbugs:annotations:3.0.1"
     implementation "uk.gov.dhsc.htbhf:htbhf-common-rest:latest.release"
     implementation "org.apache.commons:commons-lang3:3.8.1"
+    implementation "uk.gov.dhsc.htbhf:htbhf-common-database:latest.release"
     implementation project(":htbhf-dwp-api-db")
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
