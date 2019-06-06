@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uk.gov.dhsc.htbhf.CommonRestConfiguration;
+import uk.gov.dhsc.htbhf.database.CloudDBConfiguration;
 
 /**
  * The starting point for spring boot, this class enables SpringFox for documenting the api using swagger
@@ -15,7 +16,7 @@ import uk.gov.dhsc.htbhf.CommonRestConfiguration;
 @AllArgsConstructor
 @SpringBootApplication
 @EnableSwagger2
-@Import(CommonRestConfiguration.class)
+@Import({CommonRestConfiguration.class, CloudDBConfiguration.class})
 public class DWPApplication {
 
     public static void main(String[] args) {
