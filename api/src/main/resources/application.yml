@@ -39,3 +39,7 @@ server:
 
 dwp:
   base-uri: ${vcap.services.variable-service.credentials.dwp-api-uri:http://localhost:8120}
+
+postgres:
+  service:
+    id: "htbhf-eligibility-api-postgres"
