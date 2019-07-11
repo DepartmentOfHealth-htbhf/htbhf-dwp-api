@@ -1,7 +1,8 @@
 buildscript {
     ext {
         junitVersion = '5.3.2'
-        jacksonVersion = '2.9.9'
+        jacksonDatabindVersion = '2.9.9.1'
+        jacksonDataformatVersion = '2.9.9'
         springFoxVersion = '2.9.2'
     }
     dependencies {
@@ -47,7 +48,7 @@ repositories {
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
-    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabindVersion}"
     implementation "org.springframework.boot:spring-boot-starter-actuator"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "com.zaxxer:HikariCP"
@@ -73,7 +74,7 @@ dependencies {
     testImplementation "org.junit.vintage:junit-vintage-engine:${junitVersion}"
     testImplementation "org.assertj:assertj-core:3.11.1"
     testImplementation "com.h2database:h2:1.4.197"
-    testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
+    testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonDataformatVersion}"
     testImplementation "org.springframework.cloud:spring-cloud-starter-contract-stub-runner:2.1.1.RELEASE"
     testImplementation "uk.gov.dhsc.htbhf:htbhf-common-test:latest.release"
 
