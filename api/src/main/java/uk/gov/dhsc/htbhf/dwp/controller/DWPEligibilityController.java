@@ -32,7 +32,7 @@ public class DWPEligibilityController {
                                            @Valid
                                            @ApiParam("The eligibility request for Universal Credit")
                                            EligibilityRequest eligibilityRequest) {
-
+        log.debug("Received eligibility request");
         DWPEligibilityRequest request = converter.convert(eligibilityRequest);
 
         EligibilityResponse eligibilityResponse = eligibilityService.checkEligibility(request);
