@@ -17,6 +17,7 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-gradle-{{ checksum "build.gradle" }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+          when: always
       - persist_to_workspace:
           root: .
           paths:
