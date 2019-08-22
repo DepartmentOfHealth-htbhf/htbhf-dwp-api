@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.059s</div>
+<div class="counter">0.077s</div>
 <p>duration</p>
 </div>
 </td>
@@ -63,6 +63,9 @@
 <li>
 <a href="#tab0">Tests</a>
 </li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
 </ul>
 <div id="tab0" class="tab">
 <h2>Tests</h2>
@@ -76,30 +79,105 @@
 </thead>
 <tr>
 <td class="success">shouldFailToValidateAddressWithNoAddressLine1()</td>
-<td class="success">0.005s</td>
+<td class="success">0.017s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldFailToValidateAddressWithNoPostcode()</td>
-<td class="success">0.015s</td>
+<td class="success">0.012s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldFailToValidateAddressWithNoTownOrCity()</td>
-<td class="success">0.005s</td>
+<td class="success">0.016s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldValidateAddressSuccessfully()</td>
-<td class="success">0.006s</td>
+<td class="success">0.016s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldValidateAddressSuccessfullyWithNoAddressLine2()</td>
-<td class="success">0.028s</td>
+<td class="success">0.016s</td>
 <td class="success">passed</td>
 </tr>
 </table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>14:31:54.401 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+14:31:54.401 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+14:31:54.402 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+14:31:54.402 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+14:31:54.403 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+14:31:54.407 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+14:31:54.412 [Test worker] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+14:31:54.413 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+14:31:54.413 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.resolver.JPATraversableResolver as ValidatorFactory-scoped traversable resolver.
+14:31:54.413 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+14:31:54.413 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+14:31:54.413 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+14:31:54.419 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+14:31:54.420 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+14:31:54.421 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+14:31:54.421 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+14:31:54.421 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+14:31:54.422 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+14:31:54.426 [Test worker] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+14:31:54.427 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+14:31:54.427 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.resolver.JPATraversableResolver as ValidatorFactory-scoped traversable resolver.
+14:31:54.427 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+14:31:54.427 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+14:31:54.427 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+14:31:54.435 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+14:31:54.435 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+14:31:54.436 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+14:31:54.436 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+14:31:54.437 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+14:31:54.437 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+14:31:54.441 [Test worker] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+14:31:54.442 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+14:31:54.442 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.resolver.JPATraversableResolver as ValidatorFactory-scoped traversable resolver.
+14:31:54.442 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+14:31:54.442 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+14:31:54.442 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+14:31:54.446 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - ValidationMessages not found.
+14:31:54.446 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - ContributorValidationMessages not found.
+14:31:54.446 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - org.hibernate.validator.ValidationMessages found.
+14:31:54.448 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+14:31:54.449 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+14:31:54.449 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+14:31:54.450 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+14:31:54.450 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+14:31:54.451 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+14:31:54.455 [Test worker] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+14:31:54.455 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+14:31:54.455 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.resolver.JPATraversableResolver as ValidatorFactory-scoped traversable resolver.
+14:31:54.456 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+14:31:54.456 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+14:31:54.456 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+14:31:54.459 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - ValidationMessages not found.
+14:31:54.459 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - ContributorValidationMessages not found.
+14:31:54.463 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - org.hibernate.validator.ValidationMessages found.
+14:31:54.465 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Found javax.persistence.Persistence on classpath containing 'getPersistenceUtil'. Assuming JPA 2 environment. Trying to instantiate JPA aware TraversableResolver
+14:31:54.465 [Test worker] DEBUG org.hibernate.validator.internal.engine.resolver.TraversableResolvers - Instantiated JPA aware TraversableResolver of type org.hibernate.validator.internal.engine.resolver.JPATraversableResolver.
+14:31:54.466 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - Trying to load META-INF/validation.xml for XML based Validator configuration.
+14:31:54.466 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via TCCL
+14:31:54.466 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ResourceLoaderHelper - Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+14:31:54.466 [Test worker] DEBUG org.hibernate.validator.internal.xml.config.ValidationXmlParser - No META-INF/validation.xml found. Using annotation based configuration only.
+14:31:54.470 [Test worker] DEBUG org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator - Loaded expression factory via original TCCL
+14:31:54.474 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator as ValidatorFactory-scoped message interpolator.
+14:31:54.474 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.resolver.JPATraversableResolver as ValidatorFactory-scoped traversable resolver.
+14:31:54.474 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.util.ExecutableParameterNameProvider as ValidatorFactory-scoped parameter name provider.
+14:31:54.475 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.DefaultClockProvider as ValidatorFactory-scoped clock provider.
+14:31:54.475 [Test worker] DEBUG org.hibernate.validator.internal.engine.ValidatorFactoryImpl - HV000234: Using org.hibernate.validator.internal.engine.scripting.DefaultScriptEvaluatorFactory as ValidatorFactory-scoped script evaluator factory.
+14:31:54.481 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - ValidationMessages not found.
+14:31:54.481 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - ContributorValidationMessages not found.
+14:31:54.481 [Test worker] DEBUG org.hibernate.validator.resourceloading.PlatformResourceBundleLocator - org.hibernate.validator.ValidationMessages found.
+</pre>
+</span>
 </div>
 </div>
 <div id="footer">
@@ -109,7 +187,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 5.6</a> at Aug 22, 2019, 12:35:33 PM</p>
+<a href="http://www.gradle.org">Gradle 5.6</a> at Aug 22, 2019, 2:32:17 PM</p>
 </div>
 </div>
 </body>
