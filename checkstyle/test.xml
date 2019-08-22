@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.15">
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/DWPApplicationTests.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/DWPApplicationTests.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/DWPIntegrationTests.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/DWPIntegrationTests.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/controller/DWPEligibilityControllerTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/controller/DWPEligibilityControllerTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/EligibilityRequestToDWPEligibilityRequestTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/EligibilityRequestToDWPEligibilityRequestTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/EligibilityResponseFactoryTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/EligibilityResponseFactoryTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/AddressDTOTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/AddressDTOTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/EligibilityRequestTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/EligibilityRequestTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/PersonDTOTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/PersonDTOTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/LegacyHouseholdRepositoryTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/LegacyHouseholdRepositoryTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/UCHouseholdRepositoryTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/UCHouseholdRepositoryTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/EligibilityServiceTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/EligibilityServiceTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierLegacyHouseholdTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierLegacyHouseholdTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierUCHouseholdTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierUCHouseholdTest.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/AddressDTOTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/AddressDTOTestDataFactory.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPEligibilityRequestTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPEligibilityRequestTestDataFactory.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPPersonDTOTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPPersonDTOTestDataFactory.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityRequestTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityRequestTestDataFactory.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityResponseTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityResponseTestDataFactory.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/LegacyHouseholdTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/LegacyHouseholdTestDataFactory.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/PersonDTOTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/PersonDTOTestDataFactory.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/TestConstants.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/TestConstants.java">
 </file>
-<file name="/home/travis/build/DepartmentOfHealth-htbhf/htbhf-dwp-api/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/UCHouseholdTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/UCHouseholdTestDataFactory.java">
 </file>
 </checkstyle>
