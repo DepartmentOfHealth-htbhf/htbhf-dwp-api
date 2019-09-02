@@ -55,13 +55,13 @@ public class EligibilityService {
 <span class="fc" id="L55">        String nino = eligibilityRequest.getPerson().getNino();</span>
 <span class="fc" id="L56">        Optional&lt;UCHousehold&gt; ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
 <span class="fc bfc" id="L57" title="All 2 branches covered.">        if (ucHousehold.isPresent()) {</span>
-<span class="fc" id="L58">            log.debug(&quot;Matched UC household: {}&quot;, ucHousehold.get().getHouseholdIdentifier());</span>
+<span class="fc" id="L58">            log.debug(&quot;Matched UC household: {}&quot;, ucHousehold.get().getId());</span>
 <span class="fc" id="L59">            return getEligibilityResponse(eligibilityRequest, ucHousehold.get());</span>
         }
 
 <span class="fc" id="L62">        Optional&lt;LegacyHousehold&gt; legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
 <span class="fc bfc" id="L63" title="All 2 branches covered.">        if (legacyHousehold.isPresent()) {</span>
-<span class="fc" id="L64">            log.debug(&quot;Matched legacy household: {}&quot;, legacyHousehold.get().getHouseholdIdentifier());</span>
+<span class="fc" id="L64">            log.debug(&quot;Matched legacy household: {}&quot;, legacyHousehold.get().getId());</span>
 <span class="fc" id="L65">            return getEligibilityResponse(eligibilityRequest, legacyHousehold.get());</span>
         }
 
