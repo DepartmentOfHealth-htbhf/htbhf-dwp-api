@@ -55,13 +55,13 @@ public class EligibilityService {
         String nino = eligibilityRequest.getPerson().getNino();
         Optional<UCHousehold> ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);
         if (ucHousehold.isPresent()) {
-            log.debug("Matched UC household: {}", ucHousehold.get().getHouseholdIdentifier());
+            log.debug("Matched UC household: {}", ucHousehold.get().getId());
             return getEligibilityResponse(eligibilityRequest, ucHousehold.get());
         }
 
         Optional<LegacyHousehold> legacyHousehold = legacyHouseholdRepository.findHouseholdByAdultWithNino(nino);
         if (legacyHousehold.isPresent()) {
-            log.debug("Matched legacy household: {}", legacyHousehold.get().getHouseholdIdentifier());
+            log.debug("Matched legacy household: {}", legacyHousehold.get().getId());
             return getEligibilityResponse(eligibilityRequest, legacyHousehold.get());
         }
 
