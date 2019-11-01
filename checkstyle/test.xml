@@ -16,13 +16,9 @@
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/PersonDTOTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/LegacyHouseholdRepositoryTest.java">
-</file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/UCHouseholdRepositoryTest.java">
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/EligibilityServiceTest.java">
-</file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierLegacyHouseholdTest.java">
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierUCHouseholdTest.java">
 </file>
@@ -35,8 +31,6 @@
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityRequestTestDataFactory.java">
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityResponseTestDataFactory.java">
-</file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/LegacyHouseholdTestDataFactory.java">
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/PersonDTOTestDataFactory.java">
 </file>

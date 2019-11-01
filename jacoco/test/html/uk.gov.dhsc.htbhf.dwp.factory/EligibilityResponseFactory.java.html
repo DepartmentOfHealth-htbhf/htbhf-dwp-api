@@ -3,7 +3,6 @@
 import org.springframework.stereotype.Component;
 import uk.gov.dhsc.htbhf.dwp.entity.Child;
 import uk.gov.dhsc.htbhf.dwp.entity.Household;
-import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
@@ -15,45 +14,45 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Generates an {@link EligibilityResponse} for a given household ({@link LegacyHousehold} or {@link UCHousehold}) and {@link EligibilityStatus}.
+ * Generates an {@link EligibilityResponse} for a given household ({@link UCHousehold}) and {@link EligibilityStatus}.
  */
 @Component
-<span class="fc" id="L21">public class EligibilityResponseFactory {</span>
+<span class="fc" id="L20">public class EligibilityResponseFactory {</span>
 
     public EligibilityResponse createEligibilityResponse(Household household, EligibilityStatus eligibilityStatus) {
-<span class="fc" id="L24">        return EligibilityResponse.builder()</span>
-<span class="fc" id="L25">                .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))</span>
-<span class="fc" id="L26">                .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))</span>
-<span class="fc" id="L27">                .householdIdentifier(household.getHouseholdIdentifier())</span>
-<span class="fc" id="L28">                .children(getChildrenUnderFour(household))</span>
-<span class="fc" id="L29">                .eligibilityStatus(eligibilityStatus)</span>
-<span class="fc" id="L30">                .build();</span>
+<span class="fc" id="L23">        return EligibilityResponse.builder()</span>
+<span class="fc" id="L24">                .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))</span>
+<span class="fc" id="L25">                .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))</span>
+<span class="fc" id="L26">                .householdIdentifier(household.getHouseholdIdentifier())</span>
+<span class="fc" id="L27">                .children(getChildrenUnderFour(household))</span>
+<span class="fc" id="L28">                .eligibilityStatus(eligibilityStatus)</span>
+<span class="fc" id="L29">                .build();</span>
     }
 
     private List&lt;ChildDTO&gt; getChildrenUnderFour(Household household) {
-<span class="fc" id="L34">        return household.getChildren().stream()</span>
-<span class="fc" id="L35">                .filter(child -&gt; isUnderFour(child.getDateOfBirth()))</span>
-<span class="fc" id="L36">                .map(child -&gt; ChildDTO.builder().dateOfBirth(child.getDateOfBirth()).build())</span>
-<span class="fc" id="L37">                .collect(Collectors.toList());</span>
+<span class="fc" id="L33">        return household.getChildren().stream()</span>
+<span class="fc" id="L34">                .filter(child -&gt; isUnderFour(child.getDateOfBirth()))</span>
+<span class="fc" id="L35">                .map(child -&gt; ChildDTO.builder().dateOfBirth(child.getDateOfBirth()).build())</span>
+<span class="fc" id="L36">                .collect(Collectors.toList());</span>
     }
 
     private boolean isUnderFour(LocalDate dateOfBirth) {
-<span class="fc" id="L41">        return dateOfBirth.isAfter(LocalDate.now().minusYears(4));</span>
+<span class="fc" id="L40">        return dateOfBirth.isAfter(LocalDate.now().minusYears(4));</span>
     }
 
     private Integer getNumberOfChildrenUnderOne(Set&lt;? extends Child&gt; children) {
-<span class="fc" id="L45">        return getNumberOfChildrenUnderAgeInYears(children, 1);</span>
+<span class="fc" id="L44">        return getNumberOfChildrenUnderAgeInYears(children, 1);</span>
     }
 
     private Integer getNumberOfChildrenUnderFour(Set&lt;? extends Child&gt; children) {
-<span class="fc" id="L49">        return getNumberOfChildrenUnderAgeInYears(children, 4);</span>
+<span class="fc" id="L48">        return getNumberOfChildrenUnderAgeInYears(children, 4);</span>
     }
 
     private Integer getNumberOfChildrenUnderAgeInYears(Set&lt;? extends Child&gt; children, Integer ageInYears) {
-<span class="fc" id="L53">        LocalDate pastDate = LocalDate.now().minusYears(ageInYears);</span>
-<span class="fc" id="L54">        return Math.toIntExact(children.stream()</span>
-<span class="fc" id="L55">                .filter(child -&gt; child.getDateOfBirth().isAfter(pastDate))</span>
-<span class="fc" id="L56">                .count());</span>
+<span class="fc" id="L52">        LocalDate pastDate = LocalDate.now().minusYears(ageInYears);</span>
+<span class="fc" id="L53">        return Math.toIntExact(children.stream()</span>
+<span class="fc" id="L54">                .filter(child -&gt; child.getDateOfBirth().isAfter(pastDate))</span>
+<span class="fc" id="L55">                .count());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

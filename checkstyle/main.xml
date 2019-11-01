@@ -14,12 +14,6 @@
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/Household.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/legacy/LegacyAdult.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/legacy/LegacyChild.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/legacy/LegacyHousehold.java">
-</file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCAdult.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCChild.java">
@@ -41,8 +35,6 @@
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/EligibilityResponse.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/PersonDTO.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/repository/LegacyHouseholdRepository.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/repository/UCHouseholdRepository.java">
 </file>

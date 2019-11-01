@@ -2,13 +2,12 @@
 
 import org.flywaydb.core.internal.util.StringUtils;
 import org.springframework.stereotype.Service;
-import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.DWPPersonDTO;
 
 @Service
-<span class="fc" id="L11">public class HouseholdVerifier {</span>
+<span class="fc" id="L10">public class HouseholdVerifier {</span>
 
     /**
      * Determines if a given household contains an adult matching a given person.
@@ -18,38 +17,26 @@ import uk.gov.dhsc.htbhf.dwp.model.DWPPersonDTO;
      * @return true the details of the household and the person match.
      */
     public Boolean detailsMatch(UCHousehold household, DWPPersonDTO person) {
-<span class="fc" id="L21">        return household.getAdults().stream()</span>
-<span class="fc" id="L22">                .anyMatch(adult -&gt; adultMatchesPerson(adult, person));</span>
-    }
-
-    public Boolean detailsMatch(LegacyHousehold household, DWPPersonDTO person) {
-<span class="fc" id="L26">        boolean nameMatches = household.getAdults().stream()</span>
-<span class="fc" id="L27">                .anyMatch(adult -&gt; areEqual(adult.getSurname(), person.getSurname()));</span>
-
-<span class="fc bfc" id="L29" title="All 4 branches covered.">        return nameMatches &amp;&amp; addressMatches(household, person);</span>
+<span class="fc" id="L20">        return household.getAdults().stream()</span>
+<span class="fc" id="L21">                .anyMatch(adult -&gt; adultMatchesPerson(adult, person));</span>
     }
 
     private boolean adultMatchesPerson(UCAdult adult, DWPPersonDTO person) {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">        return areEqual(adult.getSurname(), person.getSurname())</span>
-<span class="fc bfc" id="L34" title="All 2 branches covered.">                &amp;&amp; firstSixCharacterMatch(person.getAddress().getAddressLine1(), adult.getAddressLine1())</span>
-<span class="fc bfc" id="L35" title="All 2 branches covered.">                &amp;&amp; areEqualIgnoringWhitespace(adult.getPostcode(), person.getAddress().getPostcode());</span>
-    }
-
-    private boolean addressMatches(LegacyHousehold household, DWPPersonDTO person) {
-<span class="fc bfc" id="L39" title="All 2 branches covered.">        return firstSixCharacterMatch(household.getAddressLine1(), person.getAddress().getAddressLine1())</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">                &amp;&amp; areEqualIgnoringWhitespace(household.getPostcode(), person.getAddress().getPostcode());</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        return areEqual(adult.getSurname(), person.getSurname())</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">                &amp;&amp; firstSixCharacterMatch(person.getAddress().getAddressLine1(), adult.getAddressLine1())</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">                &amp;&amp; areEqualIgnoringWhitespace(adult.getPostcode(), person.getAddress().getPostcode());</span>
     }
 
     private boolean firstSixCharacterMatch(String s1, String s2) {
-<span class="fc" id="L44">        return areEqual(StringUtils.left(s1, 6), StringUtils.left(s2, 6));</span>
+<span class="fc" id="L31">        return areEqual(StringUtils.left(s1, 6), StringUtils.left(s2, 6));</span>
     }
 
     private Boolean areEqualIgnoringWhitespace(String s1, String s2) {
-<span class="fc" id="L48">        return areEqual(s1.replaceAll(&quot;\\s+&quot;, &quot;&quot;), s2.replaceAll(&quot;\\s+&quot;, &quot;&quot;));</span>
+<span class="fc" id="L35">        return areEqual(s1.replaceAll(&quot;\\s+&quot;, &quot;&quot;), s2.replaceAll(&quot;\\s+&quot;, &quot;&quot;));</span>
     }
 
     private Boolean areEqual(String s1, String s2) {
-<span class="fc" id="L52">        return s1.trim().equalsIgnoreCase(s2.trim());</span>
+<span class="fc" id="L39">        return s1.trim().equalsIgnoreCase(s2.trim());</span>
     }
 
 }
