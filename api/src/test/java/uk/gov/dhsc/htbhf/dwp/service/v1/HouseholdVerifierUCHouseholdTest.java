@@ -1,0 +1,127 @@
+package uk.gov.dhsc.htbhf.dwp.service.v1;
+
+import org.junit.jupiter.api.Test;
+import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCAdult;
+import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.DWPPersonDTOTestDataFactory.aValidDWPPerson;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.UCHouseholdTestDataFactory.aUCHouseholdWithNoAdultsOrChildren;
+
+public class HouseholdVerifierUCHouseholdTest {
+
+    private final HouseholdVerifier householdVerifier = new HouseholdVerifier();
+
+    @Test
+    void shouldReturnTrueWhenPersonMatchesUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Simpson")
+                .addressLine1("742 Evergreen Terrace")
+                .postcode("AA11AA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isTrue();
+    }
+
+    @Test
+    void shouldReturnFalseWhenSurnameDoesNotMatchUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Smith")
+                .addressLine1("742 Evergreen Terrace")
+                .postcode("AA11AA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isFalse();
+    }
+
+    @Test
+    void shouldReturnFalseWhenAddressLine1DoesNotMatchUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Simpson")
+                .addressLine1("745 Deciduous Road")
+                .postcode("AA11AA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isFalse();
+    }
+
+    @Test
+    void shouldReturnFalseWhenPostcodeDoesNotMatchUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Simpson")
+                .addressLine1("742 Evergreen Terrace")
+                .postcode("W1 1NA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isFalse();
+    }
+
+    @Test
+    void shouldReturnTrueWhenAddressLine1FirstSixCharactersMatchesUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Simpson")
+                .addressLine1("742 Ev_DIFFERENT")
+                .postcode("AA11AA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isTrue();
+    }
+
+    @Test
+    void shouldReturnTrueWhenAddressLine1FirstSixCharactersDifferentCaseMatchesUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Simpson")
+                .addressLine1("742 ev_DIFFERENT")
+                .postcode("AA11AA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isTrue();
+    }
+
+    @Test
+    void shouldReturnFalseWhenAddressLine1UnderSixCharacterDoesNotMatchUCHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Simpson")
+                .addressLine1("742")
+                .postcode("AA11AA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isFalse();
+    }
+
+    @Test
+    void shouldReturnTrueWhenPostcodeMatchesWithSpacesLegacyHousehold() {
+        UCAdult adult = UCAdult.builder()
+                .surname("Simpson")
+                .addressLine1("742 Evergreen Terrace")
+                .postcode("AA1 1AA")
+                .build();
+        UCHousehold household = aUCHouseholdWithNoAdultsOrChildren().build().addAdult(adult);
+
+        Boolean response = householdVerifier.detailsMatch(household, aValidDWPPerson());
+
+        assertThat(response).isTrue();
+    }
+
+}
