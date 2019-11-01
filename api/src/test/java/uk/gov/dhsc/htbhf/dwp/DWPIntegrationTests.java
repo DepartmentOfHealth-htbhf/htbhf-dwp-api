@@ -12,17 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
-import uk.gov.dhsc.htbhf.dwp.repository.LegacyHouseholdRepository;
 import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus;
 import uk.gov.dhsc.htbhf.errorhandler.ErrorResponse;
@@ -38,11 +33,9 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidUCEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.EligibilityResponseTestDataFactory.aValidUCEligibilityResponseBuilder;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.LegacyHouseholdTestDataFactory.aLegacyHousehold;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.aPersonWithNino;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.buildDefaultPerson;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
@@ -61,9 +54,6 @@ public class DWPIntegrationTests {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private LegacyHouseholdRepository legacyHouseholdRepository;
-
-    @Autowired
     private UCHouseholdRepository ucHouseholdRepository;
 
     @Autowired
@@ -72,7 +62,6 @@ public class DWPIntegrationTests {
     @AfterEach
     void clearDatabase() {
         ucHouseholdRepository.deleteAll();
-        legacyHouseholdRepository.deleteAll();
         WireMock.reset();
     }
 
@@ -120,39 +109,6 @@ public class DWPIntegrationTests {
         //Then
         assertResponseCorrectWithStatusOnly(response, NO_MATCH);
         verifyNoCallToDWP();
-    }
-
-    @ParameterizedTest(name = "Should return eligible response for claimant [{0}] Simpson stored in Legacy household table")
-    @CsvSource({"Homer, EB123456C",
-            "Marge, EB123456D"})
-    void shouldReturnEligibleWhenMatchesLegacyHouseholdInDatabase(String parentName, String nino) {
-        //Given
-        legacyHouseholdRepository.save(aLegacyHousehold());
-        PersonDTO homer = buildDefaultPerson().firstName(parentName).nino(nino).build();
-        EligibilityRequest eligibilityRequest = anEligibilityRequestWithPerson(homer);
-
-        //When
-        ResponseEntity<EligibilityResponse> response = callService(eligibilityRequest);
-
-        //Then
-        assertResponseCorrectWithHouseholdDetails(response, SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER, ELIGIBLE);
-        verifyNoCallToDWP();
-    }
-
-    @Test
-    void shouldReturnNoMatchWhenMatchesNinoButNotNameInLegacyDatabase() {
-        //Given
-        legacyHouseholdRepository.save(aLegacyHousehold());
-        PersonDTO homer = buildDefaultPerson().lastName("noMatch").nino(HOMER_NINO).build();
-        EligibilityRequest eligibilityRequest = anEligibilityRequestWithPerson(homer);
-
-        //When
-        ResponseEntity<EligibilityResponse> response = callService(eligibilityRequest);
-
-        //Then
-        assertResponseCorrectWithStatusOnly(response, NO_MATCH);
-        verifyNoCallToDWP();
-        legacyHouseholdRepository.deleteAll();
     }
 
     @Test
