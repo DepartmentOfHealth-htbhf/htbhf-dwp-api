@@ -3,7 +3,6 @@ package uk.gov.dhsc.htbhf.dwp.factory;
 import org.springframework.stereotype.Component;
 import uk.gov.dhsc.htbhf.dwp.entity.Child;
 import uk.gov.dhsc.htbhf.dwp.entity.Household;
-import uk.gov.dhsc.htbhf.dwp.entity.legacy.LegacyHousehold;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
@@ -15,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Generates an {@link EligibilityResponse} for a given household ({@link LegacyHousehold} or {@link UCHousehold}) and {@link EligibilityStatus}.
+ * Generates an {@link EligibilityResponse} for a given household ({@link UCHousehold}) and {@link EligibilityStatus}.
  */
 @Component
 public class EligibilityResponseFactory {
