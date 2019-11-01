@@ -2,7 +2,6 @@ package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.springframework.stereotype.Component;
 import uk.gov.dhsc.htbhf.dwp.entity.Child;
-import uk.gov.dhsc.htbhf.dwp.entity.Household;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.EligibilityResponse;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 @Component
 public class EligibilityResponseFactory {
 
-    public EligibilityResponse createEligibilityResponse(Household household, EligibilityStatus eligibilityStatus) {
+    public EligibilityResponse createEligibilityResponse(UCHousehold household, EligibilityStatus eligibilityStatus) {
         return EligibilityResponse.builder()
                 .numberOfChildrenUnderOne(getNumberOfChildrenUnderOne(household.getChildren()))
                 .numberOfChildrenUnderFour(getNumberOfChildrenUnderFour(household.getChildren()))
@@ -29,7 +28,7 @@ public class EligibilityResponseFactory {
                 .build();
     }
 
-    private List<ChildDTO> getChildrenUnderFour(Household household) {
+    private List<ChildDTO> getChildrenUnderFour(UCHousehold household) {
         return household.getChildren().stream()
                 .filter(child -> isUnderFour(child.getDateOfBirth()))
                 .map(child -> ChildDTO.builder().dateOfBirth(child.getDateOfBirth()).build())
