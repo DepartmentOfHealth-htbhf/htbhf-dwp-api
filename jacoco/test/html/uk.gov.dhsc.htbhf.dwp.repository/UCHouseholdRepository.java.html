@@ -16,12 +16,12 @@ import java.util.stream.Stream;
 public interface UCHouseholdRepository extends CrudRepository&lt;UCHousehold, UUID&gt; {
 
     /**
-     * Return all households containing an adult with the given nino. These are ordered by fileImportNumber in descending order.
+     * Return all households containing an adult with the given nino.
      * @param nino The nino to check against
      * @return A stream containing all households found
      */
     @Query(&quot;SELECT household FROM UCHousehold household INNER JOIN FETCH household.adults adult &quot;
-            + &quot;WHERE adult.nino = :nino ORDER BY household.fileImportNumber DESC&quot;)
+            + &quot;WHERE adult.nino = :nino&quot;)
     Stream&lt;UCHousehold&gt; findAllHouseholdsByAdultWithNino(@Param(&quot;nino&quot;) String nino);
 
     /**
