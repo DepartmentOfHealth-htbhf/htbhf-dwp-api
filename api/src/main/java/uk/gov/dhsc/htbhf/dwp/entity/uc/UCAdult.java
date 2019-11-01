@@ -4,6 +4,7 @@ import lombok.*;
 import uk.gov.dhsc.htbhf.dwp.entity.BaseEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -34,5 +35,14 @@ public class UCAdult extends BaseEntity {
     @Size(max = 10)
     @Column(name = "address_postcode")
     private String postcode;
+
+    @Size(max = 256)
+    @Pattern(regexp = "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")
+    @Column(name = "email_address")
+    private String emailAddress;
+
+    @Pattern(regexp = "^\\+44\\d{9,10}$")
+    @Column(name = "mobile_phone_number")
+    private String mobilePhoneNumber;
 
 }
