@@ -2,9 +2,7 @@ package uk.gov.dhsc.htbhf.dwp.entity.uc;
 
 import lombok.*;
 import uk.gov.dhsc.htbhf.dwp.entity.BaseEntity;
-import uk.gov.dhsc.htbhf.dwp.entity.Household;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -20,32 +18,11 @@ import static java.util.Collections.unmodifiableSet;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @SuppressWarnings("PMD.DataClass")
-public class UCHousehold extends BaseEntity implements Household {
+public class UCHousehold extends BaseEntity {
 
     @Size(min = 1, max = 50)
     @Column(name = "household_identifier")
     private String householdIdentifier;
-
-    @Column(name = "file_import_number")
-    private Integer fileImportNumber;
-
-    @Column(name = "award_date")
-    private LocalDate awardDate;
-
-    @Column(name = "last_assessment_period_start")
-    private LocalDate lastAssessmentPeriodStart;
-
-    @Column(name = "last_assessment_period_end")
-    private LocalDate lastAssessmentPeriodEnd;
-
-    @Column(name = "household_member_pregnant")
-    private Boolean householdMemberPregnant;
-
-    @Column(name = "earnings_threshold_exceeded")
-    private Boolean earningsThresholdExceeded;
-
-    @Column(name = "no_of_children_under_four")
-    private Integer childrenUnderFour;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "household", orphanRemoval = true)
     @ToString.Exclude
@@ -76,7 +53,6 @@ public class UCHousehold extends BaseEntity implements Household {
         return this;
     }
 
-    @Override
     public Set<UCChild> getChildren() {
         return unmodifiableSet(children);
     }

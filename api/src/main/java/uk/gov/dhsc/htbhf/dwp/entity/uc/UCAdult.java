@@ -24,24 +24,12 @@ public class UCAdult extends BaseEntity {
     private String nino;
 
     @Size(max = 500)
-    @Column(name = "forename")
-    private String forename;
-
-    @Size(max = 500)
     @Column(name = "surname")
     private String surname;
 
     @Size(max = 500)
     @Column(name = "address_line_1")
     private String addressLine1;
-
-    @Size(max = 500)
-    @Column(name = "address_line_2")
-    private String addressLine2;
-
-    @Size(max = 500)
-    @Column(name = "address_town_or_city")
-    private String townOrCity;
 
     @Size(max = 10)
     @Column(name = "address_postcode")
