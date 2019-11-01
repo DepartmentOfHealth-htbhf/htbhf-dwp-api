@@ -13,48 +13,37 @@ public class UCHouseholdTestDataFactory {
     public static UCHousehold aUCHousehold() {
         return aUCHouseholdWithNoAdultsOrChildren()
                 .build()
-                .addAdult(aUCAdult(HOMER_FORENAME, SIMPSON_SURNAME, HOMER_NINO))
-                .addAdult(aUCAdult(MARGE_FORENAME, SIMPSON_SURNAME, MARGE_NINO))
-                .addChild(aUCChild(BART_FORENAME, SIMPSON_SURNAME, BART_DOB))
-                .addChild(aUCChild(LISA_FORENAME, SIMPSON_SURNAME, LISA_DOB))
-                .addChild(aUCChild(MAGGIE_FORENAME, SIMPSON_SURNAME, MAGGIE_DOB));
+                .addAdult(aUCAdult(SIMPSON_SURNAME, HOMER_NINO))
+                .addAdult(aUCAdult(SIMPSON_SURNAME, MARGE_NINO))
+                .addChild(aUCChild(BART_DOB))
+                .addChild(aUCChild(LISA_DOB))
+                .addChild(aUCChild(MAGGIE_DOB));
     }
 
     public static UCHousehold.UCHouseholdBuilder aUCHouseholdWithNoAdultsOrChildren() {
         return UCHousehold.builder()
-                .awardDate(LocalDate.now())
-                .fileImportNumber(1)
                 .householdIdentifier(SIMPSON_UC_HOUSEHOLD_IDENTIFIER)
-                .lastAssessmentPeriodStart(LocalDate.now().minusMonths(1))
-                .lastAssessmentPeriodEnd(LocalDate.now())
-                .earningsThresholdExceeded(false)
-                .householdMemberPregnant(true)
-                .childrenUnderFour(2)
                 .build()
                 .toBuilder();
     }
 
-    public static UCChild aUCChild(String forename, String surname, LocalDate dateOfBirth) {
+    public static UCChild aUCChild(LocalDate dateOfBirth) {
         return UCChild.builder()
-                .forename(forename)
-                .surname(surname)
                 .dateOfBirth(dateOfBirth)
                 .build();
     }
 
-    public static UCAdult aUCAdult(String forename, String surname, String nino) {
+    public static UCAdult aUCAdult(String surname, String nino) {
         return UCAdult.builder()
-                .forename(forename)
                 .surname(surname)
                 .nino(nino)
                 .addressLine1(SIMPSONS_ADDRESS_LINE_1)
-                .townOrCity(SIMPSONS_TOWN)
                 .postcode(SIMPSONS_POSTCODE)
                 .build();
     }
 
     public static UCAdult aUCAdultWithNino(String nino) {
-        return aUCAdult(HOMER_FORENAME, SIMPSON_SURNAME, nino);
+        return aUCAdult(SIMPSON_SURNAME, nino);
     }
 
 }

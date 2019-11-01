@@ -15,7 +15,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnTrueWhenPersonMatchesUCHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("AA11AA")
@@ -30,7 +29,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnFalseWhenSurnameDoesNotMatchUCHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Smith")
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("AA11AA")
@@ -45,7 +43,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnFalseWhenAddressLine1DoesNotMatchUCHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("745 Deciduous Road")
                 .postcode("AA11AA")
@@ -60,7 +57,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnFalseWhenPostcodeDoesNotMatchUCHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("W1 1NA")
@@ -75,7 +71,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnTrueWhenAddressLine1FirstSixCharactersMatchesUCHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 Ev_DIFFERENT")
                 .postcode("AA11AA")
@@ -90,7 +85,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnTrueWhenAddressLine1FirstSixCharactersDifferentCaseMatchesUCHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 ev_DIFFERENT")
                 .postcode("AA11AA")
@@ -105,7 +99,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnFalseWhenAddressLine1UnderSixCharacterDoesNotMatchUCHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742")
                 .postcode("AA11AA")
@@ -120,7 +113,6 @@ public class HouseholdVerifierUCHouseholdTest {
     @Test
     void shouldReturnTrueWhenPostcodeMatchesWithSpacesLegacyHousehold() {
         UCAdult adult = UCAdult.builder()
-                .forename("Lisa")
                 .surname("Simpson")
                 .addressLine1("742 Evergreen Terrace")
                 .postcode("AA1 1AA")
