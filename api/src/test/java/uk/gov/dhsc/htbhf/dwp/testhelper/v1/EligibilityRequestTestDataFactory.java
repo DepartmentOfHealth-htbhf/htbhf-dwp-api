@@ -6,10 +6,10 @@ import uk.gov.dhsc.htbhf.dwp.model.v1.PersonDTO;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.ELIGIBLE_END_DATE;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.ELIGIBLE_START_DATE;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.UC_MONTHLY_INCOME_THRESHOLD;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.PersonDTOTestDataFactory.aValidPerson;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.ELIGIBLE_END_DATE;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.ELIGIBLE_START_DATE;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.UC_MONTHLY_INCOME_THRESHOLD;
 
 public class EligibilityRequestTestDataFactory {
 

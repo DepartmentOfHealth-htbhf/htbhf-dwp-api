@@ -6,10 +6,10 @@ import uk.gov.dhsc.htbhf.dwp.model.v1.EligibilityResponse;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.LISA_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.MAGGIE_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DOB;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.NO_MATCH;
 

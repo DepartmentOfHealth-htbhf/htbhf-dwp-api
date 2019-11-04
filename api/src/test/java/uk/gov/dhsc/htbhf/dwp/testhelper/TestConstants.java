@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.testhelper.v1;
+package uk.gov.dhsc.htbhf.dwp.testhelper;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,7 +13,8 @@ public final class TestConstants {
     public static final String MAGGIE_FORENAME = "Maggie";
     public static final String BART_FORENAME = "BART";
     public static final String SIMPSON_SURNAME = "Simpson";
-    public static final LocalDate HOMER_DOB = LocalDate.parse("1985-12-31");
+    public static final String HOMER_DOB_STRING = "1985-12-31";
+    public static final LocalDate HOMER_DOB = LocalDate.parse(HOMER_DOB_STRING);
     public static final LocalDate MAGGIE_DOB = LocalDate.now().minusMonths(6);
     public static final LocalDate LISA_DOB = LocalDate.now().minusMonths(24);
     public static final LocalDate BART_DOB = LocalDate.now().minusMonths(48);

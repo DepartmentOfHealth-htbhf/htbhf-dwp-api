@@ -7,8 +7,8 @@ import uk.gov.dhsc.htbhf.dwp.model.v1.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.testhelper.v1.UCHouseholdTestDataFactory;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.LISA_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.MAGGIE_DOB;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DOB;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 
 public class EligibilityResponseFactoryTest {

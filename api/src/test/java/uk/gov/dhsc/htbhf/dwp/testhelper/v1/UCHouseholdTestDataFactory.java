@@ -6,7 +6,7 @@ import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
 
 import java.time.LocalDate;
 
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.*;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.*;
 
 public class UCHouseholdTestDataFactory {
 
