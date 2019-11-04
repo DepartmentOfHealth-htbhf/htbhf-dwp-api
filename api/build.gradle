@@ -1,7 +1,7 @@
 buildscript {
     ext {
         junitVersion = '5.3.2'
-        jacksonDataformatVersion = '2.9.9'
+        jacksonDataformatVersion = '2.9.10'
         springFoxVersion = '2.9.2'
     }
     dependencies {
