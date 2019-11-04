@@ -4,38 +4,38 @@
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/DWPIntegrationTests.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/controller/DWPEligibilityControllerTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/controller/v1/DWPEligibilityControllerTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/EligibilityRequestToDWPEligibilityRequestTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/v1/EligibilityRequestToDWPEligibilityRequestTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/EligibilityResponseFactoryTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/v1/EligibilityResponseFactoryTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/AddressDTOTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/v1/AddressDTOTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/EligibilityRequestTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/v1/EligibilityRequestTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/PersonDTOTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/v1/PersonDTOTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/UCHouseholdRepositoryTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/repository/v1/UCHouseholdRepositoryTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/EligibilityServiceTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/v1/EligibilityServiceTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/HouseholdVerifierUCHouseholdTest.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/service/v1/HouseholdVerifierUCHouseholdTest.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/AddressDTOTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/AddressDTOTestDataFactory.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPEligibilityRequestTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/DWPEligibilityRequestTestDataFactory.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/DWPPersonDTOTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/DWPPersonDTOTestDataFactory.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityRequestTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/EligibilityRequestTestDataFactory.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/EligibilityResponseTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/EligibilityResponseTestDataFactory.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/PersonDTOTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/PersonDTOTestDataFactory.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/TestConstants.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/TestConstants.java">
 </file>
-<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/UCHouseholdTestDataFactory.java">
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/testhelper/v1/UCHouseholdTestDataFactory.java">
 </file>
 </checkstyle>
