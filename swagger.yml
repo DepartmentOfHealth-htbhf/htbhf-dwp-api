@@ -16,6 +16,8 @@ basePath: "/"
 tags:
 - name: "dwp-eligibility-controller"
   description: "Endpoints for dealing with DWP Eligibility requests."
+- name: "dwp-eligibility-controller-v-2"
+  description: "Endpoints for dealing with DWP Identity and Eligibility requests."
 paths:
   /v1/dwp/eligibility:
     post:
@@ -41,6 +43,35 @@ paths:
             $ref: "#/definitions/EligibilityResponse"
         201:
           description: "Created"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        404:
+          description: "Not Found"
+      deprecated: false
+  /v2/dwp/eligibility:
+    get:
+      tags:
+        - "dwp-eligibility-controller-v-2"
+      summary: "Verify a person's identity and eligibility for benefits with DWP"
+      operationId: "getBenefitsUsingGET"
+      produces:
+        - "*/*"
+      parameters:
+        - name: "headers"
+          in: "header"
+          description: "headers"
+          required: true
+          items:
+            type: "object"
+            additionalProperties:
+              type: "string"
+      responses:
+        200:
+          description: "The person's identity status and eligibility for DWP Benefits"
+          schema:
+            $ref: "#/definitions/IdentityAndEligibilityResponse"
         401:
           description: "Unauthorized"
         403:
@@ -137,6 +168,89 @@ definitions:
         description: "The number of children under 1 that the person has"
     title: "EligibilityResponse"
     description: "The eligibility response from DWP"
+  IdentityAndEligibilityResponse:
+    type: "object"
+    properties:
+      addressLine1Match:
+        type: "string"
+        enum:
+          - "matched"
+          - "not_matched"
+          - "not_held"
+          - "not_supplied"
+          - "invalid_format"
+          - "not_set"
+      deathVerificationFlag:
+        type: "string"
+        enum:
+          - "n/a"
+          - "death_not_verified"
+          - "limited_supporting_documentation"
+          - "partial_supporting_documentation"
+          - "full_supporting_documentation"
+      dobOfChildrenUnder4:
+        type: "array"
+        items:
+          $ref: "#/definitions/LocalDate"
+      eligibilityStatus:
+        type: "string"
+        enum:
+          - "confirmed"
+          - "not_confirmed"
+          - "not_set"
+      emailAddressMatch:
+        type: "string"
+        enum:
+          - "matched"
+          - "not_matched"
+          - "not_held"
+          - "not_supplied"
+          - "invalid_format"
+          - "not_set"
+      householdIdentifier:
+        type: "string"
+      identityStatus:
+        type: "string"
+        enum:
+          - "matched"
+          - "not_matched"
+      mobilePhoneMatch:
+        type: "string"
+        enum:
+          - "matched"
+          - "not_matched"
+          - "not_held"
+          - "not_supplied"
+          - "invalid_format"
+          - "not_set"
+      postcodeMatch:
+        type: "string"
+        enum:
+          - "matched"
+          - "not_matched"
+          - "not_held"
+          - "not_supplied"
+          - "invalid_format"
+          - "not_set"
+      pregnantChildDOBMatch:
+        type: "string"
+        enum:
+          - "matched"
+          - "not_matched"
+          - "not_held"
+          - "not_supplied"
+          - "invalid_format"
+          - "not_set"
+      qualifyingBenefits:
+        type: "string"
+        enum:
+          - "universal_credit"
+          - "employment_and_support_allowance"
+          - "income_support"
+          - "jobseekers_allowance"
+          - "pension_credit"
+          - "not_set"
+    title: "IdentityAndEligibilityResponse"
   PersonDTO:
     type: "object"
     properties:

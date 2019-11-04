@@ -23,10 +23,10 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityResponseTestDataFactory.aNoMatchEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityResponseTestDataFactory.aValidUCEligibilityResponse;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.TestConstants.HOMER_NINO;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.UCHouseholdTestDataFactory.aUCHousehold;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
 
