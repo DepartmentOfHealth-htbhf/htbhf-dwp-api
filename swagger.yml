@@ -53,20 +53,62 @@ paths:
   /v2/dwp/eligibility:
     get:
       tags:
-        - "dwp-eligibility-controller-v-2"
+      - "dwp-eligibility-controller-v-2"
       summary: "Verify a person's identity and eligibility for benefits with DWP"
       operationId: "getBenefitsUsingGET"
       produces:
-        - "*/*"
+      - "*/*"
       parameters:
-        - name: "headers"
-          in: "header"
-          description: "headers"
-          required: true
-          items:
-            type: "object"
-            additionalProperties:
-              type: "string"
+      - name: "eligibilityEndDate"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date"
+      - name: "person.addressLine1"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "person.dateOfBirth"
+        in: "query"
+        required: true
+        type: "string"
+        format: "date"
+      - name: "person.emailAddress"
+        in: "query"
+        required: false
+        type: "string"
+        pattern: "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)"
+      - name: "person.mobilePhoneNumber"
+        in: "query"
+        required: false
+        type: "string"
+        pattern: "^\\+44\\d{9,10}$"
+      - name: "person.nino"
+        in: "query"
+        required: true
+        type: "string"
+        pattern: "^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z](\\\
+          d{6})[A-D]$"
+      - name: "person.postcode"
+        in: "query"
+        required: true
+        type: "string"
+        pattern: "^(GIR ?0AA|[A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]([0-9ABEHMNPRV-Y])?)|[0-9][A-HJKPS-UW])\
+          \ ?[0-9][ABD-HJLNP-UW-Z]{2})$"
+      - name: "person.pregnantDependentDob"
+        in: "query"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "person.surname"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "ucMonthlyIncomeThresholdInPence"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
       responses:
         200:
           description: "The person's identity status and eligibility for DWP Benefits"
@@ -174,20 +216,20 @@ definitions:
       addressLine1Match:
         type: "string"
         enum:
-          - "matched"
-          - "not_matched"
-          - "not_held"
-          - "not_supplied"
-          - "invalid_format"
-          - "not_set"
+        - "matched"
+        - "not_matched"
+        - "not_held"
+        - "not_supplied"
+        - "invalid_format"
+        - "not_set"
       deathVerificationFlag:
         type: "string"
         enum:
-          - "n/a"
-          - "death_not_verified"
-          - "limited_supporting_documentation"
-          - "partial_supporting_documentation"
-          - "full_supporting_documentation"
+        - "n/a"
+        - "death_not_verified"
+        - "limited_supporting_documentation"
+        - "partial_supporting_documentation"
+        - "full_supporting_documentation"
       dobOfChildrenUnder4:
         type: "array"
         items:
@@ -195,61 +237,61 @@ definitions:
       eligibilityStatus:
         type: "string"
         enum:
-          - "confirmed"
-          - "not_confirmed"
-          - "not_set"
+        - "confirmed"
+        - "not_confirmed"
+        - "not_set"
       emailAddressMatch:
         type: "string"
         enum:
-          - "matched"
-          - "not_matched"
-          - "not_held"
-          - "not_supplied"
-          - "invalid_format"
-          - "not_set"
+        - "matched"
+        - "not_matched"
+        - "not_held"
+        - "not_supplied"
+        - "invalid_format"
+        - "not_set"
       householdIdentifier:
         type: "string"
       identityStatus:
         type: "string"
         enum:
-          - "matched"
-          - "not_matched"
+        - "matched"
+        - "not_matched"
       mobilePhoneMatch:
         type: "string"
         enum:
-          - "matched"
-          - "not_matched"
-          - "not_held"
-          - "not_supplied"
-          - "invalid_format"
-          - "not_set"
+        - "matched"
+        - "not_matched"
+        - "not_held"
+        - "not_supplied"
+        - "invalid_format"
+        - "not_set"
       postcodeMatch:
         type: "string"
         enum:
-          - "matched"
-          - "not_matched"
-          - "not_held"
-          - "not_supplied"
-          - "invalid_format"
-          - "not_set"
+        - "matched"
+        - "not_matched"
+        - "not_held"
+        - "not_supplied"
+        - "invalid_format"
+        - "not_set"
       pregnantChildDOBMatch:
         type: "string"
         enum:
-          - "matched"
-          - "not_matched"
-          - "not_held"
-          - "not_supplied"
-          - "invalid_format"
-          - "not_set"
+        - "matched"
+        - "not_matched"
+        - "not_held"
+        - "not_supplied"
+        - "invalid_format"
+        - "not_set"
       qualifyingBenefits:
         type: "string"
         enum:
-          - "universal_credit"
-          - "employment_and_support_allowance"
-          - "income_support"
-          - "jobseekers_allowance"
-          - "pension_credit"
-          - "not_set"
+        - "universal_credit"
+        - "employment_and_support_allowance"
+        - "income_support"
+        - "jobseekers_allowance"
+        - "pension_credit"
+        - "not_set"
     title: "IdentityAndEligibilityResponse"
   PersonDTO:
     type: "object"

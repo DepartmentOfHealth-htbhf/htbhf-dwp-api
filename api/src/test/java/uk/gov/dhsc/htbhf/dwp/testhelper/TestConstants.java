@@ -2,6 +2,7 @@ package uk.gov.dhsc.htbhf.dwp.testhelper;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public final class TestConstants {
 
@@ -17,6 +18,7 @@ public final class TestConstants {
     public static final String HOMER_DOB_STRING = "1985-12-31";
     public static final LocalDate HOMER_DOB = LocalDate.parse(HOMER_DOB_STRING);
     public static final LocalDate MAGGIE_DOB = LocalDate.now().minusMonths(6);
+    public static final String MAGGIE_DOB_STRING = MAGGIE_DOB.format(DateTimeFormatter.ISO_LOCAL_DATE);
     public static final LocalDate LISA_DOB = LocalDate.now().minusMonths(24);
     public static final LocalDate BART_DOB = LocalDate.now().minusMonths(48);
     public static final String HOMER_EMAIL = "homer@simpson.com";
