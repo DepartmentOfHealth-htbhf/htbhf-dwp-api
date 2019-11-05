@@ -3,6 +3,7 @@ package uk.gov.dhsc.htbhf.dwp.entity.v1.uc;
 import lombok.*;
 import uk.gov.dhsc.htbhf.dwp.entity.v1.BaseEntity;
 
+import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -44,5 +45,8 @@ public class UCAdult extends BaseEntity {
     @Pattern(regexp = "^\\+44\\d{9,10}$")
     @Column(name = "mobile_phone_number")
     private String mobilePhoneNumber;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
 
 }

@@ -1,5 +1,6 @@
 package uk.gov.dhsc.htbhf.dwp;
 
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import static uk.gov.dhsc.htbhf.swagger.SwaggerGenerationUtil.assertSwaggerDocum
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = DWPApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureEmbeddedDatabase
 public class DWPApplicationTests {
 
     @LocalServerPort

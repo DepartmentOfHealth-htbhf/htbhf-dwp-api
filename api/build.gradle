@@ -1,7 +1,7 @@
 buildscript {
     ext {
         junitVersion = '5.3.2'
-        jacksonDataformatVersion = '2.9.10'
+        jacksonDataformatVersion = '2.10.0'
         springFoxVersion = '2.9.2'
     }
     dependencies {
@@ -16,7 +16,7 @@ plugins {
     id "com.github.spotbugs" version "2.0.0"
     id 'pmd'
     id 'checkstyle'
-    id "org.springframework.boot" version "2.1.9.RELEASE"
+    id "org.springframework.boot" version "2.2.0.RELEASE"
 }
 
 apply plugin: 'java'
@@ -71,7 +71,7 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
     testImplementation "org.junit.vintage:junit-vintage-engine:${junitVersion}"
     testImplementation "org.assertj:assertj-core:3.11.1"
-    testImplementation "com.h2database:h2:1.4.197"
+    testImplementation "io.zonky.test:embedded-database-spring-test:1.4.1"
     testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonDataformatVersion}"
     testImplementation "org.springframework.cloud:spring-cloud-starter-contract-stub-runner:2.1.1.RELEASE"
     testImplementation "uk.gov.dhsc.htbhf:htbhf-common-test:latest.release"
