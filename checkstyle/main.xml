@@ -8,7 +8,13 @@
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/controller/v2/DWPEligibilityControllerV2.java">
 </file>
+<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/controller/v2/DwpEligibilityRequestResolver.java">
+</file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/converter/v1/EligibilityRequestToDWPEligibilityRequestConverter.java">
+</file>
+<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/converter/v2/ConverterUtils.java">
+</file>
+<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/converter/v2/RequestHeaderToDWPEligibilityRequestV2Converter.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/v1/BaseEntity.java">
 </file>

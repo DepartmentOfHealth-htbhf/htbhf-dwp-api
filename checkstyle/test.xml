@@ -10,6 +10,10 @@
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/v1/EligibilityRequestToDWPEligibilityRequestTest.java">
 </file>
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/v2/ConverterUtilsTest.java">
+</file>
+<file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/converter/v2/RequestHeaderToDWPEligibilityRequestV2ConverterTest.java">
+</file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/factory/v1/EligibilityResponseFactoryTest.java">
 </file>
 <file name="/home/circleci/project/api/src/test/java/uk/gov/dhsc/htbhf/dwp/model/v1/AddressDTOTest.java">
