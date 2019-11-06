@@ -24,11 +24,10 @@ public final class TestConstants {
     public static final LocalDate MAGGIE_DOB = LocalDate.now().minusMonths(6);
     public static final String MAGGIE_DOB_STRING = MAGGIE_DOB.format(DateTimeFormatter.ISO_LOCAL_DATE);
     public static final LocalDate LISA_DOB = LocalDate.now().minusMonths(24);
-    public static final LocalDate BART_DOB = LocalDate.now().minusMonths(47);
+    public static final LocalDate BART_DOB = LocalDate.now().minusMonths(48);
     public static final LocalDate FIVE_YEAR_OLD = LocalDate.now().minusYears(5);
-    public static final LocalDate FOUR_YEAR_OLD = LocalDate.now().minusYears(4);
     public static final LocalDate TWENTY_YEAR_OLD = LocalDate.now().minusYears(20);
-    public static final List<LocalDate> ALL_CHILDREN_DOBS = List.of(BART_DOB, MAGGIE_DOB, LISA_DOB);
+    public static final List<LocalDate> MAGGIE_AND_LISA_DOBS = List.of(MAGGIE_DOB, LISA_DOB);
     public static final String HOMER_EMAIL = "homer@simpson.com";
     public static final String MARGE_EMAIL = "marge@simpson.com";
     public static final String HOMER_MOBILE = "+447700900000";

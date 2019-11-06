@@ -1,6 +1,5 @@
 package uk.gov.dhsc.htbhf.dwp.factory.v2;
 
-import org.flywaydb.core.internal.util.StringUtils;
 import org.springframework.stereotype.Component;
 import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCChild;
@@ -9,10 +8,13 @@ import uk.gov.dhsc.htbhf.dwp.model.v2.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
+import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.areEqualIgnoringWhitespace;
+import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.determineVerificationOutcome;
+import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.firstSixCharacterMatch;
+import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.matchingAdult;
 
 @Component
 public class IdentityAndEligibilityResponseFactory {
@@ -22,16 +24,20 @@ public class IdentityAndEligibilityResponseFactory {
     /**
      * Builds a response based on the following criteria.
      * <ul>
-     * <li> Identity status is MATCHED if NINO, Surname and DOB match the request</li>
-     * <li> Eligibility status is ELIGIBLE if the Id status is MATCHED, else INELIGIBLE.</li>
-     * <li> Address Line 1 Match is MATCHED if the first 6 characters match, else NOT_MATCHED</li>
-     * <li> Postcode match is MATCHED if the postcode matches ignoring whitespace and casing</li>
-     * <li> Mobile match is MATCHED if the mobile matches exactly, NOT_SUPPLIED if blank else NOT_MATCHED</li>
-     * <li> Email match is MATCHED if the email matches ignoring case, NOT_SUPPLIED if blank else NOT_MATCHED</li>
+     * <li> Identity status is MATCHED if NINO, Surname and DOB match the request, otherwise NOT_MATCHED</li>
+     * <li> If the Identity Status is NOT_MATCH, then all other response enum values are NOT_SET.</li>
+     * <li> Eligibility status is ELIGIBLE if the Id status is MATCHED, else NOT_SET.</li>
+     * <li> Address Line 1 Match is MATCHED if the first 6 characters match (ignoring case), else NOT_MATCHED</li>
+     * <li> Postcode match is MATCHED if the postcode matches ignoring whitespace and casing, else NOT_MATCHED</li>
+     * <li> Mobile match is MATCHED if the mobile matches exactly, NOT_SUPPLIED if blank else NOT_MATCHED. If there is no
+     * value in the database, then this is NOT_HELD</li>
+     * <li> Email match is MATCHED if the email matches ignoring case, NOT_SUPPLIED if blank else NOT_MATCHED. If there is no
+     * value in the database, then this is NOT_HELD</li>
      * <li> Qualifying Benefits are UNIVERSAL_CREDIT if the id is matched (including the address)</li>
      * <li> Household identifier will always be blank.</li>
      * <li> Pregnant dependant DOB will be NOT_SUPPLIED if not provided in the request, else NOT_SET</li>
-     * <li> The dob of children under 4 will simply be returned from the db if the id status is MATCHED</li>
+     * <li> The dob of children under 4 will simply be returned from the db if the id status is MATCHED. Any dates
+     * of birth which have become over 4 in the database are filtered out.</li>
      * </ul>
      *
      * @param household household to check
@@ -62,7 +68,14 @@ public class IdentityAndEligibilityResponseFactory {
         setEmailVerificationOutcome(matchingAdult, person, builder);
         setMobileVerificationOutcome(matchingAdult, person, builder);
         setDobOfChildrenUnder4(household, builder);
+        setPregnantDependantDob(person, builder);
         return builder.build();
+    }
+
+    private void setPregnantDependantDob(PersonDTOV2 person, IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+        if (person.getPregnantDependentDob() == null) {
+            builder.pregnantChildDOBMatch(VerificationOutcome.NOT_SUPPLIED);
+        }
     }
 
     //Make sure we only include those children which are under 4
@@ -80,7 +93,7 @@ public class IdentityAndEligibilityResponseFactory {
         VerificationOutcome mobileVerificationOutcome = determineVerificationOutcome(
                 matchingAdult.getMobilePhoneNumber(),
                 person.getMobilePhoneNumber(),
-                this::areEqual);
+                IdentityVerificationUtils::areEqual);
         builder.mobilePhoneMatch(mobileVerificationOutcome);
     }
 
@@ -89,21 +102,8 @@ public class IdentityAndEligibilityResponseFactory {
         VerificationOutcome emailVerificationOutcome = determineVerificationOutcome(
                 matchingAdult.getEmailAddress(),
                 person.getEmailAddress(),
-                this::areEqual);
+                IdentityVerificationUtils::areEqual);
         builder.emailAddressMatch(emailVerificationOutcome);
-    }
-
-    private VerificationOutcome determineVerificationOutcome(String ucSeededValue, String requestValue, BiPredicate<String, String> verificationCheck) {
-        if (ucSeededValue == null) {
-            return VerificationOutcome.NOT_HELD;
-        }
-        if (requestValue == null) {
-            return VerificationOutcome.NOT_SUPPLIED;
-        }
-        if (verificationCheck.test(ucSeededValue, requestValue)) {
-            return VerificationOutcome.MATCHED;
-        }
-        return VerificationOutcome.NOT_MATCHED;
     }
 
     private VerificationOutcome determinePostcodeVerificationOutcome(UCAdult matchingAdult, PersonDTOV2 person,
@@ -122,15 +122,6 @@ public class IdentityAndEligibilityResponseFactory {
         return addressLine1VerificationOutcome;
     }
 
-    //TODO MRS 05/11/2019: Some of these methods should be refactored out into a IdentityVerifier class or similar so they can be easily tested
-    private Boolean areEqualIgnoringWhitespace(String s1, String s2) {
-        return areEqual(s1.replaceAll("\\s+", ""), s2.replaceAll("\\s+", ""));
-    }
-
-    private boolean firstSixCharacterMatch(String s1, String s2) {
-        return areEqual(StringUtils.left(s1, 6), StringUtils.left(s2, 6));
-    }
-
     private EligibilityOutcome determineEligibilityStatus(IdentityOutcome identityStatus,
                                                           IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         EligibilityOutcome eligibilityStatus = (identityStatus == IdentityOutcome.NOT_MATCHED)
@@ -146,23 +137,6 @@ public class IdentityAndEligibilityResponseFactory {
                 ? IdentityOutcome.MATCHED : IdentityOutcome.NOT_MATCHED;
         builder.identityStatus(identityStatus);
         return identityStatus;
-    }
-
-    private boolean matchingAdult(UCAdult adult, PersonDTOV2 person) {
-        return areEqual(adult.getNino(), person.getNino())
-                && areEqual(adult.getSurname(), person.getSurname())
-                && dateOfBirthMatches(adult, person);
-    }
-
-    private boolean areEqual(String s1, String s2) {
-        return s1.trim().equalsIgnoreCase(s2.trim());
-    }
-
-    private boolean dateOfBirthMatches(UCAdult ucAdult, PersonDTOV2 person) {
-        if (ucAdult.getDateOfBirth() == null) {
-            return true;
-        }
-        return ucAdult.getDateOfBirth().equals(person.getDateOfBirth());
     }
 
     private IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder setupDefaultBuilder() {

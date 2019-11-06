@@ -23,7 +23,14 @@ class IdentityAndEligibilityResponseFactoryTest {
 
     @Test
     void shouldReturnEverythingMatchedResponse() {
-        runTest(aUCHousehold(), aValidPersonDTOV2(), anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(ALL_CHILDREN_DOBS));
+        runTest(aUCHousehold(), aValidPersonDTOV2(), anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(MAGGIE_AND_LISA_DOBS));
+    }
+
+    @Test
+    void shouldReturnEverythingMatchedWithpregnantChildDOBMatchNotSuppliedResponse() {
+        PersonDTOV2 person = aPersonDTOV2WithPregnantDependantDob(null);
+        runTest(aUCHousehold(), person, anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SUPPLIED,
+                MAGGIE_AND_LISA_DOBS));
     }
 
     @Test
@@ -39,7 +46,7 @@ class IdentityAndEligibilityResponseFactoryTest {
     @Test
     void shouldReturnIdentityStatusMatchedResponseForNoDateOfBirthInDatabase() {
         runTest(aUCHouseholdWithAdultDateOfBirth(null), aPersonDTOV2WithDateOfBirth(TWENTY_YEAR_OLD),
-                anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(ALL_CHILDREN_DOBS));
+                anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(MAGGIE_AND_LISA_DOBS));
     }
 
     @Test
@@ -60,35 +67,35 @@ class IdentityAndEligibilityResponseFactoryTest {
     @Test
     void shouldReturnEmailNotMatchedResponse() {
         IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithMatches(
-                VerificationOutcome.MATCHED, VerificationOutcome.NOT_MATCHED, ALL_CHILDREN_DOBS);
+                VerificationOutcome.MATCHED, VerificationOutcome.NOT_MATCHED, MAGGIE_AND_LISA_DOBS);
         runTest(aUCHousehold(), aPersonDTOV2WithEmailAddress("a@b.com"), expectedResponse);
     }
 
     @Test
     void shouldReturnMobileNotMatchedResponse() {
         IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithMatches(
-                VerificationOutcome.NOT_MATCHED, VerificationOutcome.MATCHED, ALL_CHILDREN_DOBS);
+                VerificationOutcome.NOT_MATCHED, VerificationOutcome.MATCHED, MAGGIE_AND_LISA_DOBS);
         runTest(aUCHousehold(), aPersonDTOV2WithMobilePhoneNumber("+447999123123"), expectedResponse);
     }
 
     @Test
     void shouldReturnMobileNotSuppliedResponse() {
         IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithMatches(
-                VerificationOutcome.NOT_SUPPLIED, VerificationOutcome.MATCHED, ALL_CHILDREN_DOBS);
+                VerificationOutcome.NOT_SUPPLIED, VerificationOutcome.MATCHED, MAGGIE_AND_LISA_DOBS);
         runTest(aUCHousehold(), aPersonDTOV2WithMobilePhoneNumber(null), expectedResponse);
     }
 
     @Test
     void shouldReturnEmailNotSuppliedResponse() {
         IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithMatches(
-                VerificationOutcome.MATCHED, VerificationOutcome.NOT_SUPPLIED, ALL_CHILDREN_DOBS);
+                VerificationOutcome.MATCHED, VerificationOutcome.NOT_SUPPLIED, MAGGIE_AND_LISA_DOBS);
         runTest(aUCHousehold(), aPersonDTOV2WithEmailAddress(null), expectedResponse);
     }
 
     @Test
     void shouldReturnMobileNotHeldResponse() {
         IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithMatches(
-                VerificationOutcome.NOT_HELD, VerificationOutcome.MATCHED, ALL_CHILDREN_DOBS);
+                VerificationOutcome.NOT_HELD, VerificationOutcome.MATCHED, MAGGIE_AND_LISA_DOBS);
         UCHousehold household = aUCHouseholdWithAdultMobileAndEmail(null, HOMER_EMAIL);
         runTest(household, aValidPersonDTOV2(), expectedResponse);
     }
@@ -96,20 +103,23 @@ class IdentityAndEligibilityResponseFactoryTest {
     @Test
     void shouldReturnEmailNotHeldResponse() {
         IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithMatches(
-                VerificationOutcome.MATCHED, VerificationOutcome.NOT_HELD, ALL_CHILDREN_DOBS);
+                VerificationOutcome.MATCHED, VerificationOutcome.NOT_HELD, MAGGIE_AND_LISA_DOBS);
         UCHousehold household = aUCHouseholdWithAdultMobileAndEmail(HOMER_MOBILE, null);
         runTest(household, aValidPersonDTOV2(), expectedResponse);
     }
 
     @Test
     void shouldReturnMatchedResponseFilteringOutChildren4OrOver() {
-        List<LocalDate> childrenDobsWithout5YearOld = List.of(BART_DOB, LISA_DOB);
+        LocalDate justUnderFourYearOld = LocalDate.now().minusYears(4).plusDays(1);
+        //Note that Bart will be excluded because he is exactly 4 years old
+        List<LocalDate> childrenDobsWithout5YearOld = List.of(LISA_DOB, justUnderFourYearOld);
         IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(childrenDobsWithout5YearOld);
 
-        UCHousehold household = aUCHouseholdWithChildren(aUCChild(BART_DOB))
-                .addChild(aUCChild(LISA_DOB))
-                .addChild(aUCChild(FOUR_YEAR_OLD))
-                .addChild(aUCChild(FIVE_YEAR_OLD));
+        UCHousehold household = aUCHouseholdWithChildren(
+                aUCChild(BART_DOB),
+                aUCChild(LISA_DOB),
+                aUCChild(justUnderFourYearOld),
+                aUCChild(FIVE_YEAR_OLD));
         runTest(household, aValidPersonDTOV2(), expectedResponse);
     }
 

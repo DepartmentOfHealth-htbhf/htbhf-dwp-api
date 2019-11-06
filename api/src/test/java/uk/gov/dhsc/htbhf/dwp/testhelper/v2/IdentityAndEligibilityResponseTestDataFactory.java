@@ -93,6 +93,11 @@ public class IdentityAndEligibilityResponseTestDataFactory {
     }
 
     public static IdentityAndEligibilityResponse anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(List<LocalDate> childrenDobs) {
+        return anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET, childrenDobs);
+    }
+
+    public static IdentityAndEligibilityResponse anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome pregnantChildDOBMatch,
+                                                                                                               List<LocalDate> childrenDobs) {
         return IdentityAndEligibilityResponse.builder()
                 .identityStatus(IdentityOutcome.MATCHED)
                 .eligibilityStatus(EligibilityOutcome.CONFIRMED)
@@ -101,7 +106,7 @@ public class IdentityAndEligibilityResponseTestDataFactory {
                 .emailAddressMatch(VerificationOutcome.MATCHED)
                 .addressLine1Match(VerificationOutcome.MATCHED)
                 .postcodeMatch(VerificationOutcome.MATCHED)
-                .pregnantChildDOBMatch(VerificationOutcome.NOT_SET)
+                .pregnantChildDOBMatch(pregnantChildDOBMatch)
                 .householdIdentifier(NO_HOUSEHOLD_IDENTIFIER_PROVIDED)
                 .deathVerificationFlag(DeathVerificationFlag.N_A)
                 .dobOfChildrenUnder4(childrenDobs)
