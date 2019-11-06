@@ -1,5 +1,6 @@
 package uk.gov.dhsc.htbhf.dwp.repository.v1;
 
+import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.UCHouseholdTestDataFactory.aUCHousehold;
 
 @SpringBootTest
+@AutoConfigureEmbeddedDatabase
 class UCHouseholdRepositoryTest {
 
     @Autowired
