@@ -11,7 +11,7 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.*;
 public class HttpRequestTestDataFactory {
 
     public static HttpEntity<Void> aValidEligibilityHttpEntity() {
-        return buildHttpEntityWithNino(VALID_NINO_V2);
+        return buildHttpEntityWithNino(HOMER_NINO_V2);
     }
 
     public static HttpEntity<Void> anInvalidEligibilityHttpEntity() {

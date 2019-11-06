@@ -31,7 +31,7 @@ class RequestHeaderToDWPEligibilityRequestV2ConverterTest {
         lenient().when(nativeWebRequest.getHeader("eligibilityEndDate")).thenReturn(eligibilityDateString);
         lenient().when(nativeWebRequest.getHeader("ucMonthlyIncomeThreshold")).thenReturn(String.valueOf(UC_MONTHLY_INCOME_THRESHOLD_IN_PENCE));
         lenient().when(nativeWebRequest.getHeader("surname")).thenReturn(SIMPSON_SURNAME);
-        lenient().when(nativeWebRequest.getHeader("nino")).thenReturn(VALID_NINO_V2);
+        lenient().when(nativeWebRequest.getHeader("nino")).thenReturn(HOMER_NINO_V2);
         lenient().when(nativeWebRequest.getHeader("dateOfBirth")).thenReturn(HOMER_DOB_STRING);
         lenient().when(nativeWebRequest.getHeader("addressLine1")).thenReturn(SIMPSONS_ADDRESS_LINE_1);
         lenient().when(nativeWebRequest.getHeader("postcode")).thenReturn(SIMPSONS_POSTCODE);
