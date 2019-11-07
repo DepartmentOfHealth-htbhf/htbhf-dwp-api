@@ -33,7 +33,7 @@ public class IdentityAndEligibilityResponseFactory {
         IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder = setupDefaultBuilder();
         PersonDTOV2 person = request.getPerson();
         IdentityOutcome identityStatus = determineIdentityStatus(household, person, builder);
-        EligibilityOutcome eligibilityStatus = determineEligibilityStatus(identityStatus, builder);
+        EligibilityOutcome eligibilityStatus = determineAndSetEligibilityStatus(identityStatus, household, builder);
 
         if (IdentityOutcome.NOT_MATCHED == identityStatus || EligibilityOutcome.NOT_CONFIRMED == eligibilityStatus) {
             return builder.build();
@@ -106,13 +106,21 @@ public class IdentityAndEligibilityResponseFactory {
         return addressLine1VerificationOutcome;
     }
 
-    private EligibilityOutcome determineEligibilityStatus(IdentityOutcome identityStatus,
-                                                          IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-        EligibilityOutcome eligibilityStatus = (identityStatus == IdentityOutcome.NOT_MATCHED)
-                ? EligibilityOutcome.NOT_SET : EligibilityOutcome.CONFIRMED;
-        //TODO MRS 06/11/2019: Add incomeThresholdExceeded back on household and test here for eligibility - if true, then return NOT_CONFIRMED. Separate PR.
-        builder.eligibilityStatus(eligibilityStatus);
-        return eligibilityStatus;
+    private EligibilityOutcome determineAndSetEligibilityStatus(IdentityOutcome identityStatus,
+                                                                UCHousehold household,
+                                                                IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+        EligibilityOutcome outcome = determineEligibilityOutcome(identityStatus, household);
+        builder.eligibilityStatus(outcome);
+        return outcome;
+    }
+
+    private EligibilityOutcome determineEligibilityOutcome(IdentityOutcome identityStatus, UCHousehold household) {
+        if (identityStatus == IdentityOutcome.NOT_MATCHED) {
+            return EligibilityOutcome.NOT_SET;
+        } else if (household.isEarningsThresholdExceeded()) {
+            return EligibilityOutcome.NOT_CONFIRMED;
+        }
+        return EligibilityOutcome.CONFIRMED;
     }
 
     private IdentityOutcome determineIdentityStatus(UCHousehold household, PersonDTOV2 person,
