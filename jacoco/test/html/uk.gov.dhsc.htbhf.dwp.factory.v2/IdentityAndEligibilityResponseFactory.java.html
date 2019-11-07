@@ -26,7 +26,7 @@ import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.matchin
      * &lt;ul&gt;
      * &lt;li&gt; Identity status is MATCHED if NINO, Surname and DOB match the request, otherwise NOT_MATCHED&lt;/li&gt;
      * &lt;li&gt; If the Identity Status is NOT_MATCH, then all other response enum values are NOT_SET.&lt;/li&gt;
-     * &lt;li&gt; Eligibility status is ELIGIBLE if the Id status is MATCHED, else NOT_SET.&lt;/li&gt;
+     * &lt;li&gt; Eligibility status is CONFIRMED if the Id status is MATCHED, NOT_CONFIRMED if the earnings threshold for the household is true, else NOT_SET.&lt;/li&gt;
      * &lt;li&gt; Address Line 1 Match is MATCHED if the first 6 characters match (ignoring case), else NOT_MATCHED&lt;/li&gt;
      * &lt;li&gt; Postcode match is MATCHED if the postcode matches ignoring whitespace and casing, else NOT_MATCHED&lt;/li&gt;
      * &lt;li&gt; Mobile match is MATCHED if the mobile matches exactly, NOT_SUPPLIED if blank else NOT_MATCHED. If there is no
@@ -49,9 +49,9 @@ import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.matchin
 <span class="fc" id="L49">        IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder = setupDefaultBuilder();</span>
 <span class="fc" id="L50">        PersonDTOV2 person = request.getPerson();</span>
 <span class="fc" id="L51">        IdentityOutcome identityStatus = determineIdentityStatus(household, person, builder);</span>
-<span class="fc" id="L52">        EligibilityOutcome eligibilityStatus = determineEligibilityStatus(identityStatus, builder);</span>
+<span class="fc" id="L52">        EligibilityOutcome eligibilityStatus = determineAndSetEligibilityStatus(identityStatus, household, builder);</span>
 
-<span class="pc bpc" id="L54" title="1 of 4 branches missed.">        if (IdentityOutcome.NOT_MATCHED == identityStatus || EligibilityOutcome.NOT_CONFIRMED == eligibilityStatus) {</span>
+<span class="fc bfc" id="L54" title="All 4 branches covered.">        if (IdentityOutcome.NOT_MATCHED == identityStatus || EligibilityOutcome.NOT_CONFIRMED == eligibilityStatus) {</span>
 <span class="fc" id="L55">            return builder.build();</span>
         }
 
@@ -122,36 +122,44 @@ import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.matchin
 <span class="fc" id="L122">        return addressLine1VerificationOutcome;</span>
     }
 
-    private EligibilityOutcome determineEligibilityStatus(IdentityOutcome identityStatus,
-                                                          IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc bfc" id="L127" title="All 2 branches covered.">        EligibilityOutcome eligibilityStatus = (identityStatus == IdentityOutcome.NOT_MATCHED)</span>
-<span class="fc" id="L128">                ? EligibilityOutcome.NOT_SET : EligibilityOutcome.CONFIRMED;</span>
-        //TODO MRS 06/11/2019: Add incomeThresholdExceeded back on household and test here for eligibility - if true, then return NOT_CONFIRMED. Separate PR.
-<span class="fc" id="L130">        builder.eligibilityStatus(eligibilityStatus);</span>
-<span class="fc" id="L131">        return eligibilityStatus;</span>
+    private EligibilityOutcome determineAndSetEligibilityStatus(IdentityOutcome identityStatus,
+                                                                UCHousehold household,
+                                                                IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+<span class="fc" id="L128">        EligibilityOutcome outcome = determineEligibilityOutcome(identityStatus, household);</span>
+<span class="fc" id="L129">        builder.eligibilityStatus(outcome);</span>
+<span class="fc" id="L130">        return outcome;</span>
+    }
+
+    private EligibilityOutcome determineEligibilityOutcome(IdentityOutcome identityStatus, UCHousehold household) {
+<span class="fc bfc" id="L134" title="All 2 branches covered.">        if (identityStatus == IdentityOutcome.NOT_MATCHED) {</span>
+<span class="fc" id="L135">            return EligibilityOutcome.NOT_SET;</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        } else if (household.isEarningsThresholdExceeded()) {</span>
+<span class="fc" id="L137">            return EligibilityOutcome.NOT_CONFIRMED;</span>
+        }
+<span class="fc" id="L139">        return EligibilityOutcome.CONFIRMED;</span>
     }
 
     private IdentityOutcome determineIdentityStatus(UCHousehold household, PersonDTOV2 person,
                                                     IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc bfc" id="L136" title="All 2 branches covered.">        IdentityOutcome identityStatus = household.getAdults().stream().anyMatch(adult -&gt; matchingAdult(adult, person))</span>
-<span class="fc" id="L137">                ? IdentityOutcome.MATCHED : IdentityOutcome.NOT_MATCHED;</span>
-<span class="fc" id="L138">        builder.identityStatus(identityStatus);</span>
-<span class="fc" id="L139">        return identityStatus;</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        IdentityOutcome identityStatus = household.getAdults().stream().anyMatch(adult -&gt; matchingAdult(adult, person))</span>
+<span class="fc" id="L145">                ? IdentityOutcome.MATCHED : IdentityOutcome.NOT_MATCHED;</span>
+<span class="fc" id="L146">        builder.identityStatus(identityStatus);</span>
+<span class="fc" id="L147">        return identityStatus;</span>
     }
 
     private IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder setupDefaultBuilder() {
-<span class="fc" id="L143">        return IdentityAndEligibilityResponse.builder()</span>
-<span class="fc" id="L144">                .identityStatus(IdentityOutcome.NOT_MATCHED)</span>
-<span class="fc" id="L145">                .eligibilityStatus(EligibilityOutcome.NOT_SET)</span>
-<span class="fc" id="L146">                .pregnantChildDOBMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L147">                .qualifyingBenefits(QualifyingBenefits.NOT_SET)</span>
-<span class="fc" id="L148">                .addressLine1Match(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L149">                .postcodeMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L150">                .mobilePhoneMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L151">                .emailAddressMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L152">                .deathVerificationFlag(DeathVerificationFlag.N_A)</span>
-<span class="fc" id="L153">                .householdIdentifier(NO_HOUSEHOLD_IDENTIFIER_PROVIDED)</span>
-<span class="fc" id="L154">                .dobOfChildrenUnder4(emptyList());</span>
+<span class="fc" id="L151">        return IdentityAndEligibilityResponse.builder()</span>
+<span class="fc" id="L152">                .identityStatus(IdentityOutcome.NOT_MATCHED)</span>
+<span class="fc" id="L153">                .eligibilityStatus(EligibilityOutcome.NOT_SET)</span>
+<span class="fc" id="L154">                .pregnantChildDOBMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L155">                .qualifyingBenefits(QualifyingBenefits.NOT_SET)</span>
+<span class="fc" id="L156">                .addressLine1Match(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L157">                .postcodeMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L158">                .mobilePhoneMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L159">                .emailAddressMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L160">                .deathVerificationFlag(DeathVerificationFlag.N_A)</span>
+<span class="fc" id="L161">                .householdIdentifier(NO_HOUSEHOLD_IDENTIFIER_PROVIDED)</span>
+<span class="fc" id="L162">                .dobOfChildrenUnder4(emptyList());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
