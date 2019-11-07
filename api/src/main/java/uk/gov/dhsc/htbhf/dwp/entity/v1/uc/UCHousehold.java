@@ -24,6 +24,9 @@ public class UCHousehold extends BaseEntity {
     @Column(name = "household_identifier")
     private String householdIdentifier;
 
+    @Column(name = "earnings_threshold_exceeded")
+    private boolean earningsThresholdExceeded;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "household", orphanRemoval = true)
     @ToString.Exclude
     private final Set<UCAdult> adults = new HashSet<>();

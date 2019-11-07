@@ -27,6 +27,16 @@ public class UCHouseholdTestDataFactoryV2 {
                 .addChild(MAGGIE);
     }
 
+    public static UCHousehold aUCHouseholdWithEarningsThresholdExceeded() {
+        return aUCHouseholdWithNoAdultsOrChildrenAndEarningsThresholdExceeded()
+                .build()
+                .addAdult(HOMER)
+                .addAdult(MARGE)
+                .addChild(BART)
+                .addChild(LISA)
+                .addChild(MAGGIE);
+    }
+
     public static UCHousehold aUCHouseholdWithChildren(UCChild... child) {
         UCHousehold ucHouseholdWithAdults = aUCHouseholdWithNoAdultsOrChildren()
                 .build()
@@ -59,6 +69,14 @@ public class UCHouseholdTestDataFactoryV2 {
     private static UCHousehold.UCHouseholdBuilder aUCHouseholdWithNoAdultsOrChildren() {
         return UCHousehold.builder()
                 .householdIdentifier(SIMPSON_UC_HOUSEHOLD_IDENTIFIER)
+                .build()
+                .toBuilder();
+    }
+
+    private static UCHousehold.UCHouseholdBuilder aUCHouseholdWithNoAdultsOrChildrenAndEarningsThresholdExceeded() {
+        return UCHousehold.builder()
+                .householdIdentifier(SIMPSON_UC_HOUSEHOLD_IDENTIFIER)
+                .earningsThresholdExceeded(true)
                 .build()
                 .toBuilder();
     }
