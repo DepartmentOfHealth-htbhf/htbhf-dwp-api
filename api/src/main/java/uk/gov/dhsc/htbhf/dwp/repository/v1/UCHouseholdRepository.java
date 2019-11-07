@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import java.util.Optional;
 import java.util.UUID;

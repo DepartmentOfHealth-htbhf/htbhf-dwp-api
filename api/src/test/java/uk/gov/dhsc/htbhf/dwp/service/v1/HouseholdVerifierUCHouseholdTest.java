@@ -1,8 +1,8 @@
 package uk.gov.dhsc.htbhf.dwp.service.v1;
 
 import org.junit.jupiter.api.Test;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCAdult;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.DWPPersonDTOTestDataFactory.aValidDWPPerson;

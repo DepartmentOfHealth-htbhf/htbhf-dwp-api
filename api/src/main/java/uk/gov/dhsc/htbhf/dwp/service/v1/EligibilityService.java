@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.factory.v1.EligibilityResponseFactory;
 import uk.gov.dhsc.htbhf.dwp.model.v1.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.v1.EligibilityResponse;

@@ -1,7 +1,7 @@
-package uk.gov.dhsc.htbhf.dwp.entity.v1.uc;
+package uk.gov.dhsc.htbhf.dwp.entity.uc;
 
 import lombok.*;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.BaseEntity;
+import uk.gov.dhsc.htbhf.dwp.entity.BaseEntity;
 
 import java.time.LocalDate;
 import javax.persistence.*;
