@@ -16,13 +16,13 @@
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/converter/v2/RequestHeaderToDWPEligibilityRequestV2Converter.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/v1/BaseEntity.java">
+<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/BaseEntity.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/v1/uc/UCAdult.java">
+<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCAdult.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/v1/uc/UCChild.java">
+<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCChild.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/v1/uc/UCHousehold.java">
+<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCHousehold.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/factory/v1/EligibilityResponseFactory.java">
 </file>
