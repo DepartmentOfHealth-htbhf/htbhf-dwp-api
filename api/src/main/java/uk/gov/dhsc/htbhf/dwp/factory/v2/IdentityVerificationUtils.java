@@ -1,7 +1,7 @@
 package uk.gov.dhsc.htbhf.dwp.factory.v2;
 
 import org.flywaydb.core.internal.util.StringUtils;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCAdult;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.model.v2.PersonDTOV2;
 import uk.gov.dhsc.htbhf.dwp.model.v2.VerificationOutcome;
 

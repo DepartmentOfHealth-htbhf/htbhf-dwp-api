@@ -1,9 +1,9 @@
 package uk.gov.dhsc.htbhf.dwp.factory.v2;
 
 import org.springframework.stereotype.Component;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCAdult;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCChild;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCChild;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.v2.*;
 
 import java.time.LocalDate;

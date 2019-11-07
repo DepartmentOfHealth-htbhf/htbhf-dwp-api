@@ -1,7 +1,7 @@
 package uk.gov.dhsc.htbhf.dwp.factory.v1;
 
 import org.junit.jupiter.api.Test;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.model.v1.ChildDTO;
 import uk.gov.dhsc.htbhf.dwp.model.v1.EligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.testhelper.v1.UCHouseholdTestDataFactory;

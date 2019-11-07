@@ -1,8 +1,8 @@
 package uk.gov.dhsc.htbhf.dwp.testhelper.v1;
 
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCAdult;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCChild;
-import uk.gov.dhsc.htbhf.dwp.entity.v1.uc.UCHousehold;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCChild;
+import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import java.time.LocalDate;
 

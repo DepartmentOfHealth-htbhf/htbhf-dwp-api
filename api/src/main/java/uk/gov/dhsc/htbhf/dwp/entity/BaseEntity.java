@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.entity.v1;
+package uk.gov.dhsc.htbhf.dwp.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
