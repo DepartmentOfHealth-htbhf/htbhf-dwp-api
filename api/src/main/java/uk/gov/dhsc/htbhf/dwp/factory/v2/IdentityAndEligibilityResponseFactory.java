@@ -22,23 +22,7 @@ public class IdentityAndEligibilityResponseFactory {
     private static final String NO_HOUSEHOLD_IDENTIFIER_PROVIDED = "";
 
     /**
-     * Builds a response based on the following criteria.
-     * <ul>
-     * <li> Identity status is MATCHED if NINO, Surname and DOB match the request, otherwise NOT_MATCHED</li>
-     * <li> If the Identity Status is NOT_MATCH, then all other response enum values are NOT_SET.</li>
-     * <li> Eligibility status is ELIGIBLE if the Id status is MATCHED, else NOT_SET.</li>
-     * <li> Address Line 1 Match is MATCHED if the first 6 characters match (ignoring case), else NOT_MATCHED</li>
-     * <li> Postcode match is MATCHED if the postcode matches ignoring whitespace and casing, else NOT_MATCHED</li>
-     * <li> Mobile match is MATCHED if the mobile matches exactly, NOT_SUPPLIED if blank else NOT_MATCHED. If there is no
-     * value in the database, then this is NOT_HELD</li>
-     * <li> Email match is MATCHED if the email matches ignoring case, NOT_SUPPLIED if blank else NOT_MATCHED. If there is no
-     * value in the database, then this is NOT_HELD</li>
-     * <li> Qualifying Benefits are UNIVERSAL_CREDIT if the id is matched (including the address)</li>
-     * <li> Household identifier will always be blank.</li>
-     * <li> Pregnant dependant DOB will be NOT_SUPPLIED if not provided in the request, else NOT_SET</li>
-     * <li> The dob of children under 4 will simply be returned from the db if the id status is MATCHED. Any dates
-     * of birth which have become over 4 in the database are filtered out.</li>
-     * </ul>
+     * Full details of how the identity and eligibility response is built can be found in README.md.
      *
      * @param household household to check
      * @param request   request to check
