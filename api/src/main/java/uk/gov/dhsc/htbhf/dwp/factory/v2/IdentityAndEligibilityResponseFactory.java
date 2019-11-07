@@ -26,7 +26,7 @@ public class IdentityAndEligibilityResponseFactory {
      * <ul>
      * <li> Identity status is MATCHED if NINO, Surname and DOB match the request, otherwise NOT_MATCHED</li>
      * <li> If the Identity Status is NOT_MATCH, then all other response enum values are NOT_SET.</li>
-     * <li> Eligibility status is ELIGIBLE if the Id status is MATCHED, else NOT_SET.</li>
+     * <li> Eligibility status is CONFIRMED if the Id status is MATCHED, NOT_CONFIRMED if the earnings threshold for the household is true, else NOT_SET.</li>
      * <li> Address Line 1 Match is MATCHED if the first 6 characters match (ignoring case), else NOT_MATCHED</li>
      * <li> Postcode match is MATCHED if the postcode matches ignoring whitespace and casing, else NOT_MATCHED</li>
      * <li> Mobile match is MATCHED if the mobile matches exactly, NOT_SUPPLIED if blank else NOT_MATCHED. If there is no
@@ -49,7 +49,7 @@ public class IdentityAndEligibilityResponseFactory {
         IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder = setupDefaultBuilder();
         PersonDTOV2 person = request.getPerson();
         IdentityOutcome identityStatus = determineIdentityStatus(household, person, builder);
-        EligibilityOutcome eligibilityStatus = determineEligibilityStatus(identityStatus, builder);
+        EligibilityOutcome eligibilityStatus = determineAndSetEligibilityStatus(identityStatus, household, builder);
 
         if (IdentityOutcome.NOT_MATCHED == identityStatus || EligibilityOutcome.NOT_CONFIRMED == eligibilityStatus) {
             return builder.build();
@@ -122,13 +122,21 @@ public class IdentityAndEligibilityResponseFactory {
         return addressLine1VerificationOutcome;
     }
 
-    private EligibilityOutcome determineEligibilityStatus(IdentityOutcome identityStatus,
-                                                          IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-        EligibilityOutcome eligibilityStatus = (identityStatus == IdentityOutcome.NOT_MATCHED)
-                ? EligibilityOutcome.NOT_SET : EligibilityOutcome.CONFIRMED;
-        //TODO MRS 06/11/2019: Add incomeThresholdExceeded back on household and test here for eligibility - if true, then return NOT_CONFIRMED. Separate PR.
-        builder.eligibilityStatus(eligibilityStatus);
-        return eligibilityStatus;
+    private EligibilityOutcome determineAndSetEligibilityStatus(IdentityOutcome identityStatus,
+                                                                UCHousehold household,
+                                                                IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+        EligibilityOutcome outcome = determineEligibilityOutcome(identityStatus, household);
+        builder.eligibilityStatus(outcome);
+        return outcome;
+    }
+
+    private EligibilityOutcome determineEligibilityOutcome(IdentityOutcome identityStatus, UCHousehold household) {
+        if (identityStatus == IdentityOutcome.NOT_MATCHED) {
+            return EligibilityOutcome.NOT_SET;
+        } else if (household.isEarningsThresholdExceeded()) {
+            return EligibilityOutcome.NOT_CONFIRMED;
+        }
+        return EligibilityOutcome.CONFIRMED;
     }
 
     private IdentityOutcome determineIdentityStatus(UCHousehold household, PersonDTOV2 person,

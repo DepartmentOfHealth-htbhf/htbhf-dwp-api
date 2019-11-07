@@ -27,6 +27,12 @@ class IdentityAndEligibilityResponseFactoryTest {
     }
 
     @Test
+    void shouldReturnNotEligibleWhenEarningsThresholdExceededResponse() {
+        UCHousehold household = aUCHouseholdWithEarningsThresholdExceeded();
+        runTest(household, aValidPersonDTOV2(), anIdentityMatchedEligibilityNotConfirmedResponse());
+    }
+
+    @Test
     void shouldReturnEverythingMatchedWithpregnantChildDOBMatchNotSuppliedResponse() {
         PersonDTOV2 person = aPersonDTOV2WithPregnantDependantDob(null);
         runTest(aUCHousehold(), person, anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SUPPLIED,
