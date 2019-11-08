@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_AND_LISA_DOBS;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.NO_HOUSEHOLD_IDENTIFIER_PROVIDED;
 
 public class IdentityAndEligibilityResponseTestDataFactory {
@@ -90,6 +91,10 @@ public class IdentityAndEligibilityResponseTestDataFactory {
                 .deathVerificationFlag(DeathVerificationFlag.N_A)
                 .dobOfChildrenUnder4(childrenDobs)
                 .build();
+    }
+
+    public static IdentityAndEligibilityResponse anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches() {
+        return anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET, MAGGIE_AND_LISA_DOBS);
     }
 
     public static IdentityAndEligibilityResponse anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(List<LocalDate> childrenDobs) {

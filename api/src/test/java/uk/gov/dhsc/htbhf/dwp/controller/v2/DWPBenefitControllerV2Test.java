@@ -1,63 +1,42 @@
 package uk.gov.dhsc.htbhf.dwp.controller.v2;
 
-import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
 import uk.gov.dhsc.htbhf.dwp.model.v2.IdentityAndEligibilityResponse;
-import uk.gov.dhsc.htbhf.errorhandler.ErrorResponse;
-
-import java.net.URI;
+import uk.gov.dhsc.htbhf.dwp.service.v2.IdentityAndEligibilityService;
+import uk.gov.dhsc.htbhf.dwp.testhelper.v2.DWPEligibilityRequestV2TestDataFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.anInvalidEligibilityHttpEntity;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdentityAndEligibilityResponseTestDataFactory.anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureEmbeddedDatabase
+@ExtendWith(MockitoExtension.class)
 class DWPBenefitControllerV2Test {
 
-    private static final URI ENDPOINT = URI.create("/v2/dwp/eligibility");
-
-    @Autowired
-    private TestRestTemplate restTemplate;
+    @Mock
+    private IdentityAndEligibilityService service;
+    @InjectMocks
+    private DWPEligibilityControllerV2 controller;
 
     @Test
     void shouldReturnResponse() {
         //Given
-        HttpEntity request = aValidEligibilityHttpEntity();
+        IdentityAndEligibilityResponse response = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches();
+        DWPEligibilityRequestV2 request = DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2();
+        given(service.checkIdentityAndEligibility(any())).willReturn(response);
 
         //When
-        ResponseEntity<IdentityAndEligibilityResponse> responseEntity = restTemplate.exchange(ENDPOINT,
-                HttpMethod.GET, request, IdentityAndEligibilityResponse.class);
+        IdentityAndEligibilityResponse controllerResponse = controller.getBenefits(request);
 
         //Then
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        IdentityAndEligibilityResponse expectedResponse = IdentityAndEligibilityResponse.builder().build();
-        assertThat(responseEntity.getBody()).isEqualTo(expectedResponse);
-    }
-
-    @Test
-    void shouldReturnBadRequestResponseWithInvalidRequest() {
-        //Given
-        HttpEntity request = anInvalidEligibilityHttpEntity();
-
-        //When
-        ResponseEntity<ErrorResponse> responseEntity = restTemplate.exchange(ENDPOINT, HttpMethod.GET, request, ErrorResponse.class);
-
-        //Then
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-        assertValidationErrorInResponse(responseEntity, "person.nino",
-                "must match \"^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z](\\d{6})[A-D]$\"");
+        assertThat(controllerResponse).isEqualTo(response);
+        verify(service).checkIdentityAndEligibility(request);
     }
 
 }
