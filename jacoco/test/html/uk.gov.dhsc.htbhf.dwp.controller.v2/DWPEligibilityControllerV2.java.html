@@ -8,13 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
 import uk.gov.dhsc.htbhf.dwp.model.v2.IdentityAndEligibilityResponse;
+import uk.gov.dhsc.htbhf.dwp.service.v2.IdentityAndEligibilityService;
 
 @RestController
 @RequestMapping(&quot;/v2/dwp/eligibility&quot;)
 @AllArgsConstructor
-<span class="fc" id="L15">@Slf4j</span>
+<span class="fc" id="L16">@Slf4j</span>
 @Api(description = &quot;Endpoints for dealing with DWP Identity and Eligibility requests.&quot;)
 public class DWPEligibilityControllerV2 {
+
+    private IdentityAndEligibilityService service;
 
     /**
      * Determines the eligibility of the claimant and checks their identity based on the given request
@@ -34,9 +37,18 @@ public class DWPEligibilityControllerV2 {
             response = IdentityAndEligibilityResponse.class)})
     public IdentityAndEligibilityResponse getBenefits(@ApiParam(&quot;The identity and eligibility request for DWP benefits&quot;)
                                                               DWPEligibilityRequestV2 request) {
-<span class="fc" id="L37">        log.debug(&quot;Received eligibility request&quot;);</span>
+<span class="fc" id="L40">        log.debug(&quot;Received eligibility request&quot;);</span>
 
-<span class="fc" id="L39">        return IdentityAndEligibilityResponse.builder().build();</span>
+<span class="fc" id="L42">        IdentityAndEligibilityResponse response = service.checkIdentityAndEligibility(request);</span>
+<span class="fc" id="L43">        logResponse(response);</span>
+<span class="fc" id="L44">        return response;</span>
     }
+
+
+    private void logResponse(IdentityAndEligibilityResponse response) {
+<span class="fc" id="L49">        log.debug(&quot;DWP identity status: {}, eligibility status: {}, qualifying benefits: {}, addressLine1: {}, postcode: {}, mobile: {}, email: {}&quot;,</span>
+<span class="fc" id="L50">                response.getIdentityStatus(), response.getEligibilityStatus(), response.getQualifyingBenefits(),</span>
+<span class="fc" id="L51">                response.getAddressLine1Match(), response.getPostcodeMatch(), response.getMobilePhoneMatch(), response.getEmailAddressMatch());</span>
+<span class="fc" id="L52">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

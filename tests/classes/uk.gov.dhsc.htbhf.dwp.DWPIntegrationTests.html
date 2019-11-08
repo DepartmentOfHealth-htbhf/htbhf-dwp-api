@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.377s</div>
+<div class="counter">0.278s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,31 +81,31 @@
 <tr>
 <td class="success">shouldReturnBadRequestForInvalidRequest()</td>
 <td class="success">shouldReturnBadRequestForInvalidRequest()</td>
-<td class="success">0.039s</td>
+<td class="success">0.026s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnEligibilityResponseWhenNotInDatabase()</td>
 <td class="success">shouldReturnEligibilityResponseWhenNotInDatabase()</td>
-<td class="success">0.519s</td>
+<td class="success">0.045s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Should return eligible response for claimant [Homer] Simpson stored in UC household table</td>
 <td class="success">shouldReturnEligibleWhenMatchesUCHouseholdInDatabase(String, String)[1]</td>
-<td class="success">0.721s</td>
+<td class="success">0.106s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Should return eligible response for claimant [Marge] Simpson stored in UC household table</td>
 <td class="success">shouldReturnEligibleWhenMatchesUCHouseholdInDatabase(String, String)[2]</td>
-<td class="success">0.049s</td>
+<td class="success">0.055s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldReturnNoMatchWhenMatchesNinoButNotNameInUCDatabase()</td>
 <td class="success">shouldReturnNoMatchWhenMatchesNinoButNotNameInUCDatabase()</td>
-<td class="success">0.049s</td>
+<td class="success">0.046s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -113,24 +113,12 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>16:25:52.335 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-16:25:52.359 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-16:25:52.402 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-16:25:52.425 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests], using SpringBootContextLoader
-16:25:52.431 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]: class path resource [uk/gov/dhsc/htbhf/dwp/DWPIntegrationTests-context.xml] does not exist
-16:25:52.431 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]: class path resource [uk/gov/dhsc/htbhf/dwp/DWPIntegrationTestsContext.groovy] does not exist
-16:25:52.432 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
-16:25:52.432 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]: DWPIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-16:25:52.483 [Test worker] DEBUG org.springframework.test.util.ReflectionTestUtils - Getting field 'configuration' from target object [org.flywaydb.core.Flyway@2bab3be] or target class [class org.flywaydb.core.Flyway]
-16:25:52.486 [Test worker] DEBUG org.springframework.test.util.ReflectionTestUtils - Invoking method 'getUndoSqlMigrationPrefix' on target object [org.flywaydb.core.api.configuration.ClassicConfiguration@3bc2000b] or target class [null] with arguments {}
-16:25:52.543 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]
-16:25:52.629 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/home/circleci/project/api/build/classes/java/main/uk/gov/dhsc/htbhf/dwp/DWPApplication.class]
-16:25:52.630 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration uk.gov.dhsc.htbhf.dwp.DWPApplication for test class uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests
-16:25:52.738 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]: using defaults.
-16:25:52.739 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.cloud.contract.stubrunner.provider.wiremock.StubRunnerWireMockTestExecutionListener, org.springframework.cloud.contract.wiremock.WireMockTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, io.zonky.test.db.flyway.OptimizedFlywayTestExecutionListener]
-16:25:52.764 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5b9a99b5, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@115e268c, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@24e55b45, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@3f9379c2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@304b18b4, io.zonky.test.db.flyway.OptimizedFlywayTestExecutionListener@50c12277, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5ef06459, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7a095b2c, org.springframework.test.context.event.EventPublishingTestExecutionListener@126f7261, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4be438c1, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@16eb4f48, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@268bb682, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@4f1e3448, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@25562f5a, org.springframework.cloud.contract.stubrunner.provider.wiremock.StubRunnerWireMockTestExecutionListener@690bb5b7, org.springframework.cloud.contract.wiremock.WireMockTestExecutionListener@124f31b2]
-16:25:52.768 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@875ddc7 testClass = DWPIntegrationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@7666e2ee testClass = DWPIntegrationTests, locations = '{}', classes = '{class uk.gov.dhsc.htbhf.dwp.DWPApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@810a4eb1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@7c5f321a, [ImportsContextCustomizer@6b7e8bbb key = [org.springframework.cloud.contract.wiremock.WireMockConfiguration, org.springframework.cloud.contract.wiremock.WireMockRestTemplateConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@cd31355, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@51407d5c, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@1370e9e8, io.zonky.test.db.postgres.EmbeddedPostgresContextCustomizerFactory$PreloadableEmbeddedPostgresContextCustomizer@f69128f4], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; false]], class annotated with @DirtiesContext [false] with mode [null].
-16:25:52.798 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=0}
+<pre>2019-11-08 09:33:16.650  INFO 732 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests], using SpringBootContextLoader
+2019-11-08 09:33:16.651  INFO 732 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]: no resource found for suffixes {-context.xml, Context.groovy}.
+2019-11-08 09:33:16.652  INFO 732 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests]: DWPIntegrationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2019-11-08 09:33:16.654  INFO 732 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.gov.dhsc.htbhf.dwp.DWPApplication for test class uk.gov.dhsc.htbhf.dwp.DWPIntegrationTests
+2019-11-08 09:33:16.655  INFO 732 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.cloud.contract.stubrunner.provider.wiremock.StubRunnerWireMockTestExecutionListener, org.springframework.cloud.contract.wiremock.WireMockTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, io.zonky.test.db.flyway.OptimizedFlywayTestExecutionListener]
+2019-11-08 09:33:16.655  INFO 732 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1b7189f3, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7bd756ea, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@32896e27, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@ea616f6, org.springframework.test.context.support.DirtiesContextTestExecutionListener@198f38c0, io.zonky.test.db.flyway.OptimizedFlywayTestExecutionListener@58ae5d1d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@212ff879, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1f004b0c, org.springframework.test.context.event.EventPublishingTestExecutionListener@7f293914, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5545c559, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@bf713b8, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@16b261e1, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@20651bba, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5b717de2, org.springframework.cloud.contract.stubrunner.provider.wiremock.StubRunnerWireMockTestExecutionListener@68a8cfe7, org.springframework.cloud.contract.wiremock.WireMockTestExecutionListener@6d90067a]
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -140,112 +128,52 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.2.0.RELEASE)
 
-2019-11-07 16:25:53.185  INFO 739 --- [    Test worker] u.g.dhsc.htbhf.dwp.DWPIntegrationTests   : Starting DWPIntegrationTests on f256cbeafb79 with PID 739 (started by circleci in /home/circleci/project/api)
-2019-11-07 16:25:53.187  INFO 739 --- [    Test worker] u.g.dhsc.htbhf.dwp.DWPIntegrationTests   : No active profile set, falling back to default profiles: default
-2019-11-07 16:25:54.671  INFO 739 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-11-07 16:25:54.786  INFO 739 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 102ms. Found 1 repository interfaces.
-2019-11-07 16:25:54.902  INFO 739 --- [    Test worker] EmbeddedPostgresContextCustomizerFactory : Replacing 'dataSource' DataSource bean with embedded version
-2019-11-07 16:25:55.374  INFO 739 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-11-07 16:25:56.013  INFO 739 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
-2019-11-07 16:25:56.031  INFO 739 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-11-07 16:25:56.031  INFO 739 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2019-11-07 16:25:56.166  INFO 739 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-11-07 16:25:56.167  INFO 739 --- [    Test worker] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2672 ms
-2019-11-07 16:25:56.422  INFO 739 --- [    Test worker] eProvider$PriorityThreadPoolTaskExecutor : Initializing ExecutorService
-2019-11-07 16:25:56.801  INFO 739 --- [  prefetching-1] i.z.t.d.p.embedded.EmbeddedPostgres      : Detected a Linux x86_64 system
-2019-11-07 16:25:56.814  INFO 739 --- [  prefetching-1] .z.t.d.p.e.DefaultPostgresBinaryResolver : Detected distribution: 'Debian'
-2019-11-07 16:25:56.818  INFO 739 --- [  prefetching-1] .z.t.d.p.e.DefaultPostgresBinaryResolver : System specific postgres binaries found: postgres-linux-x86_64.txz
-2019-11-07 16:25:56.881  INFO 739 --- [  prefetching-1] i.z.t.d.p.embedded.EmbeddedPostgres      : Extracting Postgres...
-2019-11-07 16:25:59.160  INFO 739 --- [  prefetching-1] i.z.t.d.p.embedded.EmbeddedPostgres      : Postgres binaries at /tmp/embedded-pg/PG-7010611ea87e721fb4b2e2a8657cce54
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : The files belonging to this database system will be owned by user &quot;circleci&quot;.
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : This user must also own the server process.
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : 
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : The database cluster will be initialized with locale &quot;C.UTF-8&quot;.
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : The default text search configuration will be set to &quot;english&quot;.
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : 
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : Data page checksums are disabled.
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : 
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : fixing permissions on existing directory /tmp/epg15887004859614780802 ... ok
-2019-11-07 16:25:59.175  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : creating subdirectories ... ok
-2019-11-07 16:25:59.184  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : selecting default max_connections ... 100
-2019-11-07 16:25:59.198  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : selecting default shared_buffers ... 128MB
-2019-11-07 16:25:59.198  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : selecting dynamic shared memory implementation ... posix
-2019-11-07 16:25:59.422  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : creating configuration files ... ok
-2019-11-07 16:25:59.565  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : running bootstrap script ... ok
-2019-11-07 16:26:00.125  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : performing post-bootstrap initialization ... ok
-2019-11-07 16:26:00.219  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : syncing data to disk ... ok
-2019-11-07 16:26:00.219  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : 
-2019-11-07 16:26:00.219  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : Success. You can now start the database server using:
-2019-11-07 16:26:00.219  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : 
-2019-11-07 16:26:00.219  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      :     /tmp/embedded-pg/PG-7010611ea87e721fb4b2e2a8657cce54/bin/pg_ctl -D /tmp/epg15887004859614780802 -l logfile start
-2019-11-07 16:26:00.219  INFO 739 --- [initdb:pid(811)] i.z.t.d.p.embedded.EmbeddedPostgres      : 
-2019-11-07 16:26:00.220  INFO 739 --- [  prefetching-1] i.z.t.d.p.embedded.EmbeddedPostgres      : 4c39177b-8f4f-466c-902d-618f672fd830 initdb completed in 00:00:01.056
-2019-11-07 16:26:00.227  INFO 739 --- [  prefetching-1] i.z.t.d.p.embedded.EmbeddedPostgres      : 4c39177b-8f4f-466c-902d-618f672fd830 postmaster started as Process[pid=826, exitValue=&quot;not exited&quot;] on port 33839.  Waiting up to PT20S for server startup to finish.
-2019-11-07 16:26:00.302  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : waiting for server to start....2019-11-07 16:26:00.302 UTC [830] LOG:  listening on IPv4 address &quot;127.0.0.1&quot;, port 33839
-2019-11-07 16:26:00.302  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.302 UTC [830] LOG:  could not bind IPv4 address &quot;127.0.0.1&quot;: Address already in use
-2019-11-07 16:26:00.302  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.302 UTC [830] HINT:  Is another postmaster already running on port 33839? If not, wait a few seconds and retry.
-2019-11-07 16:26:00.302  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.302 UTC [830] LOG:  could not bind IPv6 address &quot;::1&quot;: Cannot assign requested address
-2019-11-07 16:26:00.302  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.302 UTC [830] HINT:  Is another postmaster already running on port 33839? If not, wait a few seconds and retry.
-2019-11-07 16:26:00.302  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.302 UTC [830] LOG:  listening on Unix socket &quot;/tmp/.s.PGSQL.33839&quot;
-2019-11-07 16:26:00.398  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.398 UTC [831] LOG:  database system was shut down at 2019-11-07 16:26:00 UTC
-2019-11-07 16:26:00.398  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.398 UTC [832] LOG:  incomplete startup packet
-2019-11-07 16:26:00.400  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.400 UTC [830] LOG:  database system is ready to accept connections
-2019-11-07 16:26:00.405  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.405 UTC [833] FATAL:  the database system is starting up
-2019-11-07 16:26:00.432  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      :  done
-2019-11-07 16:26:00.432  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : server started
-2019-11-07 16:26:00.510  INFO 739 --- [pg_ctl:pid(826)] i.z.t.d.p.embedded.EmbeddedPostgres      : 2019-11-07 16:26:00.510 UTC [840] LOG:  incomplete startup packet
-2019-11-07 16:26:00.578  INFO 739 --- [  prefetching-1] i.z.t.d.p.embedded.EmbeddedPostgres      : 4c39177b-8f4f-466c-902d-618f672fd830 postmaster startup finished in 00:00:00.353
-2019-11-07 16:26:00.847  INFO 739 --- [  prefetching-2] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.4 by Boxfuse
-2019-11-07 16:26:00.871  INFO 739 --- [  prefetching-2] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:postgresql://localhost:33839/ejvnqvkvzwbe (PostgreSQL 10.7)
-2019-11-07 16:26:00.927  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbValidate     : Successfully validated 9 migrations (execution time 00:00.026s)
-2019-11-07 16:26:00.936  INFO 739 --- [  prefetching-2] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: &quot;public&quot;.&quot;flyway_schema_history&quot;
-2019-11-07 16:26:00.950  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;public&quot;: &lt;&lt; Empty Schema &gt;&gt;
-2019-11-07 16:26:00.951  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.001 - initialscript
-2019-11-07 16:26:00.958  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.002 - UC datafeed initial format
-2019-11-07 16:26:00.971  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.003 - legacy datafeed initial format
-2019-11-07 16:26:00.983  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.004 - UC replace flags with boolean
-2019-11-07 16:26:00.992  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.005 - fix nino length
-2019-11-07 16:26:00.996  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.006 - drop unused tables
-2019-11-07 16:26:01.001  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.007 - add mobile and email
-2019-11-07 16:26:01.006  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.008 - delete unused columns
-2019-11-07 16:26:01.012  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Migrating schema &quot;public&quot; to version 1.009 - add adult dob
-2019-11-07 16:26:01.016  INFO 739 --- [  prefetching-2] o.f.core.internal.command.DbMigrate      : Successfully applied 9 migrations to schema &quot;public&quot; (execution time 00:00.080s)
-2019-11-07 16:26:01.381  INFO 739 --- [    Test worker] i.z.t.d.l.EmbeddedDatabaseReporter       : JDBC URL to connect to the embedded database: jdbc:postgresql://localhost:33839/tyynoyemdghq?user=postgres
-2019-11-07 16:26:01.406  INFO 739 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 9 migrations (execution time 00:00.011s)
-2019-11-07 16:26:01.408  INFO 739 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;public&quot;: 1.009
-2019-11-07 16:26:01.409  INFO 739 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema &quot;public&quot; is up to date. No migration necessary.
-2019-11-07 16:26:01.529  INFO 739 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2019-11-07 16:26:01.624  INFO 739 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.6.Final}
-2019-11-07 16:26:01.683  INFO 739 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
-2019-11-07 16:26:01.843  INFO 739 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
-2019-11-07 16:26:02.551  INFO 739 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2019-11-07 16:26:02.561  INFO 739 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2019-11-07 16:26:03.357  WARN 739 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2019-11-07 16:26:03.538  INFO 739 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2019-11-07 16:26:04.119  INFO 739 --- [    Test worker] wiremock.org.eclipse.jetty.util.log      : Logging initialized @15084ms
-2019-11-07 16:26:04.327  INFO 739 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2019-11-07 16:26:04.557  INFO 739 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-11-07 16:26:05.033  INFO 739 --- [    Test worker] w.org.eclipse.jetty.server.Server        : jetty-9.2.z-SNAPSHOT
-2019-11-07 16:26:05.057  INFO 739 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Started w.o.e.j.s.ServletContextHandler@3136cda2{/__admin,null,AVAILABLE}
-2019-11-07 16:26:05.058  INFO 739 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Started w.o.e.j.s.ServletContextHandler@2543af3{/,null,AVAILABLE}
-2019-11-07 16:26:05.067  INFO 739 --- [    Test worker] w.o.e.j.s.NetworkTrafficServerConnector  : Started NetworkTrafficServerConnector@23bfa3fa{HTTP/1.1}{0.0.0.0:8120}
-2019-11-07 16:26:05.067  INFO 739 --- [    Test worker] w.org.eclipse.jetty.server.Server        : Started @16032ms
-2019-11-07 16:26:05.067  INFO 739 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2019-11-07 16:26:05.085  INFO 739 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2019-11-07 16:26:05.116  INFO 739 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2019-11-07 16:26:05.434  INFO 739 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 37275 (http) with context path ''
-2019-11-07 16:26:05.437  INFO 739 --- [    Test worker] u.g.dhsc.htbhf.dwp.DWPIntegrationTests   : Started DWPIntegrationTests in 12.637 seconds (JVM running for 16.402)
-2019-11-07 16:26:05.900  INFO 739 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-11-07 16:26:05.900  INFO 739 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-11-07 16:26:05.919  INFO 739 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 19 ms
-2019-11-07 16:26:06.414  INFO 739 --- [tp1093773977-47] /                                        : RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
-2019-11-07 16:26:06.776  INFO 739 --- [tp1093773977-47] WireMock                                 : Request received:
+2019-11-08 09:33:16.687  INFO 732 --- [    Test worker] u.g.dhsc.htbhf.dwp.DWPIntegrationTests   : Starting DWPIntegrationTests on 89ef0b48864f with PID 732 (started by circleci in /home/circleci/project/api)
+2019-11-08 09:33:16.687  INFO 732 --- [    Test worker] u.g.dhsc.htbhf.dwp.DWPIntegrationTests   : No active profile set, falling back to default profiles: default
+2019-11-08 09:33:17.059  INFO 732 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-11-08 09:33:17.075  INFO 732 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14ms. Found 1 repository interfaces.
+2019-11-08 09:33:17.096  INFO 732 --- [    Test worker] EmbeddedPostgresContextCustomizerFactory : Replacing 'dataSource' DataSource bean with embedded version
+2019-11-08 09:33:17.154  INFO 732 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-11-08 09:33:17.274  WARN 732 --- [    Test worker] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
+2019-11-08 09:33:17.281  INFO 732 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2019-11-08 09:33:17.282  INFO 732 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-08 09:33:17.283  INFO 732 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2019-11-08 09:33:17.311  INFO 732 --- [    Test worker] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring embedded WebApplicationContext
+2019-11-08 09:33:17.311  INFO 732 --- [    Test worker] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 622 ms
+2019-11-08 09:33:17.754  INFO 732 --- [    Test worker] i.z.t.d.l.EmbeddedDatabaseReporter       : JDBC URL to connect to the embedded database: jdbc:postgresql://localhost:40171/qvswtumyybon?user=postgres
+2019-11-08 09:33:17.764  INFO 732 --- [    Test worker] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:postgresql://localhost:40171/qvswtumyybon (PostgreSQL 10.7)
+2019-11-08 09:33:17.782  INFO 732 --- [    Test worker] o.f.core.internal.command.DbValidate     : Successfully validated 9 migrations (execution time 00:00.008s)
+2019-11-08 09:33:17.786  INFO 732 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Current version of schema &quot;public&quot;: 1.009
+2019-11-08 09:33:17.787  INFO 732 --- [    Test worker] o.f.core.internal.command.DbMigrate      : Schema &quot;public&quot; is up to date. No migration necessary.
+2019-11-08 09:33:17.834  INFO 732 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2019-11-08 09:33:17.850  INFO 732 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2019-11-08 09:33:17.966  INFO 732 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2019-11-08 09:33:17.967  INFO 732 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-11-08 09:33:18.271  WARN 732 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-11-08 09:33:18.368  INFO 732 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-11-08 09:33:18.492  INFO 732 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2019-11-08 09:33:18.577  INFO 732 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-08 09:33:18.795  INFO 732 --- [    Test worker] w.org.eclipse.jetty.server.Server        : jetty-9.2.z-SNAPSHOT
+2019-11-08 09:33:18.803  INFO 732 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Started w.o.e.j.s.ServletContextHandler@22ed79d0{/__admin,null,AVAILABLE}
+2019-11-08 09:33:18.803  INFO 732 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Started w.o.e.j.s.ServletContextHandler@581c2872{/,null,AVAILABLE}
+2019-11-08 09:33:18.804  INFO 732 --- [    Test worker] w.o.e.j.s.NetworkTrafficServerConnector  : Started NetworkTrafficServerConnector@11f6e958{HTTP/1.1}{0.0.0.0:8120}
+2019-11-08 09:33:18.804  INFO 732 --- [    Test worker] w.org.eclipse.jetty.server.Server        : Started @29374ms
+2019-11-08 09:33:18.804  INFO 732 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-11-08 09:33:18.805  INFO 732 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-11-08 09:33:18.812  INFO 732 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-11-08 09:33:18.858  INFO 732 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 38809 (http) with context path ''
+2019-11-08 09:33:18.859  INFO 732 --- [    Test worker] u.g.dhsc.htbhf.dwp.DWPIntegrationTests   : Started DWPIntegrationTests in 2.202 seconds (JVM running for 29.429)
+2019-11-08 09:33:18.904  INFO 732 --- [o-auto-3-exec-1] o.a.c.c.C.[Tomcat-1].[localhost].[/]     : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-11-08 09:33:18.905  INFO 732 --- [o-auto-3-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-11-08 09:33:18.914  INFO 732 --- [o-auto-3-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-11-08 09:33:19.054  INFO 732 --- [tp1280870044-97] /                                        : RequestHandlerClass from context returned com.github.tomakehurst.wiremock.http.StubRequestHandler. Normalized mapped under returned 'null'
+2019-11-08 09:33:19.061  INFO 732 --- [tp1280870044-97] WireMock                                 : Request received:
 127.0.0.1 - POST /v1/dwp/benefits
 
 Accept: [application/json, application/*+json]
 User-Agent: [Java/11.0.4]
 Connection: [keep-alive]
-X-REQUEST-ID: [67e3f3e0-c24c-41f4-b70e-624893ae03b7]
+X-REQUEST-ID: [74444c0a-fdea-480f-8ce6-a887a3e93ac1]
 Host: [localhost:8120]
 X-SESSION-ID: []
 Content-Length: [321]
@@ -256,7 +184,7 @@ Content-Type: [application/json]
 Matched response definition:
 {
   &quot;status&quot; : 200,
-  &quot;body&quot; : &quot;{\&quot;eligibilityStatus\&quot;:\&quot;ELIGIBLE\&quot;,\&quot;numberOfChildrenUnderOne\&quot;:1,\&quot;numberOfChildrenUnderFour\&quot;:2,\&quot;householdIdentifier\&quot;:\&quot;ucHouseholdIdentifier\&quot;,\&quot;children\&quot;:[{\&quot;dateOfBirth\&quot;:\&quot;2019-05-07\&quot;},{\&quot;dateOfBirth\&quot;:\&quot;2017-11-07\&quot;}]}&quot;,
+  &quot;body&quot; : &quot;{\&quot;eligibilityStatus\&quot;:\&quot;ELIGIBLE\&quot;,\&quot;numberOfChildrenUnderOne\&quot;:1,\&quot;numberOfChildrenUnderFour\&quot;:2,\&quot;householdIdentifier\&quot;:\&quot;ucHouseholdIdentifier\&quot;,\&quot;children\&quot;:[{\&quot;dateOfBirth\&quot;:\&quot;2019-05-08\&quot;},{\&quot;dateOfBirth\&quot;:\&quot;2017-11-08\&quot;}]}&quot;,
   &quot;headers&quot; : {
     &quot;Content-Type&quot; : &quot;application/json&quot;
   }
@@ -265,19 +193,18 @@ Matched response definition:
 Response:
 HTTP/1.1 200
 Content-Type: [application/json]
-Matched-Stub-Id: [9471fb96-24d3-4eec-b657-938d429a5e49]
+Matched-Stub-Id: [5ce3c278-4c6e-4022-914f-8756eb7c9de6]
 
 
-2019-11-07 16:26:06.869 ERROR 739 --- [o-auto-1-exec-5] u.g.d.htbhf.errorhandler.ErrorHandler    : Binding error(s) during incoming POST request to /v1/dwp/eligibility: [ErrorResponse.FieldError(field=person.nino, message=must not be null)]
-2019-11-07 16:26:06.884  WARN 739 --- [    Test worker] o.s.c.c.w.WireMockTestExecutionListener  : You've used fixed ports for WireMock setup - will mark context as dirty. Please use random ports, as much as possible. Your tests will be faster and more reliable and this warning will go away
-2019-11-07 16:26:06.891  INFO 739 --- [    Test worker] w.o.e.j.s.NetworkTrafficServerConnector  : Stopped NetworkTrafficServerConnector@23bfa3fa{HTTP/1.1}{0.0.0.0:8120}
-2019-11-07 16:26:06.892  INFO 739 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Stopped w.o.e.j.s.ServletContextHandler@2543af3{/,null,UNAVAILABLE}
-2019-11-07 16:26:06.893  INFO 739 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Stopped w.o.e.j.s.ServletContextHandler@3136cda2{/__admin,null,UNAVAILABLE}
-2019-11-07 16:26:06.893  WARN 739 --- [    Test worker] w.o.e.j.util.thread.QueuedThreadPool     : qtp1093773977{STOPPING,8&lt;=8&lt;=10,i=5,q=6} Couldn't stop Thread[qtp1093773977-48,5,]
-2019-11-07 16:26:06.893  WARN 739 --- [    Test worker] w.o.e.j.util.thread.QueuedThreadPool     : qtp1093773977{STOPPING,8&lt;=8&lt;=10,i=0,q=5} Couldn't stop Thread[qtp1093773977-44,5,]
-2019-11-07 16:26:06.894  WARN 739 --- [    Test worker] w.o.e.j.util.thread.QueuedThreadPool     : qtp1093773977{STOPPING,8&lt;=8&lt;=10,i=0,q=5} Couldn't stop Thread[qtp1093773977-49,5,]
-2019-11-07 16:26:06.894  INFO 739 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2019-11-07 16:26:06.896  INFO 739 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-11-08 09:33:19.138 ERROR 732 --- [o-auto-3-exec-5] u.g.d.htbhf.errorhandler.ErrorHandler    : Binding error(s) during incoming POST request to /v1/dwp/eligibility: [ErrorResponse.FieldError(field=person.nino, message=must not be null)]
+2019-11-08 09:33:19.150  WARN 732 --- [    Test worker] o.s.c.c.w.WireMockTestExecutionListener  : You've used fixed ports for WireMock setup - will mark context as dirty. Please use random ports, as much as possible. Your tests will be faster and more reliable and this warning will go away
+2019-11-08 09:33:19.152  INFO 732 --- [    Test worker] w.o.e.j.s.NetworkTrafficServerConnector  : Stopped NetworkTrafficServerConnector@11f6e958{HTTP/1.1}{0.0.0.0:8120}
+2019-11-08 09:33:19.152  INFO 732 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Stopped w.o.e.j.s.ServletContextHandler@581c2872{/,null,UNAVAILABLE}
+2019-11-08 09:33:19.152  INFO 732 --- [    Test worker] w.o.e.j.server.handler.ContextHandler    : Stopped w.o.e.j.s.ServletContextHandler@22ed79d0{/__admin,null,UNAVAILABLE}
+2019-11-08 09:33:19.152  WARN 732 --- [    Test worker] w.o.e.j.util.thread.QueuedThreadPool     : qtp1280870044{STOPPING,8&lt;=8&lt;=10,i=6,q=6} Couldn't stop Thread[qtp1280870044-94,5,main]
+2019-11-08 09:33:19.152  WARN 732 --- [    Test worker] w.o.e.j.util.thread.QueuedThreadPool     : qtp1280870044{STOPPING,8&lt;=8&lt;=10,i=0,q=6} Couldn't stop Thread[qtp1280870044-99,5,]
+2019-11-08 09:33:19.153  INFO 732 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-11-08 09:33:19.155  INFO 732 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 </pre>
 </span>
 </div>
@@ -289,7 +216,7 @@ Matched-Stub-Id: [9471fb96-24d3-4eec-b657-938d429a5e49]
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 5.6</a> at Nov 7, 2019, 4:27:52 PM</p>
+<a href="http://www.gradle.org">Gradle 5.6</a> at Nov 8, 2019, 9:34:48 AM</p>
 </div>
 </div>
 </body>
