@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
 import uk.gov.dhsc.htbhf.dwp.model.v2.IdentityAndEligibilityResponse;
+import uk.gov.dhsc.htbhf.dwp.service.v2.IdentityAndEligibilityService;
 
 @RestController
 @RequestMapping("/v2/dwp/eligibility")
@@ -15,6 +16,8 @@ import uk.gov.dhsc.htbhf.dwp.model.v2.IdentityAndEligibilityResponse;
 @Slf4j
 @Api(description = "Endpoints for dealing with DWP Identity and Eligibility requests.")
 public class DWPEligibilityControllerV2 {
+
+    private IdentityAndEligibilityService service;
 
     /**
      * Determines the eligibility of the claimant and checks their identity based on the given request
@@ -36,6 +39,15 @@ public class DWPEligibilityControllerV2 {
                                                               DWPEligibilityRequestV2 request) {
         log.debug("Received eligibility request");
 
-        return IdentityAndEligibilityResponse.builder().build();
+        IdentityAndEligibilityResponse response = service.checkIdentityAndEligibility(request);
+        logResponse(response);
+        return response;
+    }
+
+
+    private void logResponse(IdentityAndEligibilityResponse response) {
+        log.debug("DWP identity status: {}, eligibility status: {}, qualifying benefits: {}, addressLine1: {}, postcode: {}, mobile: {}, email: {}",
+                response.getIdentityStatus(), response.getEligibilityStatus(), response.getQualifyingBenefits(),
+                response.getAddressLine1Match(), response.getPostcodeMatch(), response.getMobilePhoneMatch(), response.getEmailAddressMatch());
     }
 }

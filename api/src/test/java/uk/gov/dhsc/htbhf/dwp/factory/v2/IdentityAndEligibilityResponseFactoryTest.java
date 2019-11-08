@@ -23,7 +23,7 @@ class IdentityAndEligibilityResponseFactoryTest {
 
     @Test
     void shouldReturnEverythingMatchedResponse() {
-        runTest(aUCHousehold(), aValidPersonDTOV2(), anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(MAGGIE_AND_LISA_DOBS));
+        runTest(aUCHousehold(), aValidPersonDTOV2(), anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches());
     }
 
     @Test

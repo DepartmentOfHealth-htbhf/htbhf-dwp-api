@@ -28,7 +28,6 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V2;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_AND_LISA_DOBS;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DOB;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdentityAndEligibilityResponseTestDataFactory.anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches;
@@ -61,7 +60,7 @@ class IdentityAndEligibilityServiceTest {
         DWPEligibilityRequestV2 eligibilityRequest = DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2();
         UCHousehold ucHousehold = UCHouseholdTestDataFactoryV2.aUCHousehold();
 
-        IdentityAndEligibilityResponse response = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(MAGGIE_AND_LISA_DOBS);
+        IdentityAndEligibilityResponse response = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(any())).willReturn(Optional.of(ucHousehold));
         given(responseFactory.determineIdentityAndEligibilityResponse(any(), any())).willReturn(response);
 
@@ -80,7 +79,7 @@ class IdentityAndEligibilityServiceTest {
         //Given
         DWPEligibilityRequestV2 eligibilityRequest = DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(any())).willReturn(Optional.empty());
-        IdentityAndEligibilityResponse identityResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(MAGGIE_AND_LISA_DOBS);
+        IdentityAndEligibilityResponse identityResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches();
         HttpEntity httpEntity = aValidEligibilityHttpEntity();
         given(getRequestBuilder.buildRequestWithHeaders(any())).willReturn(httpEntity);
         given(restTemplate.exchange(anyString(), any(), any(), eq(IdentityAndEligibilityResponse.class)))
