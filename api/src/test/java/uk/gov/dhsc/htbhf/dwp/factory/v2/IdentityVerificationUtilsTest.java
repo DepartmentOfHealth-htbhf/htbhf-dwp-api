@@ -76,7 +76,7 @@ class IdentityVerificationUtilsTest {
 
     @Test
     void shouldFailToMatchAdultWithDifferentDateOfBirth() {
-        PersonDTOV2 person = aPersonDTOV2WithDateOfBirth(MARGE_DOB);
+        PersonDTOV2 person = aPersonDTOV2WithDateOfBirth(MARGE_DATE_OF_BIRTH);
         assertThat(IdentityVerificationUtils.matchingAdult(HOMER, person)).isFalse();
     }
 

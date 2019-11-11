@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V2;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DOB;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DATE_OF_BIRTH;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdentityAndEligibilityResponseTestDataFactory.anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches;
 
@@ -106,7 +106,7 @@ class IdentityAndEligibilityServiceTest {
         assertThat(serviceResponse.getPostcodeMatch()).isEqualTo(VerificationOutcome.MATCHED);
         assertThat(serviceResponse.getDeathVerificationFlag()).isEqualTo(DeathVerificationFlag.N_A);
         assertThat(serviceResponse.getPregnantChildDOBMatch()).isEqualTo(VerificationOutcome.NOT_SET);
-        assertThat(serviceResponse.getDobOfChildrenUnder4()).containsExactlyInAnyOrder(LISA_DOB, MAGGIE_DOB);
+        assertThat(serviceResponse.getDobOfChildrenUnder4()).containsExactlyInAnyOrder(LISA_DOB, MAGGIE_DATE_OF_BIRTH);
     }
 
 }
