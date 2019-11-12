@@ -31,7 +31,7 @@ class GetRequestBuilderTest {
         HttpHeaders headers = httpEntity.getHeaders();
         assertCommonHeadersCorrect(headers);
         assertThat(headers.getFirst("emailAddress")).isEqualTo(HOMER_EMAIL);
-        assertThat(headers.getFirst("pregnantDependentDob")).isEqualTo(MAGGIE_DOB_STRING);
+        assertThat(headers.getFirst("pregnantDependentDob")).isEqualTo(MAGGIE_DATE_OF_BIRTH_STRING);
     }
 
     @Test
@@ -47,7 +47,7 @@ class GetRequestBuilderTest {
         HttpHeaders headers = httpEntity.getHeaders();
         assertCommonHeadersCorrect(headers);
         assertThat(headers.containsKey("emailAddress")).isFalse();
-        assertThat(headers.getFirst("pregnantDependentDob")).isEqualTo(MAGGIE_DOB_STRING);
+        assertThat(headers.getFirst("pregnantDependentDob")).isEqualTo(MAGGIE_DATE_OF_BIRTH_STRING);
     }
 
     @Test
@@ -71,7 +71,7 @@ class GetRequestBuilderTest {
         String eligibilityEndDateString = DateTimeFormatter.ISO_LOCAL_DATE.format(eligibilityEndDate);
         assertThat(headers.getFirst("surname")).isEqualTo(SIMPSON_SURNAME);
         assertThat(headers.getFirst("nino")).isEqualTo(HOMER_NINO_V2);
-        assertThat(headers.getFirst("dateOfBirth")).isEqualTo(HOMER_DOB_STRING);
+        assertThat(headers.getFirst("dateOfBirth")).isEqualTo(HOMER_DATE_OF_BIRTH_STRING);
         assertThat(headers.getFirst("eligibilityEndDate")).isEqualTo(eligibilityEndDateString);
         assertThat(headers.getFirst("addressLine1")).isEqualTo(SIMPSONS_ADDRESS_LINE_1);
         assertThat(headers.getFirst("postcode")).isEqualTo(SIMPSONS_POSTCODE);

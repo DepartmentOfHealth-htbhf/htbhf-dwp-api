@@ -30,7 +30,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.springframework.http.HttpStatus.OK;
 import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V1;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityRequestTestDataFactory.aValidEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityRequestTestDataFactory.anEligibilityRequestWithPerson;
@@ -82,7 +82,7 @@ public class DWPIntegrationTests {
     }
 
     @ParameterizedTest(name = "Should return eligible response for claimant [{0}] Simpson stored in UC household table")
-    @CsvSource({"Homer, EB123456C",
+    @CsvSource({"Homer, EE123456C",
             "Marge, EB123456D"})
     void shouldReturnEligibleWhenMatchesUCHouseholdInDatabase(String parentName, String nino) {
         //Given
@@ -102,7 +102,7 @@ public class DWPIntegrationTests {
     void shouldReturnNoMatchWhenMatchesNinoButNotNameInUCDatabase() {
         //Given
         ucHouseholdRepository.save(aUCHousehold());
-        PersonDTO person = buildDefaultPerson().lastName("noMatch").nino(HOMER_NINO).build();
+        PersonDTO person = buildDefaultPerson().lastName("noMatch").nino(HOMER_NINO_V1).build();
         EligibilityRequest eligibilityRequest = anEligibilityRequestWithPerson(person);
 
         //When

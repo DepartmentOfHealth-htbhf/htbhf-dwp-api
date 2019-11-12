@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DOB;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DATE_OF_BIRTH;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_LEGACY_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_UC_HOUSEHOLD_IDENTIFIER;
 import static uk.gov.dhsc.htbhf.eligibility.model.EligibilityStatus.ELIGIBLE;
@@ -42,7 +42,7 @@ public class EligibilityResponseTestDataFactory {
     }
 
     private static List<ChildDTO> createChildren() {
-        ChildDTO childUnderOne = ChildDTO.builder().dateOfBirth(MAGGIE_DOB).build();
+        ChildDTO childUnderOne = ChildDTO.builder().dateOfBirth(MAGGIE_DATE_OF_BIRTH).build();
         ChildDTO childUnderFour = ChildDTO.builder().dateOfBirth(LISA_DOB).build();
         return asList(childUnderOne, childUnderFour);
     }

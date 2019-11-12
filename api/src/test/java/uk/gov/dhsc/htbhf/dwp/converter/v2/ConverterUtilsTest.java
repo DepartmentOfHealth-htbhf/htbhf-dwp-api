@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_DOB_STRING;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_DATE_OF_BIRTH;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_DATE_OF_BIRTH_STRING;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.UC_MONTHLY_INCOME_THRESHOLD_IN_PENCE;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,11 +25,11 @@ class ConverterUtilsTest {
     @Test
     void shouldGetDate() {
         //Given
-        given(nativeWebRequest.getHeader(any())).willReturn(HOMER_DOB_STRING);
+        given(nativeWebRequest.getHeader(any())).willReturn(HOMER_DATE_OF_BIRTH_STRING);
         //When
         LocalDate dateOfBirth = ConverterUtils.nullSafeGetDate(nativeWebRequest, "dateOfBirth");
         //Then
-        assertThat(dateOfBirth).isEqualTo(HOMER_DOB);
+        assertThat(dateOfBirth).isEqualTo(HOMER_DATE_OF_BIRTH);
         verify(nativeWebRequest).getHeader("dateOfBirth");
     }
 

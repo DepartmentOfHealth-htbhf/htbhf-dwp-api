@@ -62,6 +62,7 @@ dependencies {
     implementation "uk.gov.dhsc.htbhf:htbhf-common-rest:latest.release"
     implementation "org.apache.commons:commons-lang3:3.8.1"
     implementation "uk.gov.dhsc.htbhf:htbhf-common-database:latest.release"
+    implementation "uk.gov.dhsc.htbhf:htbhf-common-dwp-api:latest.release"
     implementation project(":htbhf-dwp-api-db")
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
@@ -75,6 +76,7 @@ dependencies {
     testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonDataformatVersion}"
     testImplementation "org.springframework.cloud:spring-cloud-starter-contract-stub-runner:2.1.1.RELEASE"
     testImplementation "uk.gov.dhsc.htbhf:htbhf-common-test:latest.release"
+    testImplementation "uk.gov.dhsc.htbhf:htbhf-common-dwp-api-test:latest.release"
 
 
     // When editing the api documentation, this is useful to be able to view the swagger-ui on http://localhost:8080/swagger-ui.html

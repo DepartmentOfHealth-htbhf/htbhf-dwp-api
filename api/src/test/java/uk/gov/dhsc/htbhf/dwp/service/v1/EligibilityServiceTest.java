@@ -23,7 +23,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V1;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityResponseTestDataFactory.aNoMatchEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityResponseTestDataFactory.aValidUCEligibilityResponse;
@@ -65,7 +65,7 @@ class EligibilityServiceTest {
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(aValidUCEligibilityResponse());
-        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
+        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO_V1);
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
         verify(eligibilityResponseFactory).createEligibilityResponse(household, ELIGIBLE);
         verifyZeroInteractions(restTemplate);
@@ -81,7 +81,7 @@ class EligibilityServiceTest {
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(aNoMatchEligibilityResponse());
-        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
+        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO_V1);
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
         verifyZeroInteractions(restTemplate);
     }
@@ -96,7 +96,7 @@ class EligibilityServiceTest {
         EligibilityResponse response = eligibilityService.checkEligibility(eligibilityRequest);
 
         assertThat(response).isEqualTo(aValidUCEligibilityResponse());
-        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
+        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO_V1);
         verify(restTemplate).postForEntity(dwpUri + ENDPOINT, eligibilityRequest, EligibilityResponse.class);
     }
 }
