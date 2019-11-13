@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RequestHeaderToDWPEligibilityRequestV2Converter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">htbhf-dwp-api</a> &gt; <a href="index.source.html" class="el_package">uk.gov.dhsc.htbhf.dwp.converter.v2</a> &gt; <span class="el_source">RequestHeaderToDWPEligibilityRequestV2Converter.java</span></div><h1>RequestHeaderToDWPEligibilityRequestV2Converter.java</h1><pre class="source lang-java linenums">package uk.gov.dhsc.htbhf.dwp.converter.v2;
 
 import org.springframework.web.context.request.NativeWebRequest;
+import uk.gov.dhsc.htbhf.dwp.http.v2.HeaderName;
 import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
 import uk.gov.dhsc.htbhf.dwp.model.v2.PersonDTOV2;
 
 import static uk.gov.dhsc.htbhf.dwp.converter.v2.ConverterUtils.nullSafeGetDate;
 import static uk.gov.dhsc.htbhf.dwp.converter.v2.ConverterUtils.nullSafeGetInteger;
+import static uk.gov.dhsc.htbhf.dwp.http.v2.HeaderName.*;
 
 /**
  * Converts the HTTP headers in the web request given as a part of the DWP Eligibility Request into a DTO object.
  */
-<span class="fc" id="L13">public class RequestHeaderToDWPEligibilityRequestV2Converter {</span>
+<span class="fc" id="L15">public class RequestHeaderToDWPEligibilityRequestV2Converter {</span>
 
     public DWPEligibilityRequestV2 convert(NativeWebRequest webRequest) {
-<span class="fc" id="L16">        return DWPEligibilityRequestV2.builder()</span>
-<span class="fc" id="L17">                .person(buildPerson(webRequest))</span>
-<span class="fc" id="L18">                .eligibilityEndDate(nullSafeGetDate(webRequest, &quot;eligibilityEndDate&quot;))</span>
-<span class="fc" id="L19">                .ucMonthlyIncomeThresholdInPence(nullSafeGetInteger(webRequest, &quot;ucMonthlyIncomeThreshold&quot;))</span>
-<span class="fc" id="L20">                .build();</span>
+<span class="fc" id="L18">        return DWPEligibilityRequestV2.builder()</span>
+<span class="fc" id="L19">                .person(buildPerson(webRequest))</span>
+<span class="fc" id="L20">                .eligibilityEndDate(nullSafeGetDate(webRequest, ELIGIBILITY_END_DATE))</span>
+<span class="fc" id="L21">                .ucMonthlyIncomeThresholdInPence(nullSafeGetInteger(webRequest, UC_MONTHLY_INCOME_THRESHOLD))</span>
+<span class="fc" id="L22">                .build();</span>
     }
 
     private PersonDTOV2 buildPerson(NativeWebRequest webRequest) {
-<span class="fc" id="L24">        return PersonDTOV2.builder()</span>
-<span class="fc" id="L25">                .surname(webRequest.getHeader(&quot;surname&quot;))</span>
-<span class="fc" id="L26">                .nino(webRequest.getHeader(&quot;nino&quot;))</span>
-<span class="fc" id="L27">                .dateOfBirth(nullSafeGetDate(webRequest, &quot;dateOfBirth&quot;))</span>
-<span class="fc" id="L28">                .addressLine1(webRequest.getHeader(&quot;addressLine1&quot;))</span>
-<span class="fc" id="L29">                .postcode(webRequest.getHeader(&quot;postcode&quot;))</span>
-<span class="fc" id="L30">                .emailAddress(webRequest.getHeader(&quot;emailAddress&quot;))</span>
-<span class="fc" id="L31">                .mobilePhoneNumber(webRequest.getHeader(&quot;mobilePhoneNumber&quot;))</span>
-<span class="fc" id="L32">                .pregnantDependentDob(nullSafeGetDate(webRequest, &quot;pregnantDependentDob&quot;))</span>
-<span class="fc" id="L33">                .build();</span>
+<span class="fc" id="L26">        return PersonDTOV2.builder()</span>
+<span class="fc" id="L27">                .surname(getHeader(webRequest, SURNAME))</span>
+<span class="fc" id="L28">                .nino(getHeader(webRequest, NINO))</span>
+<span class="fc" id="L29">                .dateOfBirth(nullSafeGetDate(webRequest, DATE_OF_BIRTH))</span>
+<span class="fc" id="L30">                .addressLine1(getHeader(webRequest, ADDRESS_LINE_1))</span>
+<span class="fc" id="L31">                .postcode(getHeader(webRequest, POSTCODE))</span>
+<span class="fc" id="L32">                .emailAddress(getHeader(webRequest, EMAIL_ADDRESS))</span>
+<span class="fc" id="L33">                .mobilePhoneNumber(getHeader(webRequest, MOBILE_PHONE_NUMBER))</span>
+<span class="fc" id="L34">                .pregnantDependentDob(nullSafeGetDate(webRequest, PREGNANT_DEPENDENT_DOB))</span>
+<span class="fc" id="L35">                .build();</span>
+    }
+
+    private String getHeader(NativeWebRequest webRequest, HeaderName headerName) {
+<span class="fc" id="L39">        return webRequest.getHeader(headerName.getHeader());</span>
     }
 
 }
