@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityAndEligibilityResponseFactory;
+import uk.gov.dhsc.htbhf.dwp.http.v2.GetRequestBuilder;
 import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
 import uk.gov.dhsc.htbhf.dwp.model.v2.IdentityAndEligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.repository.v1.UCHouseholdRepository;
@@ -16,7 +17,7 @@ import uk.gov.dhsc.htbhf.dwp.repository.v1.UCHouseholdRepository;
 import java.util.Optional;
 
 @Service
-<span class="fc" id="L19">@Slf4j</span>
+<span class="fc" id="L20">@Slf4j</span>
 public class IdentityAndEligibilityService {
 
     private static final String DWP_ENDPOINT = &quot;/v2/dwp/benefits&quot;;
@@ -30,13 +31,13 @@ public class IdentityAndEligibilityService {
                                          RestTemplate restTemplate,
                                          UCHouseholdRepository ucHouseholdRepository,
                                          IdentityAndEligibilityResponseFactory responseFactory,
-<span class="fc" id="L33">                                         GetRequestBuilder getRequestBuilder) {</span>
-<span class="fc" id="L34">        this.uri = baseUri + DWP_ENDPOINT;</span>
-<span class="fc" id="L35">        this.ucHouseholdRepository = ucHouseholdRepository;</span>
-<span class="fc" id="L36">        this.responseFactory = responseFactory;</span>
-<span class="fc" id="L37">        this.restTemplate = restTemplate;</span>
-<span class="fc" id="L38">        this.getRequestBuilder = getRequestBuilder;</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L34">                                         GetRequestBuilder getRequestBuilder) {</span>
+<span class="fc" id="L35">        this.uri = baseUri + DWP_ENDPOINT;</span>
+<span class="fc" id="L36">        this.ucHouseholdRepository = ucHouseholdRepository;</span>
+<span class="fc" id="L37">        this.responseFactory = responseFactory;</span>
+<span class="fc" id="L38">        this.restTemplate = restTemplate;</span>
+<span class="fc" id="L39">        this.getRequestBuilder = getRequestBuilder;</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * Checks the identity and eligibility of the given request. First check the local database,
@@ -46,17 +47,17 @@ public class IdentityAndEligibilityService {
      * @return The eligibility response
      */
     public IdentityAndEligibilityResponse checkIdentityAndEligibility(DWPEligibilityRequestV2 eligibilityRequest) {
-<span class="fc" id="L49">        String nino = eligibilityRequest.getPerson().getNino();</span>
-<span class="fc" id="L50">        Optional&lt;UCHousehold&gt; ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (ucHousehold.isPresent()) {</span>
-<span class="fc" id="L52">            log.debug(&quot;Matched UC household: {}&quot;, ucHousehold.get().getId());</span>
-<span class="fc" id="L53">            return responseFactory.determineIdentityAndEligibilityResponse(ucHousehold.get(), eligibilityRequest);</span>
+<span class="fc" id="L50">        String nino = eligibilityRequest.getPerson().getNino();</span>
+<span class="fc" id="L51">        Optional&lt;UCHousehold&gt; ucHousehold = ucHouseholdRepository.findHouseholdByAdultWithNino(nino);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (ucHousehold.isPresent()) {</span>
+<span class="fc" id="L53">            log.debug(&quot;Matched UC household: {}&quot;, ucHousehold.get().getId());</span>
+<span class="fc" id="L54">            return responseFactory.determineIdentityAndEligibilityResponse(ucHousehold.get(), eligibilityRequest);</span>
         }
 
-<span class="fc" id="L56">        log.debug(&quot;No match found in db - calling DWP to check identity and eligibility&quot;);</span>
-<span class="fc" id="L57">        HttpEntity request = getRequestBuilder.buildRequestWithHeaders(eligibilityRequest);</span>
-<span class="fc" id="L58">        ResponseEntity&lt;IdentityAndEligibilityResponse&gt; response = restTemplate.exchange(uri, HttpMethod.GET, request, IdentityAndEligibilityResponse.class);</span>
-<span class="fc" id="L59">        return response.getBody();</span>
+<span class="fc" id="L57">        log.debug(&quot;No match found in db - calling DWP to check identity and eligibility&quot;);</span>
+<span class="fc" id="L58">        HttpEntity request = getRequestBuilder.buildRequestWithHeaders(eligibilityRequest);</span>
+<span class="fc" id="L59">        ResponseEntity&lt;IdentityAndEligibilityResponse&gt; response = restTemplate.exchange(uri, HttpMethod.GET, request, IdentityAndEligibilityResponse.class);</span>
+<span class="fc" id="L60">        return response.getBody();</span>
     }
 
 }

@@ -50,10 +50,6 @@
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/v1/HouseholdVerifier.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/v2/GetRequestBuilder.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/v2/HeaderName.java">
-</file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/v2/IdentityAndEligibilityService.java">
 </file>
 </checkstyle>
