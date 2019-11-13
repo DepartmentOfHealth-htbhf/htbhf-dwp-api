@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.context.request.NativeWebRequest;
+import uk.gov.dhsc.htbhf.dwp.http.v2.HeaderName;
 
 import java.time.LocalDate;
 
@@ -27,7 +28,7 @@ class ConverterUtilsTest {
         //Given
         given(nativeWebRequest.getHeader(any())).willReturn(HOMER_DATE_OF_BIRTH_STRING);
         //When
-        LocalDate dateOfBirth = ConverterUtils.nullSafeGetDate(nativeWebRequest, "dateOfBirth");
+        LocalDate dateOfBirth = ConverterUtils.nullSafeGetDate(nativeWebRequest, HeaderName.DATE_OF_BIRTH);
         //Then
         assertThat(dateOfBirth).isEqualTo(HOMER_DATE_OF_BIRTH);
         verify(nativeWebRequest).getHeader("dateOfBirth");
@@ -38,7 +39,7 @@ class ConverterUtilsTest {
         //Given
         given(nativeWebRequest.getHeader(any())).willReturn(null);
         //When
-        LocalDate dateOfBirth = ConverterUtils.nullSafeGetDate(nativeWebRequest, "dateOfBirth");
+        LocalDate dateOfBirth = ConverterUtils.nullSafeGetDate(nativeWebRequest, HeaderName.DATE_OF_BIRTH);
         //Then
         assertThat(dateOfBirth).isNull();
         verify(nativeWebRequest).getHeader("dateOfBirth");
@@ -49,7 +50,7 @@ class ConverterUtilsTest {
         //Given
         given(nativeWebRequest.getHeader(any())).willReturn("40800");
         //When
-        Integer threshold = ConverterUtils.nullSafeGetInteger(nativeWebRequest, "ucMonthlyIncomeThreshold");
+        Integer threshold = ConverterUtils.nullSafeGetInteger(nativeWebRequest, HeaderName.UC_MONTHLY_INCOME_THRESHOLD);
         //Then
         assertThat(threshold).isEqualTo(UC_MONTHLY_INCOME_THRESHOLD_IN_PENCE);
         verify(nativeWebRequest).getHeader("ucMonthlyIncomeThreshold");
@@ -60,7 +61,7 @@ class ConverterUtilsTest {
         //Given
         given(nativeWebRequest.getHeader(any())).willReturn(null);
         //When
-        Integer threshold = ConverterUtils.nullSafeGetInteger(nativeWebRequest, "ucMonthlyIncomeThreshold");
+        Integer threshold = ConverterUtils.nullSafeGetInteger(nativeWebRequest, HeaderName.UC_MONTHLY_INCOME_THRESHOLD);
         //Then
         assertThat(threshold).isNull();
         verify(nativeWebRequest).getHeader("ucMonthlyIncomeThreshold");
