@@ -23,7 +23,8 @@ class IdentityAndEligibilityResponseFactoryTest {
 
     @Test
     void shouldReturnEverythingMatchedResponse() {
-        runTest(aUCHousehold(), aValidPersonDTOV2(), anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches());
+        runTest(aUCHousehold(), aValidPersonDTOV2(), anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET,
+                MAGGIE_AND_LISA_DOBS));
     }
 
     @Test
@@ -52,7 +53,7 @@ class IdentityAndEligibilityResponseFactoryTest {
     @Test
     void shouldReturnIdentityStatusMatchedResponseForNoDateOfBirthInDatabase() {
         runTest(aUCHouseholdWithAdultDateOfBirth(null), aPersonDTOV2WithDateOfBirth(TWENTY_YEAR_OLD),
-                anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(MAGGIE_AND_LISA_DOBS));
+                anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET, MAGGIE_AND_LISA_DOBS));
     }
 
     @Test
@@ -119,7 +120,8 @@ class IdentityAndEligibilityResponseFactoryTest {
         LocalDate justUnderFourYearOld = LocalDate.now().minusYears(4).plusDays(1);
         //Note that Bart will be excluded because he is exactly 4 years old
         List<LocalDate> childrenDobsWithout5YearOld = List.of(LISA_DOB, justUnderFourYearOld);
-        IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(childrenDobsWithout5YearOld);
+        IdentityAndEligibilityResponse expectedResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET,
+                childrenDobsWithout5YearOld);
 
         UCHousehold household = aUCHouseholdWithChildren(
                 aUCChild(BART_DOB),
