@@ -106,7 +106,7 @@ class IdentityAndEligibilityServiceTest {
         assertThat(serviceResponse.getAddressLine1Match()).isEqualTo(VerificationOutcome.MATCHED);
         assertThat(serviceResponse.getPostcodeMatch()).isEqualTo(VerificationOutcome.MATCHED);
         assertThat(serviceResponse.getDeathVerificationFlag()).isEqualTo(DeathVerificationFlag.N_A);
-        assertThat(serviceResponse.getPregnantChildDOBMatch()).isEqualTo(VerificationOutcome.NOT_SET);
+        assertThat(serviceResponse.getPregnantChildDOBMatch()).isEqualTo(VerificationOutcome.NOT_SUPPLIED);
         assertThat(serviceResponse.getDobOfChildrenUnder4()).containsExactlyInAnyOrder(LISA_DOB, MAGGIE_DATE_OF_BIRTH);
     }
 

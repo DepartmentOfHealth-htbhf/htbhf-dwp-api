@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.gov.dhsc.htbhf.dwp.model.v2.IdentityAndEligibilityResponse;
+import uk.gov.dhsc.htbhf.dwp.model.v2.VerificationOutcome;
 import uk.gov.dhsc.htbhf.dwp.repository.v1.UCHouseholdRepository;
 import uk.gov.dhsc.htbhf.errorhandler.ErrorResponse;
 
@@ -26,6 +27,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V2;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_AND_LISA_DOBS;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.anEligibilityHttpEntityWithNinoAndSurname;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.anInvalidEligibilityHttpEntity;
@@ -102,7 +104,8 @@ public class DWPIntegrationTestsV2 {
 
         //Then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertResponseBodyMatches(responseEntity, anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches());
+        assertResponseBodyMatches(responseEntity, anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET,
+                MAGGIE_AND_LISA_DOBS));
         verifyNoCallToDWP();
     }
 
