@@ -21,9 +21,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V1;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_NINO_V1;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityResponseTestDataFactory.aNoMatchEligibilityResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.EligibilityResponseTestDataFactory.aValidUCEligibilityResponse;
@@ -68,7 +68,7 @@ class EligibilityServiceTest {
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO_V1);
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
         verify(eligibilityResponseFactory).createEligibilityResponse(household, ELIGIBLE);
-        verifyZeroInteractions(restTemplate);
+        verifyNoInteractions(restTemplate);
     }
 
     @Test
@@ -83,7 +83,7 @@ class EligibilityServiceTest {
         assertThat(response).isEqualTo(aNoMatchEligibilityResponse());
         verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO_V1);
         verify(householdVerifier).detailsMatch(household, eligibilityRequest.getPerson());
-        verifyZeroInteractions(restTemplate);
+        verifyNoInteractions(restTemplate);
     }
 
     @Test
