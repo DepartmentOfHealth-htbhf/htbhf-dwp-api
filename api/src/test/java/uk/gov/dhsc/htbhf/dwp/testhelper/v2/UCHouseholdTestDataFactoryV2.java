@@ -7,15 +7,15 @@ import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.*;
+import static uk.gov.dhsc.htbhf.TestConstants.*;
 
 public class UCHouseholdTestDataFactoryV2 {
 
     public static final UCAdult HOMER = aUCAdult(SIMPSON_SURNAME, HOMER_NINO_V2, HOMER_DATE_OF_BIRTH, HOMER_MOBILE, HOMER_EMAIL);
-    public static final UCAdult MARGE = aUCAdult(SIMPSON_SURNAME, MARGE_NINO_V2, MARGE_DATE_OF_BIRTH, MARGE_MOBILE, MARGE_EMAIL);
-    public static final UCChild BART = aUCChild(BART_DOB);
-    public static final UCChild LISA = aUCChild(LISA_DOB);
-    public static final UCChild MAGGIE = aUCChild(MAGGIE_DATE_OF_BIRTH);
+    private static final UCAdult MARGE = aUCAdult(SIMPSON_SURNAME, MARGE_NINO_V2, MARGE_DATE_OF_BIRTH, MARGE_MOBILE, MARGE_EMAIL);
+    private static final UCChild BART = aUCChild(BART_DATE_OF_BIRTH);
+    private static final UCChild LISA = aUCChild(LISA_DATE_OF_BIRTH);
+    private static final UCChild MAGGIE = aUCChild(MAGGIE_DATE_OF_BIRTH);
 
     public static UCHousehold aUCHousehold() {
         return aUCHouseholdWithNoAdultsOrChildren()

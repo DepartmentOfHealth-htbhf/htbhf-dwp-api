@@ -27,11 +27,11 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V2;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.LISA_DOB;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_DATE_OF_BIRTH;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_NINO_V2;
+import static uk.gov.dhsc.htbhf.TestConstants.LISA_DATE_OF_BIRTH;
+import static uk.gov.dhsc.htbhf.TestConstants.MAGGIE_DATE_OF_BIRTH;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdentityAndEligibilityResponseTestDataFactory.anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdAndEligibilityResponseTestDataFactory.anIdMatchedEligibilityConfirmedUCResponseWithAllMatches;
 
 @ExtendWith(MockitoExtension.class)
 class IdentityAndEligibilityServiceTest {
@@ -61,7 +61,7 @@ class IdentityAndEligibilityServiceTest {
         DWPEligibilityRequestV2 eligibilityRequest = DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2();
         UCHousehold ucHousehold = UCHouseholdTestDataFactoryV2.aUCHousehold();
 
-        IdentityAndEligibilityResponse response = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches();
+        IdentityAndEligibilityResponse response = anIdMatchedEligibilityConfirmedUCResponseWithAllMatches();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(any())).willReturn(Optional.of(ucHousehold));
         given(responseFactory.determineIdentityAndEligibilityResponse(any(), any())).willReturn(response);
 
@@ -80,7 +80,7 @@ class IdentityAndEligibilityServiceTest {
         //Given
         DWPEligibilityRequestV2 eligibilityRequest = DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(any())).willReturn(Optional.empty());
-        IdentityAndEligibilityResponse identityResponse = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches();
+        IdentityAndEligibilityResponse identityResponse = anIdMatchedEligibilityConfirmedUCResponseWithAllMatches();
         HttpEntity httpEntity = aValidEligibilityHttpEntity();
         given(getRequestBuilder.buildRequestWithHeaders(any())).willReturn(httpEntity);
         given(restTemplate.exchange(anyString(), any(), any(), eq(IdentityAndEligibilityResponse.class)))
@@ -107,7 +107,7 @@ class IdentityAndEligibilityServiceTest {
         assertThat(serviceResponse.getPostcodeMatch()).isEqualTo(VerificationOutcome.MATCHED);
         assertThat(serviceResponse.getDeathVerificationFlag()).isEqualTo(DeathVerificationFlag.N_A);
         assertThat(serviceResponse.getPregnantChildDOBMatch()).isEqualTo(VerificationOutcome.NOT_SUPPLIED);
-        assertThat(serviceResponse.getDobOfChildrenUnder4()).containsExactlyInAnyOrder(LISA_DOB, MAGGIE_DATE_OF_BIRTH);
+        assertThat(serviceResponse.getDobOfChildrenUnder4()).containsExactlyInAnyOrder(LISA_DATE_OF_BIRTH, MAGGIE_DATE_OF_BIRTH);
     }
 
 }

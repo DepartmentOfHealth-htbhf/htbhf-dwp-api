@@ -5,10 +5,10 @@ import uk.gov.dhsc.htbhf.dwp.model.v1.PersonDTO;
 
 import java.time.LocalDate;
 
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_DATE_OF_BIRTH;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_FORENAME;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V1;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.SIMPSON_SURNAME;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_DATE_OF_BIRTH;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_FORENAME;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_NINO_V1;
+import static uk.gov.dhsc.htbhf.TestConstants.SIMPSON_SURNAME;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.AddressDTOTestDataFactory.aValidAddress;
 
 public class PersonDTOTestDataFactory {

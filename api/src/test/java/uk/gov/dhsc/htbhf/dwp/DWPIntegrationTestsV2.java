@@ -25,14 +25,14 @@ import java.net.URI;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_NINO_V2;
+import static uk.gov.dhsc.htbhf.TestConstants.MAGGIE_AND_LISA_DOBS;
 import static uk.gov.dhsc.htbhf.assertions.IntegrationTestAssertions.assertValidationErrorInResponse;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_NINO_V2;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.MAGGIE_AND_LISA_DOBS;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.anEligibilityHttpEntityWithNinoAndSurname;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.anInvalidEligibilityHttpEntity;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdentityAndEligibilityResponseTestDataFactory.anIdentityMatchFailedResponse;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdentityAndEligibilityResponseTestDataFactory.anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdAndEligibilityResponseTestDataFactory.anIdMatchFailedResponse;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdAndEligibilityResponseTestDataFactory.anIdMatchedEligibilityConfirmedUCResponseWithAllMatches;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2.aUCHousehold;
 
 @ExtendWith(SpringExtension.class)
@@ -63,7 +63,7 @@ public class DWPIntegrationTestsV2 {
     @Test
     void shouldReturnStubResponseWhenUserNotInDatabase() throws JsonProcessingException {
         //Given
-        IdentityAndEligibilityResponse response = anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches();
+        IdentityAndEligibilityResponse response = anIdMatchedEligibilityConfirmedUCResponseWithAllMatches();
         stubDWPEndpointWithSuccessfulResponse(response);
         HttpEntity request = aValidEligibilityHttpEntity();
 
@@ -104,7 +104,7 @@ public class DWPIntegrationTestsV2 {
 
         //Then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertResponseBodyMatches(responseEntity, anIdentityMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET,
+        assertResponseBodyMatches(responseEntity, anIdMatchedEligibilityConfirmedUCResponseWithAllMatches(VerificationOutcome.NOT_SET,
                 MAGGIE_AND_LISA_DOBS));
         verifyNoCallToDWP();
     }
@@ -121,7 +121,7 @@ public class DWPIntegrationTestsV2 {
 
         //Then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertResponseBodyMatches(responseEntity, anIdentityMatchFailedResponse());
+        assertResponseBodyMatches(responseEntity, anIdMatchFailedResponse());
         verifyNoCallToDWP();
     }
 

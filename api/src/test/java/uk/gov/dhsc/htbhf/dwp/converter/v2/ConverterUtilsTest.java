@@ -13,9 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_DATE_OF_BIRTH;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.HOMER_DATE_OF_BIRTH_STRING;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.UC_MONTHLY_INCOME_THRESHOLD_IN_PENCE;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_DATE_OF_BIRTH;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_DATE_OF_BIRTH_STRING;
+import static uk.gov.dhsc.htbhf.TestConstants.UC_MONTHLY_INCOME_THRESHOLD_IN_PENCE;
 
 @ExtendWith(MockitoExtension.class)
 class ConverterUtilsTest {

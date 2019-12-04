@@ -6,7 +6,7 @@ import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
 
 import java.time.LocalDate;
 
-import static uk.gov.dhsc.htbhf.dwp.testhelper.TestConstants.*;
+import static uk.gov.dhsc.htbhf.TestConstants.*;
 
 public class UCHouseholdTestDataFactory {
 
@@ -15,8 +15,8 @@ public class UCHouseholdTestDataFactory {
                 .build()
                 .addAdult(aUCAdult(SIMPSON_SURNAME, HOMER_NINO_V1))
                 .addAdult(aUCAdult(SIMPSON_SURNAME, MARGE_NINO))
-                .addChild(aUCChild(BART_DOB))
-                .addChild(aUCChild(LISA_DOB))
+                .addChild(aUCChild(BART_DATE_OF_BIRTH))
+                .addChild(aUCChild(LISA_DATE_OF_BIRTH))
                 .addChild(aUCChild(MAGGIE_DATE_OF_BIRTH));
     }
 
@@ -27,13 +27,13 @@ public class UCHouseholdTestDataFactory {
                 .toBuilder();
     }
 
-    public static UCChild aUCChild(LocalDate dateOfBirth) {
+    private static UCChild aUCChild(LocalDate dateOfBirth) {
         return UCChild.builder()
                 .dateOfBirth(dateOfBirth)
                 .build();
     }
 
-    public static UCAdult aUCAdult(String surname, String nino) {
+    private static UCAdult aUCAdult(String surname, String nino) {
         return UCAdult.builder()
                 .surname(surname)
                 .nino(nino)
