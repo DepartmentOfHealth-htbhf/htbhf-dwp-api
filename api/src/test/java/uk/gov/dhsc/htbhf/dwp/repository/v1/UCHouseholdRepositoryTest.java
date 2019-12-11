@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v1.UCHouseholdTestDataFactory.aUCHousehold;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2.aUCHousehold;
 
 @SpringBootTest
 @AutoConfigureEmbeddedDatabase
