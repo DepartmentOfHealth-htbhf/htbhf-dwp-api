@@ -4,13 +4,9 @@
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/DWPApplication.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/controller/v1/DWPEligibilityController.java">
-</file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/controller/v2/DWPEligibilityControllerV2.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/controller/v2/DwpEligibilityRequestResolver.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/converter/v1/EligibilityRequestToDWPEligibilityRequestConverter.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/converter/v2/ConverterUtils.java">
 </file>
@@ -24,31 +20,11 @@
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/entity/uc/UCHousehold.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/factory/v1/EligibilityResponseFactory.java">
-</file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/factory/v2/IdentityAndEligibilityResponseFactory.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/factory/v2/IdentityVerificationUtils.java">
 </file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/v1/AddressDTO.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/v1/ChildDTO.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/v1/DWPEligibilityRequest.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/v1/DWPPersonDTO.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/v1/EligibilityRequest.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/v1/EligibilityResponse.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/model/v1/PersonDTO.java">
-</file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/repository/v1/UCHouseholdRepository.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/v1/EligibilityService.java">
-</file>
-<file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/v1/HouseholdVerifier.java">
 </file>
 <file name="/home/circleci/project/api/src/main/java/uk/gov/dhsc/htbhf/dwp/service/v2/IdentityAndEligibilityService.java">
 </file>
