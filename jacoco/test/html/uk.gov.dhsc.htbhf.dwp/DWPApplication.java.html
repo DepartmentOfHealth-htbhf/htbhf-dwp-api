@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uk.gov.dhsc.htbhf.CommonRestConfiguration;
 import uk.gov.dhsc.htbhf.database.CloudDBConfiguration;
-import uk.gov.dhsc.htbhf.dwp.controller.v2.DwpEligibilityRequestResolver;
-import uk.gov.dhsc.htbhf.dwp.converter.v2.RequestHeaderToDWPEligibilityRequestV2Converter;
-import uk.gov.dhsc.htbhf.dwp.http.v2.GetRequestBuilder;
+import uk.gov.dhsc.htbhf.dwp.controller.DwpEligibilityRequestResolver;
+import uk.gov.dhsc.htbhf.dwp.converter.RequestHeaderToDWPEligibilityRequestConverter;
+import uk.gov.dhsc.htbhf.dwp.http.GetRequestBuilder;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class DWPApplication implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List&lt;HandlerMethodArgumentResolver&gt; argumentResolvers) {
-<span class="fc" id="L36">        RequestHeaderToDWPEligibilityRequestV2Converter converter = new RequestHeaderToDWPEligibilityRequestV2Converter();</span>
+<span class="fc" id="L36">        RequestHeaderToDWPEligibilityRequestConverter converter = new RequestHeaderToDWPEligibilityRequestConverter();</span>
 <span class="fc" id="L37">        argumentResolvers.add(new DwpEligibilityRequestResolver(converter));</span>
 <span class="fc" id="L38">    }</span>
 

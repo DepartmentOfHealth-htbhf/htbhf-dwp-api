@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DWPEligibilityController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">htbhf-dwp-api</a> &gt; <a href="index.source.html" class="el_package">uk.gov.dhsc.htbhf.dwp.controller</a> &gt; <span class="el_source">DWPEligibilityController.java</span></div><h1>DWPEligibilityController.java</h1><pre class="source lang-java linenums">package uk.gov.dhsc.htbhf.dwp.controller;
+
+import io.swagger.annotations.*;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
+import uk.gov.dhsc.htbhf.dwp.model.IdentityAndEligibilityResponse;
+import uk.gov.dhsc.htbhf.dwp.service.IdentityAndEligibilityService;
+
+@RestController
+@RequestMapping(&quot;/v2/dwp/eligibility&quot;)
+@AllArgsConstructor
+<span class="fc" id="L16">@Slf4j</span>
+@Api(description = &quot;Endpoints for dealing with DWP Identity and Eligibility requests.&quot;)
+public class DWPEligibilityController {
+
+    private IdentityAndEligibilityService service;
+
+    /**
+     * Determines the eligibility of the claimant and checks their identity based on the given request
+     * details. The request object is built from header values in the request using
+     * {@link DwpEligibilityRequestResolver}.
+     * The request object is validated, but due to having to use the argument resolver,
+     * this is done manually in {@link DwpEligibilityRequestResolver} rather than using Spring's @Valid annotation
+     * because this doesn't work on request parameters which are built using an argument resolver.
+     *
+     * @param request The valid request object built up by {@link DwpEligibilityRequestResolver}
+     * @return The identity and eligibility response.
+     */
+    @GetMapping
+    @ApiOperation(&quot;Verify a person's identity and eligibility for benefits with DWP&quot;)
+    @ApiResponses({@ApiResponse(code = 200,
+            message = &quot;The person's identity status and eligibility for DWP Benefits&quot;,
+            response = IdentityAndEligibilityResponse.class)})
+    public IdentityAndEligibilityResponse getBenefits(@ApiParam(&quot;The identity and eligibility request for DWP benefits&quot;)
+                                                              DWPEligibilityRequest request) {
+<span class="fc" id="L40">        log.debug(&quot;Received eligibility request&quot;);</span>
+
+<span class="fc" id="L42">        IdentityAndEligibilityResponse response = service.checkIdentityAndEligibility(request);</span>
+<span class="fc" id="L43">        logResponse(response);</span>
+<span class="fc" id="L44">        return response;</span>
+    }
+
+
+    private void logResponse(IdentityAndEligibilityResponse response) {
+<span class="fc" id="L49">        log.debug(&quot;DWP identity status: {}, eligibility status: {}, qualifying benefits: {}, addressLine1: {}, postcode: {}, mobile: {}, email: {}&quot;,</span>
+<span class="fc" id="L50">                response.getIdentityStatus(), response.getEligibilityStatus(), response.getQualifyingBenefits(),</span>
+<span class="fc" id="L51">                response.getAddressLine1Match(), response.getPostcodeMatch(), response.getMobilePhoneMatch(), response.getEmailAddressMatch());</span>
+<span class="fc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
