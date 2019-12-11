@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.repository.v1;
+package uk.gov.dhsc.htbhf.dwp.repository;
 
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.AfterEach;
@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2.aUCHousehold;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
 
 @SpringBootTest
 @AutoConfigureEmbeddedDatabase

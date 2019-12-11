@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.service.v2;
+package uk.gov.dhsc.htbhf.dwp.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,12 +10,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
-import uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityAndEligibilityResponseFactory;
-import uk.gov.dhsc.htbhf.dwp.http.v2.GetRequestBuilder;
-import uk.gov.dhsc.htbhf.dwp.model.v2.*;
-import uk.gov.dhsc.htbhf.dwp.repository.v1.UCHouseholdRepository;
-import uk.gov.dhsc.htbhf.dwp.testhelper.v2.DWPEligibilityRequestV2TestDataFactory;
-import uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2;
+import uk.gov.dhsc.htbhf.dwp.factory.IdentityAndEligibilityResponseFactory;
+import uk.gov.dhsc.htbhf.dwp.http.GetRequestBuilder;
+import uk.gov.dhsc.htbhf.dwp.model.*;
+import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
+import uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory;
+import uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory;
 
 import java.util.Optional;
 
@@ -27,11 +27,11 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.http.HttpStatus.OK;
-import static uk.gov.dhsc.htbhf.TestConstants.HOMER_NINO_V2;
+import static uk.gov.dhsc.htbhf.TestConstants.HOMER_NINO;
 import static uk.gov.dhsc.htbhf.TestConstants.LISA_DATE_OF_BIRTH;
 import static uk.gov.dhsc.htbhf.TestConstants.MAGGIE_DATE_OF_BIRTH;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.IdAndEligibilityResponseTestDataFactory.anIdMatchedEligibilityConfirmedUCResponseWithAllMatches;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.HttpRequestTestDataFactory.aValidEligibilityHttpEntity;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.IdAndEligibilityResponseTestDataFactory.anIdMatchedEligibilityConfirmedUCResponseWithAllMatches;
 
 @ExtendWith(MockitoExtension.class)
 class IdentityAndEligibilityServiceTest {
@@ -58,8 +58,8 @@ class IdentityAndEligibilityServiceTest {
     @Test
     void shouldReturnAllMatchResponseForMatchingHouseholdInDbCheckIdentityAndEligibility() {
         //Given
-        DWPEligibilityRequestV2 eligibilityRequest = DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2();
-        UCHousehold ucHousehold = UCHouseholdTestDataFactoryV2.aUCHousehold();
+        DWPEligibilityRequest eligibilityRequest = DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest();
+        UCHousehold ucHousehold = UCHouseholdTestDataFactory.aUCHousehold();
 
         IdentityAndEligibilityResponse response = anIdMatchedEligibilityConfirmedUCResponseWithAllMatches();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(any())).willReturn(Optional.of(ucHousehold));
@@ -70,7 +70,7 @@ class IdentityAndEligibilityServiceTest {
 
         //Then
         assertEligibleResponse(serviceResponse);
-        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO_V2);
+        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
         verify(responseFactory).determineIdentityAndEligibilityResponse(ucHousehold, eligibilityRequest);
         verifyNoInteractions(restTemplate, getRequestBuilder);
     }
@@ -78,7 +78,7 @@ class IdentityAndEligibilityServiceTest {
     @Test
     void shouldReturnResponseFromApiCallForHouseholdNotInDatabase() {
         //Given
-        DWPEligibilityRequestV2 eligibilityRequest = DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2();
+        DWPEligibilityRequest eligibilityRequest = DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(any())).willReturn(Optional.empty());
         IdentityAndEligibilityResponse identityResponse = anIdMatchedEligibilityConfirmedUCResponseWithAllMatches();
         HttpEntity httpEntity = aValidEligibilityHttpEntity();
@@ -91,7 +91,7 @@ class IdentityAndEligibilityServiceTest {
 
         //Then
         assertEligibleResponse(serviceResponse);
-        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO_V2);
+        verify(ucHouseholdRepository).findHouseholdByAdultWithNino(HOMER_NINO);
         verify(restTemplate).exchange(FULL_URI, HttpMethod.GET, httpEntity, IdentityAndEligibilityResponse.class);
         verify(getRequestBuilder).buildRequestWithHeaders(eligibilityRequest);
         verifyNoInteractions(responseFactory);

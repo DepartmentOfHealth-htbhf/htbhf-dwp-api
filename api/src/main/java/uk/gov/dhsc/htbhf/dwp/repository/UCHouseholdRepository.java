@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.repository.v1;
+package uk.gov.dhsc.htbhf.dwp.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

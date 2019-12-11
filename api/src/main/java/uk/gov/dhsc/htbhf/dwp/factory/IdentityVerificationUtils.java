@@ -1,9 +1,9 @@
-package uk.gov.dhsc.htbhf.dwp.factory.v2;
+package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.flywaydb.core.internal.util.StringUtils;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
-import uk.gov.dhsc.htbhf.dwp.model.v2.PersonDTOV2;
-import uk.gov.dhsc.htbhf.dwp.model.v2.VerificationOutcome;
+import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
+import uk.gov.dhsc.htbhf.dwp.model.VerificationOutcome;
 
 import java.util.function.BiPredicate;
 
@@ -66,7 +66,7 @@ public class IdentityVerificationUtils {
      * @param person The person to match against the seeded data.
      * @return true if match, else false.
      */
-    public static boolean matchingAdult(UCAdult adult, PersonDTOV2 person) {
+    public static boolean matchingAdult(UCAdult adult, PersonDTO person) {
         return areEqual(adult.getNino(), person.getNino())
                 && areEqual(adult.getSurname(), person.getSurname())
                 && dateOfBirthMatches(adult, person);
@@ -90,7 +90,7 @@ public class IdentityVerificationUtils {
         return s1.trim().equalsIgnoreCase(s2.trim());
     }
 
-    private static boolean dateOfBirthMatches(UCAdult ucAdult, PersonDTOV2 person) {
+    private static boolean dateOfBirthMatches(UCAdult ucAdult, PersonDTO person) {
         if (ucAdult.getDateOfBirth() == null) {
             return true;
         }
