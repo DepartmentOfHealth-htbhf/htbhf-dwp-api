@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.context.request.NativeWebRequest;
-import uk.gov.dhsc.htbhf.dwp.http.v2.HeaderName;
+import uk.gov.dhsc.htbhf.dwp.http.HeaderName;
 
 import java.time.LocalDate;
 

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCChild;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
-import uk.gov.dhsc.htbhf.dwp.model.v2.*;
+import uk.gov.dhsc.htbhf.dwp.model.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,10 +28,10 @@ public class IdentityAndEligibilityResponseFactory {
      * @param request   request to check
      * @return the response based on what's the request and the household in the database.
      */
-    public IdentityAndEligibilityResponse determineIdentityAndEligibilityResponse(UCHousehold household, DWPEligibilityRequestV2 request) {
+    public IdentityAndEligibilityResponse determineIdentityAndEligibilityResponse(UCHousehold household, DWPEligibilityRequest request) {
 
         IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder = setupDefaultBuilder();
-        PersonDTOV2 person = request.getPerson();
+        PersonDTO person = request.getPerson();
         IdentityOutcome identityStatus = determineIdentityStatus(household, person, builder);
         EligibilityOutcome eligibilityStatus = determineAndSetEligibilityStatus(identityStatus, household, builder);
 
@@ -56,7 +56,7 @@ public class IdentityAndEligibilityResponseFactory {
         return builder.build();
     }
 
-    private void setPregnantDependantDob(PersonDTOV2 person, IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+    private void setPregnantDependantDob(PersonDTO person, IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         if (person.getPregnantDependentDob() == null) {
             builder.pregnantChildDOBMatch(VerificationOutcome.NOT_SUPPLIED);
         }
@@ -72,7 +72,7 @@ public class IdentityAndEligibilityResponseFactory {
         builder.dobOfChildrenUnder4(childrenDobs);
     }
 
-    private void setMobileVerificationOutcome(UCAdult matchingAdult, PersonDTOV2 person,
+    private void setMobileVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
                                               IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         VerificationOutcome mobileVerificationOutcome = determineVerificationOutcome(
                 matchingAdult.getMobilePhoneNumber(),
@@ -81,7 +81,7 @@ public class IdentityAndEligibilityResponseFactory {
         builder.mobilePhoneMatch(mobileVerificationOutcome);
     }
 
-    private void setEmailVerificationOutcome(UCAdult matchingAdult, PersonDTOV2 person,
+    private void setEmailVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
                                              IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         VerificationOutcome emailVerificationOutcome = determineVerificationOutcome(
                 matchingAdult.getEmailAddress(),
@@ -90,7 +90,7 @@ public class IdentityAndEligibilityResponseFactory {
         builder.emailAddressMatch(emailVerificationOutcome);
     }
 
-    private VerificationOutcome determinePostcodeVerificationOutcome(UCAdult matchingAdult, PersonDTOV2 person,
+    private VerificationOutcome determinePostcodeVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
                                                                      IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         VerificationOutcome postcodeVerificationOutcome = (areEqualIgnoringWhitespace(matchingAdult.getPostcode(), person.getPostcode()))
                 ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;
@@ -98,7 +98,7 @@ public class IdentityAndEligibilityResponseFactory {
         return postcodeVerificationOutcome;
     }
 
-    private VerificationOutcome determineAddressLine1VerificationOutcome(UCAdult adult, PersonDTOV2 person,
+    private VerificationOutcome determineAddressLine1VerificationOutcome(UCAdult adult, PersonDTO person,
                                                                          IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         VerificationOutcome addressLine1VerificationOutcome = (firstSixCharacterMatch(adult.getAddressLine1(), person.getAddressLine1()))
                 ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;
@@ -123,7 +123,7 @@ public class IdentityAndEligibilityResponseFactory {
         return EligibilityOutcome.CONFIRMED;
     }
 
-    private IdentityOutcome determineIdentityStatus(UCHousehold household, PersonDTOV2 person,
+    private IdentityOutcome determineIdentityStatus(UCHousehold household, PersonDTO person,
                                                     IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         IdentityOutcome identityStatus = household.getAdults().stream().anyMatch(adult -> matchingAdult(adult, person))
                 ? IdentityOutcome.MATCHED : IdentityOutcome.NOT_MATCHED;

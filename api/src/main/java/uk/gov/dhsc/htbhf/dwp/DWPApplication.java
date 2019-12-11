@@ -11,8 +11,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uk.gov.dhsc.htbhf.CommonRestConfiguration;
 import uk.gov.dhsc.htbhf.database.CloudDBConfiguration;
 import uk.gov.dhsc.htbhf.dwp.controller.v2.DwpEligibilityRequestResolver;
-import uk.gov.dhsc.htbhf.dwp.converter.v2.RequestHeaderToDWPEligibilityRequestV2Converter;
-import uk.gov.dhsc.htbhf.dwp.http.v2.GetRequestBuilder;
+import uk.gov.dhsc.htbhf.dwp.converter.v2.RequestHeaderToDWPEligibilityRequestConverter;
+import uk.gov.dhsc.htbhf.dwp.http.GetRequestBuilder;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class DWPApplication implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        RequestHeaderToDWPEligibilityRequestV2Converter converter = new RequestHeaderToDWPEligibilityRequestV2Converter();
+        RequestHeaderToDWPEligibilityRequestConverter converter = new RequestHeaderToDWPEligibilityRequestConverter();
         argumentResolvers.add(new DwpEligibilityRequestResolver(converter));
     }
 

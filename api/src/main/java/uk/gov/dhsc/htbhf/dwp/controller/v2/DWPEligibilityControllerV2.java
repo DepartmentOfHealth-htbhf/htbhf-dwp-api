@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
-import uk.gov.dhsc.htbhf.dwp.model.v2.IdentityAndEligibilityResponse;
+import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
+import uk.gov.dhsc.htbhf.dwp.model.IdentityAndEligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.service.v2.IdentityAndEligibilityService;
 
 @RestController
@@ -36,7 +36,7 @@ public class DWPEligibilityControllerV2 {
             message = "The person's identity status and eligibility for DWP Benefits",
             response = IdentityAndEligibilityResponse.class)})
     public IdentityAndEligibilityResponse getBenefits(@ApiParam("The identity and eligibility request for DWP benefits")
-                                                              DWPEligibilityRequestV2 request) {
+                                                              DWPEligibilityRequest request) {
         log.debug("Received eligibility request");
 
         IdentityAndEligibilityResponse response = service.checkIdentityAndEligibility(request);

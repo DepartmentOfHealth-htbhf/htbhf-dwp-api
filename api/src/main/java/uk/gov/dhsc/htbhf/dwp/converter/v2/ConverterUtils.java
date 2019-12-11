@@ -1,7 +1,7 @@
 package uk.gov.dhsc.htbhf.dwp.converter.v2;
 
 import org.springframework.web.context.request.NativeWebRequest;
-import uk.gov.dhsc.htbhf.dwp.http.v2.HeaderName;
+import uk.gov.dhsc.htbhf.dwp.http.HeaderName;
 
 import java.time.LocalDate;
 

@@ -6,18 +6,18 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
-import uk.gov.dhsc.htbhf.dwp.model.v2.PersonDTOV2;
-import uk.gov.dhsc.htbhf.dwp.model.v2.VerificationOutcome;
+import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
+import uk.gov.dhsc.htbhf.dwp.model.VerificationOutcome;
 
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static uk.gov.dhsc.htbhf.TestConstants.*;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.PersonDTOV2TestDataFactory.aPersonDTOV2WithDateOfBirth;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.PersonDTOV2TestDataFactory.aPersonDTOV2WithNino;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.PersonDTOV2TestDataFactory.aPersonDTOV2WithSurname;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.PersonDTOV2TestDataFactory.aValidPersonDTOV2;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.aPersonDTOWithDateOfBirth;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.aPersonDTOWithNino;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.aPersonDTOWithSurname;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.aValidPersonDTO;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2.HOMER;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2.aUCAdult;
 
@@ -59,31 +59,31 @@ class IdentityVerificationUtilsTest {
 
     @Test
     void shouldMatchAdult() {
-        assertThat(IdentityVerificationUtils.matchingAdult(HOMER, aValidPersonDTOV2())).isTrue();
+        assertThat(IdentityVerificationUtils.matchingAdult(HOMER, aValidPersonDTO())).isTrue();
     }
 
     @Test
     void shouldFailToMatchAdultWithDifferentSurname() {
-        PersonDTOV2 person = aPersonDTOV2WithSurname("Doe");
+        PersonDTO person = aPersonDTOWithSurname("Doe");
         assertThat(IdentityVerificationUtils.matchingAdult(HOMER, person)).isFalse();
     }
 
     @Test
     void shouldFailToMatchAdultWithDifferentNino() {
-        PersonDTOV2 person = aPersonDTOV2WithNino(MARGE_NINO_V2);
+        PersonDTO person = aPersonDTOWithNino(MARGE_NINO);
         assertThat(IdentityVerificationUtils.matchingAdult(HOMER, person)).isFalse();
     }
 
     @Test
     void shouldFailToMatchAdultWithDifferentDateOfBirth() {
-        PersonDTOV2 person = aPersonDTOV2WithDateOfBirth(MARGE_DATE_OF_BIRTH);
+        PersonDTO person = aPersonDTOWithDateOfBirth(MARGE_DATE_OF_BIRTH);
         assertThat(IdentityVerificationUtils.matchingAdult(HOMER, person)).isFalse();
     }
 
     @Test
     void shouldMatchAdultWithNoDateOfBirthInUCAdult() {
-        UCAdult homer = aUCAdult(SIMPSON_SURNAME, HOMER_NINO_V2, null, HOMER_MOBILE, HOMER_EMAIL);
-        assertThat(IdentityVerificationUtils.matchingAdult(homer, aValidPersonDTOV2())).isTrue();
+        UCAdult homer = aUCAdult(SIMPSON_SURNAME, HOMER_NINO, null, HOMER_MOBILE, HOMER_EMAIL);
+        assertThat(IdentityVerificationUtils.matchingAdult(homer, aValidPersonDTO())).isTrue();
     }
 
     @ParameterizedTest

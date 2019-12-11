@@ -9,32 +9,32 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import uk.gov.dhsc.htbhf.dwp.converter.v2.RequestHeaderToDWPEligibilityRequestV2Converter;
-import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
+import uk.gov.dhsc.htbhf.dwp.converter.v2.RequestHeaderToDWPEligibilityRequestConverter;
+import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 
 import javax.annotation.Nonnull;
 
 @AllArgsConstructor
 public class DwpEligibilityRequestResolver implements HandlerMethodArgumentResolver {
 
-    private RequestHeaderToDWPEligibilityRequestV2Converter converter;
+    private RequestHeaderToDWPEligibilityRequestConverter converter;
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
-        return methodParameter.getParameterType().equals(DWPEligibilityRequestV2.class);
+        return methodParameter.getParameterType().equals(DWPEligibilityRequest.class);
     }
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, @Nonnull WebDataBinderFactory binderFactory) throws Exception {
-        DWPEligibilityRequestV2 request = converter.convert(webRequest);
+        DWPEligibilityRequest request = converter.convert(webRequest);
         validateRequest(parameter, webRequest, binderFactory, request);
         return request;
     }
 
     @SuppressWarnings("PMD.SignatureDeclareThrowsException")
     private void validateRequest(MethodParameter parameter, NativeWebRequest webRequest, WebDataBinderFactory binderFactory,
-                                 DWPEligibilityRequestV2 request) throws Exception {
+                                 DWPEligibilityRequest request) throws Exception {
         WebDataBinder binder = binderFactory.createBinder(webRequest, request, "request");
         binder.validate();
         BindingResult bindingResult = binder.getBindingResult();

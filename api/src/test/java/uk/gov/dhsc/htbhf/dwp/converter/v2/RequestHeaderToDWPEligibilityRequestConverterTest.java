@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.context.request.NativeWebRequest;
-import uk.gov.dhsc.htbhf.dwp.model.v2.DWPEligibilityRequestV2;
+import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,12 +13,12 @@ import java.time.format.DateTimeFormatter;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.lenient;
 import static uk.gov.dhsc.htbhf.TestConstants.*;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.DWPEligibilityRequestV2TestDataFactory.aValidDWPEligibilityRequestV2;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest;
 
 @ExtendWith(MockitoExtension.class)
-class RequestHeaderToDWPEligibilityRequestV2ConverterTest {
+class RequestHeaderToDWPEligibilityRequestConverterTest {
 
-    private RequestHeaderToDWPEligibilityRequestV2Converter converter = new RequestHeaderToDWPEligibilityRequestV2Converter();
+    private RequestHeaderToDWPEligibilityRequestConverter converter = new RequestHeaderToDWPEligibilityRequestConverter();
 
     @Mock
     private NativeWebRequest nativeWebRequest;
@@ -31,7 +31,7 @@ class RequestHeaderToDWPEligibilityRequestV2ConverterTest {
         lenient().when(nativeWebRequest.getHeader("eligibilityEndDate")).thenReturn(eligibilityDateString);
         lenient().when(nativeWebRequest.getHeader("ucMonthlyIncomeThreshold")).thenReturn(String.valueOf(UC_MONTHLY_INCOME_THRESHOLD_IN_PENCE));
         lenient().when(nativeWebRequest.getHeader("surname")).thenReturn(SIMPSON_SURNAME);
-        lenient().when(nativeWebRequest.getHeader("nino")).thenReturn(HOMER_NINO_V2);
+        lenient().when(nativeWebRequest.getHeader("nino")).thenReturn(HOMER_NINO);
         lenient().when(nativeWebRequest.getHeader("dateOfBirth")).thenReturn(HOMER_DATE_OF_BIRTH_STRING);
         lenient().when(nativeWebRequest.getHeader("addressLine1")).thenReturn(SIMPSONS_ADDRESS_LINE_1);
         lenient().when(nativeWebRequest.getHeader("postcode")).thenReturn(SIMPSONS_POSTCODE);
@@ -39,9 +39,9 @@ class RequestHeaderToDWPEligibilityRequestV2ConverterTest {
         lenient().when(nativeWebRequest.getHeader("mobilePhoneNumber")).thenReturn(HOMER_MOBILE);
         lenient().when(nativeWebRequest.getHeader("pregnantDependentDob")).thenReturn(MAGGIE_DATE_OF_BIRTH_STRING);
         //When
-        DWPEligibilityRequestV2 request = converter.convert(nativeWebRequest);
+        DWPEligibilityRequest request = converter.convert(nativeWebRequest);
         //Then
-        assertThat(request).isEqualTo(aValidDWPEligibilityRequestV2());
+        assertThat(request).isEqualTo(aValidDWPEligibilityRequest());
     }
 
 }
