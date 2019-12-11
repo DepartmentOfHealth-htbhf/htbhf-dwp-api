@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.factory.v2;
+package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.flywaydb.core.internal.util.StringUtils;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;

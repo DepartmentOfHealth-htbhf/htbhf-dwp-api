@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.controller.v2;
+package uk.gov.dhsc.htbhf.dwp.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.core.MethodParameter;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import uk.gov.dhsc.htbhf.dwp.converter.v2.RequestHeaderToDWPEligibilityRequestConverter;
+import uk.gov.dhsc.htbhf.dwp.converter.RequestHeaderToDWPEligibilityRequestConverter;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 
 import javax.annotation.Nonnull;

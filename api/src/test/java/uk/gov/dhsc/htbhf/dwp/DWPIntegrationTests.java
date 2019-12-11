@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.gov.dhsc.htbhf.dwp.model.IdentityAndEligibilityResponse;
 import uk.gov.dhsc.htbhf.dwp.model.VerificationOutcome;
-import uk.gov.dhsc.htbhf.dwp.repository.v1.UCHouseholdRepository;
+import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import uk.gov.dhsc.htbhf.errorhandler.ErrorResponse;
 
 import java.net.URI;
@@ -33,13 +33,13 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.HttpRequestTestDataFactory.anElig
 import static uk.gov.dhsc.htbhf.dwp.testhelper.HttpRequestTestDataFactory.anInvalidEligibilityHttpEntity;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.IdAndEligibilityResponseTestDataFactory.anIdMatchFailedResponse;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.IdAndEligibilityResponseTestDataFactory.anIdMatchedEligibilityConfirmedUCResponseWithAllMatches;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2.aUCHousehold;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHousehold;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureEmbeddedDatabase
 @AutoConfigureWireMock(port = 8120)
-public class DWPIntegrationTestsV2 {
+public class DWPIntegrationTests {
 
     private static final URI ENDPOINT = URI.create("/v2/dwp/eligibility");
 

@@ -1,12 +1,12 @@
-package uk.gov.dhsc.htbhf.dwp.converter.v2;
+package uk.gov.dhsc.htbhf.dwp.converter;
 
 import org.springframework.web.context.request.NativeWebRequest;
 import uk.gov.dhsc.htbhf.dwp.http.HeaderName;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.PersonDTO;
 
-import static uk.gov.dhsc.htbhf.dwp.converter.v2.ConverterUtils.nullSafeGetDate;
-import static uk.gov.dhsc.htbhf.dwp.converter.v2.ConverterUtils.nullSafeGetInteger;
+import static uk.gov.dhsc.htbhf.dwp.converter.ConverterUtils.nullSafeGetDate;
+import static uk.gov.dhsc.htbhf.dwp.converter.ConverterUtils.nullSafeGetInteger;
 import static uk.gov.dhsc.htbhf.dwp.http.HeaderName.*;
 
 /**

@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.factory.v2;
+package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.springframework.stereotype.Component;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCAdult;
@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
-import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.areEqualIgnoringWhitespace;
-import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.determineVerificationOutcome;
-import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.firstSixCharacterMatch;
-import static uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityVerificationUtils.matchingAdult;
+import static uk.gov.dhsc.htbhf.dwp.factory.IdentityVerificationUtils.areEqualIgnoringWhitespace;
+import static uk.gov.dhsc.htbhf.dwp.factory.IdentityVerificationUtils.determineVerificationOutcome;
+import static uk.gov.dhsc.htbhf.dwp.factory.IdentityVerificationUtils.firstSixCharacterMatch;
+import static uk.gov.dhsc.htbhf.dwp.factory.IdentityVerificationUtils.matchingAdult;
 
 @Component
 public class IdentityAndEligibilityResponseFactory {

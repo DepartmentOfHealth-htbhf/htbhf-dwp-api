@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.service.v2;
+package uk.gov.dhsc.htbhf.dwp.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,11 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
-import uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityAndEligibilityResponseFactory;
+import uk.gov.dhsc.htbhf.dwp.factory.IdentityAndEligibilityResponseFactory;
 import uk.gov.dhsc.htbhf.dwp.http.GetRequestBuilder;
 import uk.gov.dhsc.htbhf.dwp.model.DWPEligibilityRequest;
 import uk.gov.dhsc.htbhf.dwp.model.IdentityAndEligibilityResponse;
-import uk.gov.dhsc.htbhf.dwp.repository.v1.UCHouseholdRepository;
+import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 
 import java.util.Optional;
 

@@ -14,13 +14,13 @@ info:
 host: "N/A"
 basePath: "/"
 tags:
-- name: "dwp-eligibility-controller-v-2"
+- name: "dwp-eligibility-controller"
   description: "Endpoints for dealing with DWP Identity and Eligibility requests."
 paths:
   /v2/dwp/eligibility:
     get:
       tags:
-      - "dwp-eligibility-controller-v-2"
+      - "dwp-eligibility-controller"
       summary: "Verify a person's identity and eligibility for benefits with DWP"
       operationId: "getBenefitsUsingGET"
       produces:

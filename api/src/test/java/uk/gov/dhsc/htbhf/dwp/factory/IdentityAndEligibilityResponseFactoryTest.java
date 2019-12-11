@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.factory.v2;
+package uk.gov.dhsc.htbhf.dwp.factory;
 
 import org.junit.jupiter.api.Test;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static uk.gov.dhsc.htbhf.TestConstants.*;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.IdAndEligibilityResponseTestDataFactory.*;
 import static uk.gov.dhsc.htbhf.dwp.testhelper.PersonDTOTestDataFactory.*;
-import static uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2.*;
+import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.*;
 
 class IdentityAndEligibilityResponseFactoryTest {
 

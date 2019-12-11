@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.converter.v2;
+package uk.gov.dhsc.htbhf.dwp.converter;
 
 import org.springframework.web.context.request.NativeWebRequest;
 import uk.gov.dhsc.htbhf.dwp.http.HeaderName;

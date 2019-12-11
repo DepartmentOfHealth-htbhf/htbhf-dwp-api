@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uk.gov.dhsc.htbhf.CommonRestConfiguration;
 import uk.gov.dhsc.htbhf.database.CloudDBConfiguration;
-import uk.gov.dhsc.htbhf.dwp.controller.v2.DwpEligibilityRequestResolver;
-import uk.gov.dhsc.htbhf.dwp.converter.v2.RequestHeaderToDWPEligibilityRequestConverter;
+import uk.gov.dhsc.htbhf.dwp.controller.DwpEligibilityRequestResolver;
+import uk.gov.dhsc.htbhf.dwp.converter.RequestHeaderToDWPEligibilityRequestConverter;
 import uk.gov.dhsc.htbhf.dwp.http.GetRequestBuilder;
 
 import java.util.List;

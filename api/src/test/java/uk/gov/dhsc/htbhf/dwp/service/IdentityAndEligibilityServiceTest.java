@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.service.v2;
+package uk.gov.dhsc.htbhf.dwp.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,12 +10,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import uk.gov.dhsc.htbhf.dwp.entity.uc.UCHousehold;
-import uk.gov.dhsc.htbhf.dwp.factory.v2.IdentityAndEligibilityResponseFactory;
+import uk.gov.dhsc.htbhf.dwp.factory.IdentityAndEligibilityResponseFactory;
 import uk.gov.dhsc.htbhf.dwp.http.GetRequestBuilder;
 import uk.gov.dhsc.htbhf.dwp.model.*;
-import uk.gov.dhsc.htbhf.dwp.repository.v1.UCHouseholdRepository;
+import uk.gov.dhsc.htbhf.dwp.repository.UCHouseholdRepository;
 import uk.gov.dhsc.htbhf.dwp.testhelper.DWPEligibilityRequestTestDataFactory;
-import uk.gov.dhsc.htbhf.dwp.testhelper.v2.UCHouseholdTestDataFactoryV2;
+import uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory;
 
 import java.util.Optional;
 
@@ -59,7 +59,7 @@ class IdentityAndEligibilityServiceTest {
     void shouldReturnAllMatchResponseForMatchingHouseholdInDbCheckIdentityAndEligibility() {
         //Given
         DWPEligibilityRequest eligibilityRequest = DWPEligibilityRequestTestDataFactory.aValidDWPEligibilityRequest();
-        UCHousehold ucHousehold = UCHouseholdTestDataFactoryV2.aUCHousehold();
+        UCHousehold ucHousehold = UCHouseholdTestDataFactory.aUCHousehold();
 
         IdentityAndEligibilityResponse response = anIdMatchedEligibilityConfirmedUCResponseWithAllMatches();
         given(ucHouseholdRepository.findHouseholdByAdultWithNino(any())).willReturn(Optional.of(ucHousehold));

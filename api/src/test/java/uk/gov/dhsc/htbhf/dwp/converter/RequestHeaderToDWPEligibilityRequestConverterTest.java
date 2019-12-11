@@ -1,4 +1,4 @@
-package uk.gov.dhsc.htbhf.dwp.converter.v2;
+package uk.gov.dhsc.htbhf.dwp.converter;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
