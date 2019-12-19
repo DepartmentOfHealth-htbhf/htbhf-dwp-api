@@ -41,6 +41,8 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.aUCHou
 @AutoConfigureWireMock(port = 8120)
 public class DWPIntegrationTests {
 
+    private static final String DOB_OF_CHILDREN_FIELD_NAME = "dobOfChildrenUnder4";
+
     private static final URI ENDPOINT = URI.create("/v2/dwp/eligibility");
 
     private static final String DWP_URL = "/v2/dwp/benefits";
@@ -141,15 +143,7 @@ public class DWPIntegrationTests {
     private void assertResponseBodyMatches(ResponseEntity<IdentityAndEligibilityResponse> responseEntity, IdentityAndEligibilityResponse expectedResponse) {
         IdentityAndEligibilityResponse serviceResponse = responseEntity.getBody();
         assertThat(serviceResponse).isNotNull();
-        assertThat(serviceResponse.getIdentityStatus()).isEqualTo(expectedResponse.getIdentityStatus());
-        assertThat(serviceResponse.getEligibilityStatus()).isEqualTo(expectedResponse.getEligibilityStatus());
-        assertThat(serviceResponse.getQualifyingBenefits()).isEqualTo(expectedResponse.getQualifyingBenefits());
-        assertThat(serviceResponse.getMobilePhoneMatch()).isEqualTo(expectedResponse.getMobilePhoneMatch());
-        assertThat(serviceResponse.getEmailAddressMatch()).isEqualTo(expectedResponse.getEmailAddressMatch());
-        assertThat(serviceResponse.getAddressLine1Match()).isEqualTo(expectedResponse.getAddressLine1Match());
-        assertThat(serviceResponse.getPostcodeMatch()).isEqualTo(expectedResponse.getPostcodeMatch());
-        assertThat(serviceResponse.getDeathVerificationFlag()).isEqualTo(expectedResponse.getDeathVerificationFlag());
-        assertThat(serviceResponse.getPregnantChildDOBMatch()).isEqualTo(expectedResponse.getPregnantChildDOBMatch());
+        assertThat(serviceResponse).isEqualToIgnoringGivenFields(expectedResponse, DOB_OF_CHILDREN_FIELD_NAME);
         assertThat(serviceResponse.getDobOfChildrenUnder4()).containsExactlyInAnyOrderElementsOf(expectedResponse.getDobOfChildrenUnder4());
     }
 
