@@ -41,109 +41,103 @@ import static uk.gov.dhsc.htbhf.dwp.factory.IdentityVerificationUtils.matchingAd
 
 <span class="fc" id="L42">        UCAdult matchingAdult = household.getAdults().stream().filter(adult -&gt; matchingAdult(adult, person)).findFirst().get();</span>
 
-<span class="fc" id="L44">        VerificationOutcome addressLine1VerificationOutcome = determineAddressLine1VerificationOutcome(matchingAdult, person, builder);</span>
-<span class="fc" id="L45">        VerificationOutcome postcodeVerificationOutcome = determinePostcodeVerificationOutcome(matchingAdult, person, builder);</span>
+<span class="fc" id="L44">        setAddressLine1VerificationOutcome(matchingAdult, person, builder);</span>
+<span class="fc" id="L45">        setPostcodeVerificationOutcome(matchingAdult, person, builder);</span>
 
-<span class="fc bfc" id="L47" title="All 4 branches covered.">        if (VerificationOutcome.NOT_MATCHED == addressLine1VerificationOutcome || VerificationOutcome.NOT_MATCHED == postcodeVerificationOutcome) {</span>
-<span class="fc" id="L48">            return builder.build();</span>
-        }
-
-<span class="fc" id="L51">        builder.qualifyingBenefits(QualifyingBenefits.UNIVERSAL_CREDIT);</span>
-<span class="fc" id="L52">        setEmailVerificationOutcome(matchingAdult, person, builder);</span>
-<span class="fc" id="L53">        setMobileVerificationOutcome(matchingAdult, person, builder);</span>
-<span class="fc" id="L54">        setDobOfChildrenUnder4(household, builder);</span>
-<span class="fc" id="L55">        setPregnantDependantDob(person, builder);</span>
-<span class="fc" id="L56">        return builder.build();</span>
+<span class="fc" id="L47">        builder.qualifyingBenefits(QualifyingBenefits.UNIVERSAL_CREDIT);</span>
+<span class="fc" id="L48">        setEmailVerificationOutcome(matchingAdult, person, builder);</span>
+<span class="fc" id="L49">        setMobileVerificationOutcome(matchingAdult, person, builder);</span>
+<span class="fc" id="L50">        setDobOfChildrenUnder4(household, builder);</span>
+<span class="fc" id="L51">        setPregnantDependantDob(person, builder);</span>
+<span class="fc" id="L52">        return builder.build();</span>
     }
 
     private void setPregnantDependantDob(PersonDTO person, IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (person.getPregnantDependentDob() == null) {</span>
-<span class="fc" id="L61">            builder.pregnantChildDOBMatch(VerificationOutcome.NOT_SUPPLIED);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (person.getPregnantDependentDob() == null) {</span>
+<span class="fc" id="L57">            builder.pregnantChildDOBMatch(VerificationOutcome.NOT_SUPPLIED);</span>
         }
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L59">    }</span>
 
     //Make sure we only include those children which are under 4
     private void setDobOfChildrenUnder4(UCHousehold household, IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc" id="L67">        LocalDate fourYearsAgo = LocalDate.now().minusYears(4);</span>
-<span class="fc" id="L68">        List&lt;LocalDate&gt; childrenDobs = household.getChildren().stream()</span>
-<span class="fc" id="L69">                .filter(child -&gt; child.getDateOfBirth().isAfter(fourYearsAgo))</span>
-<span class="fc" id="L70">                .map(UCChild::getDateOfBirth)</span>
-<span class="fc" id="L71">                .collect(Collectors.toList());</span>
-<span class="fc" id="L72">        builder.dobOfChildrenUnder4(childrenDobs);</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L63">        LocalDate fourYearsAgo = LocalDate.now().minusYears(4);</span>
+<span class="fc" id="L64">        List&lt;LocalDate&gt; childrenDobs = household.getChildren().stream()</span>
+<span class="fc" id="L65">                .filter(child -&gt; child.getDateOfBirth().isAfter(fourYearsAgo))</span>
+<span class="fc" id="L66">                .map(UCChild::getDateOfBirth)</span>
+<span class="fc" id="L67">                .collect(Collectors.toList());</span>
+<span class="fc" id="L68">        builder.dobOfChildrenUnder4(childrenDobs);</span>
+<span class="fc" id="L69">    }</span>
 
     private void setMobileVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
                                               IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc" id="L77">        VerificationOutcome mobileVerificationOutcome = determineVerificationOutcome(</span>
-<span class="fc" id="L78">                matchingAdult.getMobilePhoneNumber(),</span>
-<span class="fc" id="L79">                person.getMobilePhoneNumber(),</span>
+<span class="fc" id="L73">        VerificationOutcome mobileVerificationOutcome = determineVerificationOutcome(</span>
+<span class="fc" id="L74">                matchingAdult.getMobilePhoneNumber(),</span>
+<span class="fc" id="L75">                person.getMobilePhoneNumber(),</span>
                 IdentityVerificationUtils::areEqual);
-<span class="fc" id="L81">        builder.mobilePhoneMatch(mobileVerificationOutcome);</span>
-<span class="fc" id="L82">    }</span>
+<span class="fc" id="L77">        builder.mobilePhoneMatch(mobileVerificationOutcome);</span>
+<span class="fc" id="L78">    }</span>
 
     private void setEmailVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
                                              IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc" id="L86">        VerificationOutcome emailVerificationOutcome = determineVerificationOutcome(</span>
-<span class="fc" id="L87">                matchingAdult.getEmailAddress(),</span>
-<span class="fc" id="L88">                person.getEmailAddress(),</span>
+<span class="fc" id="L82">        VerificationOutcome emailVerificationOutcome = determineVerificationOutcome(</span>
+<span class="fc" id="L83">                matchingAdult.getEmailAddress(),</span>
+<span class="fc" id="L84">                person.getEmailAddress(),</span>
                 IdentityVerificationUtils::areEqual);
-<span class="fc" id="L90">        builder.emailAddressMatch(emailVerificationOutcome);</span>
-<span class="fc" id="L91">    }</span>
+<span class="fc" id="L86">        builder.emailAddressMatch(emailVerificationOutcome);</span>
+<span class="fc" id="L87">    }</span>
 
-    private VerificationOutcome determinePostcodeVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
-                                                                     IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc bfc" id="L95" title="All 2 branches covered.">        VerificationOutcome postcodeVerificationOutcome = (areEqualIgnoringWhitespace(matchingAdult.getPostcode(), person.getPostcode()))</span>
-<span class="fc" id="L96">                ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;</span>
-<span class="fc" id="L97">        builder.postcodeMatch(postcodeVerificationOutcome);</span>
-<span class="fc" id="L98">        return postcodeVerificationOutcome;</span>
-    }
+    private void setPostcodeVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
+                                                IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        VerificationOutcome postcodeVerificationOutcome = (areEqualIgnoringWhitespace(matchingAdult.getPostcode(), person.getPostcode()))</span>
+<span class="fc" id="L92">                ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;</span>
+<span class="fc" id="L93">        builder.postcodeMatch(postcodeVerificationOutcome);</span>
+<span class="fc" id="L94">    }</span>
 
-    private VerificationOutcome determineAddressLine1VerificationOutcome(UCAdult adult, PersonDTO person,
-                                                                         IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc bfc" id="L103" title="All 2 branches covered.">        VerificationOutcome addressLine1VerificationOutcome = (firstSixCharacterMatch(adult.getAddressLine1(), person.getAddressLine1()))</span>
-<span class="fc" id="L104">                ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;</span>
-<span class="fc" id="L105">        builder.addressLine1Match(addressLine1VerificationOutcome);</span>
-<span class="fc" id="L106">        return addressLine1VerificationOutcome;</span>
-    }
+    private void setAddressLine1VerificationOutcome(UCAdult adult, PersonDTO person,
+                                                    IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        VerificationOutcome addressLine1VerificationOutcome = (firstSixCharacterMatch(adult.getAddressLine1(), person.getAddressLine1()))</span>
+<span class="fc" id="L99">                ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;</span>
+<span class="fc" id="L100">        builder.addressLine1Match(addressLine1VerificationOutcome);</span>
+<span class="fc" id="L101">    }</span>
 
     private EligibilityOutcome determineAndSetEligibilityStatus(IdentityOutcome identityStatus,
                                                                 UCHousehold household,
                                                                 IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc" id="L112">        EligibilityOutcome outcome = determineEligibilityOutcome(identityStatus, household);</span>
-<span class="fc" id="L113">        builder.eligibilityStatus(outcome);</span>
-<span class="fc" id="L114">        return outcome;</span>
+<span class="fc" id="L106">        EligibilityOutcome outcome = determineEligibilityOutcome(identityStatus, household);</span>
+<span class="fc" id="L107">        builder.eligibilityStatus(outcome);</span>
+<span class="fc" id="L108">        return outcome;</span>
     }
 
     private EligibilityOutcome determineEligibilityOutcome(IdentityOutcome identityStatus, UCHousehold household) {
-<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (identityStatus == IdentityOutcome.NOT_MATCHED) {</span>
-<span class="fc" id="L119">            return EligibilityOutcome.NOT_SET;</span>
-<span class="fc bfc" id="L120" title="All 2 branches covered.">        } else if (household.isEarningsThresholdExceeded()) {</span>
-<span class="fc" id="L121">            return EligibilityOutcome.NOT_CONFIRMED;</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (identityStatus == IdentityOutcome.NOT_MATCHED) {</span>
+<span class="fc" id="L113">            return EligibilityOutcome.NOT_SET;</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        } else if (household.isEarningsThresholdExceeded()) {</span>
+<span class="fc" id="L115">            return EligibilityOutcome.NOT_CONFIRMED;</span>
         }
-<span class="fc" id="L123">        return EligibilityOutcome.CONFIRMED;</span>
+<span class="fc" id="L117">        return EligibilityOutcome.CONFIRMED;</span>
     }
 
     private IdentityOutcome determineIdentityStatus(UCHousehold household, PersonDTO person,
                                                     IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
-<span class="fc bfc" id="L128" title="All 2 branches covered.">        IdentityOutcome identityStatus = household.getAdults().stream().anyMatch(adult -&gt; matchingAdult(adult, person))</span>
-<span class="fc" id="L129">                ? IdentityOutcome.MATCHED : IdentityOutcome.NOT_MATCHED;</span>
-<span class="fc" id="L130">        builder.identityStatus(identityStatus);</span>
-<span class="fc" id="L131">        return identityStatus;</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        IdentityOutcome identityStatus = household.getAdults().stream().anyMatch(adult -&gt; matchingAdult(adult, person))</span>
+<span class="fc" id="L123">                ? IdentityOutcome.MATCHED : IdentityOutcome.NOT_MATCHED;</span>
+<span class="fc" id="L124">        builder.identityStatus(identityStatus);</span>
+<span class="fc" id="L125">        return identityStatus;</span>
     }
 
     private IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder setupDefaultBuilder() {
-<span class="fc" id="L135">        return IdentityAndEligibilityResponse.builder()</span>
-<span class="fc" id="L136">                .identityStatus(IdentityOutcome.NOT_MATCHED)</span>
-<span class="fc" id="L137">                .eligibilityStatus(EligibilityOutcome.NOT_SET)</span>
-<span class="fc" id="L138">                .pregnantChildDOBMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L139">                .qualifyingBenefits(QualifyingBenefits.NOT_SET)</span>
-<span class="fc" id="L140">                .addressLine1Match(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L141">                .postcodeMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L142">                .mobilePhoneMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L143">                .emailAddressMatch(VerificationOutcome.NOT_SET)</span>
-<span class="fc" id="L144">                .deathVerificationFlag(DeathVerificationFlag.N_A)</span>
-<span class="fc" id="L145">                .householdIdentifier(NO_HOUSEHOLD_IDENTIFIER_PROVIDED)</span>
-<span class="fc" id="L146">                .dobOfChildrenUnder4(emptyList());</span>
+<span class="fc" id="L129">        return IdentityAndEligibilityResponse.builder()</span>
+<span class="fc" id="L130">                .identityStatus(IdentityOutcome.NOT_MATCHED)</span>
+<span class="fc" id="L131">                .eligibilityStatus(EligibilityOutcome.NOT_SET)</span>
+<span class="fc" id="L132">                .addressLine1Match(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L133">                .postcodeMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L134">                .mobilePhoneMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L135">                .emailAddressMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L136">                .qualifyingBenefits(QualifyingBenefits.NOT_SET)</span>
+<span class="fc" id="L137">                .dobOfChildrenUnder4(emptyList())</span>
+<span class="fc" id="L138">                .householdIdentifier(NO_HOUSEHOLD_IDENTIFIER_PROVIDED)</span>
+<span class="fc" id="L139">                .pregnantChildDOBMatch(VerificationOutcome.NOT_SET)</span>
+<span class="fc" id="L140">                .deathVerificationFlag(DeathVerificationFlag.N_A);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
