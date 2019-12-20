@@ -41,12 +41,8 @@ public class IdentityAndEligibilityResponseFactory {
 
         UCAdult matchingAdult = household.getAdults().stream().filter(adult -> matchingAdult(adult, person)).findFirst().get();
 
-        VerificationOutcome addressLine1VerificationOutcome = determineAddressLine1VerificationOutcome(matchingAdult, person, builder);
-        VerificationOutcome postcodeVerificationOutcome = determinePostcodeVerificationOutcome(matchingAdult, person, builder);
-
-        if (VerificationOutcome.NOT_MATCHED == addressLine1VerificationOutcome || VerificationOutcome.NOT_MATCHED == postcodeVerificationOutcome) {
-            return builder.build();
-        }
+        setAddressLine1VerificationOutcome(matchingAdult, person, builder);
+        setPostcodeVerificationOutcome(matchingAdult, person, builder);
 
         builder.qualifyingBenefits(QualifyingBenefits.UNIVERSAL_CREDIT);
         setEmailVerificationOutcome(matchingAdult, person, builder);
@@ -90,20 +86,18 @@ public class IdentityAndEligibilityResponseFactory {
         builder.emailAddressMatch(emailVerificationOutcome);
     }
 
-    private VerificationOutcome determinePostcodeVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
-                                                                     IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+    private void setPostcodeVerificationOutcome(UCAdult matchingAdult, PersonDTO person,
+                                                IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         VerificationOutcome postcodeVerificationOutcome = (areEqualIgnoringWhitespace(matchingAdult.getPostcode(), person.getPostcode()))
                 ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;
         builder.postcodeMatch(postcodeVerificationOutcome);
-        return postcodeVerificationOutcome;
     }
 
-    private VerificationOutcome determineAddressLine1VerificationOutcome(UCAdult adult, PersonDTO person,
-                                                                         IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
+    private void setAddressLine1VerificationOutcome(UCAdult adult, PersonDTO person,
+                                                    IdentityAndEligibilityResponse.IdentityAndEligibilityResponseBuilder builder) {
         VerificationOutcome addressLine1VerificationOutcome = (firstSixCharacterMatch(adult.getAddressLine1(), person.getAddressLine1()))
                 ? VerificationOutcome.MATCHED : VerificationOutcome.NOT_MATCHED;
         builder.addressLine1Match(addressLine1VerificationOutcome);
-        return addressLine1VerificationOutcome;
     }
 
     private EligibilityOutcome determineAndSetEligibilityStatus(IdentityOutcome identityStatus,
@@ -135,14 +129,14 @@ public class IdentityAndEligibilityResponseFactory {
         return IdentityAndEligibilityResponse.builder()
                 .identityStatus(IdentityOutcome.NOT_MATCHED)
                 .eligibilityStatus(EligibilityOutcome.NOT_SET)
-                .pregnantChildDOBMatch(VerificationOutcome.NOT_SET)
-                .qualifyingBenefits(QualifyingBenefits.NOT_SET)
                 .addressLine1Match(VerificationOutcome.NOT_SET)
                 .postcodeMatch(VerificationOutcome.NOT_SET)
                 .mobilePhoneMatch(VerificationOutcome.NOT_SET)
                 .emailAddressMatch(VerificationOutcome.NOT_SET)
-                .deathVerificationFlag(DeathVerificationFlag.N_A)
+                .qualifyingBenefits(QualifyingBenefits.NOT_SET)
+                .dobOfChildrenUnder4(emptyList())
                 .householdIdentifier(NO_HOUSEHOLD_IDENTIFIER_PROVIDED)
-                .dobOfChildrenUnder4(emptyList());
+                .pregnantChildDOBMatch(VerificationOutcome.NOT_SET)
+                .deathVerificationFlag(DeathVerificationFlag.N_A);
     }
 }

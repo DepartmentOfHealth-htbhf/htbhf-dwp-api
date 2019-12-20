@@ -19,6 +19,7 @@ import static uk.gov.dhsc.htbhf.dwp.testhelper.UCHouseholdTestDataFactory.*;
 
 class IdentityAndEligibilityResponseFactoryTest {
 
+    private static final String DOB_OF_CHILDREN_FIELD_NAME = "dobOfChildrenUnder4";
     private IdentityAndEligibilityResponseFactory factory = new IdentityAndEligibilityResponseFactory();
 
     @Test
@@ -63,7 +64,7 @@ class IdentityAndEligibilityResponseFactoryTest {
 
     @Test
     void shouldReturnAddressLine1NotMatchedResponse() {
-        runTest(aUCHousehold(), aPersonDTOWithAddressLine1("Another Street"), anIdMatchedEligibilityConfirmedAddressNotMatchedResponse());
+        runTest(aUCHousehold(), aPersonDTOWithAddressLine1("Another Street"), anIdMatchedEligibilityConfirmedAddressLine1NotMatchedResponse());
     }
 
     @Test
@@ -139,15 +140,7 @@ class IdentityAndEligibilityResponseFactoryTest {
         IdentityAndEligibilityResponse response = factory.determineIdentityAndEligibilityResponse(household, request);
 
         //Then (cannot assert they are equal because the children dobs come out in a random order
-        assertThat(response.getIdentityStatus()).isEqualTo(expectedResponse.getIdentityStatus());
-        assertThat(response.getEligibilityStatus()).isEqualTo(expectedResponse.getEligibilityStatus());
-        assertThat(response.getQualifyingBenefits()).isEqualTo(expectedResponse.getQualifyingBenefits());
-        assertThat(response.getMobilePhoneMatch()).isEqualTo(expectedResponse.getMobilePhoneMatch());
-        assertThat(response.getEmailAddressMatch()).isEqualTo(expectedResponse.getEmailAddressMatch());
-        assertThat(response.getAddressLine1Match()).isEqualTo(expectedResponse.getAddressLine1Match());
-        assertThat(response.getPostcodeMatch()).isEqualTo(expectedResponse.getPostcodeMatch());
-        assertThat(response.getDeathVerificationFlag()).isEqualTo(expectedResponse.getDeathVerificationFlag());
-        assertThat(response.getPregnantChildDOBMatch()).isEqualTo(expectedResponse.getPregnantChildDOBMatch());
+        assertThat(response.getIdentityStatus()).isEqualToIgnoringGivenFields(expectedResponse, DOB_OF_CHILDREN_FIELD_NAME);
         assertThat(response.getDobOfChildrenUnder4()).containsExactlyInAnyOrderElementsOf(expectedResponse.getDobOfChildrenUnder4());
     }
 }
