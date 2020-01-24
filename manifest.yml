@@ -12,5 +12,4 @@ applications:
     APP_VERSION: ((app-version))
   services:
     - htbhf-eligibility-api-postgres
-    - logit-ssl-drain
     - variable-service
